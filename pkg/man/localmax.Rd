@@ -1,14 +1,14 @@
-\name{cn}
-\alias{cn}
+\name{localmax}
+\alias{localmax}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-cn
+localmax
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-cn(x)
+localmax function(x, n=2)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -48,8 +48,27 @@ cn(x)
 
 ## The function is currently defined as
 
-function(x){as.matrix(colnames(x)}
-
+function(x, n=2){
+	vet=x
+	dat=data.frame(index=1:length(vet))
+	# creo un data.frame con gli indici. Mi serve per utilizzare la funzione apply.
+	
+	test=function(index,vet,n) {
+	indices=c((index-n):(index-1), (index+1):(index+n))
+	indices=indices[indices>0&indices<(length(vet))]
+	response=((!any(vet[indices]>vet[index]))&length(indices)==(n*2))
+	return(response)
+	}
+	
+	candidates.indices=apply(dat, 1, function(x){test(index=x, vet, n)})
+	
+	if(any(candidates.indices)){
+	candidates=vet[candidates.indices]
+	return(max(candidates)) } else {
+		return(NA)
+	}
+	
+}
 
 
 
