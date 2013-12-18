@@ -9,7 +9,7 @@ erp.measure
 }
 \usage{
 erp.measure(base, numbers, win.ini, win.end, env=.GlobalEnv, startmsec=-200, endmsec=1200, fun=average.mean, others=NULL, format="long", name.dep="Dep", name.newvar="Electrode", ...)
-	
+}
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{categ}{

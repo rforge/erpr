@@ -22,14 +22,18 @@ myAgg <- function (formula, data, FUN, ..., subset, na.action = na.omit)
     names(lhs) <- as.character(m[[2L]][[2L]])[-1L]
     myOut <- aggregate.data.frame(lhs, mf[-1L], FUN = FUN, ...)
     colnames(myOut) <- c(names(mf[-1L]), 
-                         paste(names(lhs), deparse(substitute(FUN)), sep = "."))
+                        names(lhs))
+                        # paste(names(lhs), deparse(substitute(FUN)), sep = "."))
   }
   else {
     myOut <- aggregate.data.frame(mf[1L], mf[-1L], FUN = FUN, ...)
     colnames(myOut) <- c(names(mf[-1L]), 
-                         paste(strsplit(gsub("cbind\\(|\\)|\\s", "", 
-                                             names(mf[1L])), ",")[[1]],
-                               deparse(substitute(FUN)), sep = "."))
+    					 strsplit(gsub("cbind\\(|\\)|\\s", "", names(mf[1L])), ",")[[1]])
+                         #                    names(mf[1L])), ",")[[1]]
+                         #paste(strsplit(gsub("cbind\\(|\\)|\\s", "", 
+                         #                    names(mf[1L])), ",")[[1]],
+                         #     deparse(substitute(FUN)), sep = "."))
   } 
+
   myOut
 }
