@@ -1,18 +1,13 @@
 latency.analysis <-
-function(base1, base2=NULL, numbers1, numbers2=numbers1, Electrodes, win.ini, win.end, paired=T, env=.GlobalEnv, baseline=-200, total.length=1200, crit.msec=50)
+function(base1, base2=NULL, numbers1, numbers2=numbers1, Electrodes, win.ini, win.end, paired=T, env=.GlobalEnv, startmsec=-200, endmsec=1200, crit.msec=50)
 	{	
 	
 	dat.list=NULL		
-			
-	# questa è la nuova funzione msectopoint.values (creata per eeg2). E' più corretta della precedente
-	msectopoint.values=function(a, lengthsegment, startmsec, endmsec){
-	x=((a-(startmsec))*(lengthsegment-1))/(endmsec-(startmsec))
-	return(x+1)}
-	
+
 	# recupero il numero di timepoint.values dal primo file 
 	temp1=eval(parse(file="", text=paste(base1,numbers1[1], sep="")),env=env)
 	tot.timepoint.values=dim(temp1)[1]
-	samp.rate=sampling.rate(temp1, baseline, total.length)
+	samp.rate=sampling.rate(temp1, startmsec, endmsec)
 	## converto in punti la finestra critica
 	crit.point.values=round(crit.msec/(1000/samp.rate))
 	exact.crit.msec=crit.point.values*(1000/samp.rate)
@@ -21,7 +16,7 @@ function(base1, base2=NULL, numbers1, numbers2=numbers1, Electrodes, win.ini, wi
 		for (i in 1:length(numbers1))
 			{
 			temp1a=eval(parse(file="", text=paste(base1,numbers1[i], sep="")),env=env)
-			temp1b=apply(temp1a[msectopoint.values(win.ini, dim(temp1a)[1], baseline, total.length):msectopoint.values(win.end, dim(temp1a)[1], baseline, total.length),Electrodes], 1, mean) #medio per gli elettrodi
+			temp1b=apply(temp1a[msectopoints(win.ini, dim(temp1a)[1], startmsec, endmsec):msectopoints(win.end, dim(temp1a)[1], startmsec, endmsec),Electrodes], 1, mean) #medio per gli elettrodi
 			allsubj_cond1=cbind(allsubj_cond1, temp1b)
 			}
 			
@@ -31,7 +26,7 @@ function(base1, base2=NULL, numbers1, numbers2=numbers1, Electrodes, win.ini, wi
 			for (i in 1:length(numbers2))
 				{
 				temp2a=eval(parse(file="", text=paste(base2,numbers2[i], sep="")),env=env)
-				temp2b=apply(temp2a[msectopoint.values(win.ini, dim(temp1a)[1], baseline, total.length):msectopoint.values(win.end, dim(temp2a)[1], baseline, total.length),Electrodes], 1, mean) #medio per gli elettrodi
+				temp2b=apply(temp2a[msectopoints(win.ini, dim(temp1a)[1], startmsec, endmsec):msectopoints(win.end, dim(temp2a)[1], startmsec, endmsec),Electrodes], 1, mean) #medio per gli elettrodi
 				allsubj_cond2=cbind(allsubj_cond2, temp2b)
 				}
 			}

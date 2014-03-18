@@ -5,33 +5,33 @@
 t.test.pairs
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Utility function to perform a series of t-tests on several combinations of levels of one or more variables. P-value correction methods can be specified.
 }
 \usage{
-t.test.pairs(dat, vars, contr, dep, wid, p.adjust.methods = "none", paired = F, type = "t.test", vars.bet = NULL, ...)
+t.test.pairs(dat, vars, contr, dep, wid, p.adjust.methods = "none", paired = FALSE, type = "t.test", vars.bet = NULL, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{dat}{
-%%     ~~Describe \code{dat} here~~
+The \code{data.frame} including the all variables for the t-test computation.
 }
   \item{vars}{
-%%     ~~Describe \code{vars} here~~
+A vector of characters indicating the names of the independent variables to be considered for the t-tests. If length vars > 1 a new variable will be created, by combining the levels of the variables specified in \code{vars}.
 }
   \item{contr}{
-%%     ~~Describe \code{contr} here~~
+A list specifying the t-test to be performed. If \code{"all"} is specified, t-tests on all possible combinations are performed. See \code{Details} for further specification information. 
 }
   \item{dep}{
-%%     ~~Describe \code{dep} here~~
+String specifying the name of the dependent variable (a column in \code{dat}).
 }
   \item{wid}{
-%%     ~~Describe \code{wid} here~~
+Optional: string specifying variable encoding the repeated measure identifier. 
 }
   \item{p.adjust.methods}{
-%%     ~~Describe \code{p.adjust.methods} here~~
+The p-value correction methods.
 }
   \item{paired}{
-%%     ~~Describe \code{paired} here~~
+logical. If TRUE paired t-tests are performed.
 }
   \item{type}{
 %%     ~~Describe \code{type} here~~
@@ -40,88 +40,33 @@ t.test.pairs(dat, vars, contr, dep, wid, p.adjust.methods = "none", paired = F, 
 %%     ~~Describe \code{vars.bet} here~~
 }
   \item{\dots}{
-%%     ~~Describe \code{\dots} here~~
+Arguments to be passed to \code{t.test}.
 }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+The \code{contr} argument allows to specify a subset of combinations of levels of the variables listed in \code{vars} to be performed. The contrasts have to be specified as a list of lists. Each list within the main list contain two vectors with strings. The strings specify the levels of the variables in \code{vars} that have to be compared. The convention is to specify the levels sperated by an underscore. For example suppose that \code{vars=c("height", "color")}, and \code{contr=list(list(c("high_red"), c("low_red")), list(c("high_green", "low_green")))} will perform two t-tests. The first t-test it will compare the mean for \code{height=="high"} and \code{color=="red"} with the mean of \code{height=="low"}, and \code{color=="red"}. The second t-test will compare the mean of \code{height=="high"}, and \code{color=="green"} with the mean of \code{height=="low"} and \code{color=="green"}. If a p-value correction method is specified, only p-values of the t-test carried out will be taken into account.
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+A \code{data.frame} with the results of the t-tests specified.
 }
 \references{
 %% ~put references to the literature/web site here ~
 }
 \author{
-%%  ~~who you are~~
+Giorgio Arcara
 }
 \note{
-%%  ~~further notes~~
+The means for the combinations of the variables taken into account, are computed internally by \code{t.test.pairs}, according to the specification in \code{vars}, \code{dep}, \code{wid}.
+The function is not able to deal with mixed within and between t-tests. Please, perform separately the two kinds of t-tests and take into consideration if the variables specified in \code{vars} are mixed (both within and between). 
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{t.test}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (dat, vars, contr, dep, wid, p.adjust.methods = "none", 
-    paired = F, type = "t.test", vars.bet = NULL, ...) 
-{
-    dat$newfactor = apply(data.frame(dat[, vars]), 1, function(x) {
-        paste(x, collapse = "_")
-    })
-    dat$newfactor = factor(dat$newfactor)
-    dat = aggregate(dat[, dep], list(dat$newfactor, dat[, wid]), 
-        mean)
-    names(dat) = c("newfactor", "wid", dep)
-    contrast.names = NULL
-    p.values = NULL
-    t.values = NULL
-    df = NULL
-    mean.1 = NULL
-    mean.2 = NULL
-    if (contr[[1]][[1]] == "all") {
-        combs = combn(levels(dat$newfactor), 2)
-        contr = list(NULL)
-        length(contr) = dim(combs)[2]
-        for (k in 1:dim(combs)[2]) {
-            contr[[k]] = combs[, k]
-        }
-    }
-    for (i in 1:length(contr)) {
-        res = t.test(dat[dat$newfactor \%in\% contr[[i]][[1]], 
-            dep], dat[dat$newfactor \%in\% contr[[i]][[2]], dep], 
-            paired = paired, ...)
-        contrast.names = c(contrast.names, paste(contr[[i]][[1]], 
-            "vs", contr[[i]][[2]], sep = " "))
-        p.values = c(p.values, res$p.value)
-        t.values = c(t.values, res$statistic)
-        df = c(df, res$parameter)
-        mean.1 = c(mean.1, mean(dat[dat$newfactor \%in\% contr[[i]][[1]], 
-            dep]))
-        mean.2 = c(mean.2, mean(dat[dat$newfactor \%in\% contr[[i]][[2]], 
-            dep]))
-    }
-    p.values.corr = round(p.adjust(p.values, p.adjust.methods), 
-        3)
-    results = data.frame(contr = contrast.names, p.value.corr = p.values.corr, 
-        t.value = t.values, df = df, mean.1 = mean.1, mean.2)
-    attr(results, "p.corr") = p.adjust.methods
-    cat("p values adjustment = ", p.adjust.methods, "\n")
-    return(results)
-  }
+	
+#####
+	
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

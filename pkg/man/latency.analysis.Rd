@@ -1,11 +1,10 @@
 \name{latency.analysis}
 \alias{latency.analysis}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 latency.analysis
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+function to perform a latency analysis according to the procedure by Rugg et al. (1995).
 }
 \usage{
 latency.analysis(base1, base2 = NULL, numbers1, numbers2 = numbers1, Electrodes, win.ini, win.end, paired = T, env = .GlobalEnv, baseline = -200, total.length = 1200, crit.msec = 50)
@@ -13,16 +12,16 @@ latency.analysis(base1, base2 = NULL, numbers1, numbers2 = numbers1, Electrodes,
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{base1}{
-%%     ~~Describe \code{base1} here~~
+The beginning segment of the first group of object names of ERP data (with electrodes in separate columns).
 }
   \item{base2}{
-%%     ~~Describe \code{base2} here~~
+The beginning segment of the second group of object names of ERP data (with electrodes in separate columns). Default is \code{NULL}
 }
   \item{numbers1}{
-%%     ~~Describe \code{numbers1} here~~
+The numbers indicating the objects to be considered of group defined by \code{base1}. 
 }
   \item{numbers2}{
-%%     ~~Describe \code{numbers2} here~~
+The numbers indicating the objects to be considered of group defined by \code{base1}.
 }
   \item{Electrodes}{
 %%     ~~Describe \code{Electrodes} here~~

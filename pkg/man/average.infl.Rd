@@ -5,126 +5,64 @@
 average.infl
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+The function returns a diagnostic plot to investigate the influence of a given ERP \code{data.frame} on the grandaverage of a series of ERP \code{data.frame}. A GUI is provided to explore the effect of removing a \code{data.frame} (that is expected to be associated with a Subject) on the grandaverage. Two plots are superposed: the original grandaverage, and the average removing the subject selected via the GUI.
 }
-\usage{
-average.infl(base, numbers, electrode, smo = 0, layout = 1, ylims = 12, yrev = FALSE, startmsec = -200, endmsec = 1200, lwd = 1, lty = 1, env = .GlobalEnv)
-}
-%- maybe also 'usage' for other objects documented here.
+
+\usage{ average.infl(base, numbers, electrode, smo=0, startmsec=-200, endmsec=1200, lwd=1, lty=1, env=.GlobalEnv, ...)}
+
 \arguments{
-  \item{base}{
-%%     ~~Describe \code{base} here~~
+\item{base}{
+A string indicating the beginning of the name of \code{data.frame} containg the ERP data.
 }
   \item{numbers}{
-%%     ~~Describe \code{numbers} here~~
+The numbers (indicating different subjects), to be averaged by the function.
 }
+
   \item{electrode}{
-%%     ~~Describe \code{electrode} here~~
+The electrode to be plotted.
 }
   \item{smo}{
-%%     ~~Describe \code{smo} here~~
+The smoothing parameter to be applied to the data.
 }
-  \item{layout}{
-%%     ~~Describe \code{layout} here~~
-}
-  \item{ylims}{
-%%     ~~Describe \code{ylims} here~~
-}
-  \item{yrev}{
-%%     ~~Describe \code{yrev} here~~
-}
+
   \item{startmsec}{
-%%     ~~Describe \code{startmsec} here~~
+A value, in milliseconds indicating the beginning time of the ERP vector
 }
   \item{endmsec}{
-%%     ~~Describe \code{endmsec} here~~
+A value, in milliseconds indicating the end time of the ERP vector
 }
   \item{lwd}{
-%%     ~~Describe \code{lwd} here~~
-}
-  \item{lty}{
-%%     ~~Describe \code{lty} here~~
+The width of the ERP lines to be plotted.
 }
   \item{env}{
-%%     ~~Describe \code{env} here~~
+The environment in which \code{grandaverage} is to be evaluated.
 }
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
-\value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
-}
-\references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
+\item{\ldots}{
+Further parameters to be passed to \code{erp} function called within \code{average.infl}.
 }
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
+}
+
+\details{
+The function requires the package \code{\link{rpanel}}
+}
+
+\author{
+Giorgio Arcara
+}
+
+
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{erp}}, \code{link{scalp.infl}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+\dontrun{
 
-## The function is currently defined as
-function (base, numbers, electrode, smo = 0, layout = 1, ylims = 12, 
-    yrev = FALSE, startmsec = -200, endmsec = 1200, lwd = 1, 
-    lty = 1, env = .GlobalEnv) 
-{
-    require(rpanel)
-    average.infl.panel = function(panel) {
-        average.infl.endo = function(base, numbers, electrode, 
-            outline, smo = 0, col = "black", startmsec = -200, 
-            endmsec = 1000, yrev = FALSE, interval = c(startmsec, 
-                endmsec), step = 200, verticals = NULL, horizontals = NULL, 
-            x.axis = "default", ylim = c(-10, 10), lwd = 1, lty = 1, 
-            out.col = "red", env) {
-            average.temp = eval(parse(file = "", text = paste(base, 
-                numbers[1], "$", electrode, sep = "")), envir = env)
-            for (i in 2:length(numbers)) {
-                average.temp = average.temp + eval(parse(file = "", 
-                  text = paste(base, numbers[i], "$", electrode, 
-                    sep = "")), envir = env)
-            }
-            average = average.temp/length(numbers)
-            eeg(average, smo = smo, col = col, startmsec = startmsec, 
-                endmsec = endmsec, yrev = yrev, interval = interval, 
-                step = step, verticals = verticals, horizontals = horizontals, 
-                x.axis = x.axis, ylim = ylim, lwd = lwd, lty = lty, 
-                main = electrode)
-            average.excl = (average.temp - eval(parse(file = "", 
-                text = paste(base, outline, "$", electrode, sep = "")), 
-                envir = env))/(length(numbers) - 1)
-            comp.add(average.excl, col = out.col, lwd = 2, smo = smo)
-            legend("topright", legend = c("Average all", paste("Average no subj", 
-                outline)), pch = 15, col = c(col, out.col), pt.bg = c(1:6), 
-                cex = 1.2)
-        }
-        average.infl.endo(base = base, numbers = numbers, electrode = electrode, 
-            outline = panel$outnumber, smo = smo, yrev = yrev, 
-            startmsec = startmsec, endmsec = endmsec, env = env)
-        panel
-    }
-    panel <- rp.control()
-    rp.listbox(panel, outnumber, numbers, labels = as.character(numbers), 
-        action = average.infl.panel, initval = numbers[1])
-    rp.do(panel, average.infl.panel)
-  }
+# Note that Subject 1 is clearly particularly influential for the average on OZ.
+average.infl(base="Exp1_word_subj", numbers=1:20, electrode="OZ", startmsec=-200, endmsec=1500)
+
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+
+}
+

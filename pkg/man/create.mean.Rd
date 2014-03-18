@@ -5,84 +5,49 @@
 create.mean
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+From two sets of paired ERP \code{data.frame} objects the function creates a new set of \code{data.frame} objects with the values obtained by averaging the values of the original sets.
 }
 \usage{
 create.mean(bases, numbers, outname = NULL, env = .GlobalEnv, out.env = env, comment.dat = 1)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{bases}{
-%%     ~~Describe \code{bases} here~~
+A vector of strings indicating the beginning of the names of \code{data.frame} objects containg the ERP data to be averaged.
 }
   \item{numbers}{
-%%     ~~Describe \code{numbers} here~~
+The numbers (indicating different subjects), to be averaged by the function.
 }
+
   \item{outname}{
-%%     ~~Describe \code{outname} here~~
+the \code{base} of the names of the returned \code{data.frame} objects.
 }
+
   \item{env}{
-%%     ~~Describe \code{env} here~~
+The environment in which \code{grandaverage} is to be evaluated.
 }
   \item{out.env}{
-%%     ~~Describe \code{out.env} here~~
+The environment in which the objects created are returned.
 }
   \item{comment.dat}{
-%%     ~~Describe \code{comment.dat} here~~
+A number indicating from which set of objects specified in the argument \code{bases} the comment of the data.frame is retrieved.
 }
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
-}
-\references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
+a series of ERP \code{data.frame} objects obtained by averaging the sets specified.
 }
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
+\author{
+Giorgio Arcara
+}
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{create.diff}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (bases, numbers, outname = NULL, env = .GlobalEnv, out.env = env, 
-    comment.dat = 1) 
-{
-    if (is.null(outname)) {
-        stop("devi specificare outname!!")
-    }
-    for (i in 1:length(numbers)) {
-        temp = 0
-        for (k in 1:length(bases)) {
-            temp = eval(parse(file = "", text = paste(bases[k], 
-                numbers[i], sep = "")), env = env) + temp
-        }
-        temp.out = (temp/length(bases))
-        comment(temp.out) = comment(eval(parse(file = "", text = paste(bases[comment.dat], 
-            numbers[i], sep = "")), env = env))
-        assign(paste(outname, numbers[i], sep = ""), temp.out, 
-            env = out.env)
-    }
-  }
+dontrun{
+create.mean(c("Exp1_word_subj", "Exp1_nonword_subj"), 1:20, outname="Exp1_average_subj")
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+}

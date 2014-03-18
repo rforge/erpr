@@ -5,64 +5,47 @@
 pointstomsec
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+%% internal function of erpR to convert points in msec
 }
 \usage{
 pointstomsec(a, lengthsegment, startmsec, endmsec)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{deps}{
-%%     ~~Describe \code{deps} here~~
+  \item{a}{
+   a number indicating the point to be converted in ms
 }
-  \item{groups}{
-%%     ~~Describe \code{groups} here~~
+  \item{lengthsegment}{
+    the length (in points) of the segment
 }
-  \item{na.rm}{
-%%     ~~Describe \code{na.rm} here~~
+  \item{startmsec}{
+     the time (in ms) of the beginning of the segment
 }
-  \item{substr.l}{
-%%     ~~Describe \code{substr.l} here~~
+  \item{endmsec}{
+     the time (in ms) of the end of the segment
 }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+  this function is mostly an internal function.
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+The function return a single number \eqn{x}, obtained by the conversion given by \deqn{x = \frac{(endmsec-startmsec)*(a - 1)}{(lengthsegment - 1)}}
 }
 \references{
 %% ~put references to the literature/web site here ~
 }
 \author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
+Giorgio arcara
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+ \code{\link{msectopoints}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
 
-## The function is currently defined as
+# calculate the time in msec corrsponding to the point n 128 in a segment of 500 points starting from -200 ms and ending at 1500 (500 Hz).
 
-function(a, lengthsegment, startmsec, endmsec){
-			x=(((endmsec-(startmsec))*(a-1))/(lengthsegment-1))
-			return(x)
-			}
-			
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+pointstomsec(128, 500, startmsec = - 500, endmsec = 1500)
+}					

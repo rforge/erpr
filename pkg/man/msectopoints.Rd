@@ -13,7 +13,7 @@ msectopoints(a, lengthsegment, startmsec, endmsec)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{a}{
-   a number indicating the ms to be converted
+   a number indicating the ms to be converted in points
 }
   \item{lengthsegment}{
     the length (in points) of the segment
@@ -29,7 +29,7 @@ msectopoints(a, lengthsegment, startmsec, endmsec)
   this function is mostly an internal function.
 }
 \value{
-%%  ~Describe the value returned
+The function return a single number \eqn{x}, obtained by the conversion given by \deqn{x = \frac{((a-(startmsec))*(lengthsegment-1))}{(endmsec-(startmsec))}}
 %%  If it is a LIST, use
 %%  \item{comp1 }{Description of 'comp1'}
 %%  \item{comp2 }{Description of 'comp2'}
@@ -39,24 +39,22 @@ msectopoints(a, lengthsegment, startmsec, endmsec)
 %% ~put references to the literature/web site here ~
 }
 \author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
+Giorgio arcara
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{pointstomsec}}
 }
+
 \examples{
 
 # convert 400 ms to points in a segment of 500 points starting from -200 ms and ending at 1500 (500 Hz).
 
-msectopoints(400, 500, startmsec=-500, endmsec=1500)
-						
+msectopoints(120, 500, startmsec=-500, endmsec=1500)
+}					
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+%\keyword{ ~miao }
+%\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

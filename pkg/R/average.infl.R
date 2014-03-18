@@ -1,5 +1,5 @@
 average.infl <-
-function(base, numbers, electrode, smo=0, layout=1, ylims=12, yrev=FALSE, startmsec=-200, endmsec=1200, lwd=1, lty=1, env=.GlobalEnv){
+function(base, numbers, electrode, smo=0, startmsec=-200, endmsec=1200, lwd=1, lty=1, env=.GlobalEnv, ...){
 
 require(rpanel)
 
@@ -21,7 +21,7 @@ average.infl.panel=function(panel)
 		}
 		average=average.temp/length(numbers)
 		
-		eeg(average,smo=smo, col=col, startmsec=startmsec, endmsec=endmsec, yrev=yrev, interval=interval,step=step, verticals=verticals, horizontals=horizontals, x.axis=x.axis, ylim=ylim, lwd=lwd, lty=lty,main=electrode)
+		eeg(average,smo=smo, col=col, startmsec=startmsec, endmsec=endmsec, yrev=yrev, interval=interval,step=step, verticals=verticals, horizontals=horizontals, x.axis=x.axis, ylim=ylim, lwd=lwd, lty=lty,main=electrode, ...)
 		
 		average.excl=(average.temp-eval(parse(file="", text=paste(base,outline,"$",electrode, sep="")), envir=env))/(length(numbers)-1)
 		comp.add(average.excl, col=out.col, lwd=2, smo=smo)

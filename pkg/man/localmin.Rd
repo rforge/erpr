@@ -13,27 +13,23 @@ localmin(x, n=2)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
-%%     ~~Describe \code{x} here~~
+a vector of numbers.
 }
   \item{n}{
-%%     ~~Describe \code{x} here~~
+the minimum numbers of higher values to determine the local minimum (see Details). Default is two points.
 }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+The function calculates the local minimum of the vector \code{x}, i.e. the lowest value of the vector \code{x} surrounded by at least \code{n} higher numbers. The concept of local minimum applied to ERP analysis is taken from Luck (2005).
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+The local minimum of the vector \code{x} is returned.
 }
 \references{
-%% ~put references to the literature/web site here ~
-}
+Luck, S., J. (2005). \cite{An Introduction to the Event-Related Potential Technique.}
+Cambridge, Mass.: The MIT Press.}
 \author{
-%%  ~~who you are~~
+Giorgio Arcara
 }
 \note{
 %%  ~~further notes~~
@@ -45,13 +41,8 @@ localmin(x, n=2)
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-
-###
-
-
-
-
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+x=seq(-5.5,1,0.001)
+y=-(sin(x)+0.3*x)
+plot(x,y, type="l")
+abline(h=localmin(y)) #print an horizontal line intersecting the local minimum
+}

@@ -5,81 +5,52 @@
 rearrange
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+This utility function of the \code{erpR} package convert a ERP \code{data.frame} with a \cite{single} variable in wide format to a long format. 
 }
 \usage{
 rearrange(deps, oth = NULL, dataset, name.dep = "Dep", name.newvar = "New_Var")
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{deps}{
-%%     ~~Describe \code{deps} here~~
+The numbers indicating the columns in the data.frame specified to be rearranged from wide format to long format.
 }
   \item{oth}{
-%%     ~~Describe \code{oth} here~~
+Others variables that are to be kept in the returned \code{data.frame}.
 }
   \item{dataset}{
-%%     ~~Describe \code{dataset} here~~
+The name of the \code{data.frame} to be converted from wide format to long format.
 }
   \item{name.dep}{
-%%     ~~Describe \code{name.dep} here~~
+The name of the dependent variable in the returned \code{data.frame}.
 }
   \item{name.newvar}{
-%%     ~~Describe \code{name.newvar} here~~
+The name of the variable indicating the levels associated with \code{name.dep} in the returned \code{data.frame}.
 }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+The function convert a \code{data.frame} with a \cite{single} variable in wide format (levels are in different columns) in a \code{data.frame} in long format (the variable is in a single column and the levels are specified by another columns). The original variable in wide format will be represente in two columns: one (labeled by \code{name.dep} parameter) indicating the values of the dependent variable, and one that will be a factor (labeled by \code{name.newvar} parameter) indicating the levels of the variables for each observation. The variables specified in \code{oth} will be replicated appropriately. This function is called internally by \code{erp.measure}.
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+A data frame in which the variables specified in the columns \code{deps} are converted in a single column \code{name.dep} with levels specified in \code{name.newvar}
 }
-\references{
-%% ~put references to the literature/web site here ~
-}
+
 \author{
-%%  ~~who you are~~
+Giorgio Arcara
 }
 \note{
-%%  ~~further notes~~
+This function is called internally by \code{erp.measure}.
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{erp.measure}}%% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (deps, oth = NULL, dataset, name.dep = "Dep", name.newvar = "New_Var") 
-{
-    dep = as.vector(as.matrix(dataset[, deps]))
-    others = NULL
-    if (length(oth) > 0) {
-        for (i in 1:dim(dataset[, deps])[2]) {
-            others = rbind(others, dataset[, oth])
-        }
-    }
-    nuova.var = NULL
-    for (i in 1:length(names(dataset[, deps]))) {
-        nuova.var = c(nuova.var, rep(names(dataset[, deps])[i], 
-            dim(dataset[, deps])[1]))
-    }
-    dat = as.data.frame(cbind(dep, others))
-    names(dat)[1] = paste(name.dep)
-    dat[, paste(name.newvar)] = as.factor(nuova.var)
-    return(dat)
-  }
+dontrun{
+### DA CREARE DATA.FRAME
+dat.wide=ERPwide
+dat.long=rearrange(deps=c(1:32), oth=33, dataset=dat.wide, name.newvar="Electrode")
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+
+}

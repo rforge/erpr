@@ -5,74 +5,53 @@
 create.diff
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+From two sets of paired ERP \code{data.frame} objects the function creates a new set of \code{data.frame} objects with the values obtained by subtracting the values of the second set from the first set.
 }
 \usage{
-create.diff(base1, base2, numbers, outname = NULL, env = .GlobalEnv)
+create.diff(base1, base2, numbers, outname = NULL, env = .GlobalEnv, out.env = env, comment.dat = 1)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{base1}{
-%%     ~~Describe \code{base1} here~~
+A vector of strings indicating the beginning of the name first series of \code{data.frame} objects containg the ERP data.
 }
   \item{base2}{
-%%     ~~Describe \code{base2} here~~
+A vector of strings indicating the beginning of the name second series of \code{data.frame} objects containg the ERP data.
 }
+
   \item{numbers}{
-%%     ~~Describe \code{numbers} here~~
+The numbers (indicating different subjects), to be subtracted by the function.
 }
+
   \item{outname}{
-%%     ~~Describe \code{outname} here~~
+the \code{base} of the names of the returned \code{data.frame} objects.
 }
+
   \item{env}{
-%%     ~~Describe \code{env} here~~
+The environment in which \code{grandaverage} is to be evaluated.
+}
+  \item{out.env}{
+The environment in which the objects created are returned.
+}
+  \item{comment.dat}{
+A number indicating from which set of objects specified in the argument \code{bases} the comment of the data.frame is retrieved.
 }
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
-}
-\references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
+a series of ERP \code{data.frame} objects obtained by subtracting the sets specified (the first minus the second).
 }
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
+\author{
+Giorgio Arcara
+}
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{create.mean}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (base1, base2, numbers, outname = NULL, env = .GlobalEnv) 
-{
-    if (is.null(outname)) {
-        stop("devi specificare outname!!")
-    }
-    for (i in 1:length(numbers)) {
-        assign(paste(outname, numbers[i], sep = ""), (eval(parse(file = "", 
-            text = paste(base1, numbers[i], sep = "")), env = env)) - 
-            eval(parse(file = "", text = paste(base2, numbers[i], 
-                sep = "")), env = env), env = env)
-    }
-  }
+dontrun{
+create.diff(c("Exp1_word_subj", "Exp1_nonword_subj"), 1:20, outname="Exp1_diff_subj")
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+}

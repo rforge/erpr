@@ -5,74 +5,43 @@
 create.ROI
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Utility function to create a factor that collapse other factor levels (typically electrode names) in a new variable vector with the new ROI variable.
 }
 \usage{
 create.roi(datall, Electrode="Electrode", groups=NULL, roi.levels=NULL )
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{deps}{
-%%     ~~Describe \code{deps} here~~
+  \item{datall}{
+the data.frame containing ERP data in long format.
+}
+  \item{Electrode}{
+The column names of datall containing the Electrode names
 }
   \item{groups}{
-%%     ~~Describe \code{groups} here~~
+a list containing (in separate vectors) the Electrode names to create the ROI. E.g. \code{list(c("Fp1", "Fp2"), c("P3", "P4"))}.
 }
-  \item{na.rm}{
-%%     ~~Describe \code{na.rm} here~~
-}
-  \item{substr.l}{
-%%     ~~Describe \code{substr.l} here~~
+  \item{roi.levels}{
+a vector with the names of the new created factor variable. E.g. \code{c("Frontopolar", "Parietal")}.
 }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+All levels of the variable \code{Electrode} that are not specified in \code{groups} will be codified as \code{NA} in the returned vector.
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+The function returns a vector with the new codified ROI variable.
 }
-\references{
-%% ~put references to the literature/web site here ~
-}
+
 \author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
+Giorgio Arcara
 }
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
 
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-}
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function(datall, Electrode="Electrode", groups=NULL, roi.levels=NULL ){
-	if (!is.list(groups)){
-		stop("groups must be a list!")
-	}
-	if (length(groups)!=length(roi.levels)){
-		stop("groups and roi.levels must have the same length!")
-	}
-	
-	roi=rep(NA, dim(datall)[1])
-	for (i in 1:length(groups)){
-		roi[datall[,Electrode]%in%groups[[i]]]=roi.levels[i]
-	}
-	
-	return(roi)
-	
+### BISOGNA CREARE UN DATASET IN FORMATO LONG DA ALLEGARE AL PACCHETTO
+\dontrun{
+datall=ERPlong
+datall$caudality=create.roi(datall, "Electrode", groups=list(c("Fp1", "Fp2"),
+ c("P1", "P2")), roi.levels=c("Frontopolar", "Parietal"))
+}	
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

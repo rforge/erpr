@@ -5,96 +5,64 @@
 average.peak
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+A function to calculate the peak amplitude of ERP \code{data.frame} objects, i.e. data.frames with timepoints on rows and electrodes on columns. ERP data.frames are expected to be named according to a combination of \code{base} and \code{numbers}.
 }
 \usage{
-average.peak(base, numbers, win.ini, wi.end, env = .GlobalEnv, startmsec = -200, endmsec = 1200, peaktype = "max")
+average.peak(base, numbers, win.ini, win.end, env = .GlobalEnv, startmsec = -200, endmsec = 1200, peaktype="max")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{base}{
-%%     ~~Describe \code{base} here~~
+\item{base}{
+A string indicating the beginning of the name of \code{data.frame} containg the ERP data.
 }
   \item{numbers}{
-%%     ~~Describe \code{numbers} here~~
+The numbers (indicating different subjects), to be averaged by the function.
 }
   \item{win.ini}{
-%%     ~~Describe \code{win.ini} here~~
+A value indicating the initial edge (in ms) of the windows on which the peak amplitude has to be computed.
 }
-  \item{wi.end}{
-%%     ~~Describe \code{wi.end} here~~
+  \item{win.end}{
+A value indicating the final edge (in ms) of the windows on which the peak amplitude has to be computed.
 }
+
   \item{env}{
-%%     ~~Describe \code{env} here~~
+The environment in which \code{average.peak} is to be evaluated.
 }
   \item{startmsec}{
-%%     ~~Describe \code{startmsec} here~~
+A value indicating the initial time (in ms) of the ERP \code{data.frame} objects. It can be a negative value, indicating the baseline period.
 }
   \item{endmsec}{
-%%     ~~Describe \code{endmsec} here~~
+A value indicating the final time (in ms) of the ERP \code{data.frame} objects.
 }
   \item{peaktype}{
-%%     ~~Describe \code{peaktype} here~~
+the function to be applied on the time window specified.
 }
+
 }
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
+
+
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+A data.frame with a single row with the peak amplitude values for each electrodes for the time window specified by \code{win.ini} and \code{win.end}.
 }
 \references{
 %% ~put references to the literature/web site here ~
 }
 \author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
+Giorgio Arcara
 }
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
+\note{
+This function is called by the \code{\link{erp.measure}} function.
+	
+}
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{average.peak}}, \code{\link{average.peak}}, \code{\link{average.peak.NA}}, \code{\link{erp.measure}}.
+
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (base, numbers, win.ini, wi.end, env = .GlobalEnv, startmsec = -200, 
-    endmsec = 1200, peaktype = "max") 
-{
-    datall = NULL
-    msectopoints = function(a, lengthsegment, startmsec, endmsec) {
-        x = ((a - (startmsec)) * (endmsec - 1))/(endmsec - (startmsec))
-        return(x + 1)
-    }
-    for (i in 1:length(numbers)) {
-        average.temp = eval(parse(file = "", text = paste(base, 
-            numbers[i], sep = "")), env = env)
-        Subject_name = comment(eval(parse(file = "", text = paste(base, 
-            numbers[i], sep = "")), env = env))
-        average.temp = apply(average.temp[round(msectopoints(win.ini, 
-            dim(average.temp)[1], startmsec, endmsec)):round(msectopoints(wi.end, 
-            dim(average.temp)[1], startmsec, endmsec)), ], 2, 
-            eval(parse(file = "", text = peaktype)))
-        average.temp = data.frame(t(average.temp))
-        average.temp$Subject = numbers[i]
-        average.temp$Subject_name = Subject_name
-        datall = rbind(datall, average.temp)
-    }
-    rownames(datall) = 1:dim(datall)[1]
-    return(datall)
-  }
+\dontrun{
+	average.peak("Exp1_word_subj", 1:20, win.ini=400, win.end=600, startmsec=-200, endmsec=1500)
+	
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+}

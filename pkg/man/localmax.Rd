@@ -8,29 +8,28 @@ localmax
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-localmax function(x, n=2)
+localmax(x, n=2)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
-%%     ~~Describe \code{x} here~~
+a vector of numbers.
+}
+  \item{n}{
+the minimum numbers of lower values to determine the local maximum (see Details). Default is two points.
 }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+The function calculates the local maximum of the vector \code{x}, i.e. the highest value of the vector \code{x} surrounded by at least \code{n} lower numbers. The concept of local maximum applied to ERP analysis is taken from Luck (2005).
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+The local maximum of the vector \code{x} is returned.
 }
 \references{
-%% ~put references to the literature/web site here ~
-}
+Luck, S., J. (2005). \cite{An Introduction to the Event-Related Potential Technique.}
+Cambridge, Mass.: The MIT Press.}
 \author{
-%%  ~~who you are~~
+Giorgio Arcara
 }
 \note{
 %%  ~~further notes~~
@@ -42,37 +41,8 @@ localmax function(x, n=2)
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-
-function(x, n=2){
-	vet=x
-	dat=data.frame(index=1:length(vet))
-	# creo un data.frame con gli indici. Mi serve per utilizzare la funzione apply.
-	
-	test=function(index,vet,n) {
-	indices=c((index-n):(index-1), (index+1):(index+n))
-	indices=indices[indices>0&indices<(length(vet))]
-	response=((!any(vet[indices]>vet[index]))&length(indices)==(n*2))
-	return(response)
-	}
-	
-	candidates.indices=apply(dat, 1, function(x){test(index=x, vet, n)})
-	
-	if(any(candidates.indices)){
-	candidates=vet[candidates.indices]
-	return(max(candidates)) } else {
-		return(NA)
-	}
-	
+x=seq(-5.5,1,0.001)
+y=sin(x)+0.3*x
+plot(x,y, type="l")
+abline(h=localmax(y)) #print an horizontal line intersecting the local maximum
 }
-
-
-
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

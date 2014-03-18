@@ -1,11 +1,11 @@
 \name{char2fac}
 \alias{char2fac}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
 char2fac
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+convert each \code{character} column in a \code{data.frame} to a \code{factor}. 
 }
 \usage{
 char2fac(x)
@@ -13,57 +13,30 @@ char2fac(x)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
-%%     ~~Describe \code{x} here~~
+the \code{data.frame} in which columns are to be coverted.
 }
 }
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
+
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+A \code{data.frame} with \code{character} columns converted in \code{factor} columns.
 }
-\references{
-%% ~put references to the literature/web site here ~
-}
+
 \author{
-%%  ~~who you are~~
+Giorgio Arcara.
 }
 \note{
-%%  ~~further notes~~
+This is an utility function to quickly transform \code{character} vector as \code{factor} for analysis purpose.
 }
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
 
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-}
+
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+	
+	dat=data.frame(RT=rnorm(20, mean=500, sd=100), Subject=rep(1:10, 2))
+	conditions=(rep("a", 10), rep("b", 10))
+	
+	dat$conditions=conditions
+	
+	dat=char2fac(dat)
 
-## The function is currently defined as
-function (x) 
-{
-    if (is.character(x)) {
-        x = as.factor(x)
-        return(x)
-    }
-    if (is.data.frame(x)) {
-        for (i in 1:length(x)) {
-            if (is.character(x[, i])) {
-                x[, i] = as.factor(x[, i])
-            }
-        }
-    }
-    return(x)
-  }
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
