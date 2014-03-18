@@ -1,5 +1,8 @@
 pointstomsec=function(a, lengthsegment, startmsec, endmsec)
 {
-			x = (((endmsec - (startmsec))*(a - 1))/(lengthsegment - 1))
-			return(x)
+	totmsec=endmsec-(startmsec) #total duration in msec
+	pointsstep=totmsec/lengthsegment #how many msec is a point.
+	x=(a*pointsstep)+(startmsec)
+	return(x)
+
 }
