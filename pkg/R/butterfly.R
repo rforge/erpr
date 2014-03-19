@@ -8,23 +8,23 @@ env=deparse(substitute(envir))
 		if (add==FALSE)
 			{
 			i=1
-			eeg(eval(parse(file="", text=paste(env,"$",base,numbers[i],"$",electrode, sep=""))), smo=smo, col=col, startmsec=startmsec, endmsec=endmsec, yrev=yrev, interval=interval, step=step, verticals=verticals, horizontals=horizontals, x.axis=x.axis, ylim=ylim, lwd=lwd, lty=lty)
+			erp(eval(parse(file="", text=paste(env,"$",base,numbers[i],"$",electrode, sep=""))), smo=smo, col=col, startmsec=startmsec, endmsec=endmsec, yrev=yrev, interval=interval, step=step, verticals=verticals, horizontals=horizontals, x.axis=x.axis, ylim=ylim, lwd=lwd, lty=lty)
 			for (i in 2:length(numbers))
 				{
-				comp.add(eval(parse(file="", text=paste(env, "$", base,numbers[i],"$",electrode, sep=""))), col=col,lwd=lwd, lty=lty, smo=smo)
+				erp.add(eval(parse(file="", text=paste(env, "$", base,numbers[i],"$",electrode, sep=""))), col=col,lwd=lwd, lty=lty, smo=smo)
 				}
 			}
 		if (add==TRUE) 
 			{
 			for (i in 1:length(numbers))
 				{
-				comp.add(eval(parse(file="", text=paste(env, "$", base,numbers[i],"$",electrode, sep=""))),col=col, lwd=lwd, lty=lty, smo=smo)
+				erp.add(eval(parse(file="", text=paste(env, "$", base,numbers[i],"$",electrode, sep=""))),col=col, lwd=lwd, lty=lty, smo=smo)
 				}	
 			}
 		if (!is.null(outline)){
 			for (k in 1:length(outline))
 			{
-			comp.add(eval(parse(file="", text=paste(env, "$",base,outline[k],"$",electrode, sep=""))),col=out.col, lty=lty, smo=smo, lwd=lwd+2)
+			erp.add(eval(parse(file="", text=paste(env, "$",base,outline[k],"$",electrode, sep=""))),col=out.col, lty=lty, smo=smo, lwd=lwd+2)
 			}
 		}	
 	}

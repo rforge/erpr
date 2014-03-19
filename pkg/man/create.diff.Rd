@@ -51,7 +51,7 @@ Giorgio Arcara
 \code{\link{create.mean}}
 }
 \examples{
-dontrun{
+\dontrun{
 create.diff(c("Exp1_word_subj", "Exp1_nonword_subj"), 1:20, outname="Exp1_diff_subj")
 }
 }

@@ -29,7 +29,7 @@ pointstomsec(a, lengthsegment, startmsec, endmsec)
   this function is mostly an internal function.
 }
 \value{
-The function return a single number \eqn{x}, obtained by the conversion given by \deqn{x = \frac{(endmsec-startmsec)*(a - 1)}{(lengthsegment - 1)}}
+The function return a single value that is the conversion of \code{a} from points to msec.
 }
 \references{
 %% ~put references to the literature/web site here ~

@@ -5,32 +5,23 @@
 factorall
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Convenience function to update all factor variables in a \code{data.frame}.
 }
 \usage{
 factorall(x)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
-%%     ~~Describe \code{x} here~~
+The \code{data.frame} to be updated.
 }
 }
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
+
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+A \code{data.frame}, in which all factor have been updated. All unused levels are dropped.
 }
-\references{
-%% ~put references to the literature/web site here ~
-}
+
 \author{
-%%  ~~who you are~~
+Giorgio Arcara.
 }
 \note{
 %%  ~~further notes~~
@@ -38,26 +29,19 @@ factorall(x)
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-}
-\examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
 
-## The function is currently defined as
-function (x) 
-{
-    for (i in 1:length(x)) {
-        if (is.factor(x[, i])) {
-            x[, i] = factor(x[, i])
-        }
-    }
-    return(x)
-  }
+\examples{
+data(iris)
+
+iris2 <- iris[iris$Species!="setosa", ]
+levels(iris2$Species)
+
+iris2<-factorall(iris2)
+levels(iris2$Species)
+
 }
+
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+%\keyword{ ~kwd1 }
+%\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

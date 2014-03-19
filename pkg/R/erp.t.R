@@ -1,4 +1,4 @@
-eeg.t <-
+erp.t <-
 function(base1, base2,numbers,numbers2=numbers, Electrode, paired=TRUE, alpha=0.05, env=.GlobalEnv, env2=NULL,sig=NULL, main=Electrode, smo=0.5 , col="black", startmsec=-200, endmsec=1200, interval=c(startmsec, endmsec), step=200, verticals=NULL,horizontals=NULL, x.axis="default", ylim=c(-6,6), lwd=c(1,1), lty=c(1,1), cex.xaxis=0.8, cex.yaxis=1, color.list=c("blue", "red")) {
 
 

@@ -47,10 +47,10 @@ This function is called internally by \code{erp.measure}.
 \code{\link{erp.measure}}%% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-dontrun{
+\dontrun{
 ### DA CREARE DATA.FRAME
-dat.wide=ERPwide
-dat.long=rearrange(deps=c(1:32), oth=33, dataset=dat.wide, name.newvar="Electrode")
+#dat.wide=ERPwide
+#dat.long=rearrange(deps=c(1:32), oth=33, dataset=dat.wide, name.newvar="Electrode")
 }
 
 }

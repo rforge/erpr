@@ -5,145 +5,111 @@
 butterfly
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+A butterfly plot of several ERP data frames.
 }
 \usage{
-butterfly(base, numbers, electrode, add = FALSE, smo = 0.5, col = "black", startmsec = -200, endmsec = 1000, yrev = FALSE, interval = c(startmsec, endmsec), step = 200, verticals = NULL, horizontals = NULL, x.axis = "default", ylim = "default", lwd = 1, lty = 1, outline = NULL, out.col = "black", envir = .GlobalEnv)
+butterfly(base, numbers, electrode, add = FALSE, smo = 0.5, col = "black", 
+startmsec = -200, endmsec = 1000, yrev = FALSE, interval = c(startmsec, endmsec), 
+step = 200, verticals = NULL, horizontals = NULL, x.axis = "default", ylim = "default", 
+lwd = 1, lty = 1, outline = NULL, out.col = "black", env = .GlobalEnv)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{base}{
-%%     ~~Describe \code{base} here~~
+ \item{base}{
+A string indicating the beginning of the name of \code{data.frame} containg the ERP data.
 }
   \item{numbers}{
-%%     ~~Describe \code{numbers} here~~
+The numbers (indicating different subjects), to be averaged by the function.
 }
-  \item{electrode}{
-%%     ~~Describe \code{electrode} here~~
-}
+ 
   \item{add}{
-%%     ~~Describe \code{add} here~~
-}
+add the current plot to a previous plot}
   \item{smo}{
-%%     ~~Describe \code{smo} here~~
+A smoothing parameter to be applied
 }
   \item{col}{
-%%     ~~Describe \code{col} here~~
+color of the waveforms in the butterfly plot.
 }
-  \item{startmsec}{
-%%     ~~Describe \code{startmsec} here~~
+ \item{startmsec}{
+A value indicating the initial time (in ms) of the ERP \code{data.frame} objects. It can be a negative value, indicating the baseline period.
 }
   \item{endmsec}{
-%%     ~~Describe \code{endmsec} here~~
+A value indicating the final time (in ms) of the ERP \code{data.frame} objects.
 }
   \item{yrev}{
-%%     ~~Describe \code{yrev} here~~
+Logical. Should y-axis be plotted with negative values upward?
 }
-  \item{interval}{
-%%     ~~Describe \code{interval} here~~
+ \item{interval}{
+A vector with a pair of values, indicating the interval to be plotted.
 }
-  \item{step}{
-%%     ~~Describe \code{step} here~~
+   \item{step}{
+The step on the x-axis labels to be plotted. The axis will start from the first value of \code{interval}
 }
   \item{verticals}{
-%%     ~~Describe \code{verticals} here~~
+The x coordinates of optional vertical bars to be plotted
 }
   \item{horizontals}{
-%%     ~~Describe \code{horizontals} here~~
+The y coordinates of optional vertical bars to be plotted
 }
-  \item{x.axis}{
-%%     ~~Describe \code{x.axis} here~~
+ \item{x.axis}{
+If \code{default}, than an x.axis will be drawn on the bases of \code{interval} and \code{step} parameters. A vector of values can be supplied instead.
 }
   \item{ylim}{
-%%     ~~Describe \code{ylim} here~~
+A pair of values indicating the y-axis limit.
 }
   \item{lwd}{
-%%     ~~Describe \code{lwd} here~~
+The width of the ERP line to be plotted.
 }
   \item{lty}{
-%%     ~~Describe \code{lty} here~~
+The line style of the ERP line to be plotted.
+}
+  \item{x.axis}{
+If \code{default}, than an x.axis will be drawn on the bases of \code{interval} and \code{step} parameters. A vector of values can be supplied instead.
+}
+  \item{ylim}{
+A pair of values indicating the y-axis limit.
+}
+  \item{lwd}{
+The width of the ERP line to be plotted.
+}
+  \item{lty}{
+The line style of the ERP line to be plotted.
 }
   \item{outline}{
-%%     ~~Describe \code{outline} here~~
+The number of the ERP data frame to be outlined (it will be plotted with lwd=2).
 }
   \item{out.col}{
-%%     ~~Describe \code{out.col} here~~
+The color of the outlined ERP waveform.
 }
-  \item{envir}{
-%%     ~~Describe \code{envir} here~~
+  \item{env}{
+The environment in which \code{butterfly} is to be evaluated.
 }
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+a butterfly plot.
 }
-\references{
-%% ~put references to the literature/web site here ~
-}
+
 \author{
-%%  ~~who you are~~
+Giorgio Arcara
 }
-\note{
-%%  ~~further notes~~
-}
+%\note{
+%%%  ~~further notes~~
+%}
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{erp}}, \code{\link{erp.infl}}, \code{\link{scalp.infl}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
 
-## The function is currently defined as
-function (base, numbers, electrode, add = FALSE, smo = 0.5, col = "black", 
-    startmsec = -200, endmsec = 1000, yrev = FALSE, interval = c(startmsec, 
-        endmsec), step = 200, verticals = NULL, horizontals = NULL, 
-    x.axis = "default", ylim = "default", lwd = 1, lty = 1, outline = NULL, 
-    out.col = "black", envir = .GlobalEnv) 
-{
-    env = deparse(substitute(envir))
-    numbers = numbers[-(!(numbers \%in\% outline))]
-    if (add == FALSE) {
-        i = 1
-        eeg(eval(parse(file = "", text = paste(env, "$", base, 
-            numbers[i], "$", electrode, sep = ""))), smo = smo, 
-            col = col, startmsec = startmsec, endmsec = endmsec, 
-            yrev = yrev, interval = interval, step = step, verticals = verticals, 
-            horizontals = horizontals, x.axis = x.axis, ylim = ylim, 
-            lwd = lwd, lty = lty)
-        for (i in 2:length(numbers)) {
-            comp.add(eval(parse(file = "", text = paste(env, 
-                "$", base, numbers[i], "$", electrode, sep = ""))), 
-                col = col, lwd = lwd, lty = lty, smo = smo)
-        }
-    }
-    if (add == TRUE) {
-        for (i in 1:length(numbers)) {
-            comp.add(eval(parse(file = "", text = paste(env, 
-                "$", base, numbers[i], "$", electrode, sep = ""))), 
-                col = col, lwd = lwd, lty = lty, smo = smo)
-        }
-    }
-    if (!is.null(outline)) {
-        for (k in 1:length(outline)) {
-            comp.add(eval(parse(file = "", text = paste(env, 
-                "$", base, outline[k], "$", electrode, sep = ""))), 
-                col = out.col, lty = lty, smo = smo, lwd = lwd + 
-                  2)
-        }
-    }
-  }
+butterfly(base="Exp1_nonword_subj", numbers=1:20, electrode="OZ", smo=0, startmsec=-200, endmsec=1500, outline=1, ylim=c(-50,50))
+
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+%\keyword{ ~kwd1 }
+%\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

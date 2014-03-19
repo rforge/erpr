@@ -26,7 +26,7 @@ A value indicating the initial edge (in ms) of the windows on which the mean amp
 A value indicating the final edge (in ms) of the windows on which the mean amplitude has to be computed.
 }
   \item{env}{
-The environment in which \code{erp.fun} is to be evaluated.
+The environment in which \code{erp.mean} is to be evaluated.
 }
   \item{startmsec}{
 A value indicating the initial time (in ms) of the ERP \code{data.frame} objects. It can be a negative value, indicating the baseline period.
@@ -66,8 +66,8 @@ this function calls \code{\link{rearrange}}.
 
 }
 \examples{
-	
-erp.mean(base="Exp1_word_subj", numbers=1:20, win.ini=130, win.end=190, startmsec=-200, endmsec=1500,
-		others=c(condition="word"], interval="130-190", name.dep="Ampl", format="long"))
+#data(ERPsets)
+#erp.mean(base="Exp1_word_subj", numbers=1:20, win.ini=130, win.end=190, startmsec=-200, endmsec=1500,
+#		others=c(condition="word"], interval="130-190", name.dep="Ampl", format="long"))
 }
 

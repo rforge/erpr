@@ -1,14 +1,14 @@
-\name{load.eeg.multi}
-\alias{load.eeg.multi}
+\name{import.erp}
+\alias{import.erp}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-load.eeg.multi
+import.erp
 }
 \description{
 inport in the workspace a series of .txt files with ERP data.
 }
 \usage{
-load.eeg.multi(filenamebase, numbers, outname = "ERP_subj", env = .GlobalEnv)
+import.erp(filenamebase, numbers, outname = "ERP_subj", env = .GlobalEnv)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -22,7 +22,7 @@ The numbers (indicating different subjects) of the files to be imported.
 A string inficating the beginning of the name of the objects that will be created on the environment.
 }
   \item{env}{
-The environment in which the objects created by \code{load.eeg.multi} are stored.
+The environment in which the objects created by \code{import.erp} are stored.
 }
 }
 \details{
@@ -42,5 +42,5 @@ Giorgio Arcara
 
 
 \examples{
-load.eeg.multi(filenamebase="Exp1_word_subj", numbers=1:20, outname="Exp1_word_subj")
+#import.erp(filenamebase="Exp1_word_subj", numbers=1:20, outname="Exp1_word_subj")
 }

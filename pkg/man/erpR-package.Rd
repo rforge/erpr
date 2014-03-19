@@ -4,37 +4,35 @@
 \docType{package}
 \title{
 erpR-package
-~~ package title ~~
 }
 \description{
-More about what it does (maybe more than one line)
-~~ A concise (1-5 lines) description of the package ~~
+The erpR package includes a series of functions for computing traditional ERP measure, plotting, importing ERP data and for exploratory analyses.
 }
 \details{
 \tabular{ll}{
 Package: \tab erpR\cr
 Type: \tab Package\cr
 Version: \tab 0.1\cr
-Date: \tab 2013-12-12\cr
-License: \tab What license is it under?\cr
+Date: \tab 2014-03-19\cr
+License: \tab GNU public license \cr
 }
-~~ An overview of how to use the package, including the most important functions ~~
-}
+The package includes a series of functions for computing traditional ERP measure, plotting, importing ERP data and for exploratory analyses.
 \author{
 Giorgio Acara
 
-<giorgio.arcara@gmail.com>
-~~ The author and/or maintainer of the package ~~
+\email<giorgio.arcara@gmail.com>
+
+Mantainer: giorgio.arcara@gmail.com
 }
-\references{
-~~ Literature or other references for background information ~~
-}
-~~ Optionally other standard keywords, one per line, from file KEYWORDS in the R documentation directory ~~
-\keyword{ package }
-\seealso{
-~~ Optional links to other man pages, e.g. ~~
-~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
+%\references{
+%~~ Literature or other references for background information ~~
+%}
+%~~ Optionally other standard keywords, one per line, from file KEYWORDS in the R documentation directory ~~
+%\keyword{ package }
+%\seealso{
+%~~ Optional links to other man pages, e.g. ~~
+%~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
 }
 \examples{
-~~ simple examples of the most important functions ~~
+library(erpR)
 }

@@ -26,14 +26,10 @@ msectopoints(a, lengthsegment, startmsec, endmsec)
 }
 }
 \details{
-  this function is mostly an internal function.
+  this is mostly an internal function of \code{erpR}.
 }
 \value{
-The function return a single number \eqn{x}, obtained by the conversion given by \deqn{x = \frac{((a-(startmsec))*(lengthsegment-1))}{(endmsec-(startmsec))}}
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+The function return a single value that is the conversion of \code{a} from msec to points.
 }
 \references{
 %% ~put references to the literature/web site here ~

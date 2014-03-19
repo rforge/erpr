@@ -33,7 +33,7 @@ This is an utility function to quickly transform \code{character} vector as \cod
 \examples{
 	
 	dat=data.frame(RT=rnorm(20, mean=500, sd=100), Subject=rep(1:10, 2))
-	conditions=(rep("a", 10), rep("b", 10))
+	conditions=c(rep("a", 10), rep("b", 10))
 	
 	dat$conditions=conditions
 	

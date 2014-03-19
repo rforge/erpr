@@ -2,8 +2,11 @@ Package: erpR
 Type: Package
 Title: ERP analysis, graphics and utility functions. 
 Version: 0.1
-Date: 2013-12-12
+Date: 2013-03-20
 Author: Giorgio Arcara
 Maintainer: <giorgio.arcara@gmail.com>
-Description: More about what it does (maybe more than one line)
-License: GPL 3.0
+Depends: R (>= 3.0.2), rpanel, tcltk2
+Description: A series of functions for computing traditional ERP measure, plotting, importing ERP data and for exploratory analyses.
+Suggests: ez
+License:  GPL (>= 2)
+Imports: rpanel, tcltk2

@@ -5,7 +5,7 @@
 cn
 }
 \description{
-return column names of a \code{data.frame} or \code{matrix} in one-column format for a quick inspection of column names.
+Return column names of a \code{data.frame} or \code{matrix} in one-column format for an easy visual inspection.
 }
 \usage{
 cn(x)

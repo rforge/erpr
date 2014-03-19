@@ -44,7 +44,7 @@ The objects keep track of the objects averaged in a \code{comment}.
 \dontrun{
 	# compute the average of subjects 1 to 20 for the condition 
 	# specified by the string "Exp1_word_subj".
-	
+	data(ERPsets)
 	word=grandaverage("Exp1_word_subj", 1:20)
 }
 }
