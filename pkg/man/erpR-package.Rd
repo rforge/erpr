@@ -17,12 +17,13 @@ Date: \tab 2014-03-19\cr
 License: \tab GNU public license \cr
 }
 The package includes a series of functions for computing traditional ERP measure, plotting, importing ERP data and for exploratory analyses.
+}
 \author{
-Giorgio Acara
+	Giorgio Acara \email{<giorgio.arcara@gmail.com>}
+	
+	Anna Petrova
 
-\email<giorgio.arcara@gmail.com>
-
-Mantainer: giorgio.arcara@gmail.com
+	Mantainer: giorgio.arcara@gmail.com
 }
 %\references{
 %~~ Literature or other references for background information ~~
@@ -32,7 +33,7 @@ Mantainer: giorgio.arcara@gmail.com
 %\seealso{
 %~~ Optional links to other man pages, e.g. ~~
 %~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
-}
+%}
 \examples{
 library(erpR)
 }

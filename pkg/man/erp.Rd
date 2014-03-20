@@ -2,7 +2,7 @@
 \alias{erp}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-erp
+Plot an ERP waveform
 }
 \description{
 A basic function to plot an ERP sweep of a single electrode.
