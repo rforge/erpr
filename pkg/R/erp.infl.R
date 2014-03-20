@@ -1,7 +1,5 @@
 erp.infl <-
-function(base, numbers, electrode, smo=0, startmsec=-200, endmsec=1200, lwd=1, lty=1, env=.GlobalEnv, ...){
-
-require(rpanel)
+function(base, numbers, electrode, smo=0, startmsec=-200, endmsec=1200, lwd=1, lty=1, envir=.GlobalEnv, ...){
 
 
 
@@ -12,25 +10,25 @@ require(rpanel)
 erp.infl.panel=function(panel)
 	{
 
-		erp.infl.endo=function(base, numbers, electrode, outline, smo=0 , col="black", startmsec=-200, endmsec=1000, yrev=FALSE, interval=c(startmsec, endmsec), step=200, verticals=NULL,horizontals=NULL, x.axis="default", ylim=c(-10,10), lwd=1, lty=1,out.col="red", env)
+		erp.infl.endo=function(base, numbers, electrode, outline, smo=0 , col="black", startmsec=-200, endmsec=1000, yrev=FALSE, interval=c(startmsec, endmsec), step=200, verticals=NULL,horizontals=NULL, x.axis="default", ylim=c(-10,10), lwd=1, lty=1,out.col="red", envir)
 	{
-		average.temp=eval(parse(file="", text=paste(base,numbers[1],"$",electrode, sep="")), envir=env)
+		average.temp=eval(parse(file="", text=paste(base,numbers[1],"$",electrode, sep="")), envir=envir)
 		for (i in 2:length(numbers))
 		{
-			average.temp=average.temp+eval(parse(file="", text=paste(base,numbers[i],"$",electrode, sep="")), envir=env)		
+			average.temp=average.temp+eval(parse(file="", text=paste(base,numbers[i],"$",electrode, sep="")), envir=envir)		
 		}
 		average=average.temp/length(numbers)
 		
-		eeg(average,smo=smo, col=col, startmsec=startmsec, endmsec=endmsec, yrev=yrev, interval=interval,step=step, verticals=verticals, horizontals=horizontals, x.axis=x.axis, ylim=ylim, lwd=lwd, lty=lty,main=electrode, ...)
+		erp(average,smo=smo, col=col, startmsec=startmsec, endmsec=endmsec, yrev=yrev, interval=interval,step=step, verticals=verticals, horizontals=horizontals, x.axis=x.axis, ylim=ylim, lwd=lwd, lty=lty,main=electrode, ...)
 		
-		average.excl=(average.temp-eval(parse(file="", text=paste(base,outline,"$",electrode, sep="")), envir=env))/(length(numbers)-1)
-		comp.add(average.excl, col=out.col, lwd=2, smo=smo)
+		average.excl=(average.temp-eval(parse(file="", text=paste(base,outline,"$",electrode, sep="")), envir=envir))/(length(numbers)-1)
+		erp.add(average.excl, col=out.col, lwd=2, smo=smo)
 	legend("topright", legend=c("Average all", paste("Average no subj", outline)), pch=15, col=c(col,out.col), pt.bg=c(1:6), cex=1.2)
 		
 		}							
 
 		
-		erp.infl.endo(base=base, numbers=numbers, electrode=electrode, outline=panel$outnumber, smo=smo,  yrev=yrev, startmsec=startmsec, endmsec=endmsec, env=env)
+		erp.infl.endo(base=base, numbers=numbers, electrode=electrode, outline=panel$outnumber, smo=smo,  yrev=yrev, startmsec=startmsec, endmsec=endmsec, envir=envir)
 		
 		panel
 		}

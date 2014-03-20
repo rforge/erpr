@@ -5,18 +5,18 @@
 localmax
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+The function calculates a local maximum of the vector \code{x} surrounded by at least \code{n.points} lower numbers.
 }
 \usage{
-localmax(x, n=2)
+localmax(x, n.points=2)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
 a vector of numbers.
 }
-  \item{n}{
-the minimum numbers of lower values to determine the local maximum (see Details). Default is two points.
+  \item{n.points}{
+the minimum numbers of lower values to determine the local maximum. Default is two points.
 }
 }
 \details{

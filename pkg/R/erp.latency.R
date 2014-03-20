@@ -1,13 +1,13 @@
 erp.latency <-
-function(base, numbers, win.ini, win.end, env=.GlobalEnv, startmsec=-200, endmsec=1200, others=NULL, format="long", name.dep="Dep", name.newvar="Electrode", peak.fun=max, ...)
+function(base, numbers, win.ini, win.end, envir=.GlobalEnv, startmsec=-200, endmsec=1200, others=NULL, format="long", name.dep="Dep", name.newvar="Electrode", peak.fun=max, ...)
 	{	
 		datall=NULL		
 			
 		for (i in 1:length(numbers))
 		{
-		average.temp=eval(parse(file="", text=paste(base,numbers[i], sep="")),env=env)
+		average.temp=eval(parse(file="", text=paste(base,numbers[i], sep="")),envir=envir)
 		rownames(average.temp)=1:dim(average.temp)[1]
-		Subject_name=comment(eval(parse(file="", text=paste(base,numbers[i], sep="")),env=env))
+		Subject_name=comment(eval(parse(file="", text=paste(base,numbers[i], sep="")),envir=envir))
 		average.temp.peak=apply(average.temp[round(msectopoints(win.ini,dim(average.temp)[1],startmsec, endmsec)):round(msectopoints(win.end,dim(average.temp)[1],startmsec, endmsec)),],2, FUN=function(x){peak.fun(x, ...)})
 		
 		peak.pnts=NULL

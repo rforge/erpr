@@ -1,11 +1,11 @@
-\name{create.ROI}
-\alias{create.ROI}
+\name{create.roi}
+\alias{create.roi}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-create.ROI
+create.roi
 }
 \description{
-Utility function to create a factor that collapse other factor levels (typically electrode names) in a new variable vector with the new ROI variable.
+Utility function to create a factor that collapses other factor levels (typically electrode names) in a new variable vector with the new ROI variable.
 }
 \usage{
 create.roi(datall, Electrode="Electrode", groups=NULL, roi.levels=NULL )
@@ -13,23 +13,23 @@ create.roi(datall, Electrode="Electrode", groups=NULL, roi.levels=NULL )
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{datall}{
-the data.frame containing ERP data in long format.
+a  data.frame containing ERP data in long format.
 }
   \item{Electrode}{
-The column names of datall containing the Electrode names
+column names of datall containing Electrode names
 }
   \item{groups}{
-a list containing (in separate vectors) the Electrode names to create the ROI. E.g. \code{list(c("Fp1", "Fp2"), c("P3", "P4"))}.
+a list containing (in separate vectors) Electrode names to create the ROI. E.g. \code{list(c("Fp1", "Fp2"), c("P3", "P4"))}.
 }
   \item{roi.levels}{
 a vector with the names of the new created factor variable. E.g. \code{c("Frontopolar", "Parietal")}.
 }
 }
 \details{
-All levels of the variable \code{Electrode} that are not specified in \code{groups} will be codified as \code{NA} in the returned vector.
+All levels of the variable \code{Electrode} that are not specified in \code{groups} will be coded as \code{NA} in the returned vector.
 }
 \value{
-The function returns a vector with the new codified ROI variable.
+The function returns a vector with the new coded ROI variable.
 }
 
 \author{

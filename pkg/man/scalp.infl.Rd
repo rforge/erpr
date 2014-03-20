@@ -5,80 +5,82 @@
 scalp.infl
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+The function returns a diagnostic plot to investigate the influence of a given ERP data frame on the grandaverage of a series of ERP data frames. A GUI is provided to explore the effect of removing a data frame (that is expected to be associated with a Subject) from the grandaverage. Two plots are superposed: the original grandaverage, and the average removing the subject selected via the GUI. The plot shows an array of electrodes with a topography reflecting their positions on the scalp.
 }
+
 \usage{
-scalp.infl(base, numbers, smo = 0, layout = 3, ylims = 12, yrev = FALSE, startmsec = -200, endmsec = 1200, lwd = c(1, 2), lty = 1, col = "black", out.col = "red", env = .GlobalEnv)
+scalp.infl(base, numbers, smo = 0, layout = 3, ylims = 12, yrev = FALSE, startmsec = -200, endmsec = 1200, lwd = c(1, 2), lty = 1, col = "black", out.col = "red", envir = .GlobalEnv)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{base}{
-%%     ~~Describe \code{base} here~~
+\item{base}{
+a string indicating the beginning of the name of the \code{data.frame} containing the ERP data.
 }
   \item{numbers}{
-%%     ~~Describe \code{numbers} here~~
+the numbers of the subjects to be averaged by the function.
 }
-  \item{smo}{
-%%     ~~Describe \code{smo} here~~
+
+ \item{smo}{
+the smoothing parameter to be applied to the data.
 }
+
   \item{layout}{
-%%     ~~Describe \code{layout} here~~
+the layout of electrodes to be plotted. Currently only few layouts are supported. 
 }
-  \item{ylims}{
-%%     ~~Describe \code{ylims} here~~
+
+\item{ylims}{
+a number indicating the upper and lower limits of the y axis. If "auto", the function calculates the y limits automatically.
 }
   \item{yrev}{
-%%     ~~Describe \code{yrev} here~~
+logical. If \code{TRUE}, the y axis is plotted with the negative values upward.
 }
-  \item{startmsec}{
-%%     ~~Describe \code{startmsec} here~~
+
+ \item{startmsec}{
+a value (in ms) indicating the start time of the ERP vector
 }
   \item{endmsec}{
-%%     ~~Describe \code{endmsec} here~~
+a value (in ms) indicating the end time of the ERP vector
 }
-  \item{lwd}{
-%%     ~~Describe \code{lwd} here~~
+
+ \item{lwd}{
+the line width of the waveforms.
 }
   \item{lty}{
-%%     ~~Describe \code{lty} here~~
+the line type of the waveforms.
 }
   \item{col}{
-%%     ~~Describe \code{col} here~~
+the color of the grand average including all subjects.
 }
   \item{out.col}{
-%%     ~~Describe \code{out.col} here~~
+the color of the grand average in which the selected subject is removed
 }
-  \item{env}{
-%%     ~~Describe \code{env} here~~
+  \item{envir}{
+the environment in which the ERP data frames are searched for.
 }
 }
-\details{
+%\details{
 %%  ~~ If necessary, more details than the description above ~~
-}
+%}
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+The function returns a plot showing the influence of a subject on the grandaverage.
 }
-\references{
-%% ~put references to the literature/web site here ~
-}
+
 \author{
-%%  ~~who you are~~
+Giorgio Arcara
 }
-\note{
+%\note{
 %%  ~~further notes~~
-}
+%}
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{erp.infl}}, \code{\link{scalp}}
 }
 \examples{
-####
+# data(ERPdatasets)
+# Note that Subject 1 is clearly particularly influential for the average on OZ.
+# scalp.infl(base="Exp1_word_subj", numbers=1:20, layout=1, startmsec=-200, endmsec=1500)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

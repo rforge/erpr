@@ -13,7 +13,7 @@ char2fac(x)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
-the \code{data.frame} in which columns are to be coverted.
+the \code{data.frame} in which columns are to be converted.
 }
 }
 
@@ -25,7 +25,7 @@ A \code{data.frame} with \code{character} columns converted in \code{factor} col
 Giorgio Arcara.
 }
 \note{
-This is an utility function to quickly transform \code{character} vector as \code{factor} for analysis purpose.
+This is a utility to transform \code{character} vector as \code{factor} quickly for analysis purpose.
 }
 
 

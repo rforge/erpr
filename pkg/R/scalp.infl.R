@@ -1,22 +1,21 @@
 scalp.infl <-
-function(base, numbers, smo=0, layout=3, ylims=12, yrev=FALSE, startmsec=-200, endmsec=1200, lwd=c(1,2), lty=1, col="black", out.col="red", env=.GlobalEnv){
+function(base, numbers, smo=0, layout=3, ylims=12, yrev=FALSE, startmsec=-200, endmsec=1200, lwd=c(1,2), lty=1, col="black", out.col="red", envir=.GlobalEnv){
 
-require(rpanel)
 
 # la funzione contiene all'interno una funzione che crea il panel. Questa funzione a sua volta contiene la funzione scalp.infl.endo, che è quella che effettivamente fa il grafico appoggiandosi alla funzione scalp.endo. 
 
 
 scalp.infl.panel=function(panel)
 	{
-		scalp.infl.endo=function(base, numbers, outline, smo, col, startmsec, endmsec, yrev, ylims, lwd, lty, color.list=c("black","red"), layout, env=.GlobalEnv){
+		scalp.infl.endo=function(base, numbers, outline, smo, col, startmsec, endmsec, yrev, ylims, lwd, lty, color.list=c("black","red"), layout, envir=.GlobalEnv){
 		text=paste(base,numbers[1],sep="")
-		average.temp=eval(parse(file="", text=paste(base,numbers[1],sep="")), env=env)
+		average.temp=eval(parse(file="", text=paste(base,numbers[1],sep="")), envir=envir)
 		for (i in 2:length(numbers)){
-			average.temp=average.temp+eval(parse(file="", text=paste(base,numbers[i], sep="")),env=env)		
+			average.temp=average.temp+eval(parse(file="", text=paste(base,numbers[i], sep="")),envir=envir)		
 			}
 		average=average.temp/length(numbers)
 		
-		average.excl=(average.temp-eval(parse(file="", text=paste(base,outline, sep="")),env=env))/(length(numbers)-1)
+		average.excl=(average.temp-eval(parse(file="", text=paste(base,outline, sep="")),envir=envir))/(length(numbers)-1)
 
 		scalp.endo=function(categ, smo=0.5, label=c("type1"), layout=1, ylims, yrev=TRUE, startmsec=-200, 	endmsec=1200, lwd=1, lty=1, color.list=c("black","red")) {
 
@@ -116,7 +115,7 @@ electrodes=c("axes","Fp1", "blank", "Fp2","legend", "F7", "F3", "FZ", "F4", "F8"
 		}
 
 		
-		scalp.infl.endo(base=base, numbers=numbers, outline=panel$outnumber, layout=layout, smo=smo, ylims=ylims, yrev=yrev, startmsec=startmsec, endmsec=endmsec, color.list=c(col, out.col), lwd=lwd, lty=lty,env=env)
+		scalp.infl.endo(base=base, numbers=numbers, outline=panel$outnumber, layout=layout, smo=smo, ylims=ylims, yrev=yrev, startmsec=startmsec, endmsec=endmsec, color.list=c(col, out.col), lwd=lwd, lty=lty,envir=envir)
 		
 		panel
 		

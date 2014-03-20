@@ -5,17 +5,18 @@
 localmin
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+The function calculates a local minimum of the vector \code{x} surrounded by at least \code{n.points} higher numbers.
+
 }
 \usage{
-localmin(x, n=2)
+localmin(x, n.points = 2)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
 a vector of numbers.
 }
-  \item{n}{
+  \item{n.points}{
 the minimum numbers of higher values to determine the local minimum (see Details). Default is two points.
 }
 }

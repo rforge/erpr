@@ -17,7 +17,7 @@ The \code{data.frame} to be updated.
 }
 
 \value{
-A \code{data.frame}, in which all factor have been updated. All unused levels are dropped.
+A \code{data.frame} in which all factors have been updated. All unused levels are dropped.
 }
 
 \author{

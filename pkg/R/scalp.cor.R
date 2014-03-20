@@ -1,5 +1,5 @@
 scalp.cor <-
-function(base1, numbers, behaviour=NULL, alpha=0.05,method = c("pearson", "kendall", "spearman"), sig=NULL, env=.GlobalEnv, env2=NULL, smo=0.5, label=c("type1"), layout=1, ylims="auto", yrev=TRUE, startmsec=-200, endmsec=1200, lwd=c(1,1), lty=c(1,1), color.list=c("blue", "red"), legend=TRUE, legend.lab="default") {
+function(base1, numbers, behaviour=NULL, alpha=0.05,method = c("pearson", "kendall", "spearman"), sig=NULL, envir=.GlobalEnv, smo=0.5, layout=1, ylims="auto", yrev=TRUE, startmsec=-200, endmsec=1200, lwd=c(1,1), lty=c(1,1), col="blue", legend=TRUE, legend.lab="default") {
 
 if (legend.lab=="default"){
 	legend.lab=c(base1)
@@ -16,7 +16,7 @@ element=function(x,row.i){
 
 alldata1.list=list(NULL)
 for (i1 in 1:length(numbers)){
-	alldata1.list[[i1]]=eval(parse(file="", text=paste(base1,numbers[i1], sep="")),env=env)
+	alldata1.list[[i1]]=eval(parse(file="", text=paste(base1,numbers[i1], sep="")),envir=envir)
 	}
 
 
@@ -79,7 +79,7 @@ if (!is.null(sig)){
 #base1 = le prime lettere degli oggetti 
 #numbers= il numero dei soggetti di cui calcolare l'average
 
-alldata1=grandaverage(base=base1, numbers, env=env)
+alldata1=grandaverage(base=base1, numbers, envir=envir)
 
 categ=list(alldata1)
 
@@ -149,14 +149,14 @@ text((dim(categ[[1]])[1]/2)+(dim(categ[[1]])[1]/8),0, labels=expression(paste(mu
 		if (electrodes[i]=="legend"){
 		plot.new()
 		if (legend=="TRUE"){
-	legend("center", legend=legend.lab, col=color.list, cex=1.2, lty=lty, lwd=lwd) #pch=15, pt.bg=color.list
+	legend("center", legend=legend.lab, col=col, cex=1.2, lty=lty, lwd=lwd) #pch=15, pt.bg=col
 			}
 		}
 		if (electrodes[i]!="blank"&electrodes[i]!="axes"&electrodes[i]!="legend") {
 			
 			### NOTA: plotto due volte il grafico: la prima volta con type="n" poi con type="l". Altrimenti le bande si sovrascrivono col grafico
 
-			plot(smooth.spline(categ[[1]][[electrodes[i]]][1:dim(categ[[1]])[1]], spar=smo), type="n", ylim=c(yedge[1]+yedge[1]/3,yedge[2]+(yedge[2]/3)),col=color.list[1], main="", ylab="", xlab="", cex.main=0.85,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n",frame.plot=FALSE, lwd=lwd[1], lty=lty[1])
+			plot(smooth.spline(categ[[1]][[electrodes[i]]][1:dim(categ[[1]])[1]], spar=smo), type="n", ylim=c(yedge[1]+yedge[1]/3,yedge[2]+(yedge[2]/3)),col=col[1], main="", ylab="", xlab="", cex.main=0.85,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n",frame.plot=FALSE, lwd=lwd[1], lty=lty[1])
 			
 			# plotto le bande di significatività di correlazioni negative
 		######################
@@ -170,7 +170,7 @@ text((dim(categ[[1]])[1]/2)+(dim(categ[[1]])[1]/8),0, labels=expression(paste(mu
 
 			
 			### NOTA: plotto due volte il grafico: la prima volta con type="n" poi con type="l". Altrimenti le bande si sovrascrivono col grafico
-			lines(smooth.spline(categ[[1]][[electrodes[i]]][1:dim(categ[[1]])[1]], spar=smo), col=color.list[1],  cex.main=0.85, lwd=lwd[1], lty=lty[1])
+			lines(smooth.spline(categ[[1]][[electrodes[i]]][1:dim(categ[[1]])[1]], spar=smo), col=col[1],  cex.main=0.85, lwd=lwd[1], lty=lty[1])
 
 				##### di seguito ho semplicemente calcolato, tramite una proporzione, il punto che corrisponde allo 0
 				totalendmsec=endmsec+abs(startmsec)

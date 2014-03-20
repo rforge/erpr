@@ -1,4 +1,4 @@
-Agg <- function (formula, data, FUN, ..., subset, na.action = na.omit) 
+named.agg <- function (formula, data, FUN, ..., subset, na.action = na.omit) 
 {
   if (missing(formula) || !inherits(formula, "formula")) 
     stop("'formula' missing or incorrect")

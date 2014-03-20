@@ -4,11 +4,11 @@ grandaverage <-
 # in questa f(x) AGGIUNGI UN WARNING SE CI SONO NA e crea una funzione (da usare preliminarmente) che faccia un check di tutti i dati
 # magari una funz veloce che ti dica solo se sono completi e una più dettagliata che ti dica invece range e eventuali NA.
 
-function(base, numbers, electrodes="all", env=.GlobalEnv, NA.sub=T)
+function(base, numbers, electrodes="all", envir=.GlobalEnv, NA.sub=TRUE)
 	#forse da togliere la possibilità di selezionare elettrodi.
 	{
 	comment_text=paste("Subjects averaged: ", paste(base,numbers[1], sep=""))
-	average.temp=eval(parse(file="", text=paste(base,numbers[1], sep="")),env=env)
+	average.temp=eval(parse(file="", text=paste(base,numbers[1], sep="")),envir=envir)
 	
 	if(electrodes[1]=="all"){
 		electrodes=names(average.temp)
@@ -25,7 +25,7 @@ function(base, numbers, electrodes="all", env=.GlobalEnv, NA.sub=T)
 	
 		for (i in 2:length(numbers))
 		{
-			average.temp.new=eval(parse(file="", text=paste(base,numbers[i],sep="")),env=env)[,electrodes]
+			average.temp.new=eval(parse(file="", text=paste(base,numbers[i],sep="")),envir=envir)[,electrodes]
 			
 			if(NA.sub==TRUE)
 			{
@@ -45,7 +45,7 @@ function(base, numbers, electrodes="all", env=.GlobalEnv, NA.sub=T)
 		average=average.temp/rep(Electrodes.n, each=nrow(average.temp))
 		comment(average)=comment_text
 		if (sum(Electrodes.n-(length(numbers)))!=0){ #nota: length(numbers) è il numero di soggetti. In questo modo recupero il numero di sogg con NA.
-			warning("The average included some NA values. Use check.erp function", call.=FALSE)
+			warning("The average included some NA values.", call.=FALSE)
 		}
 		return(average)
 		}

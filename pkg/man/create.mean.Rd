@@ -8,24 +8,24 @@ create.mean
 From two sets of paired ERP \code{data.frame} objects the function creates a new set of \code{data.frame} objects with the values obtained by averaging the values of the original sets.
 }
 \usage{
-create.mean(bases, numbers, outname = NULL, env = .GlobalEnv, out.env = env, comment.dat = 1)
+create.mean(bases, numbers, outname = NULL, envir = .GlobalEnv, out.envir = envir, comment.dat = 1)
 }
 \arguments{
   \item{bases}{
-A vector of strings indicating the beginning of the names of \code{data.frame} objects containg the ERP data to be averaged.
+A vector of strings indicating the beginning of the names of \code{data.frame} objects containing the ERP data to be averaged.
 }
   \item{numbers}{
-The numbers (indicating different subjects), to be averaged by the function.
+The numbers of subjects to be averaged by the function.
 }
 
   \item{outname}{
 the \code{base} of the names of the returned \code{data.frame} objects.
 }
 
-  \item{env}{
+  \item{envir}{
 The environment in which \code{grandaverage} is to be evaluated.
 }
-  \item{out.env}{
+  \item{out.envir}{
 The environment in which the objects created are returned.
 }
   \item{comment.dat}{

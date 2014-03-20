@@ -5,24 +5,24 @@
 import.erp
 }
 \description{
-inport in the workspace a series of .txt files with ERP data.
+Import a series of .txt files with ERP data.
 }
 \usage{
-import.erp(filenamebase, numbers, outname = "ERP_subj", env = .GlobalEnv)
+import.erp(filenamebase, numbers, outname = "ERP_subj", envir = .GlobalEnv)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{filenamebase}{
-A string indicating the beginning of the name of the .txt files containg the ERP data.
+a string indicating the beginning of the name of the .txt files containing the ERP data.
 }
   \item{numbers}{
-The numbers (indicating different subjects) of the files to be imported.
+the numbers (indicating the subjects) of the files to be imported.
 }
   \item{outname}{
-A string inficating the beginning of the name of the objects that will be created on the environment.
+a string inficating the beginning of the name of the objects that will be created.
 }
-  \item{env}{
-The environment in which the objects created by \code{import.erp} are stored.
+  \item{envir}{
+the environment in which the objects created by \code{import.erp} are stored.
 }
 }
 \details{
@@ -39,8 +39,8 @@ Giorgio Arcara
 %%  ~~further notes~~
 }
 
-
-
 \examples{
-#import.erp(filenamebase="Exp1_word_subj", numbers=1:20, outname="Exp1_word_subj")
+\dontrun{
+import.erp(filenamebase="Exp1_word_subj", numbers=1:20, outname="Exp1_word_subj")
+}
 }

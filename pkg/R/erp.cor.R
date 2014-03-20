@@ -1,5 +1,5 @@
-eeg.cor <-
-function(base1, numbers, Electrode, behaviour=NULL, alpha=0.05,method = c("pearson", "kendall", "spearman"), env=.GlobalEnv, sig=NULL, main=Electrode, smo=0.5 , col="black", startmsec=-200, endmsec=1200, interval=c(startmsec, endmsec), step=200, verticals=NULL,horizontals=NULL, x.axis="default", ylim=c(-6,6), lwd=c(1), lty=c(1), cex.xaxis=0.8, cex.yaxis=1, color.list=c("blue", "red")) {
+erp.cor <-
+function(base1, numbers, Electrode, behaviour=NULL, alpha=0.05,method = c("pearson", "kendall", "spearman"), envir=.GlobalEnv, sig=NULL, main=Electrode, smo=0.5 , col="black", startmsec=-200, endmsec=1200, interval=c(startmsec, endmsec), step=200, verticals=NULL,horizontals=NULL, x.axis="default", ylim=c(-6,6), lwd=c(1), lty=c(1), cex.xaxis=0.8, cex.yaxis=1, color.list=c("blue", "red")) {
 
 
 	#### PARTE 1: STATISTICHE PER ELETTRODO ####
@@ -13,7 +13,7 @@ element=function(x,row.i){
 alldata1.list=list(NULL)
 alldata2.list=list(NULL)
 for (i1 in 1:length(numbers)){
-	alldata1.list[[i1]]=eval(parse(file="", text=paste(base1,numbers[i1], sep="")),env=env)
+	alldata1.list[[i1]]=eval(parse(file="", text=paste(base1,numbers[i1], sep="")),envir=envir)
 	}
 
 alltemp=list(NULL)
@@ -69,7 +69,7 @@ if (!is.null(sig)){
 
 
 
-alldata1=grandaverage(base=base1, numbers, env=env)
+alldata1=grandaverage(base=base1, numbers, envir=envir)
 
 
 

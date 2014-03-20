@@ -5,7 +5,8 @@
 scalp
 }
 \description{
-This function plots the waveforms of several ERP electrodes in an rectangular array reflecting the position in the scalp}
+This function plots the waveforms of several ERP electrodes in an rectangular array reflecting the position in the scalp
+}
 \usage{
 scalp(categ, smo = 0.5, label = c("type1"), layout = 1, ylims = "auto", yrev = TRUE, startmsec = -200, endmsec = 1200, lwd = 1, lty = 1, color.list = c("blue", "red", "darkgreen"), legend = F, legend.lab = "default", t.axis = seq(-100, endmsec, 200))
 }

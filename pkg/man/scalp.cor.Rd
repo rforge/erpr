@@ -5,101 +5,106 @@
 scalp.cor
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+This function performs a series of correlations on each timepoint betwen ERP voltages and another (usually a behavioural) variable. The set of ERP data frames is specified by \code{base1} and \code{numbers}. The behavioral variable is specified as a vector (of length equal to \code{numbers}) as the argument \code{behaviour}. A scalp plot of the results is returned.
 }
 \usage{
-scalp.cor(base1, numbers, behaviour = NULL, alpha = 0.05, method = c("pearson", "kendall", "spearman"), sig = NULL, env = .GlobalEnv, env2 = NULL, smo = 0.5, label = c("type1"), layout = 1, ylims = "auto", yrev = TRUE, startmsec = -200, endmsec = 1200, lwd = c(1, 1), lty = c(1, 1), color.list = c("blue", "red"), legend = TRUE, legend.lab = "default")
+scalp.cor(base1, numbers, behaviour = NULL, alpha = 0.05, method = c("pearson", "kendall", "spearman"), sig = NULL, envir = .GlobalEnv, smo = 0.5, layout = 1, ylims = "auto", yrev = TRUE, startmsec = -200, endmsec = 1200, lwd = c(1, 1), lty = c(1, 1), col = "blue", legend = TRUE, legend.lab = "default")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{base1}{
-%%     ~~Describe \code{base1} here~~
+\item{base1}{
+A string indicating the beginning of the name of the set of ERP data frames.
 }
   \item{numbers}{
-%%     ~~Describe \code{numbers} here~~
+The numbers (indicating different subjects), of the set of ERP data frames .
 }
   \item{behaviour}{
-%%     ~~Describe \code{behaviour} here~~
+A vector indicating the values of the behavioural variables. This vector must be of the same length of \code{numbers}
 }
   \item{alpha}{
-%%     ~~Describe \code{alpha} here~~
+The alpha of the correlation tests.
 }
   \item{method}{
-%%     ~~Describe \code{method} here~~
+The method of the correlations. Available methods are \code{"pearson", "kendall", "spearman"}.
 }
   \item{sig}{
-%%     ~~Describe \code{sig} here~~
+If \code{NULL}, then the series of correlations is computed. If an appropriate object is specified (i.e. the object returned by \code{scalp.cor} or \code{erp.cor}) then the results are retrieved by this object and the function simply plots the results.
 }
-  \item{env}{
-%%     ~~Describe \code{env} here~~
+  \item{envir}{
+The environment in which the ERP data frames  are searched.
 }
-  \item{env2}{
-%%     ~~Describe \code{env2} here~~
-}
-  \item{smo}{
+
+ \item{smo}{
 %%     ~~Describe \code{smo} here~~
 }
-  \item{label}{
-%%     ~~Describe \code{label} here~~
-}
   \item{layout}{
-%%     ~~Describe \code{layout} here~~
+The layout of electrodes to be plotted. Currently only few layout are supported. 
 }
   \item{ylims}{
-%%     ~~Describe \code{ylims} here~~
+A number indicating the upper and lower limits of the y axis. If "auto", the function calculate the y limits automatically.
 }
   \item{yrev}{
-%%     ~~Describe \code{yrev} here~~
+Logical. If \code{TRUE} the y axis is plotted with the negative values upward.
 }
-  \item{startmsec}{
-%%     ~~Describe \code{startmsec} here~~
+ \item{startmsec}{
+A value, in milliseconds indicating the beginning time of the ERP vector
 }
   \item{endmsec}{
-%%     ~~Describe \code{endmsec} here~~
+A value, in milliseconds indicating the end time of the ERP vector
 }
+
   \item{lwd}{
-%%     ~~Describe \code{lwd} here~~
+A vector specifying the line width to be associated to each ERP data frame specfied in \code{categ}
 }
   \item{lty}{
-%%     ~~Describe \code{lty} here~~
+A vector specifying the line types to be associated to each ERP data frame specfied in \code{categ}
 }
-  \item{color.list}{
-%%     ~~Describe \code{color.list} here~~
+
+\item{col}{
+	the color of the ERP waveform.
 }
+
   \item{legend}{
-%%     ~~Describe \code{legend} here~~
+Logical. If \code{TRUE} a legend with object names is drawn in the top-right corner of the array. 
 }
   \item{legend.lab}{
-%%     ~~Describe \code{legend.lab} here~~
-}
-}
-\details{
+The legend labels. If "default" names are retrieved from the \code{categ} argument.
+}}
+
+%\details{
 %%  ~~ If necessary, more details than the description above ~~
-}
+%}
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+The function plots a scalp map of of the ERP waveforms in an array resembling the topographic placements of electrodes on the scalp.
+The waveforms represent the average of the first set of data frames specified. Timepoints in which thre is a positive (and significant) correlation are highlighted by red bars. Timepoints in which thre is a positive (and significant) correlation are highlighted by blue bars. The function returns also an object with the results of the correlatiosn saved. This object can be used in future plots with \code{erp.cor} or \code{scalp.cor}, by specifying it as the argument \code{sig}.
+
 }
-\references{
+%\references{
 %% ~put references to the literature/web site here ~
-}
+%}
 \author{
-%%  ~~who you are~~
+Giorgio Arcara
 }
-\note{
+%\note{
 %%  ~~further notes~~
-}
+%}
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{erp.cor}}, ~~~
 }
 \examples{
-####
+
+data(ERPsets)
+
+#generate an hypothetic behavioral variables
+RT=rnorm(20, mean=500, sd=200)
+
+scalp.cor("Exp1_word_subj", 1:20, behaviour = RT, smo=0, layout=1, ylim=10, legend=T)
+
+
+
 }
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the

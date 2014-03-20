@@ -1,0 +1,55 @@
+\name{named.agg}
+\alias{named.agg}
+%- Also NEED an '\alias' for EACH other topic documented here.
+\title{
+named.agg
+}
+\description{
+A wrapper of the \code{aggregate} function. Data are provided as a \code{formula} and the original names are kept in the returned \code{data.frame}.
+}
+\usage{
+named.agg(formula, data, FUN, ..., subset, na.action = na.omit) 
+}
+%- maybe also 'usage' for other objects documented here.
+\arguments{
+  \item{formula}{
+A \code{formula} such as \code{y ~ x }or \code{cbind(y1, y2) ~ x1 + x2}, where the \code{y} variables are numeric data to be split into groups according to the grouping x variables (usually factors).
+}
+  \item{data}{
+The \code{data.frame} to be aggregated.
+}
+  \item{FUN}{
+a function to compute the summary statistics which can be applied to all data subsets.
+}
+  \item{subset}{
+a function to compute the summary statistics which can be applied to all data subsets.
+}
+	\item{na.action}{
+	a function which indicates what should happen when the data contain \code{NA} values. The default is to ignore missing values in the given variables.
+}
+\item{...}{
+		further arguments passed to or used by methods.
+}
+
+}
+
+\value{
+For the data frame method, you get a data frame with columns corresponding to the grouping variables in the right part of the formula, followed by aggregated columns from the left part of the formula. The names of the variables remain the same as in the original data frame. 
+}
+
+\author{
+Ananda Mahto
+}
+
+\note{
+named.agg is a wrapper of \code{\link{aggregate}}
+}
+
+\seealso{
+\code{\link{aggregate}}
+}
+\examples{
+\dontrun{
+	ERPlongAgg=named.agg(Ampl~type+electrode, ERPlong)
+}
+}

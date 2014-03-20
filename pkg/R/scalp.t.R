@@ -1,5 +1,5 @@
 scalp.t <-
-function(base1, base2, numbers, numbers2=NULL, paired=TRUE, alpha=0.05, sig=NULL, env=.GlobalEnv, env2=NULL, smo=0.5, label=c("type1"), layout=1, ylims="auto", yrev=TRUE, startmsec=-200, endmsec=1200, lwd=c(1,1), lty=c(1,1), color.list=c("blue", "red"), legend=F, legend.lab="default", t.axis=seq(-100,endmsec,200)) {
+function(base1, base2, numbers, numbers2=NULL, paired=TRUE, alpha=0.05, sig=NULL, envir=.GlobalEnv, envir2=NULL, smo=0.5, label=c("type1"), layout=1, ylims="auto", yrev=TRUE, startmsec=-200, endmsec=1200, lwd=c(1,1), lty=c(1,1), color.list=c("blue", "red"), legend=F, legend.lab="default", t.axis=seq(-100,endmsec,200)) {
 
 if (length(legend.lab)==1&legend.lab[1]=="default"){
 	legend.lab=c(base1, base2)
@@ -13,8 +13,8 @@ msectopoints=function(a,lengthsegment){
 if (is.null(numbers2)){
 	numbers2=numbers}
 
-if (is.null(env2)){
-	env2=env}
+if (is.null(envir2)){
+	envir2=envir}
 
 if (is.null(sig)){
 	
@@ -25,10 +25,10 @@ element=function(x,row.i){
 alldata1.list=list(NULL)
 alldata2.list=list(NULL)
 for (i1 in 1:length(numbers)){
-	alldata1.list[[i1]]=eval(parse(file="", text=paste(base1,numbers[i1], sep="")),env=env)
+	alldata1.list[[i1]]=eval(parse(file="", text=paste(base1,numbers[i1], sep="")),envir=envir)
 	}
 for (i2 in 1:length(numbers2)){
-	alldata2.list[[i2]]=eval(parse(file="", text=paste(base2,numbers2[i2], sep="")),env=env2)
+	alldata2.list[[i2]]=eval(parse(file="", text=paste(base2,numbers2[i2], sep="")),envir=envir2)
 	}
 
 
@@ -81,8 +81,8 @@ if (!is.null(sig)){
 #base1 = le prime lettere degli oggetti 
 #numbers= il numero dei soggetti di cui calcolare l'average
 
-alldata1=grandaverage(base=base1, numbers, env=env)
-alldata2=grandaverage(base=base2,numbers2, env=env2)
+alldata1=grandaverage(base=base1, numbers, envir=envir)
+alldata2=grandaverage(base=base2,numbers2, envir=envir2)
 
 categ=list(alldata1,alldata2)
 

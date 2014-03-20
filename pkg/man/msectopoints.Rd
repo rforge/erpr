@@ -5,7 +5,7 @@
 msectopoints
 }
 \description{
-%% internal function of erpR to convert points in msec
+An internal function of erpR to convert points in milliseconds.
 }
 \usage{
 msectopoints(a, lengthsegment, startmsec, endmsec)
@@ -19,7 +19,7 @@ msectopoints(a, lengthsegment, startmsec, endmsec)
     the length (in points) of the segment
 }
   \item{startmsec}{
-     the time (in ms) of the beginning of the segment
+     the time (in ms) of the start of the segment
 }
   \item{endmsec}{
      the time (in ms) of the end of the segment
@@ -29,13 +29,13 @@ msectopoints(a, lengthsegment, startmsec, endmsec)
   this is mostly an internal function of \code{erpR}.
 }
 \value{
-The function return a single value that is the conversion of \code{a} from msec to points.
+The function returns a single value that is the conversion of \code{a} from msec to points.
 }
 \references{
 %% ~put references to the literature/web site here ~
 }
 \author{
-Giorgio arcara
+Giorgio Arcara
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~

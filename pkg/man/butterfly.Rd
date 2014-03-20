@@ -11,16 +11,19 @@ A butterfly plot of several ERP data frames.
 butterfly(base, numbers, electrode, add = FALSE, smo = 0.5, col = "black", 
 startmsec = -200, endmsec = 1000, yrev = FALSE, interval = c(startmsec, endmsec), 
 step = 200, verticals = NULL, horizontals = NULL, x.axis = "default", ylim = "default", 
-lwd = 1, lty = 1, outline = NULL, out.col = "black", env = .GlobalEnv)
+lwd = 1, lty = 1, outline = NULL, out.col = "black", envir = .GlobalEnv)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
  \item{base}{
-A string indicating the beginning of the name of \code{data.frame} containg the ERP data.
+A string indicating the beginning of the name of \code{data.frame} containing the ERP data.
 }
   \item{numbers}{
-The numbers (indicating different subjects), to be averaged by the function.
+The numbers of subjects to be averaged by the function.
 }
+ \item{electrode}{
+ The electrode to be plotted.
+ }
  
   \item{add}{
 add the current plot to a previous plot}
@@ -31,7 +34,7 @@ A smoothing parameter to be applied
 color of the waveforms in the butterfly plot.
 }
  \item{startmsec}{
-A value indicating the initial time (in ms) of the ERP \code{data.frame} objects. It can be a negative value, indicating the baseline period.
+A value indicating the initial time (in ms) of the ERP \code{data.frame} objects. It can be a negative value, indicating the baseline time frame.
 }
   \item{endmsec}{
 A value indicating the final time (in ms) of the ERP \code{data.frame} objects.
@@ -52,7 +55,7 @@ The x coordinates of optional vertical bars to be plotted
 The y coordinates of optional vertical bars to be plotted
 }
  \item{x.axis}{
-If \code{default}, than an x.axis will be drawn on the bases of \code{interval} and \code{step} parameters. A vector of values can be supplied instead.
+If \code{default}, then an x.axis will be drawn on the bases of \code{interval} and \code{step} parameters. A vector of values can be supplied instead.
 }
   \item{ylim}{
 A pair of values indicating the y-axis limit.
@@ -63,30 +66,19 @@ The width of the ERP line to be plotted.
   \item{lty}{
 The line style of the ERP line to be plotted.
 }
-  \item{x.axis}{
-If \code{default}, than an x.axis will be drawn on the bases of \code{interval} and \code{step} parameters. A vector of values can be supplied instead.
-}
-  \item{ylim}{
-A pair of values indicating the y-axis limit.
-}
-  \item{lwd}{
-The width of the ERP line to be plotted.
-}
-  \item{lty}{
-The line style of the ERP line to be plotted.
-}
+
   \item{outline}{
 The number of the ERP data frame to be outlined (it will be plotted with lwd=2).
 }
   \item{out.col}{
 The color of the outlined ERP waveform.
 }
-  \item{env}{
+  \item{envir}{
 The environment in which \code{butterfly} is to be evaluated.
 }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+%%  ~~ If necessary, more details than in the description above ~~
 }
 \value{
 a butterfly plot.

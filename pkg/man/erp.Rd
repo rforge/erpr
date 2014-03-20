@@ -5,7 +5,7 @@
 Plot an ERP waveform
 }
 \description{
-A basic function to plot an ERP sweep of a single electrode.
+A basic function to plot an ERP waveform of a single electrode.
 }
 \usage{
 erp(e1, main = NULL, smo = 0.0, col = "black", startmsec = -200, endmsec = 1000, 
@@ -19,94 +19,94 @@ interval = c(startmsec, endmsec), step = 200, verticals = NULL, horizontals = NU
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{e1}{
-A vector with the electrode to be plotted
+a vector with the electrode to be plotted
 }
   \item{main}{
-The title of the plot
+the title of the plot
 }
   \item{smo}{
-The smoothing parameter to be applied before plotting. The default is 0.
+the smoothing parameter to be applied before plotting. The default is 0.
 }
   \item{col}{
-Color of the electrode plotted.
+the color of the electrode plotted.
 }
   \item{startmsec}{
-A value, in milliseconds indicating the beginning time of the ERP vector
+a value (in ms) indicating the start time of the ERP vector
 }
   \item{endmsec}{
-A value, in milliseconds indicating the end time of the ERP vector
+A value (in ms) indicating the end time of the ERP vector
 }
   \item{interval}{
-A vector with a pair of values, indicating the interval to be plotted
+a vector with a pair of values, indicating the interval to be plotted
 }
   \item{step}{
-The step on the x-axis labels to be plotted. The axis will start from the first value of \code{interval}
+the step on the x-axis labels to be plotted. The axis will start from the first value of \code{interval}
 }
   \item{verticals}{
-The x coordinates of optional vertical bars to be plotted
+the x coordinates of optional vertical bars to be plotted
 }
   \item{horizontals}{
-The y coordinates of optional vertical bars to be plotted
+the y coordinates of optional vertical bars to be plotted
 }
   \item{x.axis}{
-If \code{default}, than an x.axis will be drawn on the bases of \code{interval} and \code{step} parameters. A vector of values can be supplied instead.
+if \code{default}, then an x.axis will be drawn on the bases of \code{interval} and \code{step} parameters. A vector of values can be supplied instead.
 }
   \item{ylim}{
-A pair of values indicating the y-axis limit.
+a pair of values indicating the y-axis limit.
 }
   \item{lwd}{
-The width of the ERP line to be plotted.
+the width of the ERP line to be plotted.
 }
   \item{lty}{
-The line style of the ERP line to be plotted.
+the style of the ERP line to be plotted.
 }
   \item{cex.main}{
-Magnification factor of the Title supplied in \code{Main}.
+magnification factor of the Title supplied in \code{Main}.
 }
   \item{cex.xaxis}{
-Magnification factor of the x-axis labels.
+magnification factor of the x-axis labels.
 }
   \item{cex.yaxis}{
-Magnification factor of the y-axis labels.
+magnification factor of the y-axis labels.
 }
   \item{y.axis}{
-If \code{default}, than an x.axis will be drawn on the bases of \code{y.lim} and \code{y.axis.step} parameters. A vector of values can be supplied instead.
+if \code{default}, then an x.axis will be drawn on the basis of \code{y.lim} and \code{y.axis.step} parameters. A vector of values can be supplied instead.
 }
   \item{frame.plot}{
 logical. Default is \code{TRUE}. Draw a box around the plot.
 }
   \item{xaxis0}{
-logical. Default is \code{FALSE}. If \code{TRUE} all default R parameters on axis drawing are overridden. Another axis is drawn, with the parameters specified all parameters listed below.
+logical. Default is \code{FALSE}. If \code{TRUE} then all default R parameters on axis drawing are overridden. Another axis is drawn, using the parameters specified below.
 }
   \item{xtick.l}{
-The length of ticks in the x-axis.
+the length of ticks in the x-axis.
 }
   \item{xticks}{
-Position of xticks, in milliseconds. If "default" they are automatically placed.
+the position of xticks (in ms). If "default" they are automatically placed.
 }
   \item{yaxis0}{
-Logical. Default is \code{FALSE}. If \code{TRUE}. The y-axis default R parameters are ignored and another axis is drawn with the parameters specified below.
+logical. Default is \code{FALSE}. If \code{TRUE}, the y-axis default R parameters are ignored and another axis is drawn with the parameters specified below.
 }
   \item{yaxis0.origin}{
-Position (in ms) on which the y-axis intersect the x-axis.
+the position (in ms) where x-axis and y-axis intersect.
 }
   \item{ytick.l}{
-The length of ticks in the x-axis.
+length of ticks on the x-axis.
 }
   \item{y.axis.step}{
-The distance between each tick in the y axis.
+the distance between each tick on the y-axis.
 }
   \item{yticks}{
-Position (in microVolt) where y ticks are drawn.
+the position (in microVolt) where y ticks are drawn.
 }
   \item{yrev}{
-Logical. If \code{TRUE} the negative voltages is plotted upward.
+logical. If \code{TRUE} the negative voltage is plotted upward.
 }
   \item{tick}{
 currently unused parameter
 }
   \item{lwd.xticks}{
-the line width of ticks on the x-axis.
+the line width of the ticks on the x-axis.
 }
   \item{lwd.yticks}{
 the line width of ticks on the y-axis.

@@ -8,7 +8,7 @@ erp.add
 Add a waveform to a ERP plot made with \code{erp}, \code{erp.t}, or \code{butterfly} functions.
 }
 \usage{
-erp.add(en, lty = 1, smo = 0, col = "black", lwd = 1)
+erp.add(en, lty = 1, smo = 0, col = "black", lwd = 1, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -26,6 +26,9 @@ Color of the waveform plotted.
 }
   \item{lwd}{
 Line width of the waveform plotted.
+}
+\item{...}{
+	further parameters to be passed to \code{lines}
 }
 }
 

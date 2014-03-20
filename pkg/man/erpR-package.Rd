@@ -6,7 +6,7 @@
 erpR-package
 }
 \description{
-The erpR package includes a series of functions for computing traditional ERP measure, plotting, importing ERP data and for exploratory analyses.
+The erpR package includes a series of functions for computing traditional ERP measures, plotting, importing ERP data and carrying out exploratory analyses.
 }
 \details{
 \tabular{ll}{
@@ -16,10 +16,10 @@ Version: \tab 0.1\cr
 Date: \tab 2014-03-19\cr
 License: \tab GNU public license \cr
 }
-The package includes a series of functions for computing traditional ERP measure, plotting, importing ERP data and for exploratory analyses.
+The package includes a series of functions for computing traditional ERP measures, plotting, importing ERP data and carrying out exploratory analyses.
 }
 \author{
-	Giorgio Acara \email{<giorgio.arcara@gmail.com>}
+	Giorgio Acara \email{giorgio.arcara@gmail.com}
 	
 	Anna Petrova
 

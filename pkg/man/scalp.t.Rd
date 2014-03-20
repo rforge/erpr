@@ -5,107 +5,113 @@
 scalp.t
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+This function performs a series of \code{t.test} on each timepoint comparing two sets of ERP data frames. The first set is specified by \code{base1} and \code{numbers}. The second is specified by \code{base2} and \code{numbers2}. A scalp plot of the results is returned.
 }
 \usage{
-scalp.t(base1, base2, numbers, numbers2 = NULL, paired = TRUE, alpha = 0.05, sig = NULL, env = .GlobalEnv, env2 = NULL, smo = 0.5, label = c("type1"), layout = 1, ylims = "auto", yrev = TRUE, startmsec = -200, endmsec = 1200, lwd = c(1, 1), lty = c(1, 1), color.list = c("blue", "red"), legend = F, legend.lab = "default", t.axis = seq(-100, endmsec, 200))
+scalp.t(base1, base2, numbers, numbers2 = NULL, paired = TRUE, alpha = 0.05, sig = NULL, envir = .GlobalEnv, envir2 = NULL, smo = 0.5, label = c("type1"), layout = 1, ylims = "auto", yrev = TRUE, startmsec = -200, endmsec = 1200, lwd = c(1, 1), lty = c(1, 1), color.list = c("blue", "red"), legend = F, legend.lab = "default", t.axis = seq(-100, endmsec, 200))
 }
-%- maybe also 'usage' for other objects documented here.
-\arguments{
-  \item{base1}{
-%%     ~~Describe \code{base1} here~~
+\arguments{	
+	\item{base1}{
+A string indicating the beginning of the name of the first set of ERP data frames.
 }
-  \item{base2}{
-%%     ~~Describe \code{base2} here~~
+	\item{base2}{
+A string indicating the beginning of the name of the second set of ERP data frames.
 }
   \item{numbers}{
-%%     ~~Describe \code{numbers} here~~
+The numbers (indicating different subjects), of the first set of ERP data frames .
 }
   \item{numbers2}{
-%%     ~~Describe \code{numbers2} here~~
+The numbers (indicating different subjects), of the second set of ERP data frames .
 }
   \item{paired}{
-%%     ~~Describe \code{paired} here~~
+Logical. This argument specifies if the t-tests are paired or not.
 }
   \item{alpha}{
-%%     ~~Describe \code{alpha} here~~
+The alpha of the t-tests.
 }
   \item{sig}{
-%%     ~~Describe \code{sig} here~~
+If \code{NULL}, then the series of t-test is computed. If an appropriate object is specified (i.e. the object returned by \code{erp.t} or \code{scalp.t})
+then the results are retrieved by this object and the function simply plots the results.
 }
-  \item{env}{
-%%     ~~Describe \code{env} here~~
+  \item{envir}{
+The environment in which the ERP data frames of the first set are searched.
 }
-  \item{env2}{
-%%     ~~Describe \code{env2} here~~
+
+  \item{envir2}{
+The environment in which the ERP data frames of the second set are searched.
 }
+
   \item{smo}{
-%%     ~~Describe \code{smo} here~~
+The smoothing parameter to be applied before plotting. The default is 0.
 }
+
   \item{label}{
-%%     ~~Describe \code{label} here~~
+unused argument
 }
   \item{layout}{
-%%     ~~Describe \code{layout} here~~
+The layout of electrodes to be plotted. Currently only few layout are supported. 
 }
   \item{ylims}{
-%%     ~~Describe \code{ylims} here~~
+A number indicating the upper and lower limits of the y axis. If "auto", the function calculate the y limits automatically.
 }
   \item{yrev}{
-%%     ~~Describe \code{yrev} here~~
+Logical. If \code{TRUE} the y axis is plotted with the negative values upward.
 }
-  \item{startmsec}{
-%%     ~~Describe \code{startmsec} here~~
+
+ \item{startmsec}{
+A value, in milliseconds indicating the beginning time of the ERP vector
 }
   \item{endmsec}{
-%%     ~~Describe \code{endmsec} here~~
+A value, in milliseconds indicating the end time of the ERP vector
 }
+
   \item{lwd}{
-%%     ~~Describe \code{lwd} here~~
+A vector specifying the line width to be associated to each ERP data frame specfied in \code{categ}
 }
   \item{lty}{
-%%     ~~Describe \code{lty} here~~
+A vector specifying the line types to be associated to each ERP data frame specfied in \code{categ}
 }
   \item{color.list}{
-%%     ~~Describe \code{color.list} here~~
+A vector specifying the colors to be associated to each ERP data frame specfied in \code{categ}
 }
   \item{legend}{
-%%     ~~Describe \code{legend} here~~
+Logical. If \code{TRUE} a legend with object names is drawn in the top-right corner of the array. 
 }
   \item{legend.lab}{
-%%     ~~Describe \code{legend.lab} here~~
+The legend labels. If "default" names are retrieved from the \code{categ} argument.
 }
   \item{t.axis}{
-%%     ~~Describe \code{t.axis} here~~
+The ticks and sequence of an axis plotted in the bottom-left corner of the array.
 }
 }
-\details{
+
+%\details{
 %%  ~~ If necessary, more details than the description above ~~
-}
+%}
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+The function plots a map of two series of ERP waveforms in an array resembling the topographic placements of electrodes on the scalp.
+One series is the average of the first set of data frames specified, and the other series is the average of the second set of data frames specified. The colors of the waveforms are specified in the argument \code{color.list}. Timepoints in which the t-test performed is significant are highlighted by gray bars. The function returns also an object with the results of the t-tests saved. This object can be used in future plots with \code{erp.t} or \code{scalp.t}, by specifying it as the argument \code{sig}.
 }
-\references{
+%\references{
 %% ~put references to the literature/web site here ~
-}
+%}
 \author{
-%%  ~~who you are~~
+Giorgio Arcara
 }
-\note{
+
+%\note{
 %%  ~~further notes~~
-}
+%}
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{erp}}, \code{\link{erp.t}}
 }
 \examples{
-###
+#data(ERPsets)
+##scalp.t("Exp1_word_subj", "Exp1_nonword_subj", 1:20, 1:20, smo=0, layout=1, ylim=c(-10,10), startmsec=-200, endmsec=1500, color.list=c("blue", "red"))
+
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

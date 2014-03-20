@@ -7,7 +7,7 @@
 }
 \usage{data(ERPsets)}
 \format{
-	data frame6 with 426 timepoints (rows) and 34 electrodes (columns).
+	data frame with 426 timepoints (rows) and 34 electrodes (columns).
 	\describe{
   	\item{\code{Fp1, ..., HEOG1}}{Amplitude values at given electrodes.}
      }

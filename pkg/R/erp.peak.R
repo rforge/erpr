@@ -1,10 +1,10 @@
-erp.peak<-function(base, numbers, win.ini, win.end, env=.GlobalEnv, startmsec=-200, endmsec=1200, others=NULL, format="long", name.dep="Dep", name.newvar="Electrode", peak.fun=max, ...)
+erp.peak<-function(base, numbers, win.ini, win.end, envir=.GlobalEnv, startmsec=-200, endmsec=1200, others=NULL, format="long", name.dep="Dep", name.newvar="Electrode", peak.fun=max, ...)
 	{
 	datall=NULL		
 		for (i in 1:length(numbers))
 			{
-			x.temp=eval(parse(file="", text=paste(base,numbers[i], sep="")),env=env)
-			Subject_name=comment(eval(parse(file="", text=paste(base,numbers[i], sep="")),env=env))
+			x.temp=eval(parse(file="", text=paste(base,numbers[i], sep="")),envir=envir)
+			Subject_name=comment(eval(parse(file="", text=paste(base,numbers[i], sep="")),envir=envir))
 			x.temp=apply(x.temp[round(msectopoints(win.ini,dim(x.temp)[1],startmsec, endmsec)):round(msectopoints(win.end,dim(x.temp)[1],startmsec, endmsec)),],2, FUN=function(x){peak.fun(x, ...)})
 			x.temp=data.frame(t(x.temp))
 			x.temp$Subject=numbers[i]
