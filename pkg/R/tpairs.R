@@ -1,5 +1,5 @@
-t.test.pairs <-
-function(dat, vars, contr, dep, wid, p.adjust.methods="none", paired=F, type="t.test", vars.bet=NULL,...){
+tpairs <-
+function(dat, vars, contr, dep, wid, p.adjust.methods="none", paired=FALSE, type="t.test", vars.bet=NULL,...){
 
 		dat$newfactor=apply(data.frame(dat[,vars]), 1, function(x){paste(x, collapse="_")})
 		dat$newfactor=factor(dat$newfactor)	

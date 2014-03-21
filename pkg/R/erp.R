@@ -1,13 +1,8 @@
-eeg <-
-function(e1,main=NULL, smo=0.5 , col="black", startmsec=-200, endmsec=1000, interval=c(startmsec, endmsec), step=200, verticals=NULL, horizontals=NULL, x.axis="default", ylim="default", lwd=1, lty=1, cex.main=1, cex.xaxis=0.8, cex.yaxis=1, y.axis="default", frame.plot=TRUE, xaxis0=FALSE, xtick.l="default",xticks="default", yaxis0=FALSE, yaxis0.origin=0, ytick.l="default", y.axis.step=2,  yticks="default", yrev=T, tick="low", lwd.xticks=1, lwd.yticks=1){
+erp <-
+function(e1,main=NULL, smo=0 , col="black", startmsec=-200, endmsec=1000, interval=c(startmsec, endmsec), step=200, verticals=NULL, horizontals=NULL, x.axis="default", ylim="default", lwd=1, lty=1, cex.main=1, cex.xaxis=0.8, cex.yaxis=1, y.axis="default", frame.plot=TRUE, xaxis0=FALSE, xtick.l="default",xticks="default", yaxis0=FALSE, yaxis0.origin=0, ytick.l="default", y.axis.step=2,  yticks="default", lwd.xticks=1, lwd.yticks=1){
 	
 	
-	lengthwhole=length(e1)
-
-	msectopoints=function(a, lengthsegment, startmsec, endmsec){
-	x=((a-(startmsec))*(lengthsegment-1))/(endmsec-(startmsec))
-	return(x+1)}
-	
+	lengthwhole=length(e1)	
 	
 	startpoint=msectopoints(interval[1], lengthwhole, startmsec, endmsec)
 	endpoint=msectopoints(interval[2], lengthwhole, startmsec, endmsec)
@@ -39,8 +34,11 @@ function(e1,main=NULL, smo=0.5 , col="black", startmsec=-200, endmsec=1000, inte
 	}
 
 	
+		if(smo!=0){
+		e1=smooth.spline(e1, spar=smo)
+		}
 		
-		plot(smooth.spline(e1, spar=smo), type="l", col=col,lwd=lwd, main=main, yaxt="n", xaxt="n",xlim=c(startpoint, endpoint), ylab="",xlab="", lty=lty, cex.axis=cex.yaxis, frame.plot=frame.plot, cex.main=cex.main, ylim=ylim)		
+		plot(e1, type="l", col=col,lwd=lwd, main=main, yaxt="n", xaxt="n",xlim=c(startpoint, endpoint), ylab="",xlab="", lty=lty, cex.axis=cex.yaxis, frame.plot=frame.plot, cex.main=cex.main, ylim=ylim)		
 		
 	
 	
