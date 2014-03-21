@@ -17,7 +17,7 @@ Date: \tab 2014-03-19\cr
 License: \tab GNU public license \cr
 }
 The package includes a series of functions for computing traditional ERP measures, plotting, importing ERP data and carrying out exploratory analyses. 
-In many \code{erpR} functions it will be required to specify the two arguments \code{base} and \code{numbers}. From the combination of \code{base}  and \code{numbers}, it is obtained the name of the objects (or of the files) on which the functions of \code{erpR} will be applied. The argument \code{base} typically indicates the name of the experimental condition (or group or both), whereas \code{numbers} typically indicate the subject numbers on which apply the function. This system is crucial to keep order in object and files names and to tell \code{erpR} the correspondence between objects of files. In particular a given \code{base} will always refer to the same condition, and a given \code{number} will always refer to the same subject.
+Many \code{erpR} functions require to specify two arguments: \code{base} and \code{numbers}. The names of the objects for the \code{erpR} functions are obtained from the combination of \code{base} and \code{numbers}. The argument \code{base} typically indicates the name of the experimental condition (or group, or both), while \code{numbers} typically indicate the numbers of the subjects on which function is applied. This system is crucial to keep order in object and files names and to tell \code{erpR} the correspondence between the objects. In particular a given \code{base} will always refer to the same condition, and a given \code{number} will always refer to the same subject.
 
 Further information can be found on the maintainer's site \url{https://sites.google.com/site/giorgioarcara/}.
 }

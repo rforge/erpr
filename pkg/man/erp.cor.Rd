@@ -2,10 +2,10 @@
 \alias{erp.cor}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-plot the timepoint correlations between ERPs and an external variable (single electrdode)
+plot the timepoint correlations between ERPs and an external variable (single electrode)
 }
 \description{
-This function performs a series of correlations on each timepoint betwen ERP voltages and another (usually a behavioural) variable. The set of ERP data frames is specified by \code{base1} and \code{numbers}. The behavioral variable is specified as a vector (of length equal to \code{numbers}) as the argument \code{behaviour}. A plot of a single electrode showing the results of the correlation tests is returned.
+This function performs a series of correlations on each timepoint between ERP voltages and another (usually a behavioral) variable. The set of ERP data frames is specified by \code{base1} and \code{numbers}. The behavioral variable is specified as a vector (of length equal to \code{numbers}) as the argument \code{behaviour}. A plot of a single electrode showing the results of the correlation tests is returned.
 }
 \usage{
 	erp.cor(base1, numbers, Electrode, behaviour=NULL, alpha=0.05, 
@@ -18,74 +18,74 @@ This function performs a series of correlations on each timepoint betwen ERP vol
 %- maybe also 'usage' for other objects documented here.
 \arguments{
 \item{base1}{
-A string indicating the beginning of the name of the set of ERP data frames.
+a string indicating the beginning of the name of the set of ERP data frames.
 }
   \item{numbers}{
-The numbers (indicating different subjects), of the set of ERP data frames .
+the numbers of subjects of the set of ERP data frames .
 }
   \item{Electrode}{
-The electrode to be plotted
+the electrode to be plotted
 }
   \item{behaviour}{
-A vector indicating the values of the behavioural variables. This vector must be of the same length of \code{numbers}
+a vector indicating the values of the behavioural variables. This vector must be of the same length of \code{numbers}
 }
   \item{alpha}{
-The alpha of the correlation tests.
+the alpha of the correlation tests.
 }
   \item{method}{
-The method of the correlations. 
+the method of the correlations. 
 Available methods are \code{"pearson", "kendall", "spearman"}.
 }
   \item{sig}{
-If \code{NULL}, then the series of correlations is computed. If an appropriate object is specified (i.e. the object returned by \code{scalp.cor} or \code{erp.cor}) then the results are retrieved by this object and the function simply plots the results.
+if \code{NULL}, then a series of correlations is computed. If an appropriate object is specified (i.e. an object returned by \code{scalp.cor} or \code{erp.cor}) then the results are retrieved by this object and the function simply plots the results.
 }
   \item{envir}{
-The environment in which the ERP data frames  are searched.
+the environment in which the ERP data frames are searched for.
 }
  \item{main}{
-Title of the plot.
+the title of the plot.
 }
 
   \item{smo}{
-The smoothing parameter to be applied before plotting. The default is 0.
+the smoothing parameter to be applied before plotting. The default is 0.
 }
 \item{col}{
-Color of the waveform.
+the color of the waveform.
 }
 
   \item{startmsec}{
-A value, in milliseconds indicating the beginning time of the ERP vector
+a value (in ms) indicating the start time of the ERP vector
 }
   \item{endmsec}{
-A value, in milliseconds indicating the end time of the ERP vector
+a value (in ms) indicating the end time of the ERP vector
 }
   \item{interval}{
-A vector with a pair of values, indicating the interval to be plotted
+a vector with a pair of values, indicating the interval to be plotted
 }
   \item{step}{
-The step on the x-axis labels to be plotted. The axis will start from the first value of \code{interval}
+the step of the x-axis labels to be plotted. The axis will start from the first value of \code{interval}
 }
   \item{verticals}{
-The x coordinates of optional vertical bars to be plotted
+the x coordinates of the optional vertical bars to be plotted
 }
   \item{horizontals}{
-The y coordinates of optional vertical bars to be plotted
+the y coordinates of the optional horizontal bars to be plotted
 }
   \item{x.axis}{
-If \code{default}, than an x.axis will be drawn on the bases of \code{interval} and \code{step} parameters. A vector of values can be supplied instead.
+If \code{default}, then an x.axis will be drawn on the basis of \code{interval} and \code{step} parameters. A vector of values can be supplied instead.
 }
   \item{ylim}{
-A pair of values indicating the y-axis limit.
+a pair of values indicating the y-axis limit.
 }
   \item{lwd}{
-The width of the ERP line to be plotted.
+the width of the ERP line to be plotted.
 }
   \item{lty}{
-The line style of the ERP line to be plotted.
+the style of the ERP line to be plotted.
 }
 
   \item{cex.xaxis}{
-Magnification factor of the x-axis labels.
+magnification factor of the x-axis labels.
 }
   \item{cex.yaxis}{
 Magnification factor of the y-axis labels.
@@ -95,8 +95,8 @@ Magnification factor of the y-axis labels.
 %%%  ~~ If necessary, more details than the description above ~~
 %}
 \value{
-The function plots a scalp map of of the ERP waveforms in an array resembling the topographic placements of electrodes on the scalp.
-The waveforms represent the average of the first set of data frames specified. Timepoints in which thre is a positive (and significant) correlation are highlighted by red bars. Timepoints in which thre is a positive (and significant) correlation are highlighted by blue bars. The function returns also an object with the results of the correlatiosn saved. This object can be used in future plots with \code{erp.cor} or \code{scalp.cor}, by specifying it as the argument \code{sig}.
+This function plots a scalp map of the ERP waveforms in an array resembling the topographic locations of electrodes on the scalp.
+The waveforms represent the average of the first set of data frames specified. Timepoints with a positive (and significant) correlation are highlighted by red bars. Timepoints with a negative (and significant) correlation are highlighted by blue bars. The function also returns an object with the correlation results. This object can be used in future plots with \code{erp.cor} or \code{scalp.cor}, by specifying it as the argument \code{sig}.
 }
 %\references{
 %%% ~put references to the literature/web site here ~

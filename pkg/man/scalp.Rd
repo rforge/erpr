@@ -2,10 +2,10 @@
 \alias{scalp}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-plot ERP waaveforms in a scalp array
+plot ERP waveforms in a scalp array
 }
 \description{
-This function plots the waveforms of several ERP electrodes in an rectangular array reflecting the position in the scalp
+This function plots the waveforms of several electrodes in an rectangular array reflecting their positions on the scalp
 }
 \usage{
 scalp(categ, smo = 0.5, label = c("type1"), layout = 1, 
@@ -16,50 +16,50 @@ legend = F, legend.lab = "default", t.axis = seq(-100, endmsec, 200))
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{categ}{
-A list indicating the ERP data frame to be plotted. All electrodes specified in the parameter \code{layout} will be plotted. The others will be ignored.
+a list indicating the ERP data frame to be plotted. All electrodes specified in the parameter \code{layout} will be plotted. The other electrodes will be ignored.
 }
 
   \item{smo}{
-The smoothing parameter to be applied before plotting. The default is 0.
+the smoothing parameter to be applied before plotting. The default is 0.
 }
 
   \item{label}{
-Unused parameter
+unused parameter
 }
   \item{layout}{
-The layout of electrodes to be plotted. Currently only few layout are supported. 
+the layout of electrodes to be plotted. Currently only few layouts are supported. 
 }
   \item{ylims}{
-A number indicating the upper and lower limits of the y axis. If "auto", the function calculate the y limits automatically.
+a number indicating the upper and lower limits of the y-axis. If "auto", the function calculates the y limits automatically.
 }
   \item{yrev}{
-Logical. If \code{TRUE} the y axis is plotted with the negative values upward.
+logical. If \code{TRUE}, the y-axis is plotted with the negative values upward.
 }
 
  \item{startmsec}{
-A value, in milliseconds indicating the beginning time of the ERP vector
+a value (in ms) indicating the start time of the ERP vector
 }
   \item{endmsec}{
-A value, in milliseconds indicating the end time of the ERP vector
+a value (in ms) indicating the end time of the ERP vector
 }
 
   \item{lwd}{
-A vector specifying the line width to be associated to each ERP data frame specfied in \code{categ}
+a vector specifying the line width to be associated with each ERP data frame specified in \code{categ}
 }
   \item{lty}{
-A vector specifying the line types to be associated to each ERP data frame specfied in \code{categ}
+a vector specifying the line types to be associated with each ERP data frame specified in \code{categ}
 }
   \item{color.list}{
-A vector specifying the colors to be associated to each ERP data frame specfied in \code{categ}
+a vector specifying the colors to be associated with each ERP data frame specified in \code{categ}
 }
   \item{legend}{
-Logical. If \code{TRUE} a legend with object names is drawn in the top-right corner of the array. 
+logical. If \code{TRUE} a legend with object names is drawn in the top-right corner of the array. 
 }
   \item{legend.lab}{
-The legend labels. If "default" names are retrieved from the \code{categ} argument.
+the legend labels. If "default", the names are retrieved from the \code{categ} argument.
 }
   \item{t.axis}{
-The ticks and sequence of an axis plotted in the bottom-left corner of the array.
+specifies the position of the ticks on an additional axis indicating the time. This axis is plotted in the bottom-left corner of the plot array.
 }
 }
 
@@ -67,14 +67,14 @@ The ticks and sequence of an axis plotted in the bottom-left corner of the array
 %}
 
 \value{
-The function plots a map of ERP waveforms in an array resembling the topographic placements of electrodes on the scalp.
+The function plots a map of ERP waveforms in an array resembling the topographic locations of the electrodes on the scalp.
 }
 
 \author{
 Giorgio Arcara
 }
 \note{
-Currently this functions support a very limited number of layouts. Further version will allow to specify customized layouts.
+Currently this function supports a very limited number of layouts. Further versions will allow to specify customized layouts.
 }
 
 \section{Warning }{in the \code{categ} argument, a list must be specified even if the plot is on only one object}
