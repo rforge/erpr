@@ -68,6 +68,17 @@ The function is not able to deal with mixed within and between t-tests. Please, 
 }
 \examples{
 	
-#####
-	
+# simulate some subjects
+subjRT=rnorm(20, 500, 100)
+
+#simulate the effects of three experimental conditions for each subject
+condA=rnorm(20, 50, 10)
+condB=rnorm(20, -40, 10)
+condC=rnorm(20, 20, 10)
+
+#create a data frame
+dat=data.frame(Subject=rep(1:20,3), condition=c(rep("A", 20), rep("B", 20), rep("C", 20)), RT=c(subjRT+condA, subjRT+condB, subjRT+condC ))
+
+#perform pairwise t.test
+tpairs(dat, "condition", "all", "RT", "Subject", var.equal=T)	
 }

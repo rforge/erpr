@@ -1,707 +1,3 @@
-attach(panel3dat)#
-#
-pred_panel3dat= 27.23482 + typeNNsx*(-14.64124) +  (-3.31829) * log_freq.target.repub  + (-2.08209) * log_freq.const1.repub + (-2.24568) * res_log_freq.const2.repub +#
-(-1.64198) * length.target + 1.46744 * typeNNsx*log_freq.target.repub + 1.26298 * typeNNsx*log_freq.const1.repub + 0.30987 * log_freq.target.repub * log_freq.const1.repub +#
-2.80647 * typeNNsx * res_log_freq.const2.repub  + 0.43949 * log_freq.target.repub * res_log_freq.const2.repub + 0.92632 * typeNNsx * length.target + 0.24927 * log_freq.target.repub * length.target  + 0.16734 * log_freq.const1.repub*length.target   + 0.21906 * res_log_freq.const2.repub*length.target + (-0.09957) * typeNNsx*log_freq.target.repub*log_freq.const1.repub + (-0.60175) * typeNNsx * log_freq.target.repub * res_log_freq.const2.repub  - 0.03630  * typeNNsx * log_freq.target.repub * length.target -0.07859 * typeNNsx*log_freq.const1.repub*length.target -0.02394 * log_freq.target.repub*log_freq.const1.repub*length.target + -0.27770 * typeNNsx * res_log_freq.const2.repub * length.target -0.04332 * log_freq.target.repub*res_log_freq.const2.repub*length.target + 0.06050 * typeNNsx*log_freq.target.repub*res_log_freq.const2.repub*length.target
-detach(panel3dat)
-prima manda script analisi trasparenza#
-source('~/Desktop/eye mvm compounds/composti rating trasparenza/history analisi frasi con trasparenza.R', chdir = TRUE)#
-###### FIGURA 2 PAPER #######
-#
-### interazione type*freq.comp*freq2*length#
-#
-#pannello 1 type=NN1; freq.comp=span, freq.const2=5 values, length=3 values#
-#
-panels_freq.const2=quantile(stimuliNN$res_log_freq.const2.repub, prob=c(0.10, 0.30, 0.50, 0.70, 0.90), type=1) #
-# i valori che mi trova con i quantili potrebbero non essere osservati, cambio metodo di definizione di quantili (di default type=7) per ottenere valori osservati#
-panels_or_freq.const2= stimuliNN[stimuliNN$res_log_freq.const2.repub%in%panels_freq.const2, "log_freq.const2.repub"]#
-panels_or_freq.const2=round(panels_or_freq.const2,2)#
-# recupero i valori grezzi di frequenza assoluta associata ai residui.#
-#
-panels_length.target=c(10, 12, 14) #
-#in realtà usando i quantili 0.20, 0.40 e 0.60 i valori sarebbero troppo simili, per cui li ho presi io arbitariamente con un range decente.#
-panels_comp.freq=c(0.6931472, 7.2984451) #ho creato lo step in modo da creare passi uguali. Ma non influenzerà visto che verrà fatta una retta.#
-par(mfrow=c(3,1))#
-#############################################
-######## PANEL 1  (LENGTH=10) ###############
-#############################################
-panel1dat=data.frame(typeNNsx=rep(1,10), log_freq.const1.repub=rep(median(stimuliNN$log_freq.const1.repub), 10),res_log_freq.const2.repub=rep(panels_freq.const2, each=2), length.target=rep(10, 10), log_freq.target.repub=rep(panels_comp.freq, 5), log_freq.const2.repub=panels_or_freq.const2)#
-#
-# in pratica ho costruito un data.frame in cui le coppie successive di righe mi indicano i punti delle previsioni separatamente per frequenza const 2, prendendo due punti (iniziale e finale) della frequenza totale del composto.#
-#
-attach(panel1dat)#
-#
-pred_panel1dat= 27.23482 + typeNNsx*(-14.64124) +  (-3.31829) * log_freq.target.repub  + (-2.08209) * log_freq.const1.repub + (-2.24568) * res_log_freq.const2.repub +#
-(-1.64198) * length.target + 1.46744 * typeNNsx*log_freq.target.repub + 1.26298 * typeNNsx*log_freq.const1.repub + 0.30987 * log_freq.target.repub * log_freq.const1.repub +#
-2.80647 * typeNNsx * res_log_freq.const2.repub  + 0.43949 * log_freq.target.repub * res_log_freq.const2.repub + 0.92632 * typeNNsx * length.target + 0.24927 * log_freq.target.repub * length.target  + 0.16734 * log_freq.const1.repub*length.target   + 0.21906 * res_log_freq.const2.repub*length.target + (-0.09957) * typeNNsx*log_freq.target.repub*log_freq.const1.repub + (-0.60175) * typeNNsx * log_freq.target.repub * res_log_freq.const2.repub  - 0.03630  * typeNNsx * log_freq.target.repub * length.target -0.07859 * typeNNsx*log_freq.const1.repub*length.target -0.02394 * log_freq.target.repub*log_freq.const1.repub*length.target + -0.27770 * typeNNsx * res_log_freq.const2.repub * length.target -0.04332 * log_freq.target.repub*res_log_freq.const2.repub*length.target + 0.06050 * typeNNsx*log_freq.target.repub*res_log_freq.const2.repub*length.target#
-#
-detach(panel1dat)#
-#
-panel1dat$dep=exp(pred_panel1dat$dep)#
-plot(panel1dat$log_freq.target.repub, panel1dat$dep, type="n", ylim=c(400,800), xlim=c(0,8), ylab="Total View Duration", xlab="Compound frequency", main="NN1")#
-segments(panel1dat[1,]$log_freq.target.repub, panel1dat[1,]$dep, panel1dat[2,]$log_freq.target.repub, panel1dat[2,]$dep, lty=1) #
-text(panel1dat[2,]$log_freq.target.repub, panel1dat[2,]$dep, pos=4, cex=0.7, labels=panel1dat$log_freq.const2.repub[2])#
-segments(panel1dat[3,]$log_freq.target.repub, panel1dat[3,]$dep, panel1dat[4,]$log_freq.target.repub, panel1dat[4,]$dep, lty=2)#
-text(panel1dat[4,]$log_freq.target.repub, panel1dat[4,]$dep, pos=4, cex=0.7, labels=panel1dat$log_freq.const2.repub[4])#
-segments(panel1dat[5,]$log_freq.target.repub, panel1dat[5,]$dep, panel1dat[6,]$log_freq.target.repub, panel1dat[6,]$dep, lty=3)#
-text(panel1dat[6,]$log_freq.target.repub, panel1dat[6,]$dep, pos=4, cex=0.7, labels=panel1dat$log_freq.const2.repub[6])#
-segments(panel1dat[7,]$log_freq.target.repub, panel1dat[7,]$dep, panel1dat[8,]$log_freq.target.repub, panel1dat[8,]$dep, lty=3)#
-text(panel1dat[8,]$log_freq.target.repub, panel1dat[8,]$dep, pos=4, cex=0.7, labels=panel1dat$log_freq.const2.repub[8])#
-segments(panel1dat[9,]$log_freq.target.repub, panel1dat[9,]$dep, panel1dat[10,]$log_freq.target.repub, panel1dat[10,]$dep, lty=3)#
-text(panel1dat[10,]$log_freq.target.repub, panel1dat[10,]$dep, pos=4, cex=0.7, labels=panel1dat$log_freq.const2.repub[10])#
-#############################################
-######## PANEL 2 (LENGTH=12) ###############
-#############################################
-#
-panel2dat=data.frame(typeNNsx=rep(1,10), log_freq.const1.repub=rep(median(stimuliNN$log_freq.const1.repub), 10),res_log_freq.const2.repub=rep(panels_freq.const2, each=2), length.target=rep(12, 10), log_freq.target.repub=rep(panels_comp.freq, 5), log_freq.const2.repub=panels_or_freq.const2)#
-#
-# in pratica ho costruito un data.frame in cui le coppie successive di righe mi indicano i punti delle previsioni separatamente per frequenza const 2, prendendo due punti (iniziale e finale) della frequenza totale del composto.#
-#
-attach(panel2dat)#
-#
-pred_panel2dat= 27.23482 + typeNNsx*(-14.64124) +  (-3.31829) * log_freq.target.repub  + (-2.08209) * log_freq.const1.repub + (-2.24568) * res_log_freq.const2.repub +#
-(-1.64198) * length.target + 1.46744 * typeNNsx*log_freq.target.repub + 1.26298 * typeNNsx*log_freq.const1.repub + 0.30987 * log_freq.target.repub * log_freq.const1.repub +#
-2.80647 * typeNNsx * res_log_freq.const2.repub  + 0.43949 * log_freq.target.repub * res_log_freq.const2.repub + 0.92632 * typeNNsx * length.target + 0.24927 * log_freq.target.repub * length.target  + 0.16734 * log_freq.const1.repub*length.target   + 0.21906 * res_log_freq.const2.repub*length.target + (-0.09957) * typeNNsx*log_freq.target.repub*log_freq.const1.repub + (-0.60175) * typeNNsx * log_freq.target.repub * res_log_freq.const2.repub  - 0.03630  * typeNNsx * log_freq.target.repub * length.target -0.07859 * typeNNsx*log_freq.const1.repub*length.target -0.02394 * log_freq.target.repub*log_freq.const1.repub*length.target + -0.27770 * typeNNsx * res_log_freq.const2.repub * length.target -0.04332 * log_freq.target.repub*res_log_freq.const2.repub*length.target + 0.06050 * typeNNsx*log_freq.target.repub*res_log_freq.const2.repub*length.target#
-#
-detach(panel2dat)#
-#
-panel2dat$dep=exp(pred_panel2dat$dep)#
-plot(panel2dat$log_freq.target.repub, panel2dat$dep, type="n", ylim=c(400,800), xlim=c(0,8), ylab="Total View Duration", xlab="Compound frequency", main="NN1")#
-segments(panel2dat[1,]$log_freq.target.repub, panel2dat[1,]$dep, panel2dat[2,]$log_freq.target.repub, panel2dat[2,]$dep, lty=1) #
-text(panel2dat[2,]$log_freq.target.repub, panel2dat[2,]$dep, pos=4, cex=0.7, labels=panel2dat$log_freq.const2.repub[2])#
-segments(panel2dat[3,]$log_freq.target.repub, panel2dat[3,]$dep, panel2dat[4,]$log_freq.target.repub, panel2dat[4,]$dep, lty=2)#
-text(panel2dat[4,]$log_freq.target.repub, panel2dat[4,]$dep, pos=4, cex=0.7, labels=panel2dat$log_freq.const2.repub[4])#
-segments(panel2dat[5,]$log_freq.target.repub, panel2dat[5,]$dep, panel2dat[6,]$log_freq.target.repub, panel2dat[6,]$dep, lty=3)#
-text(panel2dat[6,]$log_freq.target.repub, panel2dat[6,]$dep, pos=4, cex=0.7, labels=panel2dat$log_freq.const2.repub[6])#
-segments(panel2dat[7,]$log_freq.target.repub, panel2dat[7,]$dep, panel2dat[8,]$log_freq.target.repub, panel2dat[8,]$dep, lty=3)#
-text(panel2dat[8,]$log_freq.target.repub, panel2dat[8,]$dep, pos=4, cex=0.7, labels=panel2dat$log_freq.const2.repub[8])#
-segments(panel2dat[9,]$log_freq.target.repub, panel2dat[9,]$dep, panel2dat[10,]$log_freq.target.repub, panel2dat[10,]$dep, lty=3)#
-text(panel2dat[10,]$log_freq.target.repub, panel2dat[10,]$dep, pos=4, cex=0.7, labels=panel2dat$log_freq.const2.repub[10])#
-#############################################
-######## PANEL 3 (LENGTH=14) ###############
-#############################################
-#
-panel3dat=data.frame(typeNNsx=rep(1,10), log_freq.const1.repub=rep(median(stimuliNN$log_freq.const1.repub), 10),res_log_freq.const2.repub=rep(panels_freq.const2, each=2), length.target=rep(14, 10), log_freq.target.repub=rep(panels_comp.freq, 5), log_freq.const2.repub=panels_or_freq.const2)#
-#
-# in pratica ho costruito un data.frame in cui le coppie successive di righe mi indicano i punti delle previsioni separatamente per frequenza const 2, prendendo due punti (iniziale e finale) della frequenza totale del composto.#
-#
-attach(panel3dat)#
-#
-pred_panel3dat= 27.23482 + typeNNsx*(-14.64124) +  (-3.31829) * log_freq.target.repub  + (-2.08209) * log_freq.const1.repub + (-2.24568) * res_log_freq.const2.repub +#
-(-1.64198) * length.target + 1.46744 * typeNNsx*log_freq.target.repub + 1.26298 * typeNNsx*log_freq.const1.repub + 0.30987 * log_freq.target.repub * log_freq.const1.repub +#
-2.80647 * typeNNsx * res_log_freq.const2.repub  + 0.43949 * log_freq.target.repub * res_log_freq.const2.repub + 0.92632 * typeNNsx * length.target + 0.24927 * log_freq.target.repub * length.target  + 0.16734 * log_freq.const1.repub*length.target   + 0.21906 * res_log_freq.const2.repub*length.target + (-0.09957) * typeNNsx*log_freq.target.repub*log_freq.const1.repub + (-0.60175) * typeNNsx * log_freq.target.repub * res_log_freq.const2.repub  - 0.03630  * typeNNsx * log_freq.target.repub * length.target -0.07859 * typeNNsx*log_freq.const1.repub*length.target -0.02394 * log_freq.target.repub*log_freq.const1.repub*length.target + -0.27770 * typeNNsx * res_log_freq.const2.repub * length.target -0.04332 * log_freq.target.repub*res_log_freq.const2.repub*length.target + 0.06050 * typeNNsx*log_freq.target.repub*res_log_freq.const2.repub*length.target#
-#
-detach(panel3dat)#
-#
-panel3dat$dep=exp(pred_panel3dat$dep)#
-plot(panel3dat$log_freq.target.repub, panel3dat$dep, type="n", ylim=c(400,800), xlim=c(0,8), ylab="Total View Duration", xlab="Compound frequency", main="NN1")#
-segments(panel3dat[1,]$log_freq.target.repub, panel3dat[1,]$dep, panel3dat[2,]$log_freq.target.repub, panel3dat[2,]$dep, lty=1) #
-text(panel3dat[2,]$log_freq.target.repub, panel3dat[2,]$dep, pos=4, cex=0.7, labels=panel3dat$log_freq.const2.repub[2])#
-segments(panel3dat[3,]$log_freq.target.repub, panel3dat[3,]$dep, panel3dat[4,]$log_freq.target.repub, panel3dat[4,]$dep, lty=2)#
-text(panel3dat[4,]$log_freq.target.repub, panel3dat[4,]$dep, pos=4, cex=0.7, labels=panel3dat$log_freq.const2.repub[4])#
-segments(panel3dat[5,]$log_freq.target.repub, panel3dat[5,]$dep, panel3dat[6,]$log_freq.target.repub, panel3dat[6,]$dep, lty=3)#
-text(panel3dat[6,]$log_freq.target.repub, panel3dat[6,]$dep, pos=4, cex=0.7, labels=panel3dat$log_freq.const2.repub[6])#
-segments(panel3dat[7,]$log_freq.target.repub, panel3dat[7,]$dep, panel3dat[8,]$log_freq.target.repub, panel3dat[8,]$dep, lty=3)#
-text(panel3dat[8,]$log_freq.target.repub, panel3dat[8,]$dep, pos=4, cex=0.7, labels=panel3dat$log_freq.const2.repub[8])#
-segments(panel3dat[9,]$log_freq.target.repub, panel3dat[9,]$dep, panel3dat[10,]$log_freq.target.repub, panel3dat[10,]$dep, lty=3)#
-text(panel3dat[10,]$log_freq.target.repub, panel3dat[10,]$dep, pos=4, cex=0.7, labels=panel3dat$log_freq.const2.repub[10])
-prima manda script analisi trasparenza#
-source('~/Desktop/eye mvm compounds/composti rating trasparenza/history analisi frasi con trasparenza.R', chdir = TRUE)#
-###### FIGURA 2 PAPER #######
-#
-### interazione type*freq.comp*freq2*length#
-#
-#pannello 1 type=NN1; freq.comp=span, freq.const2=5 values, length=3 values#
-#
-panels_freq.const2=quantile(stimuliNN$res_log_freq.const2.repub, prob=c(0.10, 0.30, 0.50, 0.70, 0.90), type=1) #
-# i valori che mi trova con i quantili potrebbero non essere osservati, cambio metodo di definizione di quantili (di default type=7) per ottenere valori osservati#
-panels_or_freq.const2= stimuliNN[stimuliNN$res_log_freq.const2.repub%in%panels_freq.const2, "log_freq.const2.repub"]#
-panels_or_freq.const2=round(panels_or_freq.const2,2)#
-# recupero i valori grezzi di frequenza assoluta associata ai residui.#
-#
-panels_length.target=c(10, 12, 14) #
-#in realtà usando i quantili 0.20, 0.40 e 0.60 i valori sarebbero troppo simili, per cui li ho presi io arbitariamente con un range decente.#
-panels_comp.freq=c(0.6931472, 7.2984451) #ho creato lo step in modo da creare passi uguali. Ma non influenzerà visto che verrà fatta una retta.#
-par(mfrow=c(3,1))#
-#############################################
-######## PANEL 1  (LENGTH=10) ###############
-#############################################
-panel1dat=data.frame(typeNNsx=rep(1,10), log_freq.const1.repub=rep(median(stimuliNN$log_freq.const1.repub), 10),res_log_freq.const2.repub=rep(panels_freq.const2, each=2), length.target=rep(10, 10), log_freq.target.repub=rep(panels_comp.freq, 5), log_freq.const2.repub=panels_or_freq.const2)#
-#
-# in pratica ho costruito un data.frame in cui le coppie successive di righe mi indicano i punti delle previsioni separatamente per frequenza const 2, prendendo due punti (iniziale e finale) della frequenza totale del composto.#
-#
-attach(panel1dat)#
-#
-pred_panel1dat= 27.23482 + typeNNsx*(-14.64124) +  (-3.31829) * log_freq.target.repub  + (-2.08209) * log_freq.const1.repub + (-2.24568) * res_log_freq.const2.repub +#
-(-1.64198) * length.target + 1.46744 * typeNNsx*log_freq.target.repub + 1.26298 * typeNNsx*log_freq.const1.repub + 0.30987 * log_freq.target.repub * log_freq.const1.repub +#
-2.80647 * typeNNsx * res_log_freq.const2.repub  + 0.43949 * log_freq.target.repub * res_log_freq.const2.repub + 0.92632 * typeNNsx * length.target + 0.24927 * log_freq.target.repub * length.target  + 0.16734 * log_freq.const1.repub*length.target   + 0.21906 * res_log_freq.const2.repub*length.target + (-0.09957) * typeNNsx*log_freq.target.repub*log_freq.const1.repub + (-0.60175) * typeNNsx * log_freq.target.repub * res_log_freq.const2.repub  - 0.03630  * typeNNsx * log_freq.target.repub * length.target -0.07859 * typeNNsx*log_freq.const1.repub*length.target -0.02394 * log_freq.target.repub*log_freq.const1.repub*length.target + -0.27770 * typeNNsx * res_log_freq.const2.repub * length.target -0.04332 * log_freq.target.repub*res_log_freq.const2.repub*length.target + 0.06050 * typeNNsx*log_freq.target.repub*res_log_freq.const2.repub*length.target#
-#
-detach(panel1dat)#
-#
-panel1dat$dep=exp(pred_panel1dat)#
-plot(panel1dat$log_freq.target.repub, panel1dat$dep, type="n", ylim=c(400,800), xlim=c(0,8), ylab="Total View Duration", xlab="Compound frequency", main="NN1")#
-segments(panel1dat[1,]$log_freq.target.repub, panel1dat[1,]$dep, panel1dat[2,]$log_freq.target.repub, panel1dat[2,]$dep, lty=1) #
-text(panel1dat[2,]$log_freq.target.repub, panel1dat[2,]$dep, pos=4, cex=0.7, labels=panel1dat$log_freq.const2.repub[2])#
-segments(panel1dat[3,]$log_freq.target.repub, panel1dat[3,]$dep, panel1dat[4,]$log_freq.target.repub, panel1dat[4,]$dep, lty=2)#
-text(panel1dat[4,]$log_freq.target.repub, panel1dat[4,]$dep, pos=4, cex=0.7, labels=panel1dat$log_freq.const2.repub[4])#
-segments(panel1dat[5,]$log_freq.target.repub, panel1dat[5,]$dep, panel1dat[6,]$log_freq.target.repub, panel1dat[6,]$dep, lty=3)#
-text(panel1dat[6,]$log_freq.target.repub, panel1dat[6,]$dep, pos=4, cex=0.7, labels=panel1dat$log_freq.const2.repub[6])#
-segments(panel1dat[7,]$log_freq.target.repub, panel1dat[7,]$dep, panel1dat[8,]$log_freq.target.repub, panel1dat[8,]$dep, lty=3)#
-text(panel1dat[8,]$log_freq.target.repub, panel1dat[8,]$dep, pos=4, cex=0.7, labels=panel1dat$log_freq.const2.repub[8])#
-segments(panel1dat[9,]$log_freq.target.repub, panel1dat[9,]$dep, panel1dat[10,]$log_freq.target.repub, panel1dat[10,]$dep, lty=3)#
-text(panel1dat[10,]$log_freq.target.repub, panel1dat[10,]$dep, pos=4, cex=0.7, labels=panel1dat$log_freq.const2.repub[10])#
-#############################################
-######## PANEL 2 (LENGTH=12) ###############
-#############################################
-#
-panel2dat=data.frame(typeNNsx=rep(1,10), log_freq.const1.repub=rep(median(stimuliNN$log_freq.const1.repub), 10),res_log_freq.const2.repub=rep(panels_freq.const2, each=2), length.target=rep(12, 10), log_freq.target.repub=rep(panels_comp.freq, 5), log_freq.const2.repub=panels_or_freq.const2)#
-#
-# in pratica ho costruito un data.frame in cui le coppie successive di righe mi indicano i punti delle previsioni separatamente per frequenza const 2, prendendo due punti (iniziale e finale) della frequenza totale del composto.#
-#
-attach(panel2dat)#
-#
-pred_panel2dat= 27.23482 + typeNNsx*(-14.64124) +  (-3.31829) * log_freq.target.repub  + (-2.08209) * log_freq.const1.repub + (-2.24568) * res_log_freq.const2.repub +#
-(-1.64198) * length.target + 1.46744 * typeNNsx*log_freq.target.repub + 1.26298 * typeNNsx*log_freq.const1.repub + 0.30987 * log_freq.target.repub * log_freq.const1.repub +#
-2.80647 * typeNNsx * res_log_freq.const2.repub  + 0.43949 * log_freq.target.repub * res_log_freq.const2.repub + 0.92632 * typeNNsx * length.target + 0.24927 * log_freq.target.repub * length.target  + 0.16734 * log_freq.const1.repub*length.target   + 0.21906 * res_log_freq.const2.repub*length.target + (-0.09957) * typeNNsx*log_freq.target.repub*log_freq.const1.repub + (-0.60175) * typeNNsx * log_freq.target.repub * res_log_freq.const2.repub  - 0.03630  * typeNNsx * log_freq.target.repub * length.target -0.07859 * typeNNsx*log_freq.const1.repub*length.target -0.02394 * log_freq.target.repub*log_freq.const1.repub*length.target + -0.27770 * typeNNsx * res_log_freq.const2.repub * length.target -0.04332 * log_freq.target.repub*res_log_freq.const2.repub*length.target + 0.06050 * typeNNsx*log_freq.target.repub*res_log_freq.const2.repub*length.target#
-#
-detach(panel2dat)#
-#
-panel2dat$dep=exp(pred_panel2dat)#
-plot(panel2dat$log_freq.target.repub, panel2dat$dep, type="n", ylim=c(400,800), xlim=c(0,8), ylab="Total View Duration", xlab="Compound frequency", main="NN1")#
-segments(panel2dat[1,]$log_freq.target.repub, panel2dat[1,]$dep, panel2dat[2,]$log_freq.target.repub, panel2dat[2,]$dep, lty=1) #
-text(panel2dat[2,]$log_freq.target.repub, panel2dat[2,]$dep, pos=4, cex=0.7, labels=panel2dat$log_freq.const2.repub[2])#
-segments(panel2dat[3,]$log_freq.target.repub, panel2dat[3,]$dep, panel2dat[4,]$log_freq.target.repub, panel2dat[4,]$dep, lty=2)#
-text(panel2dat[4,]$log_freq.target.repub, panel2dat[4,]$dep, pos=4, cex=0.7, labels=panel2dat$log_freq.const2.repub[4])#
-segments(panel2dat[5,]$log_freq.target.repub, panel2dat[5,]$dep, panel2dat[6,]$log_freq.target.repub, panel2dat[6,]$dep, lty=3)#
-text(panel2dat[6,]$log_freq.target.repub, panel2dat[6,]$dep, pos=4, cex=0.7, labels=panel2dat$log_freq.const2.repub[6])#
-segments(panel2dat[7,]$log_freq.target.repub, panel2dat[7,]$dep, panel2dat[8,]$log_freq.target.repub, panel2dat[8,]$dep, lty=3)#
-text(panel2dat[8,]$log_freq.target.repub, panel2dat[8,]$dep, pos=4, cex=0.7, labels=panel2dat$log_freq.const2.repub[8])#
-segments(panel2dat[9,]$log_freq.target.repub, panel2dat[9,]$dep, panel2dat[10,]$log_freq.target.repub, panel2dat[10,]$dep, lty=3)#
-text(panel2dat[10,]$log_freq.target.repub, panel2dat[10,]$dep, pos=4, cex=0.7, labels=panel2dat$log_freq.const2.repub[10])#
-#############################################
-######## PANEL 3 (LENGTH=14) ###############
-#############################################
-#
-panel3dat=data.frame(typeNNsx=rep(1,10), log_freq.const1.repub=rep(median(stimuliNN$log_freq.const1.repub), 10),res_log_freq.const2.repub=rep(panels_freq.const2, each=2), length.target=rep(14, 10), log_freq.target.repub=rep(panels_comp.freq, 5), log_freq.const2.repub=panels_or_freq.const2)#
-#
-# in pratica ho costruito un data.frame in cui le coppie successive di righe mi indicano i punti delle previsioni separatamente per frequenza const 2, prendendo due punti (iniziale e finale) della frequenza totale del composto.#
-#
-attach(panel3dat)#
-#
-pred_panel3dat= 27.23482 + typeNNsx*(-14.64124) +  (-3.31829) * log_freq.target.repub  + (-2.08209) * log_freq.const1.repub + (-2.24568) * res_log_freq.const2.repub +#
-(-1.64198) * length.target + 1.46744 * typeNNsx*log_freq.target.repub + 1.26298 * typeNNsx*log_freq.const1.repub + 0.30987 * log_freq.target.repub * log_freq.const1.repub +#
-2.80647 * typeNNsx * res_log_freq.const2.repub  + 0.43949 * log_freq.target.repub * res_log_freq.const2.repub + 0.92632 * typeNNsx * length.target + 0.24927 * log_freq.target.repub * length.target  + 0.16734 * log_freq.const1.repub*length.target   + 0.21906 * res_log_freq.const2.repub*length.target + (-0.09957) * typeNNsx*log_freq.target.repub*log_freq.const1.repub + (-0.60175) * typeNNsx * log_freq.target.repub * res_log_freq.const2.repub  - 0.03630  * typeNNsx * log_freq.target.repub * length.target -0.07859 * typeNNsx*log_freq.const1.repub*length.target -0.02394 * log_freq.target.repub*log_freq.const1.repub*length.target + -0.27770 * typeNNsx * res_log_freq.const2.repub * length.target -0.04332 * log_freq.target.repub*res_log_freq.const2.repub*length.target + 0.06050 * typeNNsx*log_freq.target.repub*res_log_freq.const2.repub*length.target#
-#
-detach(panel3dat)#
-#
-panel3dat$dep=exp(pred_panel3dat)#
-plot(panel3dat$log_freq.target.repub, panel3dat$dep, type="n", ylim=c(400,800), xlim=c(0,8), ylab="Total View Duration", xlab="Compound frequency", main="NN1")#
-segments(panel3dat[1,]$log_freq.target.repub, panel3dat[1,]$dep, panel3dat[2,]$log_freq.target.repub, panel3dat[2,]$dep, lty=1) #
-text(panel3dat[2,]$log_freq.target.repub, panel3dat[2,]$dep, pos=4, cex=0.7, labels=panel3dat$log_freq.const2.repub[2])#
-segments(panel3dat[3,]$log_freq.target.repub, panel3dat[3,]$dep, panel3dat[4,]$log_freq.target.repub, panel3dat[4,]$dep, lty=2)#
-text(panel3dat[4,]$log_freq.target.repub, panel3dat[4,]$dep, pos=4, cex=0.7, labels=panel3dat$log_freq.const2.repub[4])#
-segments(panel3dat[5,]$log_freq.target.repub, panel3dat[5,]$dep, panel3dat[6,]$log_freq.target.repub, panel3dat[6,]$dep, lty=3)#
-text(panel3dat[6,]$log_freq.target.repub, panel3dat[6,]$dep, pos=4, cex=0.7, labels=panel3dat$log_freq.const2.repub[6])#
-segments(panel3dat[7,]$log_freq.target.repub, panel3dat[7,]$dep, panel3dat[8,]$log_freq.target.repub, panel3dat[8,]$dep, lty=3)#
-text(panel3dat[8,]$log_freq.target.repub, panel3dat[8,]$dep, pos=4, cex=0.7, labels=panel3dat$log_freq.const2.repub[8])#
-segments(panel3dat[9,]$log_freq.target.repub, panel3dat[9,]$dep, panel3dat[10,]$log_freq.target.repub, panel3dat[10,]$dep, lty=3)#
-text(panel3dat[10,]$log_freq.target.repub, panel3dat[10,]$dep, pos=4, cex=0.7, labels=panel3dat$log_freq.const2.repub[10])
-panel3dat
-log_freq.const1.repub=rep(median(stimuliNN$log_freq.const1.repub)
-)
-log_freq.const1.repub
-prima manda script analisi trasparenza#
-source('~/Desktop/eye mvm compounds/composti rating trasparenza/history analisi frasi con trasparenza.R', chdir = TRUE)#
-###### FIGURA 2 PAPER #######
-#
-### interazione type*freq.comp*freq2*length#
-#
-#pannello 1 type=NN1; freq.comp=span, freq.const2=5 values, length=3 values#
-#
-panels_freq.const2=quantile(stimuliNN$res_log_freq.const2.repub, prob=c(0.10, 0.30, 0.50, 0.70, 0.90), type=1) #
-# i valori che mi trova con i quantili potrebbero non essere osservati, cambio metodo di definizione di quantili (di default type=7) per ottenere valori osservati#
-panels_or_freq.const2= stimuliNN[stimuliNN$res_log_freq.const2.repub%in%panels_freq.const2, "log_freq.const2.repub"]#
-panels_or_freq.const2=round(panels_or_freq.const2,2)#
-# recupero i valori grezzi di frequenza assoluta associata ai residui.#
-#
-panels_length.target=c(10, 12, 14) #
-#in realtà usando i quantili 0.20, 0.40 e 0.60 i valori sarebbero troppo simili, per cui li ho presi io arbitariamente con un range decente.#
-panels_comp.freq=c(0.6931472, 7.2984451) #ho creato lo step in modo da creare passi uguali. Ma non influenzerà visto che verrà fatta una retta.#
-par(mfrow=c(3,1))#
-#############################################
-######## PANEL 1  (LENGTH=10) ###############
-#############################################
-panel1dat=data.frame(typeNNsx=rep(1,10), log_freq.const1.repub=rep(median(stimuliNN$log_freq.const1.repub), 10),res_log_freq.const2.repub=rep(panels_freq.const2, each=2), length.target=rep(10, 10), log_freq.target.repub=rep(panels_comp.freq, 5), log_freq.const2.repub=panels_or_freq.const2)#
-#
-# in pratica ho costruito un data.frame in cui le coppie successive di righe mi indicano i punti delle previsioni separatamente per frequenza const 2, prendendo due punti (iniziale e finale) della frequenza totale del composto.#
-#
-attach(panel1dat)#
-#
-pred_panel1dat= 27.23482 + typeNNsx*(-14.64124) +  (-3.31829) * log_freq.target.repub  + (-2.08209) * log_freq.const1.repub + (-2.24568) * res_log_freq.const2.repub +#
-(-1.64198) * length.target + 1.46744 * typeNNsx*log_freq.target.repub + 1.26298 * typeNNsx*log_freq.const1.repub + 0.30987 * log_freq.target.repub * log_freq.const1.repub +#
-2.80647 * typeNNsx * res_log_freq.const2.repub  + 0.43949 * log_freq.target.repub * res_log_freq.const2.repub + 0.92632 * typeNNsx * length.target + 0.24927 * log_freq.target.repub * length.target  + 0.16734 * log_freq.const1.repub*length.target   + 0.21906 * res_log_freq.const2.repub*length.target + (-0.09957) * typeNNsx*log_freq.target.repub*log_freq.const1.repub + (-0.60175) * typeNNsx * log_freq.target.repub * res_log_freq.const2.repub  - 0.03630  * typeNNsx * log_freq.target.repub * length.target -0.07859 * typeNNsx*log_freq.const1.repub*length.target -0.02394 * log_freq.target.repub*log_freq.const1.repub*length.target + -0.27770 * typeNNsx * res_log_freq.const2.repub * length.target -0.04332 * log_freq.target.repub*res_log_freq.const2.repub*length.target + 0.06050 * typeNNsx*log_freq.target.repub*res_log_freq.const2.repub*length.target#
-#
-detach(panel1dat)#
-#
-panel1dat$dep=exp(pred_panel1dat)#
-plot(panel1dat$log_freq.target.repub, panel1dat$dep, type="n", ylim=c(400,800), xlim=c(0,8), ylab="Total View Duration", xlab="Compound frequency", main="NN1")#
-segments(panel1dat[1,]$log_freq.target.repub, panel1dat[1,]$dep, panel1dat[2,]$log_freq.target.repub, panel1dat[2,]$dep, lty=1) #
-text(panel1dat[2,]$log_freq.target.repub, panel1dat[2,]$dep, pos=4, cex=0.7, labels=panel1dat$log_freq.const2.repub[2])#
-segments(panel1dat[3,]$log_freq.target.repub, panel1dat[3,]$dep, panel1dat[4,]$log_freq.target.repub, panel1dat[4,]$dep, lty=2)#
-text(panel1dat[4,]$log_freq.target.repub, panel1dat[4,]$dep, pos=4, cex=0.7, labels=panel1dat$log_freq.const2.repub[4])#
-segments(panel1dat[5,]$log_freq.target.repub, panel1dat[5,]$dep, panel1dat[6,]$log_freq.target.repub, panel1dat[6,]$dep, lty=3)#
-text(panel1dat[6,]$log_freq.target.repub, panel1dat[6,]$dep, pos=4, cex=0.7, labels=panel1dat$log_freq.const2.repub[6])#
-segments(panel1dat[7,]$log_freq.target.repub, panel1dat[7,]$dep, panel1dat[8,]$log_freq.target.repub, panel1dat[8,]$dep, lty=3)#
-text(panel1dat[8,]$log_freq.target.repub, panel1dat[8,]$dep, pos=4, cex=0.7, labels=panel1dat$log_freq.const2.repub[8])#
-segments(panel1dat[9,]$log_freq.target.repub, panel1dat[9,]$dep, panel1dat[10,]$log_freq.target.repub, panel1dat[10,]$dep, lty=3)#
-text(panel1dat[10,]$log_freq.target.repub, panel1dat[10,]$dep, pos=4, cex=0.7, labels=panel1dat$log_freq.const2.repub[10])#
-#############################################
-######## PANEL 2 (LENGTH=12) ###############
-#############################################
-#
-panel2dat=data.frame(typeNNsx=rep(1,10), log_freq.const1.repub=rep(median(stimuliNN$log_freq.const1.repub), 10),res_log_freq.const2.repub=rep(panels_freq.const2, each=2), length.target=rep(12, 10), log_freq.target.repub=rep(panels_comp.freq, 5), log_freq.const2.repub=panels_or_freq.const2)#
-#
-# in pratica ho costruito un data.frame in cui le coppie successive di righe mi indicano i punti delle previsioni separatamente per frequenza const 2, prendendo due punti (iniziale e finale) della frequenza totale del composto.#
-#
-attach(panel2dat)#
-#
-pred_panel2dat= 27.23482 + typeNNsx*(-14.64124) +  (-3.31829) * log_freq.target.repub  + (-2.08209) * log_freq.const1.repub + (-2.24568) * res_log_freq.const2.repub +#
-(-1.64198) * length.target + 1.46744 * typeNNsx*log_freq.target.repub + 1.26298 * typeNNsx*log_freq.const1.repub + 0.30987 * log_freq.target.repub * log_freq.const1.repub +#
-2.80647 * typeNNsx * res_log_freq.const2.repub  + 0.43949 * log_freq.target.repub * res_log_freq.const2.repub + 0.92632 * typeNNsx * length.target + 0.24927 * log_freq.target.repub * length.target  + 0.16734 * log_freq.const1.repub*length.target   + 0.21906 * res_log_freq.const2.repub*length.target + (-0.09957) * typeNNsx*log_freq.target.repub*log_freq.const1.repub + (-0.60175) * typeNNsx * log_freq.target.repub * res_log_freq.const2.repub  - 0.03630  * typeNNsx * log_freq.target.repub * length.target -0.07859 * typeNNsx*log_freq.const1.repub*length.target -0.02394 * log_freq.target.repub*log_freq.const1.repub*length.target + -0.27770 * typeNNsx * res_log_freq.const2.repub * length.target -0.04332 * log_freq.target.repub*res_log_freq.const2.repub*length.target + 0.06050 * typeNNsx*log_freq.target.repub*res_log_freq.const2.repub*length.target#
-#
-detach(panel2dat)#
-#
-panel2dat$dep=exp(pred_panel2dat)#
-plot(panel2dat$log_freq.target.repub, panel2dat$dep, type="n", ylim=c(400,800), xlim=c(0,8), ylab="Total View Duration", xlab="Compound frequency", main="NN1")#
-segments(panel2dat[1,]$log_freq.target.repub, panel2dat[1,]$dep, panel2dat[2,]$log_freq.target.repub, panel2dat[2,]$dep, lty=1) #
-text(panel2dat[2,]$log_freq.target.repub, panel2dat[2,]$dep, pos=4, cex=0.7, labels=panel2dat$log_freq.const2.repub[2])#
-segments(panel2dat[3,]$log_freq.target.repub, panel2dat[3,]$dep, panel2dat[4,]$log_freq.target.repub, panel2dat[4,]$dep, lty=2)#
-text(panel2dat[4,]$log_freq.target.repub, panel2dat[4,]$dep, pos=4, cex=0.7, labels=panel2dat$log_freq.const2.repub[4])#
-segments(panel2dat[5,]$log_freq.target.repub, panel2dat[5,]$dep, panel2dat[6,]$log_freq.target.repub, panel2dat[6,]$dep, lty=3)#
-text(panel2dat[6,]$log_freq.target.repub, panel2dat[6,]$dep, pos=4, cex=0.7, labels=panel2dat$log_freq.const2.repub[6])#
-segments(panel2dat[7,]$log_freq.target.repub, panel2dat[7,]$dep, panel2dat[8,]$log_freq.target.repub, panel2dat[8,]$dep, lty=3)#
-text(panel2dat[8,]$log_freq.target.repub, panel2dat[8,]$dep, pos=4, cex=0.7, labels=panel2dat$log_freq.const2.repub[8])#
-segments(panel2dat[9,]$log_freq.target.repub, panel2dat[9,]$dep, panel2dat[10,]$log_freq.target.repub, panel2dat[10,]$dep, lty=3)#
-text(panel2dat[10,]$log_freq.target.repub, panel2dat[10,]$dep, pos=4, cex=0.7, labels=panel2dat$log_freq.const2.repub[10])#
-#############################################
-######## PANEL 3 (LENGTH=14) ###############
-#############################################
-#
-panel3dat=data.frame(typeNNsx=rep(1,10), log_freq.const1.repub=rep(median(stimuliNN$log_freq.const1.repub), 10),res_log_freq.const2.repub=rep(panels_freq.const2, each=2), length.target=rep(14, 10), log_freq.target.repub=rep(panels_comp.freq, 5), log_freq.const2.repub=panels_or_freq.const2)#
-#
-# in pratica ho costruito un data.frame in cui le coppie successive di righe mi indicano i punti delle previsioni separatamente per frequenza const 2, prendendo due punti (iniziale e finale) della frequenza totale del composto.#
-#
-attach(panel3dat)#
-#
-pred_panel3dat= 27.23482 + typeNNsx*(-14.64124) +  (-3.31829) * log_freq.target.repub  + (-2.08209) * log_freq.const1.repub + (-2.24568) * res_log_freq.const2.repub +#
-(-1.64198) * length.target + 1.46744 * typeNNsx*log_freq.target.repub + 1.26298 * typeNNsx*log_freq.const1.repub + 0.30987 * log_freq.target.repub * log_freq.const1.repub +#
-2.80647 * typeNNsx * res_log_freq.const2.repub  + 0.43949 * log_freq.target.repub * res_log_freq.const2.repub + 0.92632 * typeNNsx * length.target + 0.24927 * log_freq.target.repub * length.target  + 0.16734 * log_freq.const1.repub*length.target   + 0.21906 * res_log_freq.const2.repub*length.target + (-0.09957) * typeNNsx*log_freq.target.repub*log_freq.const1.repub + (-0.60175) * typeNNsx * log_freq.target.repub * res_log_freq.const2.repub  - 0.03630  * typeNNsx * log_freq.target.repub * length.target -0.07859 * typeNNsx*log_freq.const1.repub*length.target -0.02394 * log_freq.target.repub*log_freq.const1.repub*length.target + -0.27770 * typeNNsx * res_log_freq.const2.repub * length.target -0.04332 * log_freq.target.repub*res_log_freq.const2.repub*length.target + 0.06050 * typeNNsx*log_freq.target.repub*res_log_freq.const2.repub*length.target#
-#
-detach(panel3dat)#
-#
-panel3dat$dep=exp(pred_panel3dat)#
-plot(panel3dat$log_freq.target.repub, panel3dat$dep, type="n", ylim=c(400,800), xlim=c(0,8), ylab="Total View Duration", xlab="Compound frequency", main="NN1")#
-segments(panel3dat[1,]$log_freq.target.repub, panel3dat[1,]$dep, panel3dat[2,]$log_freq.target.repub, panel3dat[2,]$dep, lty=1) #
-text(panel3dat[2,]$log_freq.target.repub, panel3dat[2,]$dep, pos=4, cex=0.7, labels=panel3dat$log_freq.const2.repub[2])#
-segments(panel3dat[3,]$log_freq.target.repub, panel3dat[3,]$dep, panel3dat[4,]$log_freq.target.repub, panel3dat[4,]$dep, lty=2)#
-text(panel3dat[4,]$log_freq.target.repub, panel3dat[4,]$dep, pos=4, cex=0.7, labels=panel3dat$log_freq.const2.repub[4])#
-segments(panel3dat[5,]$log_freq.target.repub, panel3dat[5,]$dep, panel3dat[6,]$log_freq.target.repub, panel3dat[6,]$dep, lty=3)#
-text(panel3dat[6,]$log_freq.target.repub, panel3dat[6,]$dep, pos=4, cex=0.7, labels=panel3dat$log_freq.const2.repub[6])#
-segments(panel3dat[7,]$log_freq.target.repub, panel3dat[7,]$dep, panel3dat[8,]$log_freq.target.repub, panel3dat[8,]$dep, lty=3)#
-text(panel3dat[8,]$log_freq.target.repub, panel3dat[8,]$dep, pos=4, cex=0.7, labels=panel3dat$log_freq.const2.repub[8])#
-segments(panel3dat[9,]$log_freq.target.repub, panel3dat[9,]$dep, panel3dat[10,]$log_freq.target.repub, panel3dat[10,]$dep, lty=3)#
-text(panel3dat[10,]$log_freq.target.repub, panel3dat[10,]$dep, pos=4, cex=0.7, labels=panel3dat$log_freq.const2.repub[10])
-prima manda script analisi trasparenza#
-source('~/Desktop/eye mvm compounds/composti rating trasparenza/history analisi frasi con trasparenza.R', chdir = TRUE)#
-###### FIGURA 2 PAPER #######
-#
-### interazione type*freq.comp*freq2*length#
-#
-#pannello 1 type=NN1; freq.comp=span, freq.const2=5 values, length=3 values#
-#
-panels_freq.const2=quantile(stimuliNN$res_log_freq.const2.repub, prob=c(0.10, 0.30, 0.50, 0.70, 0.90), type=1) #
-# i valori che mi trova con i quantili potrebbero non essere osservati, cambio metodo di definizione di quantili (di default type=7) per ottenere valori osservati#
-panels_or_freq.const2= stimuliNN[stimuliNN$res_log_freq.const2.repub%in%panels_freq.const2, "log_freq.const2.repub"]#
-panels_or_freq.const2=round(panels_or_freq.const2,2)#
-# recupero i valori grezzi di frequenza assoluta associata ai residui.#
-#
-panels_length.target=c(10, 12, 14) #
-#in realtà usando i quantili 0.20, 0.40 e 0.60 i valori sarebbero troppo simili, per cui li ho presi io arbitariamente con un range decente.#
-panels_comp.freq=c(0.6931472, 7.2984451) #ho creato lo step in modo da creare passi uguali. Ma non influenzerà visto che verrà fatta una retta.#
-par(mfrow=c(3,1))#
-#############################################
-######## PANEL 1  (LENGTH=10) ###############
-#############################################
-panel1dat=data.frame(typeNNsx=rep(1,10), log_freq.const1.repub=rep(median(stimuliNN$log_freq.const1.repub), 10),res_log_freq.const2.repub=rep(panels_freq.const2, each=2), length.target=rep(10, 10), log_freq.target.repub=rep(panels_comp.freq, 5), log_freq.const2.repub=panels_or_freq.const2)#
-#
-# in pratica ho costruito un data.frame in cui le coppie successive di righe mi indicano i punti delle previsioni separatamente per frequenza const 2, prendendo due punti (iniziale e finale) della frequenza totale del composto.#
-#
-attach(panel1dat)#
-#
-pred_panel1dat= 27.23482 + typeNNsx*(-14.64124) +  (-3.31829) * log_freq.target.repub  + (-2.08209) * log_freq.const1.repub + (-2.24568) * res_log_freq.const2.repub +#
-(-1.64198) * length.target + 1.46744 * typeNNsx*log_freq.target.repub + 1.26298 * typeNNsx*log_freq.const1.repub + 0.30987 * log_freq.target.repub * log_freq.const1.repub +#
-2.80647 * typeNNsx * res_log_freq.const2.repub  + 0.43949 * log_freq.target.repub * res_log_freq.const2.repub + 0.92632 * typeNNsx * length.target + 0.24927 * log_freq.target.repub * length.target  + 0.16734 * log_freq.const1.repub*length.target   + 0.21906 * res_log_freq.const2.repub*length.target + (-0.09957) * typeNNsx*log_freq.target.repub*log_freq.const1.repub + (-0.60175) * typeNNsx * log_freq.target.repub * res_log_freq.const2.repub  - 0.03630  * typeNNsx * log_freq.target.repub * length.target -0.07859 * typeNNsx*log_freq.const1.repub*length.target -0.02394 * log_freq.target.repub*log_freq.const1.repub*length.target + -0.27770 * typeNNsx * res_log_freq.const2.repub * length.target -0.04332 * log_freq.target.repub*res_log_freq.const2.repub*length.target + 0.06050 * typeNNsx*log_freq.target.repub*res_log_freq.const2.repub*length.target#
-#
-detach(panel1dat)#
-#
-panel1dat$dep=exp(pred_panel1dat)#
-plot(panel1dat$log_freq.target.repub, panel1dat$dep, type="n", ylim=c(200, 1000), xlim=c(0,8), ylab="Total View Duration", xlab="Compound frequency", main="NN1")#
-segments(panel1dat[1,]$log_freq.target.repub, panel1dat[1,]$dep, panel1dat[2,]$log_freq.target.repub, panel1dat[2,]$dep, lty=1) #
-text(panel1dat[2,]$log_freq.target.repub, panel1dat[2,]$dep, pos=4, cex=0.7, labels=panel1dat$log_freq.const2.repub[2])#
-segments(panel1dat[3,]$log_freq.target.repub, panel1dat[3,]$dep, panel1dat[4,]$log_freq.target.repub, panel1dat[4,]$dep, lty=2)#
-text(panel1dat[4,]$log_freq.target.repub, panel1dat[4,]$dep, pos=4, cex=0.7, labels=panel1dat$log_freq.const2.repub[4])#
-segments(panel1dat[5,]$log_freq.target.repub, panel1dat[5,]$dep, panel1dat[6,]$log_freq.target.repub, panel1dat[6,]$dep, lty=3)#
-text(panel1dat[6,]$log_freq.target.repub, panel1dat[6,]$dep, pos=4, cex=0.7, labels=panel1dat$log_freq.const2.repub[6])#
-segments(panel1dat[7,]$log_freq.target.repub, panel1dat[7,]$dep, panel1dat[8,]$log_freq.target.repub, panel1dat[8,]$dep, lty=3)#
-text(panel1dat[8,]$log_freq.target.repub, panel1dat[8,]$dep, pos=4, cex=0.7, labels=panel1dat$log_freq.const2.repub[8])#
-segments(panel1dat[9,]$log_freq.target.repub, panel1dat[9,]$dep, panel1dat[10,]$log_freq.target.repub, panel1dat[10,]$dep, lty=3)#
-text(panel1dat[10,]$log_freq.target.repub, panel1dat[10,]$dep, pos=4, cex=0.7, labels=panel1dat$log_freq.const2.repub[10])#
-#############################################
-######## PANEL 2 (LENGTH=12) ###############
-#############################################
-#
-panel2dat=data.frame(typeNNsx=rep(1,10), log_freq.const1.repub=rep(median(stimuliNN$log_freq.const1.repub), 10),res_log_freq.const2.repub=rep(panels_freq.const2, each=2), length.target=rep(12, 10), log_freq.target.repub=rep(panels_comp.freq, 5), log_freq.const2.repub=panels_or_freq.const2)#
-#
-# in pratica ho costruito un data.frame in cui le coppie successive di righe mi indicano i punti delle previsioni separatamente per frequenza const 2, prendendo due punti (iniziale e finale) della frequenza totale del composto.#
-#
-attach(panel2dat)#
-#
-pred_panel2dat= 27.23482 + typeNNsx*(-14.64124) +  (-3.31829) * log_freq.target.repub  + (-2.08209) * log_freq.const1.repub + (-2.24568) * res_log_freq.const2.repub +#
-(-1.64198) * length.target + 1.46744 * typeNNsx*log_freq.target.repub + 1.26298 * typeNNsx*log_freq.const1.repub + 0.30987 * log_freq.target.repub * log_freq.const1.repub +#
-2.80647 * typeNNsx * res_log_freq.const2.repub  + 0.43949 * log_freq.target.repub * res_log_freq.const2.repub + 0.92632 * typeNNsx * length.target + 0.24927 * log_freq.target.repub * length.target  + 0.16734 * log_freq.const1.repub*length.target   + 0.21906 * res_log_freq.const2.repub*length.target + (-0.09957) * typeNNsx*log_freq.target.repub*log_freq.const1.repub + (-0.60175) * typeNNsx * log_freq.target.repub * res_log_freq.const2.repub  - 0.03630  * typeNNsx * log_freq.target.repub * length.target -0.07859 * typeNNsx*log_freq.const1.repub*length.target -0.02394 * log_freq.target.repub*log_freq.const1.repub*length.target + -0.27770 * typeNNsx * res_log_freq.const2.repub * length.target -0.04332 * log_freq.target.repub*res_log_freq.const2.repub*length.target + 0.06050 * typeNNsx*log_freq.target.repub*res_log_freq.const2.repub*length.target#
-#
-detach(panel2dat)#
-#
-panel2dat$dep=exp(pred_panel2dat)#
-plot(panel2dat$log_freq.target.repub, panel2dat$dep, type="n", ylim=c(200, 1000), xlim=c(0,8), ylab="Total View Duration", xlab="Compound frequency", main="NN1")#
-segments(panel2dat[1,]$log_freq.target.repub, panel2dat[1,]$dep, panel2dat[2,]$log_freq.target.repub, panel2dat[2,]$dep, lty=1) #
-text(panel2dat[2,]$log_freq.target.repub, panel2dat[2,]$dep, pos=4, cex=0.7, labels=panel2dat$log_freq.const2.repub[2])#
-segments(panel2dat[3,]$log_freq.target.repub, panel2dat[3,]$dep, panel2dat[4,]$log_freq.target.repub, panel2dat[4,]$dep, lty=2)#
-text(panel2dat[4,]$log_freq.target.repub, panel2dat[4,]$dep, pos=4, cex=0.7, labels=panel2dat$log_freq.const2.repub[4])#
-segments(panel2dat[5,]$log_freq.target.repub, panel2dat[5,]$dep, panel2dat[6,]$log_freq.target.repub, panel2dat[6,]$dep, lty=3)#
-text(panel2dat[6,]$log_freq.target.repub, panel2dat[6,]$dep, pos=4, cex=0.7, labels=panel2dat$log_freq.const2.repub[6])#
-segments(panel2dat[7,]$log_freq.target.repub, panel2dat[7,]$dep, panel2dat[8,]$log_freq.target.repub, panel2dat[8,]$dep, lty=3)#
-text(panel2dat[8,]$log_freq.target.repub, panel2dat[8,]$dep, pos=4, cex=0.7, labels=panel2dat$log_freq.const2.repub[8])#
-segments(panel2dat[9,]$log_freq.target.repub, panel2dat[9,]$dep, panel2dat[10,]$log_freq.target.repub, panel2dat[10,]$dep, lty=3)#
-text(panel2dat[10,]$log_freq.target.repub, panel2dat[10,]$dep, pos=4, cex=0.7, labels=panel2dat$log_freq.const2.repub[10])#
-#############################################
-######## PANEL 3 (LENGTH=14) ###############
-#############################################
-#
-panel3dat=data.frame(typeNNsx=rep(1,10), log_freq.const1.repub=rep(median(stimuliNN$log_freq.const1.repub), 10),res_log_freq.const2.repub=rep(panels_freq.const2, each=2), length.target=rep(14, 10), log_freq.target.repub=rep(panels_comp.freq, 5), log_freq.const2.repub=panels_or_freq.const2)#
-#
-# in pratica ho costruito un data.frame in cui le coppie successive di righe mi indicano i punti delle previsioni separatamente per frequenza const 2, prendendo due punti (iniziale e finale) della frequenza totale del composto.#
-#
-attach(panel3dat)#
-#
-pred_panel3dat= 27.23482 + typeNNsx*(-14.64124) +  (-3.31829) * log_freq.target.repub  + (-2.08209) * log_freq.const1.repub + (-2.24568) * res_log_freq.const2.repub +#
-(-1.64198) * length.target + 1.46744 * typeNNsx*log_freq.target.repub + 1.26298 * typeNNsx*log_freq.const1.repub + 0.30987 * log_freq.target.repub * log_freq.const1.repub +#
-2.80647 * typeNNsx * res_log_freq.const2.repub  + 0.43949 * log_freq.target.repub * res_log_freq.const2.repub + 0.92632 * typeNNsx * length.target + 0.24927 * log_freq.target.repub * length.target  + 0.16734 * log_freq.const1.repub*length.target   + 0.21906 * res_log_freq.const2.repub*length.target + (-0.09957) * typeNNsx*log_freq.target.repub*log_freq.const1.repub + (-0.60175) * typeNNsx * log_freq.target.repub * res_log_freq.const2.repub  - 0.03630  * typeNNsx * log_freq.target.repub * length.target -0.07859 * typeNNsx*log_freq.const1.repub*length.target -0.02394 * log_freq.target.repub*log_freq.const1.repub*length.target + -0.27770 * typeNNsx * res_log_freq.const2.repub * length.target -0.04332 * log_freq.target.repub*res_log_freq.const2.repub*length.target + 0.06050 * typeNNsx*log_freq.target.repub*res_log_freq.const2.repub*length.target#
-#
-detach(panel3dat)#
-#
-panel3dat$dep=exp(pred_panel3dat)#
-plot(panel3dat$log_freq.target.repub, panel3dat$dep, type="n", ylim=c(200, 1000), xlim=c(0,8), ylab="Total View Duration", xlab="Compound frequency", main="NN1")#
-segments(panel3dat[1,]$log_freq.target.repub, panel3dat[1,]$dep, panel3dat[2,]$log_freq.target.repub, panel3dat[2,]$dep, lty=1) #
-text(panel3dat[2,]$log_freq.target.repub, panel3dat[2,]$dep, pos=4, cex=0.7, labels=panel3dat$log_freq.const2.repub[2])#
-segments(panel3dat[3,]$log_freq.target.repub, panel3dat[3,]$dep, panel3dat[4,]$log_freq.target.repub, panel3dat[4,]$dep, lty=2)#
-text(panel3dat[4,]$log_freq.target.repub, panel3dat[4,]$dep, pos=4, cex=0.7, labels=panel3dat$log_freq.const2.repub[4])#
-segments(panel3dat[5,]$log_freq.target.repub, panel3dat[5,]$dep, panel3dat[6,]$log_freq.target.repub, panel3dat[6,]$dep, lty=3)#
-text(panel3dat[6,]$log_freq.target.repub, panel3dat[6,]$dep, pos=4, cex=0.7, labels=panel3dat$log_freq.const2.repub[6])#
-segments(panel3dat[7,]$log_freq.target.repub, panel3dat[7,]$dep, panel3dat[8,]$log_freq.target.repub, panel3dat[8,]$dep, lty=3)#
-text(panel3dat[8,]$log_freq.target.repub, panel3dat[8,]$dep, pos=4, cex=0.7, labels=panel3dat$log_freq.const2.repub[8])#
-segments(panel3dat[9,]$log_freq.target.repub, panel3dat[9,]$dep, panel3dat[10,]$log_freq.target.repub, panel3dat[10,]$dep, lty=3)#
-text(panel3dat[10,]$log_freq.target.repub, panel3dat[10,]$dep, pos=4, cex=0.7, labels=panel3dat$log_freq.const2.repub[10])
-prima manda script analisi trasparenza#
-source('~/Desktop/eye mvm compounds/composti rating trasparenza/history analisi frasi con trasparenza.R', chdir = TRUE)#
-###### FIGURA 2 PAPER #######
-#
-### interazione type*freq.comp*freq2*length#
-#
-#pannello 1 type=NN1; freq.comp=span, freq.const2=5 values, length=3 values#
-#
-panels_freq.const2=quantile(stimuliNN$res_log_freq.const2.repub, prob=c(0.10, 0.30, 0.50, 0.70, 0.90), type=1) #
-# i valori che mi trova con i quantili potrebbero non essere osservati, cambio metodo di definizione di quantili (di default type=7) per ottenere valori osservati#
-panels_or_freq.const2= stimuliNN[stimuliNN$res_log_freq.const2.repub%in%panels_freq.const2, "log_freq.const2.repub"]#
-panels_or_freq.const2=round(panels_or_freq.const2,2)#
-# recupero i valori grezzi di frequenza assoluta associata ai residui.#
-#
-panels_length.target=c(10, 12, 14) #
-#in realtà usando i quantili 0.20, 0.40 e 0.60 i valori sarebbero troppo simili, per cui li ho presi io arbitariamente con un range decente.#
-panels_comp.freq=c(0.6931472, 7.2984451) #ho creato lo step in modo da creare passi uguali. Ma non influenzerà visto che verrà fatta una retta.#
-par(mfrow=c(3,1))#
-#############################################
-######## PANEL 1  (LENGTH=10) ###############
-#############################################
-panel1dat=data.frame(typeNNsx=rep(0,10), log_freq.const1.repub=rep(median(stimuliNN$log_freq.const1.repub), 10),res_log_freq.const2.repub=rep(panels_freq.const2, each=2), length.target=rep(10, 10), log_freq.target.repub=rep(panels_comp.freq, 5), log_freq.const2.repub=panels_or_freq.const2)#
-#
-# in pratica ho costruito un data.frame in cui le coppie successive di righe mi indicano i punti delle previsioni separatamente per frequenza const 2, prendendo due punti (iniziale e finale) della frequenza totale del composto.#
-#
-attach(panel1dat)#
-#
-pred_panel1dat= 27.23482 + typeNNsx*(-14.64124) +  (-3.31829) * log_freq.target.repub  + (-2.08209) * log_freq.const1.repub + (-2.24568) * res_log_freq.const2.repub +#
-(-1.64198) * length.target + 1.46744 * typeNNsx*log_freq.target.repub + 1.26298 * typeNNsx*log_freq.const1.repub + 0.30987 * log_freq.target.repub * log_freq.const1.repub +#
-2.80647 * typeNNsx * res_log_freq.const2.repub  + 0.43949 * log_freq.target.repub * res_log_freq.const2.repub + 0.92632 * typeNNsx * length.target + 0.24927 * log_freq.target.repub * length.target  + 0.16734 * log_freq.const1.repub*length.target   + 0.21906 * res_log_freq.const2.repub*length.target + (-0.09957) * typeNNsx*log_freq.target.repub*log_freq.const1.repub + (-0.60175) * typeNNsx * log_freq.target.repub * res_log_freq.const2.repub  - 0.03630  * typeNNsx * log_freq.target.repub * length.target -0.07859 * typeNNsx*log_freq.const1.repub*length.target -0.02394 * log_freq.target.repub*log_freq.const1.repub*length.target + -0.27770 * typeNNsx * res_log_freq.const2.repub * length.target -0.04332 * log_freq.target.repub*res_log_freq.const2.repub*length.target + 0.06050 * typeNNsx*log_freq.target.repub*res_log_freq.const2.repub*length.target#
-#
-detach(panel1dat)#
-#
-panel1dat$dep=exp(pred_panel1dat)#
-plot(panel1dat$log_freq.target.repub, panel1dat$dep, type="n", ylim=c(200, 1000), xlim=c(0,8), ylab="Total View Duration", xlab="Compound frequency", main="NN1")#
-segments(panel1dat[1,]$log_freq.target.repub, panel1dat[1,]$dep, panel1dat[2,]$log_freq.target.repub, panel1dat[2,]$dep, lty=1) #
-text(panel1dat[2,]$log_freq.target.repub, panel1dat[2,]$dep, pos=4, cex=0.7, labels=panel1dat$log_freq.const2.repub[2])#
-segments(panel1dat[3,]$log_freq.target.repub, panel1dat[3,]$dep, panel1dat[4,]$log_freq.target.repub, panel1dat[4,]$dep, lty=2)#
-text(panel1dat[4,]$log_freq.target.repub, panel1dat[4,]$dep, pos=4, cex=0.7, labels=panel1dat$log_freq.const2.repub[4])#
-segments(panel1dat[5,]$log_freq.target.repub, panel1dat[5,]$dep, panel1dat[6,]$log_freq.target.repub, panel1dat[6,]$dep, lty=3)#
-text(panel1dat[6,]$log_freq.target.repub, panel1dat[6,]$dep, pos=4, cex=0.7, labels=panel1dat$log_freq.const2.repub[6])#
-segments(panel1dat[7,]$log_freq.target.repub, panel1dat[7,]$dep, panel1dat[8,]$log_freq.target.repub, panel1dat[8,]$dep, lty=3)#
-text(panel1dat[8,]$log_freq.target.repub, panel1dat[8,]$dep, pos=4, cex=0.7, labels=panel1dat$log_freq.const2.repub[8])#
-segments(panel1dat[9,]$log_freq.target.repub, panel1dat[9,]$dep, panel1dat[10,]$log_freq.target.repub, panel1dat[10,]$dep, lty=3)#
-text(panel1dat[10,]$log_freq.target.repub, panel1dat[10,]$dep, pos=4, cex=0.7, labels=panel1dat$log_freq.const2.repub[10])#
-#############################################
-######## PANEL 2 (LENGTH=12) ###############
-#############################################
-#
-panel2dat=data.frame(typeNNsx=rep(0,10), log_freq.const1.repub=rep(median(stimuliNN$log_freq.const1.repub), 10),res_log_freq.const2.repub=rep(panels_freq.const2, each=2), length.target=rep(12, 10), log_freq.target.repub=rep(panels_comp.freq, 5), log_freq.const2.repub=panels_or_freq.const2)#
-#
-# in pratica ho costruito un data.frame in cui le coppie successive di righe mi indicano i punti delle previsioni separatamente per frequenza const 2, prendendo due punti (iniziale e finale) della frequenza totale del composto.#
-#
-attach(panel2dat)#
-#
-pred_panel2dat= 27.23482 + typeNNsx*(-14.64124) +  (-3.31829) * log_freq.target.repub  + (-2.08209) * log_freq.const1.repub + (-2.24568) * res_log_freq.const2.repub +#
-(-1.64198) * length.target + 1.46744 * typeNNsx*log_freq.target.repub + 1.26298 * typeNNsx*log_freq.const1.repub + 0.30987 * log_freq.target.repub * log_freq.const1.repub +#
-2.80647 * typeNNsx * res_log_freq.const2.repub  + 0.43949 * log_freq.target.repub * res_log_freq.const2.repub + 0.92632 * typeNNsx * length.target + 0.24927 * log_freq.target.repub * length.target  + 0.16734 * log_freq.const1.repub*length.target   + 0.21906 * res_log_freq.const2.repub*length.target + (-0.09957) * typeNNsx*log_freq.target.repub*log_freq.const1.repub + (-0.60175) * typeNNsx * log_freq.target.repub * res_log_freq.const2.repub  - 0.03630  * typeNNsx * log_freq.target.repub * length.target -0.07859 * typeNNsx*log_freq.const1.repub*length.target -0.02394 * log_freq.target.repub*log_freq.const1.repub*length.target + -0.27770 * typeNNsx * res_log_freq.const2.repub * length.target -0.04332 * log_freq.target.repub*res_log_freq.const2.repub*length.target + 0.06050 * typeNNsx*log_freq.target.repub*res_log_freq.const2.repub*length.target#
-#
-detach(panel2dat)#
-#
-panel2dat$dep=exp(pred_panel2dat)#
-plot(panel2dat$log_freq.target.repub, panel2dat$dep, type="n", ylim=c(200, 1000), xlim=c(0,8), ylab="Total View Duration", xlab="Compound frequency", main="NN1")#
-segments(panel2dat[1,]$log_freq.target.repub, panel2dat[1,]$dep, panel2dat[2,]$log_freq.target.repub, panel2dat[2,]$dep, lty=1) #
-text(panel2dat[2,]$log_freq.target.repub, panel2dat[2,]$dep, pos=4, cex=0.7, labels=panel2dat$log_freq.const2.repub[2])#
-segments(panel2dat[3,]$log_freq.target.repub, panel2dat[3,]$dep, panel2dat[4,]$log_freq.target.repub, panel2dat[4,]$dep, lty=2)#
-text(panel2dat[4,]$log_freq.target.repub, panel2dat[4,]$dep, pos=4, cex=0.7, labels=panel2dat$log_freq.const2.repub[4])#
-segments(panel2dat[5,]$log_freq.target.repub, panel2dat[5,]$dep, panel2dat[6,]$log_freq.target.repub, panel2dat[6,]$dep, lty=3)#
-text(panel2dat[6,]$log_freq.target.repub, panel2dat[6,]$dep, pos=4, cex=0.7, labels=panel2dat$log_freq.const2.repub[6])#
-segments(panel2dat[7,]$log_freq.target.repub, panel2dat[7,]$dep, panel2dat[8,]$log_freq.target.repub, panel2dat[8,]$dep, lty=3)#
-text(panel2dat[8,]$log_freq.target.repub, panel2dat[8,]$dep, pos=4, cex=0.7, labels=panel2dat$log_freq.const2.repub[8])#
-segments(panel2dat[9,]$log_freq.target.repub, panel2dat[9,]$dep, panel2dat[10,]$log_freq.target.repub, panel2dat[10,]$dep, lty=3)#
-text(panel2dat[10,]$log_freq.target.repub, panel2dat[10,]$dep, pos=4, cex=0.7, labels=panel2dat$log_freq.const2.repub[10])#
-#############################################
-######## PANEL 3 (LENGTH=14) ###############
-#############################################
-#
-panel3dat=data.frame(typeNNsx=rep(0,10), log_freq.const1.repub=rep(median(stimuliNN$log_freq.const1.repub), 10),res_log_freq.const2.repub=rep(panels_freq.const2, each=2), length.target=rep(14, 10), log_freq.target.repub=rep(panels_comp.freq, 5), log_freq.const2.repub=panels_or_freq.const2)#
-#
-# in pratica ho costruito un data.frame in cui le coppie successive di righe mi indicano i punti delle previsioni separatamente per frequenza const 2, prendendo due punti (iniziale e finale) della frequenza totale del composto.#
-#
-attach(panel3dat)#
-#
-pred_panel3dat= 27.23482 + typeNNsx*(-14.64124) +  (-3.31829) * log_freq.target.repub  + (-2.08209) * log_freq.const1.repub + (-2.24568) * res_log_freq.const2.repub +#
-(-1.64198) * length.target + 1.46744 * typeNNsx*log_freq.target.repub + 1.26298 * typeNNsx*log_freq.const1.repub + 0.30987 * log_freq.target.repub * log_freq.const1.repub +#
-2.80647 * typeNNsx * res_log_freq.const2.repub  + 0.43949 * log_freq.target.repub * res_log_freq.const2.repub + 0.92632 * typeNNsx * length.target + 0.24927 * log_freq.target.repub * length.target  + 0.16734 * log_freq.const1.repub*length.target   + 0.21906 * res_log_freq.const2.repub*length.target + (-0.09957) * typeNNsx*log_freq.target.repub*log_freq.const1.repub + (-0.60175) * typeNNsx * log_freq.target.repub * res_log_freq.const2.repub  - 0.03630  * typeNNsx * log_freq.target.repub * length.target -0.07859 * typeNNsx*log_freq.const1.repub*length.target -0.02394 * log_freq.target.repub*log_freq.const1.repub*length.target + -0.27770 * typeNNsx * res_log_freq.const2.repub * length.target -0.04332 * log_freq.target.repub*res_log_freq.const2.repub*length.target + 0.06050 * typeNNsx*log_freq.target.repub*res_log_freq.const2.repub*length.target#
-#
-detach(panel3dat)#
-#
-panel3dat$dep=exp(pred_panel3dat)#
-plot(panel3dat$log_freq.target.repub, panel3dat$dep, type="n", ylim=c(200, 1000), xlim=c(0,8), ylab="Total View Duration", xlab="Compound frequency", main="NN1")#
-segments(panel3dat[1,]$log_freq.target.repub, panel3dat[1,]$dep, panel3dat[2,]$log_freq.target.repub, panel3dat[2,]$dep, lty=1) #
-text(panel3dat[2,]$log_freq.target.repub, panel3dat[2,]$dep, pos=4, cex=0.7, labels=panel3dat$log_freq.const2.repub[2])#
-segments(panel3dat[3,]$log_freq.target.repub, panel3dat[3,]$dep, panel3dat[4,]$log_freq.target.repub, panel3dat[4,]$dep, lty=2)#
-text(panel3dat[4,]$log_freq.target.repub, panel3dat[4,]$dep, pos=4, cex=0.7, labels=panel3dat$log_freq.const2.repub[4])#
-segments(panel3dat[5,]$log_freq.target.repub, panel3dat[5,]$dep, panel3dat[6,]$log_freq.target.repub, panel3dat[6,]$dep, lty=3)#
-text(panel3dat[6,]$log_freq.target.repub, panel3dat[6,]$dep, pos=4, cex=0.7, labels=panel3dat$log_freq.const2.repub[6])#
-segments(panel3dat[7,]$log_freq.target.repub, panel3dat[7,]$dep, panel3dat[8,]$log_freq.target.repub, panel3dat[8,]$dep, lty=3)#
-text(panel3dat[8,]$log_freq.target.repub, panel3dat[8,]$dep, pos=4, cex=0.7, labels=panel3dat$log_freq.const2.repub[8])#
-segments(panel3dat[9,]$log_freq.target.repub, panel3dat[9,]$dep, panel3dat[10,]$log_freq.target.repub, panel3dat[10,]$dep, lty=3)#
-text(panel3dat[10,]$log_freq.target.repub, panel3dat[10,]$dep, pos=4, cex=0.7, labels=panel3dat$log_freq.const2.repub[10])
-panel3dat
-panel2dat
-prima manda script analisi trasparenza#
-source('~/Desktop/eye mvm compounds/composti rating trasparenza/history analisi frasi con trasparenza.R', chdir = TRUE)#
-###### FIGURA 2 PAPER #######
-#
-### interazione type*freq.comp*freq2*length#
-#
-#pannello 1 type=NN1; freq.comp=span, freq.const2=5 values, length=3 values#
-#
-panels_freq.const2=quantile(stimuliNN$res_log_freq.const2.repub, prob=c(0.10, 0.30, 0.50, 0.70, 0.90), type=1) #
-# i valori che mi trova con i quantili potrebbero non essere osservati, cambio metodo di definizione di quantili (di default type=7) per ottenere valori osservati#
-panels_or_freq.const2= stimuliNN[stimuliNN$res_log_freq.const2.repub%in%panels_freq.const2, "log_freq.const2.repub"]#
-panels_or_freq.const2=round(panels_or_freq.const2,2)#
-# recupero i valori grezzi di frequenza assoluta associata ai residui.#
-#
-panels_length.target=c(10, 12, 14) #
-#in realtà usando i quantili 0.20, 0.40 e 0.60 i valori sarebbero troppo simili, per cui li ho presi io arbitariamente con un range decente.#
-panels_comp.freq=c(0.6931472, 7.2984451) #ho creato lo step in modo da creare passi uguali. Ma non influenzerà visto che verrà fatta una retta.#
-par(mfrow=c(3,1))#
-#############################################
-######## PANEL 1  (LENGTH=10) ###############
-#############################################
-panel1dat=data.frame(typeNNsx=rep(1,10), log_freq.const1.repub=rep(median(stimuliNN$log_freq.const1.repub), 10),res_log_freq.const2.repub=rep(panels_freq.const2, each=2), length.target=rep(10, 10), log_freq.target.repub=rep(panels_comp.freq, 5), log_freq.const2.repub=panels_or_freq.const2)#
-#
-# in pratica ho costruito un data.frame in cui le coppie successive di righe mi indicano i punti delle previsioni separatamente per frequenza const 2, prendendo due punti (iniziale e finale) della frequenza totale del composto.#
-#
-attach(panel1dat)#
-#
-pred_panel1dat= 27.23482 + typeNNsx*(-14.64124) +  (-3.31829) * log_freq.target.repub  + (-2.08209) * log_freq.const1.repub + (-2.24568) * res_log_freq.const2.repub +#
-(-1.64198) * length.target + 1.46744 * typeNNsx*log_freq.target.repub + 1.26298 * typeNNsx*log_freq.const1.repub + 0.30987 * log_freq.target.repub * log_freq.const1.repub +#
-2.80647 * typeNNsx * res_log_freq.const2.repub  + 0.43949 * log_freq.target.repub * res_log_freq.const2.repub + 0.92632 * typeNNsx * length.target + 0.24927 * log_freq.target.repub * length.target  + 0.16734 * log_freq.const1.repub*length.target   + 0.21906 * res_log_freq.const2.repub*length.target + (-0.09957) * typeNNsx*log_freq.target.repub*log_freq.const1.repub + (-0.60175) * typeNNsx * log_freq.target.repub * res_log_freq.const2.repub  - 0.03630  * typeNNsx * log_freq.target.repub * length.target -0.07859 * typeNNsx*log_freq.const1.repub*length.target -0.02394 * log_freq.target.repub*log_freq.const1.repub*length.target + -0.27770 * typeNNsx * res_log_freq.const2.repub * length.target -0.04332 * log_freq.target.repub*res_log_freq.const2.repub*length.target + 0.06050 * typeNNsx*log_freq.target.repub*res_log_freq.const2.repub*length.target#
-#
-detach(panel1dat)#
-#
-panel1dat$dep=exp(pred_panel1dat)#
-plot(panel1dat$log_freq.target.repub, panel1dat$dep, type="n", ylim=c(200, 1000), xlim=c(0,8), ylab="Total View Duration", xlab="Compound frequency", main="NN1")#
-segments(panel1dat[1,]$log_freq.target.repub, panel1dat[1,]$dep, panel1dat[2,]$log_freq.target.repub, panel1dat[2,]$dep, lty=1) #
-text(panel1dat[2,]$log_freq.target.repub, panel1dat[2,]$dep, pos=4, cex=0.7, labels=panel1dat$log_freq.const2.repub[2])#
-segments(panel1dat[3,]$log_freq.target.repub, panel1dat[3,]$dep, panel1dat[4,]$log_freq.target.repub, panel1dat[4,]$dep, lty=2)#
-text(panel1dat[4,]$log_freq.target.repub, panel1dat[4,]$dep, pos=4, cex=0.7, labels=panel1dat$log_freq.const2.repub[4])#
-segments(panel1dat[5,]$log_freq.target.repub, panel1dat[5,]$dep, panel1dat[6,]$log_freq.target.repub, panel1dat[6,]$dep, lty=3)#
-text(panel1dat[6,]$log_freq.target.repub, panel1dat[6,]$dep, pos=4, cex=0.7, labels=panel1dat$log_freq.const2.repub[6])#
-segments(panel1dat[7,]$log_freq.target.repub, panel1dat[7,]$dep, panel1dat[8,]$log_freq.target.repub, panel1dat[8,]$dep, lty=3)#
-text(panel1dat[8,]$log_freq.target.repub, panel1dat[8,]$dep, pos=4, cex=0.7, labels=panel1dat$log_freq.const2.repub[8])#
-segments(panel1dat[9,]$log_freq.target.repub, panel1dat[9,]$dep, panel1dat[10,]$log_freq.target.repub, panel1dat[10,]$dep, lty=3)#
-text(panel1dat[10,]$log_freq.target.repub, panel1dat[10,]$dep, pos=4, cex=0.7, labels=panel1dat$log_freq.const2.repub[10])#
-#############################################
-######## PANEL 2 (LENGTH=12) ###############
-#############################################
-#
-panel2dat=data.frame(typeNNsx=rep(1,10), log_freq.const1.repub=rep(median(stimuliNN$log_freq.const1.repub), 10),res_log_freq.const2.repub=rep(panels_freq.const2, each=2), length.target=rep(12, 10), log_freq.target.repub=rep(panels_comp.freq, 5), log_freq.const2.repub=panels_or_freq.const2)#
-#
-# in pratica ho costruito un data.frame in cui le coppie successive di righe mi indicano i punti delle previsioni separatamente per frequenza const 2, prendendo due punti (iniziale e finale) della frequenza totale del composto.#
-#
-attach(panel2dat)#
-#
-pred_panel2dat= 27.23482 + typeNNsx*(-14.64124) +  (-3.31829) * log_freq.target.repub  + (-2.08209) * log_freq.const1.repub + (-2.24568) * res_log_freq.const2.repub +#
-(-1.64198) * length.target + 1.46744 * typeNNsx*log_freq.target.repub + 1.26298 * typeNNsx*log_freq.const1.repub + 0.30987 * log_freq.target.repub * log_freq.const1.repub +#
-2.80647 * typeNNsx * res_log_freq.const2.repub  + 0.43949 * log_freq.target.repub * res_log_freq.const2.repub + 0.92632 * typeNNsx * length.target + 0.24927 * log_freq.target.repub * length.target  + 0.16734 * log_freq.const1.repub*length.target   + 0.21906 * res_log_freq.const2.repub*length.target + (-0.09957) * typeNNsx*log_freq.target.repub*log_freq.const1.repub + (-0.60175) * typeNNsx * log_freq.target.repub * res_log_freq.const2.repub  - 0.03630  * typeNNsx * log_freq.target.repub * length.target -0.07859 * typeNNsx*log_freq.const1.repub*length.target -0.02394 * log_freq.target.repub*log_freq.const1.repub*length.target + -0.27770 * typeNNsx * res_log_freq.const2.repub * length.target -0.04332 * log_freq.target.repub*res_log_freq.const2.repub*length.target + 0.06050 * typeNNsx*log_freq.target.repub*res_log_freq.const2.repub*length.target#
-#
-detach(panel2dat)#
-#
-panel2dat$dep=exp(pred_panel2dat)#
-plot(panel2dat$log_freq.target.repub, panel2dat$dep, type="n", ylim=c(200, 1000), xlim=c(0,8), ylab="Total View Duration", xlab="Compound frequency", main="NN1")#
-segments(panel2dat[1,]$log_freq.target.repub, panel2dat[1,]$dep, panel2dat[2,]$log_freq.target.repub, panel2dat[2,]$dep, lty=1) #
-text(panel2dat[2,]$log_freq.target.repub, panel2dat[2,]$dep, pos=4, cex=0.7, labels=panel2dat$log_freq.const2.repub[2])#
-segments(panel2dat[3,]$log_freq.target.repub, panel2dat[3,]$dep, panel2dat[4,]$log_freq.target.repub, panel2dat[4,]$dep, lty=2)#
-text(panel2dat[4,]$log_freq.target.repub, panel2dat[4,]$dep, pos=4, cex=0.7, labels=panel2dat$log_freq.const2.repub[4])#
-segments(panel2dat[5,]$log_freq.target.repub, panel2dat[5,]$dep, panel2dat[6,]$log_freq.target.repub, panel2dat[6,]$dep, lty=3)#
-text(panel2dat[6,]$log_freq.target.repub, panel2dat[6,]$dep, pos=4, cex=0.7, labels=panel2dat$log_freq.const2.repub[6])#
-segments(panel2dat[7,]$log_freq.target.repub, panel2dat[7,]$dep, panel2dat[8,]$log_freq.target.repub, panel2dat[8,]$dep, lty=3)#
-text(panel2dat[8,]$log_freq.target.repub, panel2dat[8,]$dep, pos=4, cex=0.7, labels=panel2dat$log_freq.const2.repub[8])#
-segments(panel2dat[9,]$log_freq.target.repub, panel2dat[9,]$dep, panel2dat[10,]$log_freq.target.repub, panel2dat[10,]$dep, lty=3)#
-text(panel2dat[10,]$log_freq.target.repub, panel2dat[10,]$dep, pos=4, cex=0.7, labels=panel2dat$log_freq.const2.repub[10])#
-#############################################
-######## PANEL 3 (LENGTH=14) ###############
-#############################################
-#
-panel3dat=data.frame(typeNNsx=rep(1,10), log_freq.const1.repub=rep(median(stimuliNN$log_freq.const1.repub), 10),res_log_freq.const2.repub=rep(panels_freq.const2, each=2), length.target=rep(14, 10), log_freq.target.repub=rep(panels_comp.freq, 5), log_freq.const2.repub=panels_or_freq.const2)#
-#
-# in pratica ho costruito un data.frame in cui le coppie successive di righe mi indicano i punti delle previsioni separatamente per frequenza const 2, prendendo due punti (iniziale e finale) della frequenza totale del composto.#
-#
-attach(panel3dat)#
-#
-pred_panel3dat= 27.23482 + typeNNsx*(-14.64124) +  (-3.31829) * log_freq.target.repub  + (-2.08209) * log_freq.const1.repub + (-2.24568) * res_log_freq.const2.repub +#
-(-1.64198) * length.target + 1.46744 * typeNNsx*log_freq.target.repub + 1.26298 * typeNNsx*log_freq.const1.repub + 0.30987 * log_freq.target.repub * log_freq.const1.repub +#
-2.80647 * typeNNsx * res_log_freq.const2.repub  + 0.43949 * log_freq.target.repub * res_log_freq.const2.repub + 0.92632 * typeNNsx * length.target + 0.24927 * log_freq.target.repub * length.target  + 0.16734 * log_freq.const1.repub*length.target   + 0.21906 * res_log_freq.const2.repub*length.target + (-0.09957) * typeNNsx*log_freq.target.repub*log_freq.const1.repub + (-0.60175) * typeNNsx * log_freq.target.repub * res_log_freq.const2.repub  - 0.03630  * typeNNsx * log_freq.target.repub * length.target -0.07859 * typeNNsx*log_freq.const1.repub*length.target -0.02394 * log_freq.target.repub*log_freq.const1.repub*length.target + -0.27770 * typeNNsx * res_log_freq.const2.repub * length.target -0.04332 * log_freq.target.repub*res_log_freq.const2.repub*length.target + 0.06050 * typeNNsx*log_freq.target.repub*res_log_freq.const2.repub*length.target#
-#
-detach(panel3dat)#
-#
-panel3dat$dep=exp(pred_panel3dat)#
-plot(panel3dat$log_freq.target.repub, panel3dat$dep, type="n", ylim=c(200, 1000), xlim=c(0,8), ylab="Total View Duration", xlab="Compound frequency", main="NN1")#
-segments(panel3dat[1,]$log_freq.target.repub, panel3dat[1,]$dep, panel3dat[2,]$log_freq.target.repub, panel3dat[2,]$dep, lty=1) #
-text(panel3dat[2,]$log_freq.target.repub, panel3dat[2,]$dep, pos=4, cex=0.7, labels=panel3dat$log_freq.const2.repub[2])#
-segments(panel3dat[3,]$log_freq.target.repub, panel3dat[3,]$dep, panel3dat[4,]$log_freq.target.repub, panel3dat[4,]$dep, lty=2)#
-text(panel3dat[4,]$log_freq.target.repub, panel3dat[4,]$dep, pos=4, cex=0.7, labels=panel3dat$log_freq.const2.repub[4])#
-segments(panel3dat[5,]$log_freq.target.repub, panel3dat[5,]$dep, panel3dat[6,]$log_freq.target.repub, panel3dat[6,]$dep, lty=3)#
-text(panel3dat[6,]$log_freq.target.repub, panel3dat[6,]$dep, pos=4, cex=0.7, labels=panel3dat$log_freq.const2.repub[6])#
-segments(panel3dat[7,]$log_freq.target.repub, panel3dat[7,]$dep, panel3dat[8,]$log_freq.target.repub, panel3dat[8,]$dep, lty=3)#
-text(panel3dat[8,]$log_freq.target.repub, panel3dat[8,]$dep, pos=4, cex=0.7, labels=panel3dat$log_freq.const2.repub[8])#
-segments(panel3dat[9,]$log_freq.target.repub, panel3dat[9,]$dep, panel3dat[10,]$log_freq.target.repub, panel3dat[10,]$dep, lty=3)#
-text(panel3dat[10,]$log_freq.target.repub, panel3dat[10,]$dep, pos=4, cex=0.7, labels=panel3dat$log_freq.const2.repub[10])
-panel1dat
-panel1dat=data.frame(typeNNsx=rep(1,10), log_freq.const1.repub=rep(median(stimuliNN$log_freq.const1.repub), 10),res_log_freq.const2.repub=rep(panels_freq.const2, each=2), length.target=rep(10, 10), log_freq.target.repub=rep(panels_comp.freq, 5), log_freq.const2.repub=rep(panels_or_freq.const2,each=2))
-panel2dat
-panel1dat
-attach(panel1dat)
-pred_panel1dat= 27.23482 + typeNNsx*(-14.64124) +  (-3.31829) * log_freq.target.repub  + (-2.08209) * log_freq.const1.repub + (-2.24568) * res_log_freq.const2.repub +#
-(-1.64198) * length.target + 1.46744 * typeNNsx*log_freq.target.repub + 1.26298 * typeNNsx*log_freq.const1.repub + 0.30987 * log_freq.target.repub * log_freq.const1.repub +#
-2.80647 * typeNNsx * res_log_freq.const2.repub  + 0.43949 * log_freq.target.repub * res_log_freq.const2.repub + 0.92632 * typeNNsx * length.target + 0.24927 * log_freq.target.repub * length.target  + 0.16734 * log_freq.const1.repub*length.target   + 0.21906 * res_log_freq.const2.repub*length.target + (-0.09957) * typeNNsx*log_freq.target.repub*log_freq.const1.repub + (-0.60175) * typeNNsx * log_freq.target.repub * res_log_freq.const2.repub  - 0.03630  * typeNNsx * log_freq.target.repub * length.target -0.07859 * typeNNsx*log_freq.const1.repub*length.target -0.02394 * log_freq.target.repub*log_freq.const1.repub*length.target + -0.27770 * typeNNsx * res_log_freq.const2.repub * length.target -0.04332 * log_freq.target.repub*res_log_freq.const2.repub*length.target + 0.06050 * typeNNsx*log_freq.target.repub*res_log_freq.const2.repub*length.target#
-#
-detach(panel1dat)
-panel1dat$dep=exp(pred_panel1dat)
-panel1dat
-ls()
-NN.final.reported
-summary(NN.final.reported)
-NN.final.reported
-predict(NN.final.reported)
-predict.merMod
-?predict.merMod
-NN$log_TotViewDur.target=log(NN$TotViewDur.target)
-NN
-head(NN)
-REVISIONE 3 PAPER#
-### NOTA!! è il modello riportato con marelli. Nota che non ho usato "update" altrimenti non mi restituiva i p-values. #
-NN.final.reported2=lmer(formula = log_TotViewDur.target ~ type + log_freq.target.repub + #
-    log_freq.const1.repub + res_log_freq.const2.repub + length.target + #
-    (1 | Subject) + type:log_freq.target.repub + type:log_freq.const1.repub + #
-    log_freq.target.repub:log_freq.const1.repub + type:res_log_freq.const2.repub + #
-    log_freq.target.repub:res_log_freq.const2.repub + type:length.target + #
-    log_freq.target.repub:length.target + log_freq.const1.repub:length.target + #
-    res_log_freq.const2.repub:length.target + type:log_freq.target.repub:log_freq.const1.repub + #
-    type:log_freq.target.repub:res_log_freq.const2.repub + type:log_freq.target.repub:length.target + #
-    type:log_freq.const1.repub:length.target + log_freq.target.repub:log_freq.const1.repub:length.target + #
-    type:res_log_freq.const2.repub:length.target + log_freq.target.repub:res_log_freq.const2.repub:length.target + #
-    type:log_freq.target.repub:res_log_freq.const2.repub:length.target+(1|TARGET),#
-    data = NN)
-NN.final.reported2
-summary(NN.final.reported2)
-predict(NN.final.reported, newdata=NN[1,]
-)
-NN[1,]
-predict(NN.final.reported2, newdata=NN[1,])
-NN.final.reported2
-predict(NN.final.reported2)
-predict(NN.final.reported2, newdata=data.frame(NN[1,]))
-data.frame(NN[1,])
-predict(NN.final.reported2, newdata=data.frame(NN[2,]))
-predict(NN.final.reported2, newdata=data.frame(NN[3,]))
-predict(NN.final.reported2, newdata=data.frame(NN[1:10,]))
-predict(NN.final.reported2, newdata=NN))
-predict(NN.final.reported2, newdata=NN)
-NN.final.reported2
-detach(package:lmerTest)
-REVISIONE 3 PAPER#
-### NOTA!! è il modello riportato con marelli. Nota che non ho usato "update" altrimenti non mi restituiva i p-values. #
-NN.final.reported=lmer(formula = log(TotViewDur.target) ~ type + log_freq.target.repub + #
-    log_freq.const1.repub + res_log_freq.const2.repub + length.target + #
-    (1 | Subject) + type:log_freq.target.repub + type:log_freq.const1.repub + #
-    log_freq.target.repub:log_freq.const1.repub + type:res_log_freq.const2.repub + #
-    log_freq.target.repub:res_log_freq.const2.repub + type:length.target + #
-    log_freq.target.repub:length.target + log_freq.const1.repub:length.target + #
-    res_log_freq.const2.repub:length.target + type:log_freq.target.repub:log_freq.const1.repub + #
-    type:log_freq.target.repub:res_log_freq.const2.repub + type:log_freq.target.repub:length.target + #
-    type:log_freq.const1.repub:length.target + log_freq.target.repub:log_freq.const1.repub:length.target + #
-    type:res_log_freq.const2.repub:length.target + log_freq.target.repub:res_log_freq.const2.repub:length.target + #
-    type:log_freq.target.repub:res_log_freq.const2.repub:length.target+(1|TARGET),#
-    data = NN)
-REVISIONE 3 PAPER#
-### NOTA!! è il modello riportato con marelli. Nota che non ho usato "update" altrimenti non mi restituiva i p-values. #
-NN.final.reported2=lmer(formula = log_TotViewDur.target ~ type + log_freq.target.repub + #
-    log_freq.const1.repub + res_log_freq.const2.repub + length.target + #
-    (1 | Subject) + type:log_freq.target.repub + type:log_freq.const1.repub + #
-    log_freq.target.repub:log_freq.const1.repub + type:res_log_freq.const2.repub + #
-    log_freq.target.repub:res_log_freq.const2.repub + type:length.target + #
-    log_freq.target.repub:length.target + log_freq.const1.repub:length.target + #
-    res_log_freq.const2.repub:length.target + type:log_freq.target.repub:log_freq.const1.repub + #
-    type:log_freq.target.repub:res_log_freq.const2.repub + type:log_freq.target.repub:length.target + #
-    type:log_freq.const1.repub:length.target + log_freq.target.repub:log_freq.const1.repub:length.target + #
-    type:res_log_freq.const2.repub:length.target + log_freq.target.repub:res_log_freq.const2.repub:length.target + #
-    type:log_freq.target.repub:res_log_freq.const2.repub:length.target+(1|TARGET),#
-    data = NN)
-NN.final.reported2
-summary(NN.final.reported2)
-predict(NN.final.reported2, newdata=NN[c(1,2),])
-source('~/Desktop/eye mvm compounds/composti rating trasparenza/history analisi frasi con trasparenza.R', chdir = TRUE)
-detach(realdat)
 model_pred=predict(NN.final.reported)
 realdat=NN.final.reported@frame[1,]
 model_pred=predict(NN.final.reported)#
@@ -5326,111 +4622,400 @@ segments(panel6dat[7,]$log_freq.target.repub, panel6dat[7,]$dep, panel6dat[8,]$l
 text(panel6dat[8,]$log_freq.target.repub, panel6dat[8,]$dep, pos=4, cex=0.7, labels=panel6dat$log_freq.const2.repub[8])#
 segments(panel6dat[9,]$log_freq.target.repub, panel6dat[9,]$dep, panel6dat[10,]$log_freq.target.repub, panel6dat[10,]$dep, lty=3)#
 text(panel6dat[10,]$log_freq.target.repub, panel6dat[10,]$dep, pos=4, cex=0.7, labels=panel6dat$log_freq.const2.repub[10])
-parser:nlines
-parser::nlines
-parser::nlines
-dir("~/Desktop/R files/erpr/pkg/R")
-setwd("~/Desktop/R files/erpr/pkg/R")
+260+285+120+90.28+38.88
+(260+285+120+90.28+38.88-410)
+\name{erp.measure}#
+\alias{erp.measure}#
+%- Also NEED an '\alias' for EACH other topic documented here.#
+\title{#
+erp.measure#
+}#
+\description{#
+This function calculates the mean amplitude, on several ERP \code{data.frame}. It returns results in "wide" format (each electrode in a columen) or in "long" format, a \code{data.frame}format more suitable for standard statistical analysis in R (e.g. ANOVA). \code{erp.mean} applies the function \code{mean} on several ERP \code{data.frame} objects, i.e. data.frames with timepoints on rows and electrodes on columns. ERP data.frames are expected to be named as a combination of strings specified in \code{base} and \code{numbers}. Differently from \code{\link{erp.fun}} this function returns a data.frame in long format (see Details).  #
+}#
+\usage{#
+erp.measure(base, numbers, win.ini, win.end, env=.GlobalEnv, startmsec=-200, endmsec=1200, fun=average.mean, others=NULL, format="long", name.dep="Dep", name.newvar="Electrode")#
+}#
+%- maybe also 'usage' for other objects documented here.#
+\arguments{#
+#
+\item{base}{#
+A string indicating the beginning of the name of \code{data.frame} containg the ERP data.#
+}#
+  \item{numbers}{#
+The numbers (indicating different subjects), to be averaged by the function.#
+}#
+  \item{win.ini}{#
+A value indicating the initial edge (in ms) of the windows on which the peak amplitude has to be computed.#
+}#
+  \item{win.end}{#
+A value indicating the final edge (in ms) of the windows on which the peak amplitude has to be computed.#
+}#
+  \item{env}{#
+The environment in which \code{erp.fun} is to be evaluated.#
+}#
+  \item{startmsec}{#
+A value indicating the initial time (in ms) of the ERP \code{data.frame} objects. It can be a negative value, indicating the baseline period.#
+}#
+  \item{endmsec}{#
+A value indicating the final time (in ms) of the ERP \code{data.frame} objects.#
+}#
+  \item{others}{#
+the name of others variables to be included in the returned \code{data.frame}. Ignored if format is "wide".#
+}#
+\item{format}{#
+	the output format. It may be "wide" or "long".#
+}#
+\item{name.dep}{#
+	the name of the dependent variable in the returned \code{data.frame}. Ignored if format is "wide".#
+}#
+#
+}#
+#
+\details{#
+This function returns a \code{data.frame} in long format ready for standard statistical analysis in R. It takes as input ERP \code{data.frame} with electrodes in separate columns. The returned \code{data.frame} has one column for dependent variable and a new factor "Electrode".#
+}#
+\value{#
+a \code{data.frame} in long format. #
+}#
+#
+\author{#
+Giorgio Arcara#
+}#
+\note{#
+this function is a wrapper for \code{\link{erp.fun}} and \code{\link{rearrange}}#
+}#
+\seealso{#
+\code{\link{erp.peak}}, \code{\link{erp.latency}}, \code{\link{rearrange}},  \code{\link{mean}} #
+#
+}#
+\examples{#
+erp.mean(base="Exp1_word_subj", numbers=1:20, win.ini=130, win.end=190, startmsec=-200, endmsec=1500,#
+		others=c(condition="word"], interval="130-190", name.dep="Ampl", format="long"))#
+}
+library(erpR)
+?erpR
+remove.packages(erpR)
+remove.packages("erpR")
+?erpR
+library(erpR)
+?erpR
+library(erpR)
+?erpR
+?erp
+erp()
+library(erpR)
+?erpR
+?erp
+citations(erpR)
+citation(erpR)
+?erpR
+citation("erpR")
+library(erpR)
+?erpR
+data(ERPsets)#
+word=grandaverage("Exp1_word_subj", 1:20) #
+erp(word$Fp1, smo=0, col="blue", startmsec=-200, endmsec=1500, ylim=c(-20,20))
+example(butterfly)
+example(butterfly)
+example("butterfly")
+?butterfly
+data(ERPsets)#
+butterfly(base="Exp1_nonword_subj", numbers=1:20, electrode="OZ", smo=0, #
+startmsec=-200, endmsec=1500, outline=1, ylim=c(-50,50))
+ls
+ls()
+?char2fac
+dat=data.frame(RT=rnorm(20, mean=500, sd=100), Subject=rep(1:10, 2))#
+	conditions=c(rep("a", 10), rep("b", 10))#
+	dat$conditions=conditions#
+	dat=char2fac(dat)
+dat
+examples(cn)
+example(cn)
+?cn
+data(iris)#
+cn(iris)
+?create.diff
+data(ERPsets)#
+create.diff(c("Exp1_word_subj", "Exp1_nonword_subj"), 1:20, outname="Exp1_diff_subj")
+create.diff("Exp1_word_subj", "Exp1_nonword_subj", 1:20, 1:20, outname="Exp1_diff_subj")
+create.diff("Exp1_word_subj", "Exp1_nonword_subj", 1:20,  outname="Exp1_diff_subj")
+ls()
+?create.mean
+?create.roi
+data(ERPsets)#
+datall=erp.mean(base = "Exp1_word_subj", numbers = 1:20, win.ini = 400, win.end = 600, startmsec= -200, endmsec = 1500, format="long", name.dep="Ampl")#
+datall$caudality=create.roi(datall, "Electrode", groups=list(c("Fp1", "Fp2"), c("P3", "P4")), roi.levels=c("Frontopolar", "Parietal"))#
+table(datall$caudality, datall$Electrode)
+data(ERPsets)#
+word=grandaverage("Exp1_word_subj", 1:20) #
+erp(word$Fp1, smo=0, col="blue", startmsec=-200, endmsec=1500, ylim=c(-20,20))
+curr.dir="~/Desktop/R files/erpr/pkg/man"
+setwd(curr.dir)
+files
 files=dir()
 files
-i=
-1
-temp=readLines(files[i])
-temp
-grep("^[ ]#", temp)
-grep("^ #", temp)
-grep("#", temp)
-grep("[]#", temp)
-grep("[ ]#", temp)
-grep("^[ ]#", temp)
-temp2=gsub(" ", "", temp)
-temp2
-temp2[!grep("^#", temp)]
-temp2[-grep("^#", temp)]
-temp2
-temp2[grep("^#", temp2)]
-temp2[-grep("^#", temp2)]
-temp4=temp3[!temp3=="",]
-temp3=temp2[-grep("^#", temp)]  # tolgo linee con solo commenti#
-	temp4=temp3[!temp3=="",]
-temp3=temp2[-grep("^#", temp)]  # tolgo linee con solo commenti#
-	temp4=temp3[!temp3==""]
-temp4
-temp3
-temp2=gsub(" ", "", temp)#
-	temp3=temp2[-grep("^#", temp)]  # tolgo linee con solo c
-temp3
-temp3=temp2[-grep("^#", temp2)]  # tolgo linee con solo commenti
-temp3
-temp4=temp3[!temp3=="",]
-temp3
-temp3==""
-temp4=temp3[!temp3==""]
-temp4
-tot.count=0
-tot.count=tot.count+length(temp4)
-tot.count
-CONTA LINEE DI CODICE IN VARI FILES#
-#
-setwd("~/Desktop/R files/erpr/pkg/R")#
+curr.dir="~/Desktop/R files/erpr/pkg/man"#
+setwd(curr.dir)#
 #
 files=dir()#
 #
-tot.count=0#
+dir.create(paste("../nuovoman", sep=""))#
 #
 for (i in 1:length(files)){#
 	temp=readLines(files[i])#
-	temp2=gsub(" ", "", temp) #tolgo spazi, in modo da eliminare poi righe vuote e allineare il simbolo di commento # a sx.#
-	temp3=temp2[-grep("^#", temp2)]  # tolgo linee che cominciano con ##
-	temp4=temp3[!temp3==""] #tolgo righe solo con spazi#
-	tot.count=tot.count+length(temp4)#
+	temp=gsub("Electrode", "electrode", temp)#
+	writeLines(temp, paste("../nuovoman/", files[i],sep=""))#
 }
-CONTA LINEE DI CODICE IN VARI FILES#
-#
-setwd("~/Desktop/R files/erpr/pkg/R")#
+curr.dir="~/Desktop/R files/erpr/pkg/R"#
+setwd(curr.dir)#
 #
 files=dir()#
 #
-tot.count=0#
+dir.create(paste("../nuovoman", sep=""))#
 #
 for (i in 1:length(files)){#
 	temp=readLines(files[i])#
-	temp2=gsub(" ", "", temp) #tolgo spazi, in modo da eliminare poi righe vuote e allineare il simbolo di commento # a sx.#
-	temp3=temp2[-grep("^#", temp2)]  # tolgo linee che cominciano con ##
-	temp4=temp3[!temp3==""] #tolgo righe solo con spazi#
-	tot.count=tot.count+length(temp4)#
+	temp=gsub("Electrode", "electrode", temp)#
+	writeLines(temp, paste("../nuovoman/", files[i],sep=""))#
 }
-CONTA LINEE DI CODICE IN VARI FILES#
+data(ERPsets)#
+word=grandaverage("Exp1_word_subj", 1:20) #
+erp(word$Fp1, smo=0, col="blue", startmsec=-200, endmsec=1500, ylim=c(-10,10))
+?erp.add
+data(ERPsets)#
 #
-setwd("~/Desktop/R files/erpr/pkg/R")#
+word=grandaverage("Exp1_word_subj", 1:20) #
+nonword=grandaverage("Exp1_nonword_subj", 1:20) #
 #
-files=dir()#
+erp(word$Fp1, col="blue", startmsec=-200, endmsec=1500)#
+erp.add(nonword$Fp1, col="red")
+Not run: #
+	data(ERPsets)#
+	word=grandaverage("Exp1_word_subj", 1:20) #
+	#generate some simulated RT data #
+	RT=rnorm(20, mean = 500, sd = 100)#
+	erp.cor("Exp1_word_subj", 1:20, RT, Electrode="Fp1", ylim=10, legend=T)
+Not run: #
+	data(ERPsets)#
+	word=grandaverage("Exp1_word_subj", 1:20) #
+	#generate some simulated RT data #
+	RT=rnorm(20, mean = 500, sd = 100)#
+	erp.cor("Exp1_word_subj", 1:20, RT, Electrode="Fp1", ylim=10)
+Not run: #
+	data(ERPsets)#
+	word=grandaverage("Exp1_word_subj", 1:20) #
+	#generate some simulated RT data #
+	RT=rnorm(20, mean = 500, sd = 100)#
+	erp.cor("Exp1_word_subj", 1:20, RT, Electrode="Fp1", ylims=c(-6,6))
+Not run: #
+	data(ERPsets)#
+	word=grandaverage("Exp1_word_subj", 1:20) #
+	#generate some simulated RT data #
+	RT=rnorm(20, mean = 500, sd = 100)#
+	erp.cor("Exp1_word_subj", 1:20, RT, Electrode="Fp1", ylim=c(-6,6))
+data(ERPsets)#
+butterfly(base="Exp1_nonword_subj", numbers=1:20, electrode="OZ", smo=0, #
+startmsec=-200, endmsec=1500, outline=1, ylim=c(-100,100))
+butterfly(base="Exp1_nonword_subj", numbers=1:20, electrode="Fp1", smo=0, #
+startmsec=-200, endmsec=1500, outline=1, ylim=c(-20,20))
+butterfly(base="Exp1_nonword_subj", numbers=1:20, electrode="Fp1", smo=0, #
+startmsec=-200, endmsec=1500, outline=1, ylim=c(-20,20), out.col="red")
+create.diff("Exp1_word_subj", "Exp1_nonword_subj", 1:20,  outname="Exp1_diff_subj")
+?erp.add
+data(ERPsets)#
 #
-tot.count=0#
+word=grandaverage("Exp1_word_subj", 1:20) #
+nonword=grandaverage("Exp1_nonword_subj", 1:20) #
 #
-for (i in 1:length(files)){#
-	temp=readLines(files[i])#
-	temp2=gsub(" ", "", temp) #tolgo spazi, in modo da eliminare poi righe vuote e allineare il simbolo di commento # a sx.#
-	temp3=temp2[-grep("^#", temp2)]  # tolgo linee che cominciano con ##
-	temp4=temp3[!temp3==""] #tolgo righe solo con spazi#
-	tot.count=tot.count+length(temp4)#
+erp(word$Fp1, col="blue", startmsec=-200, endmsec=1500)#
+erp.add(nonword$Fp1, col="red")
+?erp.mean
+?erp.latency
+erp.infl(base="Exp1_word_subj", numbers=1:20, electrode="OZ", startmsec=-200, endmsec=1500)
+?erp.latency
+data(ERPsets)#
+erp.latency(base="Exp1_word_subj", numbers=1:20,#
+ win.ini=130, win.end=190, startmsec=-200, endmsec=1500,#
+others=c(condition="word", interval="130-190"), #
+name.dep="Ampl", format="long", peak.fun=max)
+dat=erp.mean(base="Exp1_word_subj", numbers=1:20, #
+win.ini=130, win.end=190, startmsec=-200, endmsec=1500,#
+others=c(condition="word", interval="130-190"), name.dep="Ampl", format="long")
+dat
+data(ERPsets)#
+#
+dat=erp.peak(base="Exp1_word_subj", numbers=1:20, #
+win.ini=130, win.end=190, startmsec=-200, endmsec=1500,#
+others=c(condition="word", interval="130-190"), name.dep="Ampl", format="long", peak.fun=max)
+data(ERPsets)#
+word=grandaverage("Exp1_word_subj", 1:20) #
+erp(word$Fp1, smo=0, col="blue", startmsec=-200, endmsec=1500, ylim=c(-10,10))
+data(ERPsets)#
+erp.t("Exp1_word_subj", "Exp1_nonword_subj", 1:20, 1:20, smo=0, layout=1, ylim=c(-10,10), #
+startmsec=-200, endmsec=1500, color.list=c("blue", "red"))
+data(ERPsets)#
+erp.t("Exp1_word_subj", "Exp1_nonword_subj", 1:20, 1:20, smo=0, ylim=c(-10,10), #
+startmsec=-200, endmsec=1500, color.list=c("blue", "red"))
+data(iris)#
+#
+iris2 <- iris[iris$Species!="setosa", ]#
+levels(iris2$Species)#
+#
+iris2<-factorall(iris2)#
+levels(iris2$Species)
+compute the average of subjects 1 to 20 for the condition #
+# specified by the string "Exp1_word_subj".#
+word=grandaverage("Exp1_word_subj", 1:20)
+x=seq(-5.5,1,0.001)#
+y=sin(x)+0.3*x#
+plot(x,y, type="l")#
+abline(h=localmax(y))
+erp.t <-#
+function(base1, base2,numbers1,numbers2=numbers1, electrode, paired=TRUE, alpha=0.05, envir=.GlobalEnv, envir2=NULL,sig=NULL, main=electrode, smo=0.5 , col="black", startmsec=-200, endmsec=1200, interval=c(startmsec, endmsec), step=200, verticals=NULL,horizontals=NULL, x.axis="default", ylim=c(-6,6), lwd=c(1,1), lty=c(1,1), cex.xaxis=0.8, cex.yaxis=1, color.list=c("blue", "red")) {#
+	#### PARTE 1: STATISTICHE PER ELETTRODO #####
+if (is.null(numbers2)){#
+	numbers2=numbers1}#
+#
+if (is.null(envir2)){#
+	envir2=envir}#
+#
+if (is.null(sig)){#
+element=function(x,row.i){#
+	return(x[row.i,])#
+	}#
+#
+alldata1.list=list(NULL)#
+alldata2.list=list(NULL)#
+for (i1 in 1:length(numbers1)){#
+	alldata1.list[[i1]]=eval(parse(file="", text=paste(base1,numbers1[i1], sep="")),envir=envir)#
+	}#
+for (i2 in 1:length(numbers2)){#
+	alldata2.list[[i2]]=eval(parse(file="", text=paste(base2,numbers2[i2], sep="")),envir=envir2)#
+	}#
+alltemp=list(NULL)#
+length(alltemp)=dim(alldata1.list[[1]])[1] #creo una lista con tanti elementi quanti i punti del tracciato.#
+alltemp.results=list(NULL)#
+length(alltemp.results)=dim(alldata1.list[[1]])[1] #creo una lista con tanti elementi quanti i punti del tracciato.#
+n.points.time=floor(seq(1,dim(alldata1.list[[1]])[1],dim(alldata1.list[[1]])[1]/10))#
+time.elapsed=0#
+cat("t-test results computation\n")#
+for (k in 1:dim(alldata1.list[[1]])[1]) {#prendo la dimensione di un data.frame qualsiasi#
+		temp1=lapply(alldata1.list, function(x) { element(x,k) } )#
+		temp1.1=matrix(unlist(temp1), ncol=length(alldata1.list[[1]]), byrow=TRUE)#
+		temp2=lapply(alldata2.list, function(x) { element(x,k) } )#
+		temp2.1=matrix(unlist(temp2), ncol=length(alldata1.list[[1]]), byrow=TRUE) #di ciascuna riga una #
+		#matrice con n righe (una per soggetto) e k colonne (una per elettrodo) #
+		alltemp[[k]][[1]]=temp1.1#
+		alltemp[[k]][[2]]=temp2.1#
+		temp.results.vet=NULL#
+		for (j in 1:dim(alltemp[[k]][[1]])[2]){#nota:uso dim perché alltemp[[k]][[1]] è una matrice#
+		temp.results.vet[j]=(t.test(alltemp[[k]][[1]][,j], alltemp[[k]][[2]][,j], corr=F, paired=paired)$p.value)<alpha#
+		}#
+		alltemp.results[[k]]=temp.results.vet#
+		if (k%in%n.points.time){#
+			cat(rep(".",10-time.elapsed), "\n")#
+			time.elapsed=time.elapsed+1#
+			}#
+		}#
+		cat("\n")#
+#
+alltemp.results=matrix(unlist(alltemp.results), byrow=TRUE, ncol=dim(alldata1.list[[1]])[2])#
+alltemp.results=as.data.frame(alltemp.results)#
+names(alltemp.results)=names(alldata1.list[[1]])#
+		}#
+if (!is.null(sig)){#
+	alltemp.results=sig#
+	}#
+#
+##### PARTE 2 CREO DATAFRAME PER SCALP#
+alldata1=grandaverage(base=base1, numbers1, envir=envir)#
+alldata2=grandaverage(base=base2,numbers2, envir=envir2)#
+e1=alldata1[,electrode]#
+e2=alldata2[,electrode]#
+#
+lengthwhole=length(e1)#
+	msectopoints=function(a,lengthsegment){#
+	x=((a-(startmsec))*lengthsegment)/(endmsec+abs(startmsec))#
+	return(x)}#
+	startpoint=msectopoints(interval[1], lengthwhole)#
+	endpoint=msectopoints(interval[2], lengthwhole)#
+	vet=seq(interval[1], interval[2], step)#
+	if (x.axis[1]!="default"){#
+		vet=x.axis#
+		}#
+	temp0=msectopoints(0, lengthwhole)#
+	vet2=msectopoints(vet, lengthwhole)#
+	vet.names=paste(vet) # vet sarebbero le labels del nuovo asse#
+#
+	maxe1=max(e1)#
+	mine1=min(e1)#
+		plot(e1, type="n", ylim=ylim, col=col,lwd=lwd, main=main, xaxt="n",xlim=c(startpoint, endpoint), ylab="",xlab="", lty=lty, cex.axis=cex.yaxis)#
+		# plotto le bande di significatività#
+		#######################
+		abline(v=grep(TRUE, alltemp.results[,electrode]), col="lightgray", lwd=3)#
+		########################
+		lines(smooth.spline(e1, spar=smo), col=color.list[1],lwd=lwd[1], type="l", lty=lty[1])#
+		lines(smooth.spline(e2, spar=smo), col=color.list[2],lwd=lwd[2], type="l", lty=lty[2])#
+		axis(1,vet2, paste(vet), cex.axis=cex.xaxis)#
+		abline(h=0, lty="longdash")#
+		segments(temp0,-0.5,temp0,0.5, lty=1)#
+	# draw vertical lines (expressed in msec and authomatically converted in points)#
+	for (i in 1:length(verticals)){#
+		x=msectopoints(verticals[i], lengthwhole)#
+		abline(v=x)#
+		}	#
+	#draw horizontal lines (expressed in microvolts)#
+	for (i in 1:length(horizontals)){#
+		x=(horizontals[i])#
+		abline(h=x)#
+	}	#
+#
+print(color.list)#
+invisible(alltemp.results)#
 }
-i
-CONTA LINEE DI CODICE IN VARI FILES#
+data(ERPsets)#
+erp.t("Exp1_word_subj", "Exp1_nonword_subj", 1:20, 1:20, smo=0, ylim=c(-10,10), #
+startmsec=-200, endmsec=1500, color.list=c("blue", "red"))
+erp.t("Exp1_word_subj", "Exp1_nonword_subj", 1:20, 1:20, electrode="Fp1", smo=0, ylim=c(-10,10), #
+startmsec=-200, endmsec=1500, color.list=c("blue", "red"))
+data(ERPsets)#
 #
-setwd("~/Desktop/R files/erpr/pkg/R")#
+datall=erp.mean(base = "Exp1_word_subj", numbers = 1:20, #
+win.ini = 400, win.end = 600, startmsec= -200, endmsec = 1500, format="long", name.dep="Ampl")#
 #
-files=dir()#
+datagg=named.agg(Ampl~electrode+Subject, datall, FUN=mean)
+erp.mean
+data(ERPsets)#
 #
-tot.count=0#
+#generate an hypothetic behavioral variables#
+RT=rnorm(20, mean=500, sd=200)#
 #
-for (i in 1:length(files)){#
-	temp=readLines(files[i])#
-	temp2=gsub(" ", "", temp) #tolgo spazi, in modo da eliminare poi righe vuote e allineare il simbolo di commento # a sx.#
-	temp3=temp2[-grep("^#", temp2)]  # tolgo linee che cominciano con ##
-	temp4=temp3[!temp3==""] #tolgo righe solo con spazi#
-	tot.count=tot.count+length(temp4)#
-}
-i
-files[i]
-tot.count
+scalp.cor("Exp1_word_subj", 1:20, behaviour = RT, smo=0, layout=1, ylim=10, legend=T)
+word=grandaverage("Exp1_word_subj", 1:20)#
+#
+nonword=grandaverage("Exp1_nonword_subj", 1:20)#
+scalp(list(word), smo=0, layout=1, ylim=10)#
+#
+scalp(list(word, nonword), smo=0, layout=1, ylim=10, legend=T)
+scalp.t("Exp1_word_subj", "Exp1_nonword_subj", 1:20, 1:20, smo=0, layout=1, ylim=c(-10,10), startmsec=-200, endmsec=1500, color.list=c("blue", "red"))
+scalp.t("Exp1_word_subj", "Exp1_nonword_subj", 1:20, 1:20, smo=0, layout=1, ylims=c(10), startmsec=-200, endmsec=1500, color.list=c("blue", "red"))
+scalp.t("Exp1_word_subj", "Exp1_nonword_subj", 1:20, 1:20, smo=0, layout=1, ylims=10, startmsec=-200, endmsec=1500, color.list=c("blue", "red"))
+?aggregate
+?named.agg
+?aggregate
+asd
+safasf
+5+5
+install.packages("erpR", repos="http://r-forge.r-project.org")
+ls()
+sampling.rate(Exp1_diff_subj11, -200, 1500)
+cond1=rnorm(20, 500, 100)
+cond1
+hist(cond1)
+condA=rnorm(20, 500, 80)#
+condB=rnorm(20, 500, 80)#
+condC=rnorm(20, 650, 80)
+??mvnorm
+mvrnorm
