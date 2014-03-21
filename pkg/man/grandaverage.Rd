@@ -2,7 +2,7 @@
 \alias{grandaverage}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-grandaverage
+calculate the grandaverage of ERP data frames for graphical purposes
 }
 \description{
 A function to average ERP objects, i.e. data frames with timepoints in rows, electrodes in columns and amplitude values in each cell.
@@ -31,9 +31,11 @@ Logical. If \code{TRUE}, electrodes columns with \code{NA} are ignored in granda
 In this case, a Warning is displayed.
 }
 }
-\details{
+
+%\details{
 %%  ~~ If necessary, more details than the description above ~~
-}
+%}
+
 \value{
 a data frame with the values of subjects specified by the combination of \code{base} and \code{numbers}.
 }
@@ -45,10 +47,9 @@ Giorgio Arcara
 The function keeps track of the objects averaged in a \code{comment}.
 }
 
-
-\seealso{
+%\seealso{
 %% ~~objects to See Also as \code{\link{help}}, ~~~
-}
+%}
 \examples{
 \dontrun{
 	# compute the average of subjects 1 to 20 for the condition 

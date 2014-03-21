@@ -2,13 +2,18 @@
 \alias{scalp.t}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-scalp.t
+plot t-test comparisons at all timepoints between two ERP set of data frames (scalp array)
 }
 \description{
 This function performs a series of \code{t.test} on each timepoint comparing two sets of ERP data frames. The first set is specified by \code{base1} and \code{numbers}. The second is specified by \code{base2} and \code{numbers2}. A scalp plot of the results is returned.
 }
 \usage{
-scalp.t(base1, base2, numbers, numbers2 = NULL, paired = TRUE, alpha = 0.05, sig = NULL, envir = .GlobalEnv, envir2 = NULL, smo = 0.5, label = c("type1"), layout = 1, ylims = "auto", yrev = TRUE, startmsec = -200, endmsec = 1200, lwd = c(1, 1), lty = c(1, 1), color.list = c("blue", "red"), legend = F, legend.lab = "default", t.axis = seq(-100, endmsec, 200))
+scalp.t(base1, base2, numbers, numbers2 = NULL, paired = TRUE,
+alpha = 0.05, sig = NULL, envir = .GlobalEnv, envir2 = NULL, 
+smo = 0.5, layout = 1, ylims = "auto", yrev = TRUE,
+startmsec = -200, endmsec = 1200, lwd = c(1, 1), lty = c(1, 1), 
+color.list = c("blue", "red"), legend = F, legend.lab = "default",
+t.axis = seq(-100, endmsec, 200))
 }
 \arguments{	
 	\item{base1}{
@@ -45,9 +50,6 @@ The environment in which the ERP data frames of the second set are searched.
 The smoothing parameter to be applied before plotting. The default is 0.
 }
 
-  \item{label}{
-unused argument
-}
   \item{layout}{
 The layout of electrodes to be plotted. Currently only few layout are supported. 
 }
@@ -109,9 +111,10 @@ Giorgio Arcara
 \code{\link{erp}}, \code{\link{erp.t}}
 }
 \examples{
-#data(ERPsets)
-##scalp.t("Exp1_word_subj", "Exp1_nonword_subj", 1:20, 1:20, smo=0, layout=1, ylim=c(-10,10), startmsec=-200, endmsec=1500, color.list=c("blue", "red"))
-
+\dontrun{
+data(ERPsets)
+scalp.t("Exp1_word_subj", "Exp1_nonword_subj", 1:20, 1:20, smo=0, layout=1, ylim=c(-10,10), startmsec=-200, endmsec=1500, color.list=c("blue", "red"))
+}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

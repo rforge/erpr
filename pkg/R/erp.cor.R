@@ -1,5 +1,5 @@
 erp.cor <-
-function(base1, numbers, Electrode, behaviour=NULL, alpha=0.05,method = c("pearson", "kendall", "spearman"), envir=.GlobalEnv, sig=NULL, main=Electrode, smo=0.5 , col="black", startmsec=-200, endmsec=1200, interval=c(startmsec, endmsec), step=200, verticals=NULL,horizontals=NULL, x.axis="default", ylim=c(-6,6), lwd=c(1), lty=c(1), cex.xaxis=0.8, cex.yaxis=1, color.list=c("blue", "red")) {
+function(base1, numbers, Electrode, behaviour=NULL, alpha=0.05,method = c("pearson", "kendall", "spearman"),  sig=NULL, envir=.GlobalEnv, main=Electrode, smo=0.5 , col="black", startmsec=-200, endmsec=1200, interval=c(startmsec, endmsec), step=200, verticals=NULL,horizontals=NULL, x.axis="default", ylim=c(-6,6), lwd=c(1), lty=c(1), cex.xaxis=0.8, cex.yaxis=1) {
 
 
 	#### PARTE 1: STATISTICHE PER ELETTRODO ####
@@ -112,7 +112,7 @@ lengthwhole=length(e1)
 		#######################
 
 		
-		lines(smooth.spline(e1, spar=smo), col=color.list[1],lwd=lwd[1], type="l", lty=lty[1])
+		lines(smooth.spline(e1, spar=smo), col=col,lwd=lwd[1], type="l", lty=lty[1])
 		
 
 	
@@ -131,6 +131,5 @@ lengthwhole=length(e1)
 		abline(h=x)
 	}	
 
-print(color.list)
 invisible(alltemp.results)
 }

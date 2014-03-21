@@ -2,13 +2,15 @@
 \alias{erp.latency}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-erp.latency
+calculate latency of several ERP data frames on a given time window
 }
 \description{
 This function calculates peak latency on several ERP data.frames. It returns results in "wide" format (each electrode in a column) or in "long" format, a \code{data.frame} format more suitable for standard statistical analysis in R (e.g. ANOVA). \code{erp.latency} applies the function \code{mean} on several ERP data.frames with timepoints in rows and electrodes in columns. ERP data.frames are expected to be named as a combination of strings specified in \code{base} and \code{numbers}.
 }
 \usage{
-erp.latency(base, numbers, win.ini, win.end, envir=.GlobalEnv, startmsec=-200, endmsec=1200, others=NULL, format="long", name.dep="Dep", name.newvar="Electrode", peak.fun, ...)
+erp.latency(base, numbers, win.ini, win.end, envir=.GlobalEnv, 
+startmsec=-200, endmsec=1200, others=NULL, format="long", 
+name.dep="Dep", name.newvar="Electrode", peak.fun, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -79,7 +81,12 @@ this function calls \code{\link{rearrange}}.
 \code{\link{erp.mean}}, \code{\link{erp.peak}}, \code{\link{rearrange}},  \code{\link{max}},   \code{\link{min}},  \code{\link{localmax}},  \code{\link{localmin}}
 }
 \examples{
-	
-erp.latency(base="Exp1_word_subj", numbers=1:20, win.ini=130, win.end=190, startmsec=-200, endmsec=1500,
-		others=c(condition="word", interval="130-190", name.dep="Ampl", format="long"), peak.fun=max)
+\dontrun{
+data(ERPsets)
+erp.latency(base="Exp1_word_subj", numbers=1:20,
+ win.ini=130, win.end=190, startmsec=-200, endmsec=1500,
+others=c(condition="word", interval="130-190"), 
+name.dep="Ampl", format="long", peak.fun=max)
+
+}
 }

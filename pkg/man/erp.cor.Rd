@@ -2,228 +2,128 @@
 \alias{erp.cor}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-erp.cor
+plot the timepoint correlations between ERPs and an external variable (single electrdode)
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+This function performs a series of correlations on each timepoint betwen ERP voltages and another (usually a behavioural) variable. The set of ERP data frames is specified by \code{base1} and \code{numbers}. The behavioral variable is specified as a vector (of length equal to \code{numbers}) as the argument \code{behaviour}. A plot of a single electrode showing the results of the correlation tests is returned.
 }
 \usage{
-erp.cor(base1, numbers, Electrode, behaviour = NULL, alpha = 0.05, method = c("pearson", "kendall", "spearman"), envir = .GlobalEnv, sig = NULL, main = Electrode, smo = 0.5, col = "black", startmsec = -200, endmsec = 1200, interval = c(startmsec, endmsec), step = 200, verticals = NULL, horizontals = NULL, x.axis = "default", ylim = c(-6, 6), lwd = c(1), lty = c(1), cex.xaxis = 0.8, cex.yaxis = 1, color.list = c("blue", "red"))
+	erp.cor(base1, numbers, Electrode, behaviour=NULL, alpha=0.05, 
+	method = c("pearson", "kendall", "spearman"), sig=NULL, 
+	envir=.GlobalEnv, main=Electrode, smo=0.5 , col="black", 
+	startmsec=-200, endmsec=1200, interval=c(startmsec, endmsec), 
+	step=200, verticals=NULL,horizontals=NULL, x.axis="default", 
+	ylim=c(-6,6), lwd=c(1), lty=c(1), cex.xaxis=0.8, cex.yaxis=1)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{base1}{
-%%     ~~Describe \code{base1} here~~
+\item{base1}{
+A string indicating the beginning of the name of the set of ERP data frames.
 }
   \item{numbers}{
-%%     ~~Describe \code{numbers} here~~
+The numbers (indicating different subjects), of the set of ERP data frames .
 }
   \item{Electrode}{
-%%     ~~Describe \code{Electrode} here~~
+The electrode to be plotted
 }
   \item{behaviour}{
-%%     ~~Describe \code{behaviour} here~~
+A vector indicating the values of the behavioural variables. This vector must be of the same length of \code{numbers}
 }
   \item{alpha}{
-%%     ~~Describe \code{alpha} here~~
+The alpha of the correlation tests.
 }
   \item{method}{
-%%     ~~Describe \code{method} here~~
-}
-  \item{envir}{
-%%     ~~Describe \code{envir} here~~
+The method of the correlations. 
+Available methods are \code{"pearson", "kendall", "spearman"}.
 }
   \item{sig}{
-%%     ~~Describe \code{sig} here~~
+If \code{NULL}, then the series of correlations is computed. If an appropriate object is specified (i.e. the object returned by \code{scalp.cor} or \code{erp.cor}) then the results are retrieved by this object and the function simply plots the results.
 }
-  \item{main}{
-%%     ~~Describe \code{main} here~~
+  \item{envir}{
+The environment in which the ERP data frames  are searched.
 }
+ \item{main}{
+Title of the plot.
+}
+
   \item{smo}{
-%%     ~~Describe \code{smo} here~~
+The smoothing parameter to be applied before plotting. The default is 0.
 }
-  \item{col}{
-%%     ~~Describe \code{col} here~~
+\item{col}{
+Color of the waveform.
 }
+
   \item{startmsec}{
-%%     ~~Describe \code{startmsec} here~~
+A value, in milliseconds indicating the beginning time of the ERP vector
 }
   \item{endmsec}{
-%%     ~~Describe \code{endmsec} here~~
+A value, in milliseconds indicating the end time of the ERP vector
 }
   \item{interval}{
-%%     ~~Describe \code{interval} here~~
+A vector with a pair of values, indicating the interval to be plotted
 }
   \item{step}{
-%%     ~~Describe \code{step} here~~
+The step on the x-axis labels to be plotted. The axis will start from the first value of \code{interval}
 }
   \item{verticals}{
-%%     ~~Describe \code{verticals} here~~
+The x coordinates of optional vertical bars to be plotted
 }
   \item{horizontals}{
-%%     ~~Describe \code{horizontals} here~~
+The y coordinates of optional vertical bars to be plotted
 }
   \item{x.axis}{
-%%     ~~Describe \code{x.axis} here~~
+If \code{default}, than an x.axis will be drawn on the bases of \code{interval} and \code{step} parameters. A vector of values can be supplied instead.
 }
   \item{ylim}{
-%%     ~~Describe \code{ylim} here~~
+A pair of values indicating the y-axis limit.
 }
   \item{lwd}{
-%%     ~~Describe \code{lwd} here~~
+The width of the ERP line to be plotted.
 }
   \item{lty}{
-%%     ~~Describe \code{lty} here~~
+The line style of the ERP line to be plotted.
 }
+
   \item{cex.xaxis}{
-%%     ~~Describe \code{cex.xaxis} here~~
+Magnification factor of the x-axis labels.
 }
   \item{cex.yaxis}{
-%%     ~~Describe \code{cex.yaxis} here~~
-}
-  \item{color.list}{
-%%     ~~Describe \code{color.list} here~~
+Magnification factor of the y-axis labels.
 }
 }
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
+%\details{
+%%%  ~~ If necessary, more details than the description above ~~
+%}
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+The function plots a scalp map of of the ERP waveforms in an array resembling the topographic placements of electrodes on the scalp.
+The waveforms represent the average of the first set of data frames specified. Timepoints in which thre is a positive (and significant) correlation are highlighted by red bars. Timepoints in which thre is a positive (and significant) correlation are highlighted by blue bars. The function returns also an object with the results of the correlatiosn saved. This object can be used in future plots with \code{erp.cor} or \code{scalp.cor}, by specifying it as the argument \code{sig}.
 }
-\references{
-%% ~put references to the literature/web site here ~
-}
+%\references{
+%%% ~put references to the literature/web site here ~
+%}
 \author{
-%%  ~~who you are~~
+Giorgio Arcara
 }
-\note{
+%\note{
 %%  ~~further notes~~
-}
+%}
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{scalp.cor}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (base1, numbers, Electrode, behaviour = NULL, alpha = 0.05, 
-    method = c("pearson", "kendall", "spearman"), envir = .GlobalEnv, 
-    sig = NULL, main = Electrode, smo = 0.5, col = "black", startmsec = -200, 
-    endmsec = 1200, interval = c(startmsec, endmsec), step = 200, 
-    verticals = NULL, horizontals = NULL, x.axis = "default", 
-    ylim = c(-6, 6), lwd = c(1), lty = c(1), cex.xaxis = 0.8, 
-    cex.yaxis = 1, color.list = c("blue", "red")) 
-{
-    if (is.null(sig)) {
-        element = function(x, row.i) {
-            return(x[row.i, ])
-        }
-        alldata1.list = list(NULL)
-        alldata2.list = list(NULL)
-        for (i1 in 1:length(numbers)) {
-            alldata1.list[[i1]] = eval(parse(file = "", text = paste(base1, 
-                numbers[i1], sep = "")), envir = envir)
-        }
-        alltemp = list(NULL)
-        length(alltemp) = dim(alldata1.list[[1]])[1]
-        alltemp.results = list(NULL)
-        length(alltemp.results) = dim(alldata1.list[[1]])[1]
-        n.points.time = floor(seq(1, dim(alldata1.list[[1]])[1], 
-            dim(alldata1.list[[1]])[1]/10))
-        time.elapsed = 0
-        cat("correlation results computation\n")
-        for (k in 1:dim(alldata1.list[[1]])[1]) {
-            temp1 = lapply(alldata1.list, function(x) {
-                element(x, k)
-            })
-            temp1.1 = matrix(unlist(temp1), ncol = length(alldata1.list[[1]]), 
-                byrow = TRUE)
-            alltemp[[k]][[1]] = temp1.1
-            temp.test.vet = list(NULL)
-            length(temp.test.vet) = dim(alltemp[[k]][[1]])[1]
-            temp.results.vet = NULL
-            for (j in 1:dim(alltemp[[k]][[1]])[2]) {
-                temp.test.vet[[j]] = cor.test(alltemp[[k]][[1]][, 
-                  j], behaviour, method = method)
-                if (temp.test.vet[[j]]$p.value < alpha) {
-                  if (temp.test.vet[[j]]$estimate < 0) {
-                    temp.results.vet[j] = -1
-                  }
-                  if (temp.test.vet[[j]]$estimate > 0) {
-                    temp.results.vet[j] = 1
-                  }
-                }
-                if (temp.test.vet[[j]]$p.value >= alpha) 
-                  temp.results.vet[j] = 0
-            }
-            alltemp.results[[k]] = temp.results.vet
-            if (k \%in\% n.points.time) {
-                cat(rep(".", 10 - time.elapsed), "\n")
-                time.elapsed = time.elapsed + 1
-            }
-        }
-        cat("\n")
-        alltemp.results = matrix(unlist(alltemp.results), byrow = TRUE, 
-            ncol = dim(alldata1.list[[1]])[2])
-        alltemp.results = as.data.frame(alltemp.results)
-        names(alltemp.results) = names(alldata1.list[[1]])
-    }
-    if (!is.null(sig)) {
-        alltemp.results = sig
-    }
-    alldata1 = grandaverage(base = base1, numbers, envir = envir)
-    e1 = alldata1[, Electrode]
-    lengthwhole = length(e1)
-    msectopoints = function(a, lengthsegment) {
-        x = ((a - (startmsec)) * lengthsegment)/(endmsec + abs(startmsec))
-        return(x)
-    }
-    startpoint = msectopoints(interval[1], lengthwhole)
-    endpoint = msectopoints(interval[2], lengthwhole)
-    vet = seq(interval[1], interval[2], step)
-    if (x.axis[1] != "default") {
-        vet = x.axis
-    }
-    temp0 = msectopoints(0, lengthwhole)
-    vet2 = msectopoints(vet, lengthwhole)
-    vet.names = paste(vet)
-    maxe1 = max(e1)
-    mine1 = min(e1)
-    plot(e1, type = "n", ylim = ylim, col = col, lwd = lwd, main = main, 
-        xaxt = "n", xlim = c(startpoint, endpoint), ylab = "", 
-        xlab = "", lty = lty, cex.axis = cex.yaxis)
-    abline(v = grep(-1, alltemp.results[, Electrode]), col = "lightblue", 
-        lwd = 3)
-    abline(v = grep(+1, alltemp.results[, Electrode]), col = "indianred1", 
-        lwd = 3)
-    lines(smooth.spline(e1, spar = smo), col = color.list[1], 
-        lwd = lwd[1], type = "l", lty = lty[1])
-    axis(1, vet2, paste(vet), cex.axis = cex.xaxis)
-    abline(h = 0, lty = "longdash")
-    segments(temp0, -0.5, temp0, 0.5, lty = 1)
-    for (i in 1:length(verticals)) {
-        x = msectopoints(verticals[i], lengthwhole)
-        abline(v = x)
-    }
-    for (i in 1:length(horizontals)) {
-        x = (horizontals[i])
-        abline(h = x)
-    }
-    print(color.list)
-    invisible(alltemp.results)
-  }
+	
+	\dontrun{
+	data(ERPsets)
+	word=grandaverage("Exp1_word_subj", 1:20) 
+	#generate some simulated RT data 
+	RT=rnorm(20, mean = 500, sd = 100)
+	erp.cor("Exp1_word_subj", 1:20, RT, Electrode="Fp1", ylim=10, legend=T)
+	}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+%\keyword{ ~kwd1 }
+%\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

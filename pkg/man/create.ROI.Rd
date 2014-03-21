@@ -2,7 +2,7 @@
 \alias{create.roi}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-create.roi
+create region of interests
 }
 \description{
 Utility function to create a factor that collapses other factor levels (typically electrode names) in a new variable vector with the new ROI variable.
@@ -40,8 +40,9 @@ Giorgio Arcara
 \examples{
 ### BISOGNA CREARE UN DATASET IN FORMATO LONG DA ALLEGARE AL PACCHETTO
 \dontrun{
-datall=ERPlong
-datall$caudality=create.roi(datall, "Electrode", groups=list(c("Fp1", "Fp2"),
- c("P1", "P2")), roi.levels=c("Frontopolar", "Parietal"))
+data(ERPsets)
+datall=erp.mean(base = "Exp1_word_subj", numbers = 1:20, win.ini = 400, win.end = 600, startmsec= -200, endmsec = 1500, format="long", name.dep="Ampl")
+datall$caudality=create.roi(datall, "Electrode", groups=list(c("Fp1", "Fp2"), c("P3", "P4")), roi.levels=c("Frontopolar", "Parietal"))
+table(datall$caudality, datall$Electrode)
 }	
 }

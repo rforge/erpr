@@ -2,7 +2,7 @@
 \alias{cn}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-cn
+display column names
 }
 \description{
 Return column names of a \code{data.frame} or \code{matrix} in one-column format for an easy visual inspection.
@@ -15,9 +15,9 @@ cn(x)
 \code{x} is a data.frame or a matrix with column names
 }
 }
-\details{
+%\details{
 %%  ~~ If necessary, more details than the description above ~~
-}
+%}
 \value{
 A one-column matrix with the column names of \code{x}
 }
@@ -30,6 +30,8 @@ This function comes from an idea by Antoine Tremblay.
 
 
 \examples{
+\dontrun{
 data(iris)
 cn(iris)
+}
 }

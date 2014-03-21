@@ -2,7 +2,7 @@
 \alias{pointstomsec}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-pointstomsec
+convert points in milliseconds
 }
 \description{
 An internal function of erpR to convert points in milliseconds.
@@ -31,9 +31,9 @@ pointstomsec(a, lengthsegment, startmsec, endmsec)
 \value{
 The function return a single value that is the conversion of \code{a} from points to msec.
 }
-\references{
+%\references{
 %% ~put references to the literature/web site here ~
-}
+%}
 \author{
 Giorgio Arcara
 }
@@ -44,8 +44,10 @@ Giorgio Arcara
  \code{\link{msectopoints}}
 }
 \examples{
-
+	
+\dontrun{
 # calculate the time in msec corresponding to the point 128 in a segment of 500 points starting from -200 ms and ending at 1500 (500 Hz).
-
 pointstomsec(128, 500, startmsec = - 500, endmsec = 1500)
+}
+
 }					

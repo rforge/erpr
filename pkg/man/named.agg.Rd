@@ -2,7 +2,7 @@
 \alias{named.agg}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-named.agg
+aggregate and keep original names
 }
 \description{
 A wrapper of the \code{aggregate} function. Data are provided as a \code{formula} and the original names are kept in the returned \code{data.frame}.
@@ -50,6 +50,9 @@ named.agg is a wrapper of \code{\link{aggregate}}
 }
 \examples{
 \dontrun{
-	ERPlongAgg=named.agg(Ampl~type+electrode, ERPlong)
+	data(ERPsets)
+	datall=erp.mean(base = "Exp1_word_subj", numbers = 1:20, 
+	win.ini = 400, win.end = 600, startmsec= -200, endmsec = 1500, format="long", name.dep="Ampl")
+	datagg=named.agg(Ampl~Electrode+Subject, datall, FUN=mean)
 }
 }

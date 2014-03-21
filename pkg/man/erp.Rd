@@ -2,7 +2,7 @@
 \alias{erp}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Plot an ERP waveform
+plot an ERP waveform
 }
 \description{
 A basic function to plot an ERP waveform of a single electrode.
@@ -14,7 +14,7 @@ interval = c(startmsec, endmsec), step = 200, verticals = NULL, horizontals = NU
   cex.yaxis = 1, y.axis = "default", frame.plot = TRUE, xaxis0 = FALSE, 
   xtick.l = "default", xticks = "default", yaxis0 = FALSE, 
   yaxis0.origin = 0, ytick.l = "default", y.axis.step = 2, 
-  yticks = "default", yrev = T, tick = "low", lwd.xticks = 1, lwd.yticks = 1)
+  yticks = "default", lwd.xticks = 1, lwd.yticks = 1)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -99,12 +99,7 @@ the distance between each tick on the y-axis.
   \item{yticks}{
 the position (in microVolt) where y ticks are drawn.
 }
-  \item{yrev}{
-logical. If \code{TRUE} the negative voltage is plotted upward.
-}
-  \item{tick}{
-currently unused parameter
-}
+
   \item{lwd.xticks}{
 the line width of the ticks on the x-axis.
 }
@@ -112,9 +107,11 @@ the line width of the ticks on the x-axis.
 the line width of ticks on the y-axis.
 }
 }
-\details{
+
+%\details{
 %%  ~~ If necessary, more details than the description above ~~
-}
+%}
+
 \value{
 the plot of an ERP waveform. 
 }
@@ -132,9 +129,14 @@ Giorgio Arcara
 \code{\link{erp.t}}, \code{\link{erp.infl}}
 }
 \examples{
-#data(ERPsets)
-# erp(Exp1_word_subj1$Fp1, smo=0, col="blue", startmsec=-200, endmsec=1500, ylim=c(-20,20))
 
+\dontrun{
+
+data(ERPsets)
+word=grandaverage("Exp1_word_subj", 1:20) 
+erp(word$Fp1, smo=0, col="blue", startmsec=-200, endmsec=1500, ylim=c(-20,20))
+
+}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

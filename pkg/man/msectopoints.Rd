@@ -2,10 +2,10 @@
 \alias{msectopoints}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-msectopoints
+convert points in milliseconds
 }
 \description{
-An internal function of erpR to convert points in milliseconds.
+An internal function of erpR to convert milliseconds in points.
 }
 \usage{
 msectopoints(a, lengthsegment, startmsec, endmsec)
@@ -31,9 +31,9 @@ msectopoints(a, lengthsegment, startmsec, endmsec)
 \value{
 The function returns a single value that is the conversion of \code{a} from msec to points.
 }
-\references{
+%\references{
 %% ~put references to the literature/web site here ~
-}
+%}
 \author{
 Giorgio Arcara
 }
@@ -45,10 +45,10 @@ Giorgio Arcara
 }
 
 \examples{
-
+\dontrun{
 # convert 400 ms to points in a segment of 500 points starting from -200 ms and ending at 1500 (500 Hz).
-
 msectopoints(120, 500, startmsec=-500, endmsec=1500)
+}
 }					
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

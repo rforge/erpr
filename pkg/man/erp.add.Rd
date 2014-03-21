@@ -2,7 +2,7 @@
 \alias{erp.add}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-erp.add
+add an ERP waveform to a plot
 }
 \description{
 Add a waveform to a ERP plot made with \code{erp}, \code{erp.t}, or \code{butterfly} functions.
@@ -47,6 +47,7 @@ Giorgio Arcara
 }
 \examples{
 
+\dontrun{
 data(ERPsets)
 
 word=grandaverage("Exp1_word_subj", 1:20) 
@@ -54,6 +55,7 @@ nonword=grandaverage("Exp1_nonword_subj", 1:20)
 
 erp(word$Fp1, col="blue", startmsec=-200, endmsec=1500)
 erp.add(nonword$Fp1, col="red")
+}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

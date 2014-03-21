@@ -2,7 +2,7 @@
 \alias{rearrange}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-rearrange
+rearrange a data frame from wide to long format
 }
 \description{
 This utility function of the \code{erpR} package converts a ERP data frame with a \cite{single} variable in wide format to a long format. 
@@ -47,9 +47,9 @@ This function is called internally by \code{erp.mean}, \code{erp.peak}, and \cod
 }
 \examples{
 \dontrun{
-### DA CREARE DATA.FRAME
-#dat.wide=ERPwide
-#dat.long=rearrange(deps=c(1:32), oth=33, dataset=dat.wide, name.newvar="Electrode")
+data(ERPsets)
+datwide=erp.mean(base="Exp1_word_subj", numbers=1:20, win.ini=130, win.end=190, startmsec=-200, endmsec=1500, format="wide")
+dat.long=rearrange(deps=c(1:32), oth=33:34, dataset=datwide, name.newvar="Electrode")
 }
 
 }

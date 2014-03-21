@@ -2,13 +2,15 @@
 \alias{create.diff}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-create.diff
+create ERP data frame with differential values
 }
 \description{
-this function creates a new set of \code{data.frame} objects from two sets of paired ERP \code{data.frame} objects. The values are obtained by subtracting the values of the second set from the first set.
+this function creates a new set of \code{data.frame} objects from two sets of paired ERP \code{data.frame} objects. 
+The values are obtained by subtracting the values of the second set from the first set.
 }
 \usage{
-create.diff(base1, base2, numbers, outname = NULL, envir = .GlobalEnv, out.envir = envir, comment.dat = 1)
+create.diff(base1, base2, numbers, outname = NULL, envir = .GlobalEnv, 
+out.envir = envir, comment.dat = 1)
 }
 \arguments{
   \item{base1}{
@@ -36,9 +38,10 @@ The environment in which the objects created are returned.
 A number indicating from which set of objects specified in the argument \code{bases} the comment of the data.frame is retrieved.
 }
 }
-\details{
+
+%\details{
 %%  ~~ If necessary, more details than the description above ~~
-}
+%}
 \value{
 a series of ERP \code{data.frame} objects obtained by subtracting the specified sets (the first minus the second).
 }
@@ -52,6 +55,7 @@ Giorgio Arcara
 }
 \examples{
 \dontrun{
+data(ERPsets)
 create.diff(c("Exp1_word_subj", "Exp1_nonword_subj"), 1:20, outname="Exp1_diff_subj")
 }
 }

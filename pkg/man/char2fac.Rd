@@ -2,7 +2,7 @@
 \alias{char2fac}
 
 \title{
-char2fac
+character to factor conversion
 }
 \description{
 convert each \code{character} column in a \code{data.frame} to a \code{factor}. 
@@ -32,11 +32,13 @@ This is a utility to transform \code{character} vector as \code{factor} quickly 
 
 \examples{
 	
+	\dontrun{
 	dat=data.frame(RT=rnorm(20, mean=500, sd=100), Subject=rep(1:10, 2))
 	conditions=c(rep("a", 10), rep("b", 10))
 	
 	dat$conditions=conditions
 	
 	dat=char2fac(dat)
+	}
 
 }

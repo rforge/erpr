@@ -2,7 +2,7 @@
 \alias{erp.mean}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-erp.mean
+calculate mean of several ERP data frames on a given time window
 }
 \description{
 This function calculates the mean amplitude on several ERP data frames. It returns results in "wide" format (each electrode in a column) or in "long" format, a \code{data.frame} format more suitable for standard statistical analysis in R (e.g. ANOVA). \code{erp.mean} applies the function \code{mean} on several ERP data.frames with timepoints in rows and electrodes in columns. ERP data frames are expected to be named as a combination of strings specified in \code{base} and \code{numbers}.  
@@ -68,8 +68,12 @@ this function calls \code{\link{rearrange}}.
 
 }
 \examples{
-	
-erp.mean(base="Exp1_word_subj", numbers=1:20, win.ini=130, win.end=190, startmsec=-200, endmsec=1500,
-		others=c(condition="word"], interval="130-190", name.dep="Ampl", format="long"))
+\dontrun{
+data(ERPsets)
+erp.mean(base="Exp1_word_subj", numbers=1:20, 
+win.ini=130, win.end=190, startmsec=-200, endmsec=1500,
+others=c(condition="word", interval="130-190"), name.dep="Ampl", format="long")
+
+}
 }
 

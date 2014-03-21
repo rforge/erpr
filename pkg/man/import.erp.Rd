@@ -2,7 +2,7 @@
 \alias{import.erp}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-import.erp
+import ERP data matrices from .txt files
 }
 \description{
 Import a series of .txt files with ERP data.
@@ -25,9 +25,9 @@ a string inficating the beginning of the name of the objects that will be create
 the environment in which the objects created by \code{import.erp} are stored.
 }
 }
-\details{
+%\details{
 %%  ~~ If necessary, more details than the description above ~~
-}
+%}
 \value{
 a series of ERP \code{data.frame} objects.
 }
@@ -35,12 +35,12 @@ a series of ERP \code{data.frame} objects.
 \author{
 Giorgio Arcara
 }
-\note{
+%\note{
 %%  ~~further notes~~
-}
+%}
 
 \examples{
 \dontrun{
-import.erp(filenamebase="Exp1_word_subj", numbers=1:20, outname="Exp1_word_subj")
+#import.erp(filenamebase="Exp1_word_subj", numbers=1:20, outname="Exp1_word_subj")
 }
 }

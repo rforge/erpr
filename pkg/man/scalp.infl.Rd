@@ -2,14 +2,16 @@
 \alias{scalp.infl}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-scalp.infl
+inspect visually the influence of a subject on an average (scalp array)
 }
 \description{
 The function returns a diagnostic plot to investigate the influence of a given ERP data frame on the grandaverage of a series of ERP data frames. A GUI is provided to explore the effect of removing a data frame (that is expected to be associated with a Subject) from the grandaverage. Two plots are superposed: the original grandaverage, and the average removing the subject selected via the GUI. The plot shows an array of electrodes with a topography reflecting their positions on the scalp.
 }
 
 \usage{
-scalp.infl(base, numbers, smo = 0, layout = 3, ylims = 12, yrev = FALSE, startmsec = -200, endmsec = 1200, lwd = c(1, 2), lty = 1, col = "black", out.col = "red", envir = .GlobalEnv)
+scalp.infl(base, numbers, smo = 0, layout = 3, ylims = 12, 
+yrev = FALSE, startmsec = -200, endmsec = 1200, lwd = c(1, 2), 
+lty = 1, col = "black", out.col = "red", envir = .GlobalEnv)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -78,9 +80,11 @@ Giorgio Arcara
 \code{\link{erp.infl}}, \code{\link{scalp}}
 }
 \examples{
-# data(ERPdatasets)
-# Note that Subject 1 is clearly particularly influential for the average on OZ.
-# scalp.infl(base="Exp1_word_subj", numbers=1:20, layout=1, startmsec=-200, endmsec=1500)
+\dontrun{
+data(ERPdatasets)
+# Notice that Subject 1 is clearly particularly influential for the average on OZ.
+scalp.infl(base="Exp1_word_subj", numbers=1:20, layout=1, startmsec=-200, endmsec=1500)
+}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

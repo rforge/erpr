@@ -2,13 +2,14 @@
 \alias{create.mean}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-create.mean
+create ERP data frames with mean values
 }
 \description{
 From two sets of paired ERP \code{data.frame} objects the function creates a new set of \code{data.frame} objects with the values obtained by averaging the values of the original sets.
 }
 \usage{
-create.mean(bases, numbers, outname = NULL, envir = .GlobalEnv, out.envir = envir, comment.dat = 1)
+create.mean(bases, numbers, outname = NULL, envir = .GlobalEnv, 
+out.envir = envir, comment.dat = 1)
 }
 \arguments{
   \item{bases}{
@@ -32,9 +33,10 @@ The environment in which the objects created are returned.
 A number indicating from which set of objects specified in the argument \code{bases} the comment of the data.frame is retrieved.
 }
 }
-\details{
+
+%\details{
 %%  ~~ If necessary, more details than the description above ~~
-}
+%}
 \value{
 a series of ERP \code{data.frame} objects obtained by averaging the sets specified.
 }
@@ -48,6 +50,7 @@ Giorgio Arcara
 }
 \examples{
 \dontrun{
+data(ERPsets)
 create.mean(c("Exp1_word_subj", "Exp1_nonword_subj"), 1:20, outname="Exp1_average_subj")
 }
 }

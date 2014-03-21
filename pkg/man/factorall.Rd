@@ -2,7 +2,7 @@
 \alias{factorall}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-factorall
+apply factor to all columns of a data frame
 }
 \description{
 Convenience function to update all factor variables in a \code{data.frame}.
@@ -23,14 +23,16 @@ A \code{data.frame} in which all factors have been updated. All unused levels ar
 \author{
 Giorgio Arcara.
 }
-\note{
+
+%\note{
 %%  ~~further notes~~
-}
+%}
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 
 \examples{
+\dontrun{
 data(iris)
 
 iris2 <- iris[iris$Species!="setosa", ]
@@ -38,6 +40,7 @@ levels(iris2$Species)
 
 iris2<-factorall(iris2)
 levels(iris2$Species)
+}
 
 }
 

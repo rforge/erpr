@@ -2,13 +2,16 @@
 \alias{scalp}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-scalp
+plot ERP waaveforms in a scalp array
 }
 \description{
 This function plots the waveforms of several ERP electrodes in an rectangular array reflecting the position in the scalp
 }
 \usage{
-scalp(categ, smo = 0.5, label = c("type1"), layout = 1, ylims = "auto", yrev = TRUE, startmsec = -200, endmsec = 1200, lwd = 1, lty = 1, color.list = c("blue", "red", "darkgreen"), legend = F, legend.lab = "default", t.axis = seq(-100, endmsec, 200))
+scalp(categ, smo = 0.5, label = c("type1"), layout = 1, 
+ylims = "auto", yrev = TRUE, startmsec = -200, endmsec = 1200, 
+lwd = 1, lty = 1, color.list = c("blue", "red", "darkgreen"), 
+legend = F, legend.lab = "default", t.axis = seq(-100, endmsec, 200))
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -80,8 +83,10 @@ Currently this functions support a very limited number of layouts. Further versi
 \code{\link{scalp.t}}, \code{\link{scalp.infl}}, \code{\link{erp}}
 }
 \examples{
-####scalp(list(word), smo=0, layout=1, ylim=10)
-####scalp(list(word, nonword), smo=0, layout=1, ylim=10, legend=T)
+\dontrun{
+scalp(list(word), smo=0, layout=1, ylim=10)
+scalp(list(word, nonword), smo=0, layout=1, ylim=10, legend=T)
+}
 }
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the

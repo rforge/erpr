@@ -2,16 +2,16 @@
 \alias{butterfly}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-butterfly
+ERP butterfly plot
 }
 \description{
 A butterfly plot of several ERP data frames.
 }
 \usage{
 butterfly(base, numbers, electrode, add = FALSE, smo = 0.5, col = "black", 
-startmsec = -200, endmsec = 1000, yrev = FALSE, interval = c(startmsec, endmsec), 
-step = 200, verticals = NULL, horizontals = NULL, x.axis = "default", ylim = "default", 
-lwd = 1, lty = 1, outline = NULL, out.col = "black", envir = .GlobalEnv)
+startmsec = -200, endmsec = 1000, interval = c(startmsec, endmsec), 
+step = 200, verticals = NULL, horizontals = NULL, x.axis = "default", 
+ylim = "default", lwd = 1, lty = 1, outline = NULL, out.col = "black", envir = .GlobalEnv)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -34,13 +34,11 @@ A smoothing parameter to be applied
 color of the waveforms in the butterfly plot.
 }
  \item{startmsec}{
-A value indicating the initial time (in ms) of the ERP \code{data.frame} objects. It can be a negative value, indicating the baseline time frame.
+A value indicating the initial time (in ms) of the ERP \code{data.frame} objects. 
+It can be a negative value, indicating the baseline time frame.
 }
   \item{endmsec}{
 A value indicating the final time (in ms) of the ERP \code{data.frame} objects.
-}
-  \item{yrev}{
-Logical. Should y-axis be plotted with negative values upward?
 }
  \item{interval}{
 A vector with a pair of values, indicating the interval to be plotted.
@@ -55,7 +53,8 @@ The x coordinates of optional vertical bars to be plotted
 The y coordinates of optional vertical bars to be plotted
 }
  \item{x.axis}{
-If \code{default}, then an x.axis will be drawn on the bases of \code{interval} and \code{step} parameters. A vector of values can be supplied instead.
+If \code{default}, then an x.axis will be drawn on the bases of \code{interval} and \code{step} parameters. 
+A vector of values can be supplied instead.
 }
   \item{ylim}{
 A pair of values indicating the y-axis limit.
@@ -77,9 +76,9 @@ The color of the outlined ERP waveform.
 The environment in which \code{butterfly} is to be evaluated.
 }
 }
-\details{
+%\details{
 %%  ~~ If necessary, more details than in the description above ~~
-}
+%}
 \value{
 a butterfly plot.
 }
@@ -98,7 +97,11 @@ Giorgio Arcara
 }
 \examples{
 
-butterfly(base="Exp1_nonword_subj", numbers=1:20, electrode="OZ", smo=0, startmsec=-200, endmsec=1500, outline=1, ylim=c(-50,50))
+\dontrun{
+data(ERPsets)
+butterfly(base="Exp1_nonword_subj", numbers=1:20, electrode="OZ", smo=0, 
+startmsec=-200, endmsec=1500, outline=1, ylim=c(-50,50))
+}
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

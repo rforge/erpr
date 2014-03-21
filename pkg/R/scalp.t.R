@@ -1,5 +1,5 @@
 scalp.t <-
-function(base1, base2, numbers, numbers2=NULL, paired=TRUE, alpha=0.05, sig=NULL, envir=.GlobalEnv, envir2=NULL, smo=0.5, label=c("type1"), layout=1, ylims="auto", yrev=TRUE, startmsec=-200, endmsec=1200, lwd=c(1,1), lty=c(1,1), color.list=c("blue", "red"), legend=F, legend.lab="default", t.axis=seq(-100,endmsec,200)) {
+function(base1, base2, numbers, numbers2=NULL, paired=TRUE, alpha=0.05, sig=NULL, envir=.GlobalEnv, envir2=NULL, smo=0.5, layout=1, ylims="auto", yrev=TRUE, startmsec=-200, endmsec=1200, lwd=c(1,1), lty=c(1,1), color.list=c("blue", "red"), legend=F, legend.lab="default", t.axis=seq(-100,endmsec,200)) {
 
 if (length(legend.lab)==1&legend.lab[1]=="default"){
 	legend.lab=c(base1, base2)

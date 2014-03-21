@@ -10,7 +10,7 @@ function(base, numbers, electrode, smo=0, startmsec=-200, endmsec=1200, lwd=1, l
 erp.infl.panel=function(panel)
 	{
 
-		erp.infl.endo=function(base, numbers, electrode, outline, smo=0 , col="black", startmsec=-200, endmsec=1000, yrev=FALSE, interval=c(startmsec, endmsec), step=200, verticals=NULL,horizontals=NULL, x.axis="default", ylim=c(-10,10), lwd=1, lty=1,out.col="red", envir)
+		erp.infl.endo=function(base, numbers, electrode, outline, smo=0 , col="black", startmsec=-200, endmsec=1000, interval=c(startmsec, endmsec), step=200, verticals=NULL,horizontals=NULL, x.axis="default", ylim=c(-10,10), lwd=1, lty=1,out.col="red", envir)
 	{
 		average.temp=eval(parse(file="", text=paste(base,numbers[1],"$",electrode, sep="")), envir=envir)
 		for (i in 2:length(numbers))
@@ -19,7 +19,7 @@ erp.infl.panel=function(panel)
 		}
 		average=average.temp/length(numbers)
 		
-		erp(average,smo=smo, col=col, startmsec=startmsec, endmsec=endmsec, yrev=yrev, interval=interval,step=step, verticals=verticals, horizontals=horizontals, x.axis=x.axis, ylim=ylim, lwd=lwd, lty=lty,main=electrode, ...)
+		erp(average,smo=smo, col=col, startmsec=startmsec, endmsec=endmsec, interval=interval,step=step, verticals=verticals, horizontals=horizontals, x.axis=x.axis, ylim=ylim, lwd=lwd, lty=lty,main=electrode, ...)
 		
 		average.excl=(average.temp-eval(parse(file="", text=paste(base,outline,"$",electrode, sep="")), envir=envir))/(length(numbers)-1)
 		erp.add(average.excl, col=out.col, lwd=2, smo=smo)
@@ -28,7 +28,7 @@ erp.infl.panel=function(panel)
 		}							
 
 		
-		erp.infl.endo(base=base, numbers=numbers, electrode=electrode, outline=panel$outnumber, smo=smo,  yrev=yrev, startmsec=startmsec, endmsec=endmsec, envir=envir)
+		erp.infl.endo(base=base, numbers=numbers, electrode=electrode, outline=panel$outnumber, smo=smo, startmsec=startmsec, endmsec=endmsec, envir=envir)
 		
 		panel
 		}

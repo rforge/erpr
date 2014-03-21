@@ -2,13 +2,17 @@
 \alias{scalp.cor}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-scalp.cor
+plot the timepoint correlations between ERPs and an external variable (scalp array)
 }
 \description{
 This function performs a series of correlations on each timepoint betwen ERP voltages and another (usually a behavioural) variable. The set of ERP data frames is specified by \code{base1} and \code{numbers}. The behavioral variable is specified as a vector (of length equal to \code{numbers}) as the argument \code{behaviour}. A scalp plot of the results is returned.
 }
 \usage{
-scalp.cor(base1, numbers, behaviour = NULL, alpha = 0.05, method = c("pearson", "kendall", "spearman"), sig = NULL, envir = .GlobalEnv, smo = 0.5, layout = 1, ylims = "auto", yrev = TRUE, startmsec = -200, endmsec = 1200, lwd = c(1, 1), lty = c(1, 1), col = "blue", legend = TRUE, legend.lab = "default")
+scalp.cor(base1, numbers, behaviour = NULL, alpha = 0.05, 
+method = c("pearson", "kendall", "spearman"), sig = NULL, 
+envir = .GlobalEnv, smo = 0.5, layout = 1, ylims = "auto",
+ yrev = TRUE, startmsec = -200, endmsec = 1200, lwd = c(1, 1), 
+ lty = c(1, 1), col = "blue", legend = TRUE, legend.lab = "default")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -33,7 +37,6 @@ If \code{NULL}, then the series of correlations is computed. If an appropriate o
   \item{envir}{
 The environment in which the ERP data frames  are searched.
 }
-
  \item{smo}{
 %%     ~~Describe \code{smo} here~~
 }
@@ -96,6 +99,7 @@ Giorgio Arcara
 }
 \examples{
 
+\dontrun{
 data(ERPsets)
 
 #generate an hypothetic behavioral variables
@@ -103,7 +107,7 @@ RT=rnorm(20, mean=500, sd=200)
 
 scalp.cor("Exp1_word_subj", 1:20, behaviour = RT, smo=0, layout=1, ylim=10, legend=T)
 
-
+}
 
 }
 
