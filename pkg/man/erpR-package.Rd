@@ -3,21 +3,21 @@
 \alias{erpR}
 \docType{package}
 \title{
-erpR-package
+erpR package
 }
 \description{
-The erpR package includes a series of functions for computing traditional ERP measures, plotting, importing ERP data and carrying out exploratory analyses.
+The erpR package includes a series of functions for importing ERP data, carrying out exploratory analyses, computing traditional ERP measures and ERP plotting.
 }
 \details{
 \tabular{ll}{
 Package: \tab erpR\cr
 Type: \tab Package\cr
-Version: \tab 0.1\cr
+Version: \tab 0.1.0\cr
 Date: \tab 2014-03-19\cr
 License: \tab GNU public license \cr
 }
-The package includes a series of functions for computing traditional ERP measures, plotting, importing ERP data and carrying out exploratory analyses. 
-Many \code{erpR} functions require to specify two arguments: \code{base} and \code{numbers}. The names of the objects for the \code{erpR} functions are obtained from the combination of \code{base} and \code{numbers}. The argument \code{base} typically indicates the name of the experimental condition (or group, or both), while \code{numbers} typically indicate the numbers of the subjects on which function is applied. This system is crucial to keep order in object and files names and to tell \code{erpR} the correspondence between the objects. In particular a given \code{base} will always refer to the same condition, and a given \code{number} will always refer to the same subject.
+The package includes a series of functions for importing ERP data, carrying out exploratory analyses, computing traditional ERP measures and ERP plotting. 
+Many \code{erpR} functions require to specify two arguments: \code{base} and \code{numbers}. The names of the objects for the \code{erpR} functions are obtained from the combination of \code{base} and \code{numbers}. The argument \code{base} typically indicates the name of the experimental condition (or group, or both), while \code{numbers} indicate the numbers of the subjects on which function is applied. This system is crucial to keep order in object and files names and to tell \code{erpR} the correspondence between the objects. In particular a given \code{base} will always refer to the same condition, and a given \code{number} will always refer to the same subject.
 
 Further information can be found on the maintainer's site \url{https://sites.google.com/site/giorgioarcara/}.
 }
@@ -42,6 +42,6 @@ Further information can be found on the maintainer's site \url{https://sites.goo
 library(erpR)
 data(ERPsets)
 word=grandaverage("Exp1_word_subj", 1:20) 
-erp(word$Fp1, smo=0, col="blue", startmsec=-200, endmsec=1500, ylim=c(-20,20))
+erp(word$Fp1, smo=0, col="blue", startmsec=-200, endmsec=1500, ylim=c(-10,10))
 }
 }

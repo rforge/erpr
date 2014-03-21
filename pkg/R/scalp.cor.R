@@ -1,8 +1,8 @@
 scalp.cor <-
-function(base1, numbers, behaviour=NULL, alpha=0.05,method = c("pearson", "kendall", "spearman"), sig=NULL, envir=.GlobalEnv, smo=0.5, layout=1, ylims="auto", yrev=TRUE, startmsec=-200, endmsec=1200, lwd=c(1,1), lty=c(1,1), col="blue", legend=TRUE, legend.lab="default") {
+function(base, numbers, behaviour=NULL, alpha=0.05,method = c("pearson", "kendall", "spearman"), sig=NULL, envir=.GlobalEnv, smo=0.5, layout=1, ylims="auto", yrev=TRUE, startmsec=-200, endmsec=1200, lwd=c(1,1), lty=c(1,1), col="blue", legend=TRUE, legend.lab="default") {
 
 if (legend.lab=="default"){
-	legend.lab=c(base1)
+	legend.lab=c(base)
 	}
 #### PARTE 1: STATISTICHE PER ELETTRODO ####
 
@@ -16,7 +16,7 @@ element=function(x,row.i){
 
 alldata1.list=list(NULL)
 for (i1 in 1:length(numbers)){
-	alldata1.list[[i1]]=eval(parse(file="", text=paste(base1,numbers[i1], sep="")),envir=envir)
+	alldata1.list[[i1]]=eval(parse(file="", text=paste(base,numbers[i1], sep="")),envir=envir)
 	}
 
 
@@ -76,10 +76,10 @@ if (!is.null(sig)){
 
 ### FUNZIONE PER FARE AVERAGE PER PLOT
 
-#base1 = le prime lettere degli oggetti 
+#base = le prime lettere degli oggetti 
 #numbers= il numero dei soggetti di cui calcolare l'average
 
-alldata1=grandaverage(base=base1, numbers, envir=envir)
+alldata1=grandaverage(base=base, numbers, envir=envir)
 
 categ=list(alldata1)
 

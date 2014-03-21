@@ -2,7 +2,7 @@
 \alias{localmax}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-calculate local maximum
+calculate a local maximum
 }
 \description{
 The function calculates a local maximum of the vector \code{x} surrounded by at least \code{n.points} lower numbers.
@@ -16,11 +16,11 @@ localmax(x, n.points=2)
 a vector of numbers.
 }
   \item{n.points}{
-the minimum numbers of lower values to determine the local maximum. Default is two points.
+a minimum number of lower values to determine the local maximum. Default is two points.
 }
 }
 \details{
-The function calculates the local maximum of the vector \code{x}, i.e. the highest value of the vector \code{x} surrounded by at least \code{n} lower numbers. The concept of local maximum applied to ERP analysis is taken from Luck (2005).
+The function calculates a local maximum of the vector \code{x}, i.e. the highest value of the vector \code{x} surrounded by at least \code{n} lower numbers. The concept of the local maximum applied to ERP analysis is taken from Luck (2005).
 }
 \value{
 The local maximum of the vector \code{x} is returned.

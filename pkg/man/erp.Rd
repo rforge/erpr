@@ -19,46 +19,46 @@ interval = c(startmsec, endmsec), step = 200, verticals = NULL, horizontals = NU
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{e1}{
-a vector with the electrode to be plotted
+a vector with the electrode to be plotted.
 }
   \item{main}{
-the title of the plot
+plot title.
 }
   \item{smo}{
-the smoothing parameter to be applied before plotting. The default is 0.
+the smoothing parameter to apply before plotting. Default is 0.
 }
   \item{col}{
 the color of the electrode plotted.
 }
   \item{startmsec}{
-a value (in ms) indicating the start time of the ERP vector
+the start time (in ms) of the ERP vector.
 }
   \item{endmsec}{
-A value (in ms) indicating the end time of the ERP vector
+the end time (in ms) of the ERP vector.
 }
   \item{interval}{
-a vector with a pair of values, indicating the interval to be plotted
+a vector with a pair of values, indicating the interval to be plotted.
 }
   \item{step}{
-the step on the x-axis labels to be plotted. The axis will start from the first value of \code{interval}
+the step of the x-axis labels. The axis will start from the first value of \code{interval}
 }
   \item{verticals}{
-the x coordinates of optional vertical bars to be plotted
+the x coordinates of optional vertical bars.
 }
   \item{horizontals}{
-the y coordinates of optional vertical bars to be plotted
+the y coordinates of optional horizontal bars.
 }
   \item{x.axis}{
-if \code{default}, then an x.axis will be drawn on the bases of \code{interval} and \code{step} parameters. A vector of values can be supplied instead.
+if \code{default}, then an x.axis will be drawn on the basis of \code{interval} and \code{step} parameters. A vector of values can be supplied instead.
 }
   \item{ylim}{
 a pair of values indicating the y-axis limit.
 }
   \item{lwd}{
-the width of the ERP line to be plotted.
+line width.
 }
   \item{lty}{
-the style of the ERP line to be plotted.
+line type.
 }
   \item{cex.main}{
 magnification factor of the Title supplied in \code{Main}.
@@ -76,35 +76,35 @@ if \code{default}, then an x.axis will be drawn on the basis of \code{y.lim} and
 logical. Default is \code{TRUE}. Draw a box around the plot.
 }
   \item{xaxis0}{
-logical. Default is \code{FALSE}. If \code{TRUE} then all default R parameters on axis drawing are overridden. Another axis is drawn, using the parameters specified below.
+logical. Default is \code{FALSE}. If \code{TRUE}, then default x-axis R parameters are overridden. Another axis is drawn using the parameters specified below.
 }
   \item{xtick.l}{
-the length of ticks in the x-axis.
+the length of the ticks on the x-axis.
 }
   \item{xticks}{
-the position of xticks (in ms). If "default" they are automatically placed.
+the position of xticks (in ms). If "default", they are placed automatically.
 }
   \item{yaxis0}{
-logical. Default is \code{FALSE}. If \code{TRUE}, the y-axis default R parameters are ignored and another axis is drawn with the parameters specified below.
+logical. Default is \code{FALSE}. If \code{TRUE}, the default y-axis R parameters are overridden. Another axis is drawn using the parameters specified below.
 }
   \item{yaxis0.origin}{
 the position (in ms) where x-axis and y-axis intersect.
 }
   \item{ytick.l}{
-length of ticks on the x-axis.
+the length of the ticks on the x-axis.
 }
   \item{y.axis.step}{
-the distance between each tick on the y-axis.
+the distance between the ticks on the y-axis.
 }
   \item{yticks}{
-the position (in microVolt) where y ticks are drawn.
+a vector of positions of the y-ticks (in microVolts).
 }
 
   \item{lwd.xticks}{
-the line width of the ticks on the x-axis.
+x-ticks line width.
 }
   \item{lwd.yticks}{
-the line width of ticks on the y-axis.
+y-ticks line width.
 }
 }
 
@@ -134,7 +134,7 @@ Giorgio Arcara
 
 data(ERPsets)
 word=grandaverage("Exp1_word_subj", 1:20) 
-erp(word$Fp1, smo=0, col="blue", startmsec=-200, endmsec=1500, ylim=c(-20,20))
+erp(word$Fp1, smo=0, col="blue", startmsec=-200, endmsec=1500, ylim=c(-10,10))
 
 }
 }

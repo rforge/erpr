@@ -2,10 +2,10 @@
 \alias{create.diff}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-create ERP data frame with differential values
+create an ERP data frame with differential values
 }
 \description{
-this function creates a new set of \code{data.frame} objects from two sets of paired ERP \code{data.frame} objects. 
+This function creates a new set of data frames from two sets of paired ERP data frames. 
 The values are obtained by subtracting the values of the second set from the first set.
 }
 \usage{
@@ -14,28 +14,28 @@ out.envir = envir, comment.dat = 1)
 }
 \arguments{
   \item{base1}{
-A vector of strings indicating the beginning of the name of the first series of \code{data.frame} objects containg the ERP data.
+a vector of strings indicating the beginning of the name of the first series of data frames containing ERP data.
 }
   \item{base2}{
-A vector of strings indicating the beginning of the name of the second series of \code{data.frame} objects containg the ERP data.
+a vector of strings indicating the beginning of the name of the second series of data frames containing ERP data.
 }
 
   \item{numbers}{
-The numbers of the subjects to be subtracted by the function.
+the numbers of the subjects to be subtracted by the function.
 }
 
   \item{outname}{
-the \code{base} of the names of the returned \code{data.frame} objects.
+the \code{base} of the names of the returned data frames.
 }
 
   \item{envir}{
-The environment in which \code{grandaverage} is to be evaluated.
+the environment in which \code{create.diff} is to be evaluated.
 }
   \item{out.envir}{
-The environment in which the objects created are returned.
+the environment in which the new objects are returned.
 }
   \item{comment.dat}{
-A number indicating from which set of objects specified in the argument \code{bases} the comment of the data.frame is retrieved.
+a number indicating from which set of objects specified in the argument \code{bases} the comment of the data frame is retrieved.
 }
 }
 
@@ -43,7 +43,7 @@ A number indicating from which set of objects specified in the argument \code{ba
 %%  ~~ If necessary, more details than the description above ~~
 %}
 \value{
-a series of ERP \code{data.frame} objects obtained by subtracting the specified sets (the first minus the second).
+A series of ERP data frames obtained by subtracting one specified set from the other.
 }
 
 \author{
@@ -56,6 +56,6 @@ Giorgio Arcara
 \examples{
 \dontrun{
 data(ERPsets)
-create.diff(c("Exp1_word_subj", "Exp1_nonword_subj"), 1:20, outname="Exp1_diff_subj")
+create.diff("Exp1_word_subj", "Exp1_nonword_subj", 1:20,  outname="Exp1_diff_subj")
 }
 }

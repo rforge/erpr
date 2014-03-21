@@ -29,7 +29,7 @@ the environment in which the objects created by \code{import.erp} are stored.
 %%  ~~ If necessary, more details than the description above ~~
 %}
 \value{
-a series of ERP \code{data.frame} objects.
+A series of ERP data frames.
 }
 
 \author{

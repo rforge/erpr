@@ -26,7 +26,7 @@ pointstomsec(a, lengthsegment, startmsec, endmsec)
 }
 }
 \details{
-  this is mostly an internal function of \code{erpR}.
+  This is mostly an internal function of \code{erpR}.
 }
 \value{
 The function return a single value that is the conversion of \code{a} from points to msec.

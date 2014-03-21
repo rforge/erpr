@@ -41,10 +41,10 @@ function(base, numbers, electrodes="all", envir=.GlobalEnv, NA.sub=TRUE)
 			noNA.num=rbind(noNA.num,noNA.num.new)			
 			
 		}
-		Electrodes.n=colSums(noNA.num) # Electrodes.n è il numero di soggetti per cui gli elettrodi non hanno NA
-		average=average.temp/rep(Electrodes.n, each=nrow(average.temp))
+		electrodes.n=colSums(noNA.num) # electrodes.n è il numero di soggetti per cui gli elettrodi non hanno NA
+		average=average.temp/rep(electrodes.n, each=nrow(average.temp))
 		comment(average)=comment_text
-		if (sum(Electrodes.n-(length(numbers)))!=0){ #nota: length(numbers) è il numero di soggetti. In questo modo recupero il numero di sogg con NA.
+		if (sum(electrodes.n-(length(numbers)))!=0){ #nota: length(numbers) è il numero di soggetti. In questo modo recupero il numero di sogg con NA.
 			warning("The average included some NA values.", call.=FALSE)
 		}
 		return(average)

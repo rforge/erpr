@@ -2,10 +2,10 @@
 \alias{char2fac}
 
 \title{
-character to factor conversion
+convert characters to factors 
 }
 \description{
-convert each \code{character} column in a \code{data.frame} to a \code{factor}. 
+convert each \code{character} column in a data frame to a \code{factor}. 
 }
 \usage{
 char2fac(x)
@@ -13,7 +13,7 @@ char2fac(x)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
-the \code{data.frame} in which columns are to be converted.
+a \code{data.frame} in which columns are to be converted.
 }
 }
 
@@ -25,20 +25,17 @@ A \code{data.frame} with \code{character} columns converted in \code{factor} col
 Giorgio Arcara.
 }
 \note{
-This is a utility to transform \code{character} vector as \code{factor} quickly for analysis purpose.
+This is an utility to quickly transform a \code{character} vector to \code{factor} for analysis purpose.
 }
 
 
 
 \examples{
 	
-	\dontrun{
-	dat=data.frame(RT=rnorm(20, mean=500, sd=100), Subject=rep(1:10, 2))
-	conditions=c(rep("a", 10), rep("b", 10))
-	
-	dat$conditions=conditions
-	
-	dat=char2fac(dat)
-	}
-
+\dontrun{
+dat=data.frame(RT=rnorm(20, mean=500, sd=100), Subject=rep(1:10, 2))
+conditions=c(rep("a", 10), rep("b", 10))
+dat$conditions=conditions	
+dat=char2fac(dat)
+}
 }

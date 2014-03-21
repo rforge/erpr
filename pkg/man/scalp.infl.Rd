@@ -2,10 +2,10 @@
 \alias{scalp.infl}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-inspect visually the influence of a subject on an average (scalp array)
+visually inspect the influence of a subject on an average (scalp array)
 }
 \description{
-The function returns a diagnostic plot to investigate the influence of a given ERP data frame on the grandaverage of a series of ERP data frames. A GUI is provided to explore the effect of removing a data frame (that is expected to be associated with a Subject) from the grandaverage. Two plots are superposed: the original grandaverage, and the average removing the subject selected via the GUI. The plot shows an array of electrodes with a topography reflecting their positions on the scalp.
+The function returns a diagnostic plot to investigate the influence of a given ERP data frame on the grandaverage of a series of ERP data frames. A GUI is provided to explore the effect of removing a data frame (that is expected to be associated with a subject) from the grandaverage. Two plots are superposed: the original grandaverage, and the average removing the subject selected via the GUI. The plot shows an array of electrodes with a topography reflecting their positions on the scalp.
 }
 
 \usage{
@@ -19,11 +19,11 @@ lty = 1, col = "black", out.col = "red", envir = .GlobalEnv)
 a string indicating the beginning of the name of the \code{data.frame} containing the ERP data.
 }
   \item{numbers}{
-the numbers of the subjects to be averaged by the function.
+the numbers of the subjects to be averaged.
 }
 
  \item{smo}{
-the smoothing parameter to be applied to the data.
+the smoothing parameter to apply.
 }
 
   \item{layout}{
@@ -34,21 +34,21 @@ the layout of electrodes to be plotted. Currently only few layouts are supported
 a number indicating the upper and lower limits of the y axis. If "auto", the function calculates the y limits automatically.
 }
   \item{yrev}{
-logical. If \code{TRUE}, the y axis is plotted with the negative values upward.
+logical. If \code{TRUE}, the y-axis is plotted with the negative values upward.
 }
 
  \item{startmsec}{
-a value (in ms) indicating the start time of the ERP vector
+the start time (in ms) of the ERP vector
 }
   \item{endmsec}{
-a value (in ms) indicating the end time of the ERP vector
+the end time (in ms) of the ERP vector
 }
 
  \item{lwd}{
-the line width of the waveforms.
+line width of the waveforms.
 }
   \item{lty}{
-the line type of the waveforms.
+line type of the waveforms.
 }
   \item{col}{
 the color of the grand average including all subjects.
@@ -60,9 +60,10 @@ the color of the grand average in which the selected subject is removed
 the environment in which the ERP data frames are searched for.
 }
 }
-%\details{
-%%  ~~ If necessary, more details than the description above ~~
-%}
+\details{
+The function requires the package \code{rpanel}
+}
+
 \value{
 The function returns a plot showing the influence of a subject on the grandaverage.
 }

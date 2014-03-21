@@ -37,10 +37,10 @@ logical. If \code{TRUE}, the y-axis is plotted with the negative values upward.
 }
 
  \item{startmsec}{
-a value (in ms) indicating the start time of the ERP vector
+the start time (in ms) of the ERP vector
 }
   \item{endmsec}{
-a value (in ms) indicating the end time of the ERP vector
+the end time (in ms) of the ERP vector
 }
 
   \item{lwd}{
@@ -56,10 +56,10 @@ a vector specifying the colors to be associated with each ERP data frame specifi
 logical. If \code{TRUE} a legend with object names is drawn in the top-right corner of the array. 
 }
   \item{legend.lab}{
-the legend labels. If "default", the names are retrieved from the \code{categ} argument.
+the legend labels. If "default", the names are retrieved from \code{categ}.
 }
   \item{t.axis}{
-specifies the position of the ticks on an additional axis indicating the time. This axis is plotted in the bottom-left corner of the plot array.
+the position of the ticks on an additional axis indicating the time. This axis is plotted in the bottom-left corner of the plot array.
 }
 }
 
@@ -68,6 +68,10 @@ specifies the position of the ticks on an additional axis indicating the time. T
 
 \value{
 The function plots a map of ERP waveforms in an array resembling the topographic locations of the electrodes on the scalp.
+}
+
+\section{Warning}{
+In \code{categ} argument, a list must be specified even if only one object is plotted.
 }
 
 \author{
@@ -84,7 +88,12 @@ Currently this function supports a very limited number of layouts. Further versi
 }
 \examples{
 \dontrun{
+word=grandaverage("Exp1_word_subj", 1:20)
+
+nonword=grandaverage("Exp1_nonword_subj", 1:20)
+
 scalp(list(word), smo=0, layout=1, ylim=10)
+
 scalp(list(word, nonword), smo=0, layout=1, ylim=10, legend=T)
 }
 }

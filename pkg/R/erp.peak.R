@@ -1,4 +1,4 @@
-erp.peak<-function(base, numbers, win.ini, win.end, envir=.GlobalEnv, startmsec=-200, endmsec=1200, others=NULL, format="long", name.dep="Dep", name.newvar="Electrode", peak.fun=max, ...)
+erp.peak<-function(base, numbers, win.ini, win.end, envir=.GlobalEnv, startmsec=-200, endmsec=1200, others=NULL, format="long", name.dep="Dep", name.newvar="electrode", peak.fun=max, ...)
 	{
 	datall=NULL		
 		for (i in 1:length(numbers))

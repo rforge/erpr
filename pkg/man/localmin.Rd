@@ -2,7 +2,7 @@
 \alias{localmin}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-calculate local minimum
+calculate a local minimum
 }
 \description{
 The function calculates a local minimum of the vector \code{x} surrounded by at least \code{n.points} higher numbers.
@@ -17,11 +17,11 @@ localmin(x, n.points = 2)
 a vector of numbers.
 }
   \item{n.points}{
-the minimum numbers of higher values to determine the local minimum (see Details). Default is two points.
+a minimum number of higher values to determine the local minimum (see Details). Default is two points.
 }
 }
 \details{
-The function calculates the local minimum of the vector \code{x}, i.e. the lowest value of the vector \code{x} surrounded by at least \code{n} higher numbers. The concept of local minimum applied to ERP analysis is taken from Luck (2005).
+The function calculates a local minimum of the vector \code{x}, i.e. the lowest value of the vector \code{x} surrounded by at least \code{n} higher numbers. The concept of the local minimum applied to ERP analysis is taken from Luck (2005).
 }
 \value{
 The local minimum of the vector \code{x} is returned.

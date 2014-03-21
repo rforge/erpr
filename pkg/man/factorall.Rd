@@ -2,17 +2,17 @@
 \alias{factorall}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-apply factor to all columns of a data frame
+Drop the unused factor levels for all factor variables
 }
 \description{
-Convenience function to update all factor variables in a \code{data.frame}.
+A convenience function to update all factor variables in a \code{data.frame}.
 }
 \usage{
 factorall(x)
 }
 \arguments{
   \item{x}{
-The \code{data.frame} to be updated.
+a \code{data.frame} to be updated.
 }
 }
 

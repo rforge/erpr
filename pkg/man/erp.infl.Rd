@@ -2,10 +2,10 @@
 \alias{erp.infl}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-inspect visually the influence of a subject on an average (single electrode)
+Visually inspect the influence of a subject on the average (single electrode).
 }
 \description{
-This function returns a diagnostic plot to investigate the influence of a given ERP data frame on the grandaverage of a series of ERP data frames. A GUI is provided to explore the effect of removing a data frame (that is expected to be associated with a Subject) on the grandaverage. Two plots are superposed: the original grandaverage, and the average removing the subject selected via the GUI.
+This function returns a diagnostic plot to investigate the influence of a given ERP data frame on the grandaverage of a series of ERP data frames. A GUI is provided to explore the effect of removing a data frame (that is expected to be associated with a Subject) on the grandaverage. Two plots are superposed: the original grandaverage and the average removing the subject selected via the GUI.
 }
 
 \usage{ erp.infl(base, numbers, electrode, smo=0, startmsec=-200, 
@@ -16,31 +16,31 @@ This function returns a diagnostic plot to investigate the influence of a given 
 a string indicating the beginning of the name of the \code{data.frame} containing the ERP data.
 }
   \item{numbers}{
-the numbers of subjects to be averaged by the function.
+the numbers of the subjects to be averaged by the function.
 }
 
   \item{electrode}{
 the electrode to be plotted.
 }
   \item{smo}{
-The smoothing parameter to be applied to the data.
+the smoothing parameter to apply before plotting. Default is 0.
 }
 
   \item{startmsec}{
-a value (in ms) indicating the start time of the ERP vector.
+the start time (in ms) of the ERP vector.
 }
   \item{endmsec}{
-a value (in ms) indicating the end time of the ERP vector.
+the end time (in ms) of the ERP vector.
 }
   \item{lwd}{
-the width of the ERP lines to be plotted.
+line width.
 }
   
   \item{lty}{
-the type of the ERP lines to be plotted.
+line type.
 }
   \item{envir}{
-the environment in which \code{grandaverage} is to be evaluated.
+the environment in which \code{erp.infl} is to be evaluated.
 }
 \item{\ldots}{
 further parameters to be passed to \code{erp} function called within \code{erp.infl}.
@@ -49,7 +49,7 @@ further parameters to be passed to \code{erp} function called within \code{erp.i
 }
 
 \details{
-The function requires the package \code{\link{rpanel}}
+The function requires the package \code{rpanel}
 }
 
 \author{

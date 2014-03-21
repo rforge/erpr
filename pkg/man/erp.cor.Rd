@@ -2,29 +2,29 @@
 \alias{erp.cor}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-plot the timepoint correlations between ERPs and an external variable (single electrode)
+plot the timepoint correlations between ERPs (single electrode) and an external variable 
 }
 \description{
-This function performs a series of correlations on each timepoint between ERP voltages and another (usually a behavioral) variable. The set of ERP data frames is specified by \code{base1} and \code{numbers}. The behavioral variable is specified as a vector (of length equal to \code{numbers}) as the argument \code{behaviour}. A plot of a single electrode showing the results of the correlation tests is returned.
+This function performs a series of correlations on each timepoint between ERP voltages and another (typically a behavioral) variable. The set of ERP data frames is specified by \code{base} and \code{numbers}. The behavioral variable is specified as a vector (of length equal to \code{numbers}) as the argument \code{behaviour}. The function returns a plot of a single electrode showing the results of the correlation tests.
 }
 \usage{
-	erp.cor(base1, numbers, Electrode, behaviour=NULL, alpha=0.05, 
+	erp.cor(base, numbers, electrode, behaviour=NULL, alpha=0.05, 
 	method = c("pearson", "kendall", "spearman"), sig=NULL, 
-	envir=.GlobalEnv, main=Electrode, smo=0.5 , col="black", 
+	envir=.GlobalEnv, main=electrode, smo=0.5 , col="black", 
 	startmsec=-200, endmsec=1200, interval=c(startmsec, endmsec), 
 	step=200, verticals=NULL,horizontals=NULL, x.axis="default", 
 	ylim=c(-6,6), lwd=c(1), lty=c(1), cex.xaxis=0.8, cex.yaxis=1)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-\item{base1}{
+\item{base}{
 a string indicating the beginning of the name of the set of ERP data frames.
 }
   \item{numbers}{
-the numbers of subjects of the set of ERP data frames .
+the numbers of the subjects of the set of ERP data frames.
 }
-  \item{Electrode}{
-the electrode to be plotted
+  \item{electrode}{
+the electrode to be plotted.
 }
   \item{behaviour}{
 a vector indicating the values of the behavioural variables. This vector must be of the same length of \code{numbers}
@@ -43,33 +43,33 @@ if \code{NULL}, then a series of correlations is computed. If an appropriate obj
 the environment in which the ERP data frames are searched for.
 }
  \item{main}{
-the title of the plot.
+plot title.
 }
 
   \item{smo}{
-the smoothing parameter to be applied before plotting. The default is 0.
+the smoothing parameter to apply before plotting. Default is 0.
 }
 \item{col}{
 the color of the waveform.
 }
 
   \item{startmsec}{
-a value (in ms) indicating the start time of the ERP vector
+the start time (in ms) of the ERP vector.
 }
   \item{endmsec}{
-a value (in ms) indicating the end time of the ERP vector
+the end time (in ms) of the ERP vector.
 }
   \item{interval}{
-a vector with a pair of values, indicating the interval to be plotted
+a vector with a pair of values, indicating the interval to be plotted.
 }
   \item{step}{
-the step of the x-axis labels to be plotted. The axis will start from the first value of \code{interval}
+the step of the x-axis labels. The axis will start from the first value of \code{interval}
 }
   \item{verticals}{
-the x coordinates of the optional vertical bars to be plotted
+the x-coordinates of the optional vertical bars.
 }
   \item{horizontals}{
-the y coordinates of the optional horizontal bars to be plotted
+the y coordinates of the optional horizontal bars.
 }
   \item{x.axis}{
 If \code{default}, then an x.axis will be drawn on the basis of \code{interval} and \code{step} parameters. A vector of values can be supplied instead.
@@ -78,17 +78,17 @@ If \code{default}, then an x.axis will be drawn on the basis of \code{interval} 
 a pair of values indicating the y-axis limit.
 }
   \item{lwd}{
-the width of the ERP line to be plotted.
+line width.
 }
   \item{lty}{
-the style of the ERP line to be plotted.
+line type.
 }
 
   \item{cex.xaxis}{
 magnification factor of the x-axis labels.
 }
   \item{cex.yaxis}{
-Magnification factor of the y-axis labels.
+magnification factor of the y-axis labels.
 }
 }
 %\details{
@@ -115,13 +115,13 @@ Giorgio Arcara
 }
 \examples{
 	
-	\dontrun{
-	data(ERPsets)
-	word=grandaverage("Exp1_word_subj", 1:20) 
-	#generate some simulated RT data 
-	RT=rnorm(20, mean = 500, sd = 100)
-	erp.cor("Exp1_word_subj", 1:20, RT, Electrode="Fp1", ylim=10, legend=T)
-	}
+\dontrun{
+data(ERPsets)
+word=grandaverage("Exp1_word_subj", 1:20) 
+#generate some simulated RT data 
+RT=rnorm(20, mean = 500, sd = 100)
+erp.cor("Exp1_word_subj", 1:20, RT, Electrode="Fp1", ylim=c(-6,6))
+}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

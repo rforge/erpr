@@ -5,7 +5,7 @@
 create ERP data frames with mean values
 }
 \description{
-From two sets of paired ERP \code{data.frame} objects the function creates a new set of \code{data.frame} objects with the values obtained by averaging the values of the original sets.
+This function creates a new set of data frames from two sets of paired ERP data frames by averaging the values of the original sets.
 }
 \usage{
 create.mean(bases, numbers, outname = NULL, envir = .GlobalEnv, 
@@ -13,24 +13,24 @@ out.envir = envir, comment.dat = 1)
 }
 \arguments{
   \item{bases}{
-A vector of strings indicating the beginning of the names of \code{data.frame} objects containing the ERP data to be averaged.
+a vector of strings indicating the beginning of the names of the data frames containing the ERP data to be averaged.
 }
   \item{numbers}{
-The numbers of subjects to be averaged by the function.
+the numbers of the subjects to be averaged.
 }
 
   \item{outname}{
-the \code{base} of the names of the returned \code{data.frame} objects.
+the \code{base} of the names of the returned data frames.
 }
 
   \item{envir}{
-The environment in which \code{grandaverage} is to be evaluated.
+the environment in which \code{create.mean} is to be evaluated.
 }
   \item{out.envir}{
-The environment in which the objects created are returned.
+the environment in which the new objects are returned.
 }
   \item{comment.dat}{
-A number indicating from which set of objects specified in the argument \code{bases} the comment of the data.frame is retrieved.
+a number indicating from which set of objects specified in the argument \code{bases} the comment of the data frame is retrieved.
 }
 }
 
@@ -38,7 +38,7 @@ A number indicating from which set of objects specified in the argument \code{ba
 %%  ~~ If necessary, more details than the description above ~~
 %}
 \value{
-a series of ERP \code{data.frame} objects obtained by averaging the sets specified.
+A series of ERP data frames obtained by averaging the specified sets.
 }
 
 \author{
@@ -51,6 +51,6 @@ Giorgio Arcara
 \examples{
 \dontrun{
 data(ERPsets)
-create.mean(c("Exp1_word_subj", "Exp1_nonword_subj"), 1:20, outname="Exp1_average_subj")
+create.mean("Exp1_word_subj", "Exp1_nonword_subj", 1:20,  outname="Exp1_average_subj")
 }
 }
