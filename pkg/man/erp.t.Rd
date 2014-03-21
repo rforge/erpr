@@ -8,11 +8,13 @@ plot t-test comparisons at all timepoints between two sets of ERP data frames (s
 This function performs a series of t-tests on each timepoint comparing two sets of ERP data frames. The first set is specified by \code{base1} and \code{numbers1}. The second set is specified by \code{base2} and \code{numbers2}.
 }
 \usage{
-erp.t(base1, base2, numbers1, numbers2 = numbers1, electrode, paired = TRUE, 
-alpha = 0.05, envir = .GlobalEnv, envir2 = NULL, sig = NULL, main = electrode, 
-smo = 0.5, col = "black", startmsec = -200, endmsec = 1200, interval = c(startmsec, endmsec), 
-step = 200, verticals = NULL, horizontals = NULL, x.axis = "default", ylim = c(-6, 6), 
-lwd = c(1, 1), lty = c(1, 1), cex.xaxis = 0.8, cex.yaxis = 1, color.list = c("blue", "red"))
+erp.t(base1, base2, numbers1, numbers2 = numbers1, electrode, 
+paired = TRUE, alpha = 0.05, envir = .GlobalEnv, envir2 = NULL,
+sig = NULL, main = electrode, smo = 0.5, col = "black", 
+startmsec = -200, endmsec = 1200, interval = c(startmsec, endmsec), 
+step = 200, verticals = NULL, horizontals = NULL, x.axis = "default", 
+ylim = c(-6, 6), lwd = c(1, 1), lty = c(1, 1), cex.xaxis = 0.8, 
+cex.yaxis = 1, color.list = c("blue", "red"))
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

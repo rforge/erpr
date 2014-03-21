@@ -48,7 +48,10 @@ This function is called internally by \code{erp.mean}, \code{erp.peak}, and \cod
 \examples{
 \dontrun{
 data(ERPsets)
-datwide=erp.mean(base="Exp1_word_subj", numbers=1:20, win.ini=130, win.end=190, startmsec=-200, endmsec=1500, format="wide")
+
+datwide=erp.mean(base="Exp1_word_subj", numbers=1:20, win.ini=130, 
+win.end=190, startmsec=-200, endmsec=1500, format="wide")
+
 dat.long=rearrange(deps=c(1:32), oth=33:34, dataset=datwide, name.newvar="electrode")
 }
 

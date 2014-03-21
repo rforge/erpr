@@ -46,7 +46,9 @@ Giorgio Arcara
 
 \examples{
 \dontrun{
-# convert 400 ms to points in a segment of 500 points starting from -200 ms and ending at 1500 (500 Hz).
+# convert 400 ms to points in a segment of 500 points starting from -200 ms 
+# and ending at 1500 (500 Hz).
+
 msectopoints(120, 500, startmsec=-500, endmsec=1500)
 }
 }					

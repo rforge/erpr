@@ -114,7 +114,8 @@ Giorgio Arcara
 \dontrun{
 data(ERPsets)
 
-scalp.t("Exp1_word_subj", "Exp1_nonword_subj", 1:20, 1:20, smo=0, layout=1, ylims=10, startmsec=-200, endmsec=1500, color.list=c("blue", "red"))
+scalp.t("Exp1_word_subj", "Exp1_nonword_subj", 1:20, 1:20, smo=0, 
+layout=1, ylims=10, startmsec=-200, endmsec=1500, color.list=c("blue", "red"))
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

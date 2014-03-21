@@ -8,7 +8,9 @@ Calculate the mean of several ERP data frames in a given time window
 This function calculates the mean amplitude of several ERP data frames. It returns the results in wide format (each electrode in a separate column) or in long format which is more suitable for standard statistical analysis in R (e.g. ANOVA). \code{erp.mean} applies the function \code{mean} on several ERP data frames with timepoints in rows and electrodes in columns. ERP data frames are expected to be named as a combination of strings specified in \code{base} and \code{numbers}.  
 }
 \usage{
-erp.mean(base, numbers, win.ini, win.end, envir=.GlobalEnv, startmsec=-200, endmsec=1200, others=NULL, format="long", name.dep="Dep", name.newvar="electrode")
+erp.mean(base, numbers, win.ini, win.end, envir=.GlobalEnv, 
+startmsec=-200, endmsec=1200, others=NULL, format="long", 
+name.dep="Dep", name.newvar="electrode")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

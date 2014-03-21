@@ -19,10 +19,10 @@ a  data frame containing ERP data in long format.
 column names of datall containing electrode names.
 }
   \item{groups}{
-a list containing (in separate vectors) electrode names to create the ROI. E.g. \code{list(c("Fp1", "Fp2"), c("P3", "P4"))}.
+a list containing (in separate vectors) electrode names to create the ROI.\cr E.g. \code{list(c("Fp1", "Fp2"), c("P3", "P4"))}.
 }
   \item{roi.levels}{
-a vector with the names of the newly created factor variable. E.g. \code{c("Frontopolar", "Parietal")}.
+a vector with the names of the newly created factor variable.\cr E.g. \code{c("Frontopolar", "Parietal")}.
 }
 }
 \details{
