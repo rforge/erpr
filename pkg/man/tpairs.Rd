@@ -29,7 +29,7 @@ a string specifying the name of the dependent variable (a column in \code{dat}).
 optional: a string specifying the variable that encodes the repeated measure identifier.
 }
   \item{p.adjust.methods}{
-p-value correction methods.
+p-value correction methods as in \code{\link{p.adjust}}.
 }
   \item{paired}{
 logical. If TRUE, paired t-tests are performed.
@@ -64,7 +64,7 @@ The function is not able to deal with mixed within and between t-tests. Please, 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link{t.test}}
+\code{\link{t.test}}, \code{\link{p.adjust}}
 }
 \examples{
 	
@@ -77,7 +77,9 @@ condB=rnorm(20, -40, 10)
 condC=rnorm(20, 20, 10)
 
 #create a data frame
-dat=data.frame(Subject=rep(1:20,3), condition=c(rep("A", 20), rep("B", 20), rep("C", 20)), RT=c(subjRT+condA, subjRT+condB, subjRT+condC ))
+dat=data.frame(Subject=rep(1:20,3), 
+condition=c(rep("A", 20), rep("B", 20), rep("C", 20)), 
+RT=c(subjRT+condA, subjRT+condB, subjRT+condC ))
 
 #perform pairwise t.test
 tpairs(dat, "condition", "all", "RT", "Subject", var.equal=T)	
