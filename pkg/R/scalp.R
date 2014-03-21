@@ -10,11 +10,6 @@ legend.lab=gsub(" ", "", legend.lab)
 legend.lab=unlist(strsplit(legend.lab, ","))
 }
 
-msectopoints=function(a,lengthsegment){
-	x=((a-(startmsec))*lengthsegment)/(endmsec+abs(startmsec))
-	return(x)}
-				
-
 if (length(lwd)==1){
 	lwd=rep(lwd, length(categ))}
 if (length(lty)==1){
