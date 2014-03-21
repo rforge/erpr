@@ -9,7 +9,7 @@ An utility function to perform a series of t-tests on several combinations of le
 }
 \usage{
 tpairs(dat, vars, contr, dep, wid, p.adjust.methods = "none", 
-paired = FALSE, type = "t.test", vars.bet = NULL, ...)
+paired = FALSE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -34,12 +34,7 @@ p-value correction methods as in \code{\link{p.adjust}}.
   \item{paired}{
 logical. If TRUE, paired t-tests are performed.
 }
-  \item{type}{
-the type of statistical test. Currently only \code{t.test} is supported.
-}
-  \item{vars.bet}{
-Currently unsupported. Specify if there are between-observation variables.
-}
+
   \item{\dots}{
 Arguments passed to \code{t.test}.
 }
@@ -67,7 +62,7 @@ The function is not able to deal with mixed within and between t-tests. Please, 
 \code{\link{t.test}}, \code{\link{p.adjust}}
 }
 \examples{
-	
+\dontrun{
 # simulate some subjects
 subjRT=rnorm(20, 500, 100)
 
@@ -82,5 +77,6 @@ condition=c(rep("A", 20), rep("B", 20), rep("C", 20)),
 RT=c(subjRT+condA, subjRT+condB, subjRT+condC ))
 
 #perform pairwise t.test
-tpairs(dat, "condition", "all", "RT", "Subject", var.equal=T)	
+tpairs(dat, "condition", "all", "RT", "Subject", var.equal=TRUE)	
+}
 }

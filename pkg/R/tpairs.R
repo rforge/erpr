@@ -1,5 +1,5 @@
 tpairs <-
-function(dat, vars, contr, dep, wid, p.adjust.methods="none", paired=FALSE, type="t.test", vars.bet=NULL,...){
+function(dat, vars, contr, dep, wid, p.adjust.methods="none", paired=FALSE, ...){
 
 		dat$newfactor=apply(data.frame(dat[,vars]), 1, function(x){paste(x, collapse="_")})
 		dat$newfactor=factor(dat$newfactor)	
@@ -20,7 +20,7 @@ function(dat, vars, contr, dep, wid, p.adjust.methods="none", paired=FALSE, type
 				}
 			}
 		for (i in 1:length(contr)){ #forse puoi evitare questo ciclo con un lapply..
-			res=t.test(dat[dat$newfactor%in%contr[[i]][[1]],dep],dat[dat$newfactor%in%contr[[i]][[2]],dep], 		paired=paired,...)
+		res=t.test(dat[dat$newfactor%in%contr[[i]][[1]],dep],dat[dat$newfactor%in%contr[[i]][[2]],dep], paired=paired,...)
 		contrast.names=c(contrast.names, paste(contr[[i]][[1]], "vs", contr[[i]][[2]], sep=" "))
 		p.values=c(p.values, res$p.value)
 		t.values=c(t.values, res$statistic)
