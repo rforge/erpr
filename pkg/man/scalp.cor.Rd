@@ -12,7 +12,8 @@ scalp.cor(base, numbers, behaviour = NULL, alpha = 0.05,
 method = c("pearson", "kendall", "spearman"), sig = NULL, 
 envir = .GlobalEnv, smo = 0.5, layout = 1, ylims = "auto",
  yrev = TRUE, startmsec = -200, endmsec = 1200, lwd = c(1, 1), 
- lty = c(1, 1), col = "blue", legend = TRUE, legend.lab = "default")
+ lty = c(1, 1), col = "blue", legend = TRUE, legend.lab = "default",
+ t.axis=seq(-100,endmsec,200), scalp.array=NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -41,7 +42,8 @@ the environment in which the ERP data frames are searched for.
 %%     ~~Describe \code{smo} here~~
 }
   \item{layout}{
-the layout of electrodes to be plotted. Currently only few layouts are supported. 
+A number indicating the layout of electrodes to be plotted. Currently only few default layouts are supported (a number from 1 to 5).
+Alternatively, a vector indicating the layout may be supplied (see \code{Details}). 
 }
   \item{ylims}{
 a number indicating the upper and lower limits of the y-axis. If "auto", the function calculates the y limits automatically.
@@ -72,11 +74,18 @@ logical. If \code{TRUE}, a legend with object names is drawn in the top-right co
 }
   \item{legend.lab}{
 the legend labels. If "default", the names are retrieved from the \code{categ} argument.
-}}
+}
+  \item{t.axis}{
+the position of the ticks on an additional axis indicating the time. This axis is plotted in the bottom-left corner of the plot array.
+}
+	\item{scalp.array}{
+if a custom \code{layout} is supplied. This argument is vector of two values indicating the number of panels of the plot, as number of rows and number of columns respectively.
+	}
+}
 
-%\details{
-%%  ~~ If necessary, more details than the description above ~~
-%}
+\details{ The layout parameter can be a number (from 1 to 5), that specify some default electrode arrangements (currently only a few default arrangement are supported). Otherwise, the argument allows to specify a character vector indicating the names of the electrodes to be plotted and their arrangement. The plot is divided in a number of panels as specified in \code{scalp.array}. The names specified will be plotted from top to bottom and from left to right. If \code{"blank"} is specified, then an empty panel will be plotted. If \code{"xaxis"} is specified then an x axis indicating time will be plotted. If \code{"yaxis"} is specified then an y axis indicating voltage will be plotted. 
+}
+
 \value{
 The function plots a scalp map of ERP waveforms in an array resembling the topographic locations of the electrodes on the scalp.
 The waveforms represent an average of the first set of specified data frames. Timepoints with a positive (and significant) correlation are highlighted by red bars. Timepoints with a negative (and significant) correlation are highlighted by blue bars. The function also returns an object with the results of the correlations. This object can be used for future plots with \code{erp.cor} or \code{scalp.cor}, by specifying it as the argument \code{sig}.

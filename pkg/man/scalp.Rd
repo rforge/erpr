@@ -11,7 +11,8 @@ This function plots the waveforms of several electrodes in an rectangular array 
 scalp(categ, smo = 0.5, layout = 1, 
 ylims = "auto", yrev = TRUE, startmsec = -200, endmsec = 1200, 
 lwd = 1, lty = 1, color.list = c("blue", "red", "darkgreen"), 
-legend = F, legend.lab = "default", t.axis = seq(-100, endmsec, 200))
+legend = F, legend.lab = "default", t.axis = seq(-100, endmsec, 200), 
+scalp.array=NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -24,7 +25,8 @@ the smoothing parameter to be applied before plotting. The default is 0.
 }
 
   \item{layout}{
-the layout of electrodes to be plotted. Currently only few layouts are supported. 
+A number indicating the layout of electrodes to be plotted. Currently only few default layouts are supported (a number from 1 to 5).
+Alternatively, a vector indicating the layout may be supplied (see \code{Details}). 
 }
   \item{ylims}{
 a number indicating the upper and lower limits of the y-axis. If "auto", the function calculates the y limits automatically.
@@ -58,10 +60,13 @@ the legend labels. If "default", the names are retrieved from \code{categ}.
   \item{t.axis}{
 the position of the ticks on an additional axis indicating the time. This axis is plotted in the bottom-left corner of the plot array.
 }
+	\item{scalp.array}{
+if a custom \code{layout} is supplied. This argument is vector of two values indicating the number of panels of the plot, as number of rows and number of columns respectively.
+	}
 }
 
-%\details{
-%}
+\details{ The layout parameter can be a number (from 1 to 5), that specify some default electrode arrangements (currently only a few default arrangement are supported). Otherwise, the argument allows to specify a character vector indicating the names of the electrodes to be plotted and their arrangement. The plot is divided in a number of panels as specified in \code{scalp.array}. The names specified will be plotted from top to bottom and from left to right. If \code{"blank"} is specified, then an empty panel will be plotted. If \code{"xaxis"} is specified then an x axis indicating time will be plotted. If \code{"yaxis"} is specified then an y axis indicating voltage will be plotted. 
+}
 
 \value{
 The function plots a map of ERP waveforms in an array resembling the topographic locations of the electrodes on the scalp.
@@ -86,7 +91,6 @@ Currently this function supports a very limited number of layouts. Further versi
 \examples{
 \dontrun{
 data(ERPsets)
-
 
 word=grandaverage("Exp1_word_subj", 1:20)
 

@@ -11,7 +11,8 @@ The function returns a diagnostic plot to investigate the influence of a given E
 \usage{
 scalp.infl(base, numbers, smo = 0, layout = 3, ylims = 12, 
 yrev = FALSE, startmsec = -200, endmsec = 1200, lwd = c(1, 2), 
-lty = 1, col = "black", out.col = "red", envir = .GlobalEnv)
+lty = 1, col = "black", out.col = "red", envir = .GlobalEnv,
+t.axis=seq(-100,endmsec,200), scalp.array=NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -27,9 +28,9 @@ the smoothing parameter to apply.
 }
 
   \item{layout}{
-the layout of electrodes to be plotted. Currently only few layouts are supported. 
+A number indicating the layout of electrodes to be plotted. Currently only few default layouts are supported (a number from 1 to 5).
+Alternatively, a vector indicating the layout may be supplied (see \code{Details}). 
 }
-
 \item{ylims}{
 a number indicating the upper and lower limits of the y axis. If "auto", the function calculates the y limits automatically.
 }
@@ -59,11 +60,16 @@ the color of the grand average in which the selected subject is removed
   \item{envir}{
 the environment in which the ERP data frames are searched for.
 }
+  \item{t.axis}{
+the position of the ticks on an additional axis indicating the time. This axis is plotted in the bottom-left corner of the plot array.
 }
-\details{
-The function requires the package \code{rpanel}
+	\item{scalp.array}{
+if a custom \code{layout} is supplied. This argument is vector of two values indicating the number of panels of the plot, as number of rows and number of columns respectively.
+	}
 }
 
+\details{ The layout parameter can be a number (from 1 to 5), that specify some default electrode arrangements (currently only a few default arrangement are supported). Otherwise, the argument allows to specify a character vector indicating the names of the electrodes to be plotted and their arrangement. The plot is divided in a number of panels as specified in \code{scalp.array}. The names specified will be plotted from top to bottom and from left to right. If \code{"blank"} is specified, then an empty panel will be plotted. If \code{"xaxis"} is specified then an x axis indicating time will be plotted. If \code{"yaxis"} is specified then an y axis indicating voltage will be plotted. 
+}
 \value{
 The function returns a plot showing the influence of a subject on the grandaverage.
 }
