@@ -33,7 +33,7 @@ a vector indicating the values of the behavioural variables. This vector must be
 the alpha of the correlation tests.
 }
   \item{method}{
-the method of the correlations. 
+the method of the correlations. \cr
 Available methods are \code{"pearson", "kendall", "spearman"}.
 }
   \item{sig}{

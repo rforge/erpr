@@ -8,7 +8,8 @@ import ERP data matrices from ASCII files (file extension should be specified).
 Import a series of .txt files with ERP data.
 }
 \usage{
-import.erp(filenamebase, numbers, ext=".txt", outname = "ERP_subj", envir = .GlobalEnv, fileinfo=FALSE)
+import.erp(filenamebase, numbers, ext=".txt", 
+outname = "ERP_subj", envir = .GlobalEnv, fileinfo=FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

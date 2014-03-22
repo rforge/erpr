@@ -1,5 +1,5 @@
 scalp.infl <-
-function(base, numbers, smo=0, layout=3, ylims=12, yrev=FALSE, startmsec=-200, endmsec=1200, lwd=c(1,2), lty=1, col="black", out.col="red", envir=.GlobalEnv, t.axis=seq(-100,endmsec,200), scalp.array=NULL){
+function(base, numbers, smo=0, layout=1, ylims=12, yrev=FALSE, startmsec=-200, endmsec=1200, lwd=c(1,2), lty=1, col="black", out.col="red", envir=.GlobalEnv, t.axis=seq(-100,endmsec,200), scalp.array=NULL){
 
 
 # la funzione contiene all'interno una funzione che crea il panel. Questa funzione a sua volta contiene la funzione scalp.infl.endo, che è quella che effettivamente fa il grafico appoggiandosi alla funzione scalp.endo. 

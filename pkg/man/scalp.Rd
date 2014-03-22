@@ -26,7 +26,7 @@ the smoothing parameter to be applied before plotting. The default is 0.
 
   \item{layout}{
 A number indicating the layout of electrodes to be plotted. Currently only few default layouts are supported (a number from 1 to 5).
-Alternatively, a vector indicating the layout may be supplied (see \code{Details}). 
+Alternatively, a character vector specifying the layout may be supplied (see \code{Details}). 
 }
   \item{ylims}{
 a number indicating the upper and lower limits of the y-axis. If "auto", the function calculates the y limits automatically.
@@ -61,11 +61,11 @@ the legend labels. If "default", the names are retrieved from \code{categ}.
 the position of the ticks on an additional axis indicating the time. This axis is plotted in the bottom-left corner of the plot array.
 }
 	\item{scalp.array}{
-if a custom \code{layout} is supplied. This argument is vector of two values indicating the number of panels of the plot, as number of rows and number of columns respectively.
+This argument is vector of two values indicating the number of panels of the plot, as number of rows and number of columns respectively. If a default layout is specified, the number of panels is automatically computed.
 	}
 }
 
-\details{ The layout parameter can be a number (from 1 to 5), that specify some default electrode arrangements (currently only a few default arrangement are supported). Otherwise, the argument allows to specify a character vector indicating the names of the electrodes to be plotted and their arrangement. The plot is divided in a number of panels as specified in \code{scalp.array}. The names specified will be plotted from top to bottom and from left to right. If \code{"blank"} is specified, then an empty panel will be plotted. If \code{"xaxis"} is specified then an x axis indicating time will be plotted. If \code{"yaxis"} is specified then an y axis indicating voltage will be plotted. 
+\details{ The layout parameter can be a number (from 1 to 5), that specifies some default electrode arrangements (currently only a few default arrangements are supported). Otherwise, the argument may be a character vector indicating the names of the electrodes to be plotted. The plot is divided in a number of panels as specified in \code{scalp.array}. The names specified will be plotted from top to bottom and from left to right. If \code{"blank"} is specified an empty panel will be plotted. If \code{"xaxis"} is specified a x axis indicating time will be plotted. If \code{"yaxis"} is specified a y axis indicating voltage will be plotted. 
 }
 
 \value{
