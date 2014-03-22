@@ -2,7 +2,7 @@
 \alias{scalp.infl}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-visually inspect the influence of a subject on an average (scalp array)
+inspect the influence of a subject on an average (scalp array)
 }
 \description{
 The function returns a diagnostic plot to investigate the influence of a given ERP data frame on the grandaverage of a series of ERP data frames. A GUI is provided to explore the effect of removing a data frame (that is expected to be associated with a subject) from the grandaverage. Two plots are superposed: the original grandaverage, and the average removing the subject selected via the GUI. The plot shows an array of electrodes with a topography reflecting their positions on the scalp.

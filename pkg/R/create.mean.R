@@ -1,5 +1,5 @@
 create.mean <-
-function(bases, numbers, outname=NULL, envir=.GlobalEnv, out.envir=envir, comment.dat=1)
+function(bases, numbers, outname=NULL, envir=.GlobalEnv, out.envir=envir, fileinfo=1)
 	{
 	if (is.null(outname))
 	{
@@ -13,7 +13,7 @@ function(bases, numbers, outname=NULL, envir=.GlobalEnv, out.envir=envir, commen
 		temp=eval(parse(file="", text=paste(bases[k],numbers[i], sep="")),envir=envir)+temp
 		}
 		temp.out=(temp/length(bases))
-		comment(temp.out)=comment(eval(parse(file="", text=paste(bases[comment.dat],numbers[i], sep="")),envir=envir))
+		comment(temp.out)=comment(eval(parse(file="", text=paste(bases[fileinfo],numbers[i], sep="")),envir=envir))
 		assign(paste(outname,numbers[i], sep=""),temp.out, envir=out.envir)		
 	}
 	}

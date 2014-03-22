@@ -10,7 +10,7 @@ The values are obtained by subtracting the values of the second set from the fir
 }
 \usage{
 create.diff(base1, base2, numbers, outname = NULL, envir = .GlobalEnv, 
-out.envir = envir, comment.dat = 1)
+out.envir = envir, fileinfo = 1)
 }
 \arguments{
   \item{base1}{
@@ -34,13 +34,13 @@ the environment in which \code{create.diff} is to be evaluated.
   \item{out.envir}{
 the environment in which the new objects are returned.
 }
-  \item{comment.dat}{
-a number indicating from which set of objects specified in the argument \code{bases} the comment of the data frame is retrieved.
+  \item{fileinfo}{
+a number indicating from which set of objects specified in the argument \code{bases} the information of the data frame is retrieved.
 }
 }
 
 \details{
-For more information on \code{comment.dat} argument see Details section of \code{\link{import.erp}}.
+For more information on the \code{fileinfo} argument, see Details section of \code{\link{import.erp}}.
 }
 \value{
 A series of ERP data frames obtained by subtracting one specified set from the other.

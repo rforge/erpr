@@ -9,7 +9,7 @@ This function creates a new set of data frames from two sets of paired ERP data 
 }
 \usage{
 create.mean(bases, numbers, outname = NULL, envir = .GlobalEnv, 
-out.envir = envir, comment.dat = 1)
+out.envir = envir, fileinfo = 1)
 }
 \arguments{
   \item{bases}{
@@ -29,13 +29,13 @@ the environment in which \code{create.mean} is to be evaluated.
   \item{out.envir}{
 the environment in which the new objects are returned.
 }
-  \item{comment.dat}{
-a number indicating from which set of objects specified in the argument \code{bases} the comment of the data frame is retrieved.
+  \item{fileinfo}{
+a number indicating from which set of objects specified in the argument \code{bases} the information of the data frame is retrieved.
 }
 }
 
 \details{
-For more information on \code{comment.dat} argument see Details section of \code{\link{import.erp}}.
+For more information on \code{fileinfo} argument see Details section of \code{\link{import.erp}}.
 }
 
 \value{
