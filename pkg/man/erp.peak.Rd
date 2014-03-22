@@ -57,10 +57,10 @@ the names of other variables to be included in the returned data frame. Ignored 
 }
 
 \details{
-The function takes an ERP data frame with electrodes in separate columns as input. If the format is long, this function returns a data frame in long format ready for standard statistical analysis in R.  The returned data frame has one column for dependent variable and a new factor "electrode". \code{localmax} and \code{localmin} are two \code{erpR} functions written following Luck (2005).
+The function takes an ERP data frame with electrodes in separate columns as input. If the format is long, this function returns a data frame in long format ready for standard statistical analysis in R.  The returned data frame has one column for dependent variable and a new factor "electrode". The \code{erpR} functions \code{localmax} and \code{localmin} are are written following Luck (2005).
 }
 \value{
-An ERP \code{data.frame} with peak amplitude in long or wide format. 
+A ERP data frame with peak amplitude in long or wide format. Two more columns are added: the column \code{Subject} indicates the subject \code{number}; the column \code{Subject_name} reports the string retrieved from the comment of the data frame (see Details on \code{\link{import.erp}}).
 }
 \references{
 Luck, S., J. (2005). \cite{An Introduction to the Event-Related Potential Technique.}

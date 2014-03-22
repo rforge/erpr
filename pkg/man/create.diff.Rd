@@ -39,9 +39,9 @@ a number indicating from which set of objects specified in the argument \code{ba
 }
 }
 
-%\details{
-%%  ~~ If necessary, more details than the description above ~~
-%}
+\details{
+For more information on \code{comment.dat} argument see Details section of \code{\link{import.erp}}.
+}
 \value{
 A series of ERP data frames obtained by subtracting one specified set from the other.
 }

@@ -121,7 +121,7 @@ electrodes=c("axes","Fp1", "blank", "Fp2","legend", "F7", "F3", "FZ", "F4", "F8"
 		
 		}
 		panel <- rp.control() #se volessi creare più pannelli allora dovrei aggiungere un'altro panel.
-       rp.listbox(panel, outnumber, numbers, labels=as.character(numbers), action = scalp.infl.panel, initval=numbers[1])
+       rp.listbox(panel, outnumber, numbers, labels=as.character(numbers), action = scalp.infl.panel, initval=numbers[1], title="Subject")
 	   rp.do(panel, scalp.infl.panel)
 	   
 	   

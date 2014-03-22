@@ -33,7 +33,7 @@ erp.infl.panel=function(panel)
 		panel
 		}
 		panel <- rp.control() #se volessi creare più pannelli allora dovrei aggiungere un'altro panel.
-       rp.listbox(panel, outnumber, numbers, labels=as.character(numbers), action = erp.infl.panel, initval=numbers[1])
+       rp.listbox(panel, outnumber, numbers, labels=as.character(numbers), action = erp.infl.panel, initval=numbers[1], title="Subject")
 	   rp.do(panel, erp.infl.panel)
 
 	   

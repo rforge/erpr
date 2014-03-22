@@ -1,8 +1,13 @@
 factorall <-
 function(x){
-	for(i in 1:length(x)){
-		if (is.factor(x[,i])){
-			x[,i]=factor(x[,i])}
-		}
+	if (length(dim(x))>1){
+		for(i in 1:length(x)){
+			{
+				x[,i]=factor(x[,i])}
+			}
 		return(x)
+		} else {
+		x=factor(x)
+		return(x)
+		}
 	}

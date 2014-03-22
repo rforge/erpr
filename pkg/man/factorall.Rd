@@ -2,22 +2,22 @@
 \alias{factorall}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Drop the unused factor levels for all factor variables
+Factorize more then one variable in a data frame
 }
 \description{
-A convenience function to update all factor variables in a \code{data.frame}.
+A convenience function to transform on or more variable of a data frame into factor.
 }
 \usage{
 factorall(x)
 }
 \arguments{
   \item{x}{
-a \code{data.frame} to be updated.
+one or more data frame columns to be transformed into factor.
 }
 }
 
 \value{
-A \code{data.frame} in which all factors have been updated. All unused levels are dropped.
+The vectors supplied are transformed into factors. Notice that if a variable is already a factor, it is updated and all unused levels are dropped.
 }
 
 \author{
@@ -38,8 +38,9 @@ data(iris)
 iris2 <- iris[iris$Species!="setosa", ]
 levels(iris2$Species)
 
-iris2<-factorall(iris2)
+iris2[,c("Petal.Width", "Species")]<-factorall(iris2[,c("Petal.Width", "Species")])
 levels(iris2$Species)
+str(iris2)
 }
 
 }
