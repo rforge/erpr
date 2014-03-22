@@ -76,10 +76,6 @@ e1=alldata1[,electrode]
 e2=alldata2[,electrode]
 
 lengthwhole=length(e1)
-	msectopoints=function(a,lengthsegment){
-	x=((a-(startmsec))*lengthsegment)/(endmsec+abs(startmsec))
-	return(x)}
-	
 	
 	startpoint=msectopoints(interval[1], lengthwhole)
 	endpoint=msectopoints(interval[2], lengthwhole)

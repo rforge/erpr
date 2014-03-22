@@ -40,8 +40,11 @@ Further information can be found on the maintainer's site \url{https://sites.goo
 \examples{
 \dontrun{
 library(erpR)
+
 data(ERPsets)
+
 word=grandaverage("Exp1_word_subj", 1:20) 
+
 erp(word$Fp1, smo=0, col="blue", startmsec=-200, endmsec=1500, ylim=c(-10,10))
 }
 }

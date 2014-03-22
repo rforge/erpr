@@ -1,5 +1,5 @@
 scalp <-
-function(categ, smo=0.5, label=c("type1"), layout=1, ylims="auto", yrev=TRUE, startmsec=-200, endmsec=1200, lwd=1, lty=1, color.list=c("blue", "red", "darkgreen"), legend=F, legend.lab="default", t.axis=seq(-100,endmsec,200)){
+function(categ, smo=0.5, layout=1, ylims="auto", yrev=TRUE, startmsec=-200, endmsec=1200, lwd=1, lty=1, color.list=c("blue", "red", "darkgreen"), legend=F, legend.lab="default", t.axis=seq(-100,endmsec,200)){
 
 if (length(legend.lab)==1&legend.lab[1]=="default"){
 legend.lab=deparse(substitute(categ))
@@ -82,8 +82,7 @@ text((dim(categ[[1]])[1]/2)+(dim(categ[[1]])[1]/8),0, labels=expression(paste(mu
 		}
 		if (electrodes[i]=="axis"){
 plot(categ[[1]]$P4, type="n", frame.plot=FALSE,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n", ylim=c(yedge[1]+yedge[1]/3,yedge[2]+(yedge[2]/3)))
-
-			axis(1, pos=c(msectopoints(startmsec,dim(categ[[1]])[1]),0), at=msectopoints(t.axis, dim(categ[[1]])[1]), labels=paste(t.axis))
+		axis(1, pos=0, at=msectopoints(t.axis, dim(categ[[1]])[1], startmsec, endmsec), labels=paste(t.axis))
 		}
 		if (electrodes[i]!="blank"&electrodes[i]!="axis"&electrodes[i]!="legend") {
 			plot(smooth.spline(categ[[1]][[electrodes[i]]][1:dim(categ[[1]])[1]], spar=smo), type="l", ylim=c(yedge[1]+yedge[1]/3,yedge[2]+(yedge[2]/3)),col=color.list[1], main="", ylab="", xlab="", cex.main=0.85,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n",frame.plot=FALSE, lwd=lwd[1], lty=lty[1])
@@ -91,7 +90,7 @@ plot(categ[[1]]$P4, type="n", frame.plot=FALSE,xlim=c(1,dim(categ[[1]])[1]),xaxt
 				##### di seguito ho semplicemente calcolato, tramite una proporzione, il punto che corrisponde allo 0
 
 				totalendmsec=endmsec+abs(startmsec)
-				zeropoint=msectopoints(0, dim(categ[[1]])[1])
+				zeropoint=msectopoints(0, dim(categ[[1]])[1], startmsec=startmsec, endmsec=endmsec)
 				
 				segments(x0=zeropoint, y0=-0.8, x1=zeropoint, y1=0.5, lwd=1.5)
 				abline(h=0, lty="longdash")

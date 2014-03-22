@@ -8,7 +8,7 @@ plot ERP waveforms in a scalp array
 This function plots the waveforms of several electrodes in an rectangular array reflecting their positions on the scalp
 }
 \usage{
-scalp(categ, smo = 0.5, label = c("type1"), layout = 1, 
+scalp(categ, smo = 0.5, layout = 1, 
 ylims = "auto", yrev = TRUE, startmsec = -200, endmsec = 1200, 
 lwd = 1, lty = 1, color.list = c("blue", "red", "darkgreen"), 
 legend = F, legend.lab = "default", t.axis = seq(-100, endmsec, 200))
@@ -23,9 +23,6 @@ a list indicating the ERP data frame to be plotted. All electrodes specified in 
 the smoothing parameter to be applied before plotting. The default is 0.
 }
 
-  \item{label}{
-unused parameter
-}
   \item{layout}{
 the layout of electrodes to be plotted. Currently only few layouts are supported. 
 }
@@ -88,6 +85,9 @@ Currently this function supports a very limited number of layouts. Further versi
 }
 \examples{
 \dontrun{
+data(ERPsets)
+
+
 word=grandaverage("Exp1_word_subj", 1:20)
 
 nonword=grandaverage("Exp1_nonword_subj", 1:20)

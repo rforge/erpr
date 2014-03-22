@@ -5,9 +5,6 @@ if (length(legend.lab)==1&legend.lab[1]=="default"){
 	legend.lab=c(base1, base2)
 }
 
-msectopoints=function(a,lengthsegment){
-	x=((a-(startmsec))*lengthsegment)/(endmsec+abs(startmsec))
-	return(x)}
 
 #### PARTE 1: STATISTICHE PER ELETTRODO ####
 if (is.null(numbers2)){
@@ -160,7 +157,7 @@ text((dim(categ[[1]])[1]/2)+(dim(categ[[1]])[1]/8),0, labels=expression(paste(mu
 		if (electrodes[i]=="axis"){
 plot(categ[[1]]$P4, type="n", frame.plot=FALSE,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n", ylim=c(yedge[1]+yedge[1]/3,yedge[2]+(yedge[2]/3)))
 
-			axis(1, pos=c(msectopoints(startmsec,dim(categ[[1]])[1]),0), at=msectopoints(t.axis, dim(categ[[1]])[1]), labels=paste(t.axis))
+		axis(1, pos=0, at=msectopoints(t.axis, dim(categ[[1]])[1], startmsec, endmsec), labels=paste(t.axis))
 		}
 		if (electrodes[i]!="blank"&electrodes[i]!="axis"&electrodes[i]!="legend") {
 			
