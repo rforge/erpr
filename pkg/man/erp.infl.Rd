@@ -2,7 +2,7 @@
 \alias{erp.infl}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Visually inspect the influence of a subject on the average (single electrode).
+inspect the influence of a subject on the average (single electrode).
 }
 \description{
 This function returns a diagnostic plot to investigate the influence of a given ERP data frame on the grandaverage of a series of ERP data frames. A GUI is provided to explore the effect of removing a data frame (that is expected to be associated with a Subject) on the grandaverage. Two plots are superposed: the original grandaverage and the average removing the subject selected via the GUI.

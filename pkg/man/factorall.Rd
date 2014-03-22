@@ -2,10 +2,10 @@
 \alias{factorall}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Factorize more then one variable in a data frame
+Factorize one or more variables in a data frame
 }
 \description{
-A convenience function to transform on or more variable of a data frame into factor.
+A convenience function to transform on or more variables of a data frame into factors.
 }
 \usage{
 factorall(x)
