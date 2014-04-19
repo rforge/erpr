@@ -1,30 +1,73 @@
 butterfly <-
-function(base, numbers,electrode, add=FALSE, smo=0.5 , col="black", startmsec=-200, endmsec=1000, interval=c(startmsec, endmsec), step=200, verticals=NULL,horizontals=NULL, x.axis="default", ylim="default", lwd=1, lty=1, outline=NULL, out.col="black", envir=.GlobalEnv)
+function(base, numbers,  electrode = NULL, startmsec = - 200, endmsec = 1200, erplist = NULL, outline=NULL, out.col="black", add = FALSE, ...)
+# ... further parameters are passed to erp
 	{
-		
-envir=deparse(substitute(envir))
+	# preliminary checks
+	if (is.null(erplist)){
+	stop("an erplist object containing ERP data frames must be specified!", call.=F)
+	}
+	
+	#electrode checks
+	if (!electrode%in%names(erplist[[1]])) {
+	stop("The electrode specified is not in the data frames contained in the erplist", call.=F)
+	}
+	
+	#### object checks
+	object.names=c(paste(base, numbers, sep=""))
+	if (any(!object.names%in%names(erplist))){
+		missing.objects=object.names[!object.names%in%names(erplist)]
+		missing.object.collist=paste(missing.objects, "\n", sep="")
+		stop("The following objects are not contained in the erplist specified:\n", missing.object.collist, call.=F)
+	}
+	
+	mycall=match.call()
+	mycall.list=as.list(mycall)
+	mycall.erp.add=mycall.list[names(mycall.list)%in%c("lty", "smo", "col", "lwd", "startmsec", "endmsec", "interval")]
+	mycall.erp.add=append(mycall.erp.add, as.name("el"))
+	names(mycall.erp.add)[length(mycall.erp.add)]="el"
+	# in the line above I retrieve the arguments of the call relavant for erp.add
+	
 
-			numbers=numbers[-!(numbers%in%outline)]
+
+	numbers=numbers[-!(numbers%in%outline)]
 		if (add==FALSE)
 			{
 			i=1
-			erp(eval(parse(file="", text=paste(envir,"$",base,numbers[i],"$",electrode, sep=""))), smo=smo, col=col, startmsec=startmsec, endmsec=endmsec,  interval=interval, step=step, verticals=verticals, horizontals=horizontals, x.axis=x.axis, ylim=ylim, lwd=lwd, lty=lty)
+			el=erplist[[paste(base, numbers[i], sep="")]][[electrode]]
+			erp(el, startmsec=startmsec, endmsec=endmsec, ...)
 			for (i in 2:length(numbers))
 				{
-				erp.add(eval(parse(file="", text=paste(envir, "$", base,numbers[i],"$",electrode, sep=""))), col=col,lwd=lwd, lty=lty, smo=smo)
+				el=erplist[[paste(base, numbers[i], sep="")]][[electrode]]
+				
+				do.call("erp.add", mycall.erp.add)
 				}
 			}
 		if (add==TRUE) 
 			{
 			for (i in 1:length(numbers))
 				{
-				erp.add(eval(parse(file="", text=paste(envir, "$", base,numbers[i],"$",electrode, sep=""))),col=col, lwd=lwd, lty=lty, smo=smo)
+				el=erplist[[paste(base, numbers[i], sep="")]][[electrode]]
+				do.call("erp.add", mycall.erp.add)
 				}	
 			}
 		if (!is.null(outline)){
+			
+			# modifications to call for outline electrodes
+			
+			#modification to lwd
+			mycall.erp.add.out=mycall.erp.add
+			if (!is.null(mycall.erp.add.out$lwd)){
+				mycall.erp.add.out$lwd= mycall.erp.add.out$lwd+2
+			} else {
+				mycall.erp.add.out$lwd=3
+			}
+			# modification to col
+			mycall.erp.add.out$col = out.col
+			
+			
 			for (k in 1:length(outline))
 			{
-			erp.add(eval(parse(file="", text=paste(envir, "$",base,outline[k],"$",electrode, sep=""))),col=out.col, lty=lty, smo=smo, lwd=lwd+2)
+			do.call("erp.add", mycall.erp.add.out)
 			}
 		}	
 	}

@@ -9,7 +9,7 @@ A function to average ERP objects, i.e. data frames with timepoints in rows, ele
 It is used to compute the grandaverage across several subjects, for plotting purposes.
 }
 \usage{
-grandaverage(base, numbers, electrodes="all", envir = .GlobalEnv, NA.sub=TRUE)
+grandaverage(base, numbers, electrodes="all", erplist = NULL, NA.sub=TRUE)
 }
 \arguments{
   \item{base}{
@@ -23,8 +23,8 @@ the numbers of subjects to be averaged.
 a character vector indicating the electrodes on which perform the grandaverage. Default is \code{"all"}, 
 and the \code{grandaverage} is performed on all electrodes of the data frames.
 }
-  \item{envir}{
-the environment in which \code{grandaverage} is to be evaluated.
+  \item{erplist}{
+a list containing ERP data frames.
 }
   \item{NA.sub}{
 logical. If \code{TRUE}, electrodes columns with \code{NA} are ignored in grandaverage computation.

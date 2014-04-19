@@ -1,5 +1,35 @@
 scalp.t <-
-function(base1, base2, numbers1, numbers2=NULL, paired=TRUE, alpha=0.05, sig=NULL, envir=.GlobalEnv, envir2=NULL, smo=0.5, layout=1, ylims="auto", yrev=TRUE, startmsec=-200, endmsec=1200, lwd=c(1,1), lty=c(1,1), color.list=c("blue", "red"), legend=F, legend.lab="default", t.axis=seq(-100,endmsec,200), scalp.array=NULL) {
+function(base1, base2, numbers1, numbers2=NULL, paired=TRUE, alpha=0.05, sig=NULL, erplist1=NULL, erplist2=erplist1, smo=NULL, layout=1, ylims="auto", yrev=TRUE, startmsec=-200, endmsec=1200, lwd=c(1,1), lty=c(1,1), color.list=c("blue", "red"), legend=F, legend.lab="default", t.axis=seq(-100,endmsec,200), scalp.array=NULL) {
+
+
+	# preliminary checks
+	if (is.null(erplist1)|is.null(erplist2)){
+	stop("two erplist objects (erplist1 and erplist2) containing ERP data frames must be specified!", call.=F)
+	}
+	
+	# consistency checks for paired =T
+	if (paired==TRUE&(length(numbers1)!=length(numbers2))){
+	stop ("if paired == TRUE, numbers1 and numbers2 must have equal length.", call.=F)
+	}
+	
+	#### object checks
+	object.names1=paste(base1, numbers1, sep="")
+	if (any(!object.names1%in%names(erplist1))){
+		missing.objects1=object.names1[!object.names1%in%names(erplist1)]
+		missing.object.collist1=paste(missing.objects1, "\n", sep="")
+		stop("The following objects are not contained in the erplist1 specified:\n", missing.object.collist1, call.=F)
+	}
+		#### object checks
+	object.names2=paste(base2, numbers2, sep="")
+	if (any(!object.names2%in%names(erplist2))){
+		missing.objects2=object.names2[!object.names2%in%names(erplist2)]
+		missing.object.collist2=paste(missing.objects2, "\n", sep="")
+		stop("The following objects are not contained in the erplist2 specified:\n", missing.object.collist2, call.=F)
+	}
+	
+
+
+
 
 if (length(legend.lab)==1&legend.lab[1]=="default"){
 	legend.lab=c(base1, base2)
@@ -10,8 +40,6 @@ if (length(legend.lab)==1&legend.lab[1]=="default"){
 if (is.null(numbers2)){
 	numbers2=numbers1}
 
-if (is.null(envir2)){
-	envir2=envir}
 
 if (is.null(sig)){
 	
@@ -22,10 +50,10 @@ element=function(x,row.i){
 alldata1.list=list(NULL)
 alldata2.list=list(NULL)
 for (i1 in 1:length(numbers1)){
-	alldata1.list[[i1]]=eval(parse(file="", text=paste(base1,numbers1[i1], sep="")),envir=envir)
+	alldata1.list[[i1]]=erplist1[[paste(base1,numbers1[i1], sep="")]]
 	}
 for (i2 in 1:length(numbers2)){
-	alldata2.list[[i2]]=eval(parse(file="", text=paste(base2,numbers2[i2], sep="")),envir=envir2)
+	alldata2.list[[i2]]=erplist2[[paste(base2,numbers2[i2], sep="")]]	
 	}
 
 
@@ -78,8 +106,8 @@ if (!is.null(sig)){
 #base1 = le prime lettere degli oggetti 
 #numbers1= il numero dei soggetti di cui calcolare l'average
 
-alldata1=grandaverage(base=base1, numbers1, envir=envir)
-alldata2=grandaverage(base=base2,numbers2, envir=envir2)
+alldata1=grandaverage(base=base1, numbers1, erplist=erplist1)
+alldata2=grandaverage(base=base2,numbers2, erplist=erplist2)
 
 categ=list(alldata1,alldata2)
 
@@ -149,7 +177,7 @@ if (!is.null(scalp.array)){
 
 	for (i in 1:(length(electrodes))){
 		if (electrodes[i]=="yaxis"){
-		plot(categ[[1]]$P4, type="n", frame.plot=FALSE,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n", ylim=c(yedge[1]+yedge[1]/3,yedge[2]+(yedge[2]/3)))
+		plot(1, type="n", frame.plot=FALSE,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n", ylim=c(yedge[1]+yedge[1]/3,yedge[2]+(yedge[2]/3)))
 	axis(side=2, pos= dim(categ[[1]])[1]/2, at=c(round(ceiling(yedge[1]),0),round(ceiling(yedge[1])/2,0),0,round(floor(yedge[2])/2,0),round(floor(yedge[2]),0)), cex.axis=0.8, las=2)
 	text((dim(categ[[1]])[1]/2)+(dim(categ[[1]])[1]/8),0, labels=expression(paste(mu,"V")), cex=1.4)
 	}
@@ -163,35 +191,45 @@ if (!is.null(scalp.array)){
 			}
 		}
 		if (electrodes[i]=="xaxis"){
-plot(categ[[1]]$P4, type="n", frame.plot=FALSE,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n", ylim=c(yedge[1]+yedge[1]/3,yedge[2]+(yedge[2]/3)))
+plot(1, type="n", frame.plot=FALSE,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n", ylim=c(yedge[1]+yedge[1]/3,yedge[2]+(yedge[2]/3)))
 
 		axis(1, pos=0, at=msectopoints(t.axis, dim(categ[[1]])[1], startmsec, endmsec), labels=paste(t.axis))
 		}
 		if (!electrodes[i]%in%c("xaxis", "yaxis", "legend", "blank")) {
 			
 			### NOTA: plotto due volte il grafico: la prima volta con type="n" poi con type="l". Altrimenti le bande si sovrascrivono col grafico
-
-			plot(smooth.spline(categ[[1]][[electrodes[i]]][1:dim(categ[[1]])[1]], spar=smo), type="n", ylim=c(yedge[1]+yedge[1]/3,yedge[2]+(yedge[2]/3)),col=color.list[1], main="", ylab="", xlab="", cex.main=0.85,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n",frame.plot=FALSE, lwd=lwd[1], lty=lty[1])
+			el=categ[[1]][[electrodes[i]]][1:dim(categ[[1]])[1]]
+			
+			
+			plot(el, type="n", ylim=c(yedge[1]+yedge[1]/3,yedge[2]+(yedge[2]/3)),col=color.list[1], main="", ylab="", xlab="", cex.main=0.85,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n",frame.plot=FALSE, lwd=lwd[1], lty=lty[1])
 			
 			# plotto le bande di significatività
 			######################
 			abline(v=grep(TRUE,alltemp.results[,electrodes[i]]), col="lightgray")
 			#######################
 			
+			if (!is.null(smo)){
+				el=smooth.spline(el, spar=smo)
+			}
+			
+			el=categ[[1]][[electrodes[i]]][1:dim(categ[[1]])[1]]
+
 			### NOTA: plotto due volte il grafico: la prima volta con type="n" poi con type="l". Altrimenti le bande si sovrascrivono col grafico
-			lines(smooth.spline(categ[[1]][[electrodes[i]]][1:dim(categ[[1]])[1]], spar=smo), col=color.list[1],  cex.main=0.85, lwd=lwd[1], lty=lty[1])
+			lines(el, col=color.list[1],  cex.main=0.85, lwd=lwd[1], lty=lty[1])
 
 				##### di seguito ho semplicemente calcolato, tramite una proporzione, il punto che corrisponde allo 0
-				totalendmsec=endmsec+abs(startmsec)
-				zeropoint=(abs(startmsec)*dim(categ[[1]])[1])/totalendmsec
+				zeropoint=msectopoints(0, length(el), startmsec, endmsec)
 				segments(x0=zeropoint, y0=-0.8, x1=zeropoint, y1=0.5, lwd=1.5)
 				
 							
 				abline(h=0, lty="longdash")
 				mtext(electrodes[i],side=3, line=-2)
 				
-										
-					lines(smooth.spline(categ[[2]][[electrodes[i]]], spar=smo),col=color.list[2], lwd=lwd[2],lty=lty[2])
+			el2=categ[[2]][[electrodes[i]]]
+			if (!is.null(smo)){
+				el2=smooth.spline(el2, spar=smo)
+			}						
+			lines(el2,col=color.list[2], lwd=lwd[2],lty=lty[2])
 
 							
 									 

@@ -8,22 +8,37 @@ add an ERP waveform to a plot
 Add a waveform to a ERP plot created with \code{erp}, \code{erp.t}, or \code{butterfly} functions.
 }
 \usage{
-erp.add(en, lty = 1, smo = 0, col = "black", lwd = 1, ...)
+erp.add(el, startmsec=-200, endmsec=1200, interval=c(startmsec, endmsec), 
+smo = NULL, col = "black", lty = 1, lwd = 1, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{en}{
+  \item{el}{
 the electrode to be plotted. 
 }
-  \item{lty}{
-line type of the waveform .
+\item{startmsec}{
+the start time (in ms) of the ERP vector.
 }
+\item{endmsec}{
+the end time (in ms) of the ERP vector.
+}
+
   \item{smo}{
-the smoothing parameter to apply before plotting. Default is 0, that is no smoothing.
+the smoothing parameter to apply (see \code{\link{smooth.spline}}). Default is \code{NULL} and no smoothing is applied.
 }
+  \item{interval}{
+a vector with a pair of values indicating the interval (in milliseconds) to be plotted.
+}
+
+
   \item{col}{
 the color of the waveform.
 }
+
+  \item{lty}{
+line type of the waveform .
+}
+
   \item{lwd}{
 line width of the waveform.
 }

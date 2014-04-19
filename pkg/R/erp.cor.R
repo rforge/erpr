@@ -1,6 +1,38 @@
 erp.cor <-
-function(base, numbers, electrode, behaviour=NULL, alpha=0.05,method = c("pearson", "kendall", "spearman"),  sig=NULL, envir=.GlobalEnv, main=electrode, smo=0.5 , col="black", startmsec=-200, endmsec=1200, interval=c(startmsec, endmsec), step=200, verticals=NULL,horizontals=NULL, x.axis="default", ylim=c(-6,6), lwd=c(1), lty=c(1), cex.xaxis=0.8, cex.yaxis=1) {
+function(base, numbers, electrode, erplist=NULL,startmsec=-200, endmsec=1200, external=NULL, smo=NULL, alpha=0.05, method = c("pearson", "kendall", "spearman"),  sig=NULL,  main=electrode, ...) {
+	# the three dots indicates parameter to be passed to erp.
 
+	# preliminary checks
+	if (is.null(erplist)){
+	stop("an erplist object containing ERP data frames must be specified!", call.=F)
+	}
+	
+	if (length(numbers)!=length(external)){
+	stop("the external variable should have the same length of numbers (of Subjects)")
+	}
+	
+	if (!electrode%in%names(erplist[[1]])) {
+	stop("The electrode specified is not in the data frames contained in the erplist", call.=F)
+	}
+
+	
+	#### object checks
+	object.names=c(paste(base, numbers, sep=""))
+	if (any(!object.names%in%names(erplist))){
+		missing.objects=object.names[!object.names%in%names(erplist)]
+		missing.object.collist=paste(missing.objects, "\n", sep="")
+		stop("The following objects are not contained in the erplist specified:\n", missing.object.collist, call.=F)
+	}
+	
+		#retrieve the call that can be used with erp and erp.add
+		mycall=match.call()
+		mycall.list=as.list(mycall)
+
+		#create the object for the future call of erp
+		mycall.erp=mycall.list[names(mycall.list)%in%as.list(names(as.list(args(erp))))]
+		#notice the second part of this line of code. Basically I retrive the args of funciton erp, transform in a list. Then I take only the args in call that match
+		# with args of function erp, to avoid to call for args unexpected from the function erp.
+		mycall.erp$el=as.name("el")
 
 	#### PARTE 1: STATISTICHE PER ELETTRODO ####
 
@@ -13,7 +45,7 @@ element=function(x,row.i){
 alldata1.list=list(NULL)
 alldata2.list=list(NULL)
 for (i1 in 1:length(numbers)){
-	alldata1.list[[i1]]=eval(parse(file="", text=paste(base,numbers[i1], sep="")),envir=envir)
+	alldata1.list[[i1]]=erplist[[paste(base,numbers[i1], sep="")]]	
 	}
 
 alltemp=list(NULL)
@@ -35,7 +67,7 @@ for (k in 1:dim(alldata1.list[[1]])[1]) {#prendo la dimensione di un data.frame 
 		length(temp.test.vet)=dim(alltemp[[k]][[1]])[1]
 		temp.results.vet=NULL
 		for (j in 1:dim(alltemp[[k]][[1]])[2]){#nota:uso dim perché alltemp[[k]][[1]] è una matrice
-		temp.test.vet[[j]]=cor.test(alltemp[[k]][[1]][,j], behaviour, method=method)
+		temp.test.vet[[j]]=cor.test(alltemp[[k]][[1]][,j], external, method=method)
 		if(temp.test.vet[[j]]$p.value<alpha){
 			if (temp.test.vet[[j]]$estimate<0){
 				temp.results.vet[j]=-1
@@ -64,43 +96,20 @@ if (!is.null(sig)){
 	alltemp.results=sig
 	}
 
-##### PARTE 2 CREO DATAFRAME PER SCALP
+##### PARTE 2 CREO DATAFRAME PER erp plot
 
 
 
 
-alldata1=grandaverage(base=base, numbers, envir=envir)
+alldata1=grandaverage(base=base, numbers, erplist=erplist)
 
 
 
-e1=alldata1[,electrode]
+el=alldata1[,electrode]
 
-lengthwhole=length(e1)
-	msectopoints=function(a,lengthsegment){
-	x=((a-(startmsec))*lengthsegment)/(endmsec+abs(startmsec))
-	return(x)}
-	
-	
-	startpoint=msectopoints(interval[1], lengthwhole)
-	endpoint=msectopoints(interval[2], lengthwhole)
-	
-	
-	vet=seq(interval[1], interval[2], step)
-	
-	if (x.axis[1]!="default"){
-		vet=x.axis
-		}
 		
-	temp0=msectopoints(0, lengthwhole)
-	vet2=msectopoints(vet, lengthwhole)
-	vet.names=paste(vet) # vet sarebbero le labels del nuovo asse
-
-	maxe1=max(e1)
-	mine1=min(e1)
-		
-
-		plot(e1, type="n", ylim=ylim, col=col,lwd=lwd, main=main, xaxt="n",xlim=c(startpoint, endpoint), ylab="",xlab="", lty=lty, cex.axis=cex.yaxis)
-		
+		do.call("erp", mycall.erp[-1])
+				
 		# plotto le bande di significatività di correlazioni negative
 		######################
 		abline(v=grep(-1, alltemp.results[,electrode]), col="lightblue", lwd=3)
@@ -112,24 +121,6 @@ lengthwhole=length(e1)
 		#######################
 
 		
-		lines(smooth.spline(e1, spar=smo), col=col,lwd=lwd[1], type="l", lty=lty[1])
-		
-
-	
-		axis(1,vet2, paste(vet), cex.axis=cex.xaxis)
-		abline(h=0, lty="longdash")
-		segments(temp0,-0.5,temp0,0.5, lty=1)
-	
-	# draw vertical lines (expressed in msec and authomatically converted in points)
-	for (i in 1:length(verticals)){
-		x=msectopoints(verticals[i], lengthwhole)
-		abline(v=x)
-		}	
-	#draw horizontal lines (expressed in microvolts)
-	for (i in 1:length(horizontals)){
-		x=(horizontals[i])
-		abline(h=x)
-	}	
 
 invisible(alltemp.results)
 }

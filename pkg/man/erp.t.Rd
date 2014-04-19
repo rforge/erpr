@@ -8,13 +8,10 @@ plot t-test comparisons at all timepoints between two sets of ERP data frames (s
 This function performs a series of t-tests on each timepoint comparing two sets of ERP data frames. The first set is specified by \code{base1} and \code{numbers1}. The second set is specified by \code{base2} and \code{numbers2}.
 }
 \usage{
-erp.t(base1, base2, numbers1, numbers2 = numbers1, electrode, 
-paired = TRUE, alpha = 0.05, envir = .GlobalEnv, envir2 = NULL,
-sig = NULL, main = electrode, smo = 0.5, col = "black", 
-startmsec = -200, endmsec = 1200, interval = c(startmsec, endmsec), 
-step = 200, verticals = NULL, horizontals = NULL, x.axis = "default", 
-ylim = c(-6, 6), lwd = c(1, 1), lty = c(1, 1), cex.xaxis = 0.8, 
-cex.yaxis = 1, color.list = c("blue", "red"))
+erp.t(base1, base2, numbers1, numbers2 = numbers1, startmsec = -200, 
+endmsec=1200, electrode, smo = NULL, paired = TRUE, alpha = 0.05, 
+erplist1 = NULL, erplist2 = erplist1, sig = NULL, main = electrode, 
+col = c("blue", "red"), ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -30,20 +27,32 @@ the numbers of the subjects of the first set of ERP data frames.
   \item{numbers2}{
 The numbers of the subjects of the second set of ERP data frames.
 }
+  \item{startmsec}{
+the start time (in ms) of the ERP vector.
+}
+  \item{endmsec}{
+the end time (in ms) of the ERP vector.
+}
+
   \item{electrode}{
 a string indicating the electrode to be considered in the analysis.
 }
+
+  \item{smo}{
+the smoothing parameter to apply (see \code{\link{smooth.spline}}). Default is \code{NULL} and no smoothing is applied.
+}
+
   \item{paired}{
 logical. This argument specifies if the t-tests are paired or not.
 }
   \item{alpha}{
 the alpha of the t-tests.
 }
-  \item{envir}{
-the environment in which the ERP data frames of the first set are searched for.
+  \item{erplist1}{
+a list containing the ERP data frames specified in \code{base1} and \code{numbers1}.
 }
-  \item{envir2}{
-the environment in which the ERP data frames of the second set are searched for.
+  \item{erplist2}{
+a list containing the ERP data frames specified in \code{base2} and \code{numbers2}.
 }
   \item{sig}{
 if \code{NULL}, then a series of t-tests is computed. If an appropriate object is specified (i.e. the object returned by \code{erp.t} or \code{scalp.t})
@@ -53,53 +62,13 @@ then the results are retrieved by this object and the function simply plots the 
 plot title.
 }
 
-  \item{smo}{
-the smoothing parameter to apply before plotting. Default is 0.
-}
  \item{col}{
-the color of the waveform.
+the colors of the waveforms.
+}
+\item{\ldots}{
+	further parameters to be passed to \code{\link{erp}}.
 }
 
-  \item{startmsec}{
-the start time (in ms) of the ERP vector.
-}
-  \item{endmsec}{
-the end time (in ms) of the ERP vector.
-}
-  \item{interval}{
-a vector with a pair of values indicating the interval to be plotted.
-}
-  \item{step}{
-the step of the x-axis labels. The axis will start from the first value of \code{interval}
-}
-  \item{verticals}{
-the x-coordinates of optional vertical bars.
-}
-  \item{horizontals}{
-the y-coordinates of optional horizontal bars.
-}
-  \item{x.axis}{
-if \code{default}, then an x.axis will be drawn on the basis of \code{interval} and \code{step} parameters. A vector of values can be supplied instead.
-}
-  \item{ylim}{
-a pair of values indicating the y-axis limit.
-}
-  \item{lwd}{
-line width.
-}
-  \item{lty}{
-line type.
-}
-
-  \item{cex.xaxis}{
-magnification factor of the x-axis labels.
-}
-  \item{cex.yaxis}{
-magnification factor of the y-axis labels.
-}
-  \item{color.list}{
-a vector specifying the two colors of to be associated with the two conditions.
-}
 }
 %\details{
 %%%  ~~ If necessary, more details than the description above ~~
@@ -123,12 +92,14 @@ There is also a function \code{\link{scalp.infl}} able to perform the t-tests on
 }
 \examples{
 
-\dontrun{
 data(ERPsets)
 
-erp.t("Exp1_word_subj", "Exp1_nonword_subj", 1:20, 1:20, electrode="Fp1", smo=0, ylim=c(-10,10), 
-startmsec=-200, endmsec=1500, color.list=c("blue", "red"))
-}
+erp.t("Exp1_word_subj", "Exp1_nonword_subj", 1:20, 1:20, 
+electrode="Fp1", ylim=c(-10,10),  startmsec=-200, 
+endmsec=1500, erplist1=ERPsets, erplist2=ERPsets, 
+col=c("blue", "red"))
+
+
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

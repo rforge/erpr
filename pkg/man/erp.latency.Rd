@@ -8,9 +8,9 @@ calculate latency of several ERP data frames on a given time window
 This function calculates the peak latency on several ERP data frames. It returns the results in wide format (each electrode in a separate column) or in long format which is more suitable for standard statistical analysis in R (e.g. ANOVA). \code{erp.latency} applies the function \code{mean} to several ERP data frames with timepoints in rows and electrodes in columns. ERP data frames are expected to be named as a combination of strings specified in \code{base} and \code{numbers}.
 }
 \usage{
-erp.latency(base, numbers, win.ini, win.end, envir=.GlobalEnv, 
+erp.latency(base, numbers, win.ini, win.end, erplist = NULL, 
 startmsec=-200, endmsec=1200, others=NULL, format="long", 
-name.dep="Dep", name.newvar="electrode", peak.fun, ...)
+name.dep="Dep", name.newvar="electrode", peak.fun = "max", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -27,8 +27,8 @@ the initial edge (in ms) of the window in which the peak latency has to be compu
   \item{win.end}{
 the final edge (in ms) of the window in which the peak latency has to be computed.
 }
-  \item{envir}{
-the environment in which \code{erp.latency} has to be evaluated.
+  \item{erplist}{
+a list containing the ERP data frames specified in \code{base} and \code{numbers}.
 }
   \item{startmsec}{
 the start time (in ms) of the ERP data frames. It can be a negative value, indicating the baseline time frame.

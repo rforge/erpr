@@ -15,11 +15,20 @@
 
 
 create.roi=function(datall, electrode="electrode", groups=NULL, roi.levels=NULL ){
+	# preliminary checks
+	
 	if (!is.list(groups)){
 		stop("groups must be a list!")
 	}
 	if (length(groups)!=length(roi.levels)){
 		stop("groups and roi.levels must have the same length!")
+	}
+	
+	# missing electrodes checks
+	all.electrodes=unlist(groups)
+	if (any(!all.electrodes%in%datall[,electrode])){
+		missing.el=all.electrodes[!all.electrodes%in%datall[,electrode]]
+		stop("The following electrodes are not contained in the data frame specified:\n", missing.el, call.=F)
 	}
 	
 	roi=rep(NA, dim(datall)[1])

@@ -1,13 +1,56 @@
 erp.t <-
-function(base1, base2,numbers1,numbers2=numbers1, electrode, paired=TRUE, alpha=0.05, envir=.GlobalEnv, envir2=NULL,sig=NULL, main=electrode, smo=0.5 , col="black", startmsec=-200, endmsec=1200, interval=c(startmsec, endmsec), step=200, verticals=NULL,horizontals=NULL, x.axis="default", ylim=c(-6,6), lwd=c(1,1), lty=c(1,1), cex.xaxis=0.8, cex.yaxis=1, color.list=c("blue", "red")) {
+function(base1, base2,numbers1,numbers2=numbers1, startmsec=-200, endmsec=1200, electrode, smo = NULL, paired=TRUE, alpha=0.05, erplist1=NULL, erplist2=erplist1, sig=NULL, main=electrode, col=c("blue", "red"), ...) {
+
+	# preliminary checks
+	if (is.null(erplist1)|is.null(erplist2)){
+	stop("two erplist objects (erplist1 and erplist2) containing ERP data frames must be specified!", call.=F)
+	}
+	
+	#electrode checks
+	if (!electrode%in%names(erplist1[[1]])) {
+	stop("The electrode specified is not in the data frames contained in the erplist1", call.=F)
+	}
+	
+	if (!electrode%in%names(erplist2[[1]])) {
+	stop("The electrode specified is not in the data frames contained in the erplist2", call.=F)
+	}
+
+	
+	#### object checks
+	object.names1=paste(base1, numbers1, sep="")
+	if (any(!object.names1%in%names(erplist1))){
+		missing.objects1=object.names1[!object.names1%in%names(erplist1)]
+		missing.object.collist1=paste(missing.objects1, "\n", sep="")
+		stop("The following objects are not contained in the erplist1 specified:\n", missing.object.collist1, call.=F)
+	}
+		#### object checks
+	object.names2=paste(base2, numbers2, sep="")
+	if (any(!object.names2%in%names(erplist2))){
+		missing.objects2=object.names2[!object.names2%in%names(erplist2)]
+		missing.object.collist2=paste(missing.objects2, "\n", sep="")
+		stop("The following objects are not contained in the erplist2 specified:\n", missing.object.collist2, call.=F)
+	}
+	
+#retrieve the call that can be used with erp and erp.add
+mycall=match.call()
+mycall.list=as.list(mycall)
+
+#create the object for the future call of erp
+mycall.erp=mycall.list[names(mycall.list)%in%as.list(names(as.list(args(erp))))]
+#notice the second part of this line of code. Basically I retrive the args of funciton erp, transform in a list. Then I take only the args in call that match
+# with args of function erp, to avoid to call for args unexpected from the function erp.
+mycall.erp$el=as.name("e1") # this is for a fake initial plot, it does not matter if it is e1 or e2.
+mycall.erp$type="n" # this is for the fake initial plot.
+
+
+#create the object for the future call of erp
+mycall.erp.add=mycall.list[names(mycall.list)%in%c("lty", "smo", "col", "lwd")]
 
 
 	#### PARTE 1: STATISTICHE PER ELETTRODO ####
 if (is.null(numbers2)){
 	numbers2=numbers1}
 
-if (is.null(envir2)){
-	envir2=envir}
 
 if (is.null(sig)){
 element=function(x,row.i){
@@ -17,10 +60,10 @@ element=function(x,row.i){
 alldata1.list=list(NULL)
 alldata2.list=list(NULL)
 for (i1 in 1:length(numbers1)){
-	alldata1.list[[i1]]=eval(parse(file="", text=paste(base1,numbers1[i1], sep="")),envir=envir)
+	alldata1.list[[i1]]=erplist1[[paste(base1,numbers1[i1], sep="")]]
 	}
 for (i2 in 1:length(numbers2)){
-	alldata2.list[[i2]]=eval(parse(file="", text=paste(base2,numbers2[i2], sep="")),envir=envir2)
+	alldata2.list[[i2]]=erplist2[[paste(base2,numbers2[i2], sep="")]]
 	}
 
 
@@ -67,62 +110,38 @@ if (!is.null(sig)){
 
 
 
-alldata1=grandaverage(base=base1, numbers1, envir=envir)
-alldata2=grandaverage(base=base2,numbers2, envir=envir2)
+alldata1=grandaverage(base=base1, numbers1, erplist=erplist1)
+alldata2=grandaverage(base=base2,numbers2, erplist=erplist2)
 
 
 
 e1=alldata1[,electrode]
 e2=alldata2[,electrode]
 
-lengthwhole=length(e1)
-	
-	startpoint=msectopoints(interval[1], lengthwhole)
-	endpoint=msectopoints(interval[2], lengthwhole)
-	
-	
-	vet=seq(interval[1], interval[2], step)
-	
-	if (x.axis[1]!="default"){
-		vet=x.axis
-		}
 		
-	temp0=msectopoints(0, lengthwhole)
-	vet2=msectopoints(vet, lengthwhole)
-	vet.names=paste(vet) # vet sarebbero le labels del nuovo asse
-
-	maxe1=max(e1)
-	mine1=min(e1)
-		
-
-		plot(e1, type="n", ylim=ylim, col=col,lwd=lwd, main=main, xaxt="n",xlim=c(startpoint, endpoint), ylab="",xlab="", lty=lty, cex.axis=cex.yaxis)
-		
+		do.call("erp", mycall.erp[-1])
+					
 		# plotto le bande di significatività
 		######################
 		abline(v=grep(TRUE, alltemp.results[,electrode]), col="lightgray", lwd=3)
 		#######################
+		if (!is.null(smo)){
+			e1=smooth.spline(e1, spar=smo)$y
+			e2=smooth.spline(e2, spar=smo)$y
+		}
+		
+		mycall.erp.add$el = as.name("e1")
+		mycall.erp.add$col = col[1]
+		
+		do.call("erp.add", mycall.erp.add)		
+		
+		mycall.erp.add$el = as.name("e2")
+		mycall.erp.add$col = col[2]
 
-		
-		lines(smooth.spline(e1, spar=smo), col=color.list[1],lwd=lwd[1], type="l", lty=lty[1])
-		
-		lines(smooth.spline(e2, spar=smo), col=color.list[2],lwd=lwd[2], type="l", lty=lty[2])
+		do.call("erp.add", mycall.erp.add)		
 
 	
-		axis(1,vet2, paste(vet), cex.axis=cex.xaxis)
-		abline(h=0, lty="longdash")
-		segments(temp0,-0.5,temp0,0.5, lty=1)
-	
-	# draw vertical lines (expressed in msec and authomatically converted in points)
-	for (i in 1:length(verticals)){
-		x=msectopoints(verticals[i], lengthwhole)
-		abline(v=x)
-		}	
-	#draw horizontal lines (expressed in microvolts)
-	for (i in 1:length(horizontals)){
-		x=(horizontals[i])
-		abline(h=x)
-	}	
-
-print(color.list)
+		
+print(col)
 invisible(alltemp.results)
 }

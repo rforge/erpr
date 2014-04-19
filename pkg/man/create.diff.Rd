@@ -7,10 +7,11 @@ create an ERP data frame with differential values
 \description{
 This function creates a new set of data frames from two sets of paired ERP data frames. 
 The values are obtained by subtracting the values of the second set from the first set.
+All data frames must be in the same erplist.
 }
 \usage{
-create.diff(base1, base2, numbers, outname = NULL, envir = .GlobalEnv, 
-out.envir = envir, fileinfo = 1)
+create.diff(base1, base2, numbers, outname = NULL, erplist, 
+fileinfo = 1)
 }
 \arguments{
   \item{base1}{
@@ -28,12 +29,10 @@ the numbers of the subjects to be subtracted by the function.
 the \code{base} of the names of the returned data frames.
 }
 
-  \item{envir}{
-the environment in which \code{create.diff} is to be evaluated.
+  \item{erplist}{
+a list containing the ERP data frames specified in \code{base} and \code{numbers}.
 }
-  \item{out.envir}{
-the environment in which the new objects are returned.
-}
+
   \item{fileinfo}{
 a number indicating from which set of objects specified in the argument \code{bases} the information of the data frame is retrieved.
 }

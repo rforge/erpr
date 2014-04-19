@@ -1,5 +1,23 @@
 scalp.cor <-
-function(base, numbers, behaviour=NULL, alpha=0.05,method = c("pearson", "kendall", "spearman"), sig=NULL, envir=.GlobalEnv, smo=0.5, layout=1, ylims="auto", yrev=TRUE, startmsec=-200, endmsec=1200, lwd=c(1,1), lty=c(1,1), col="blue", legend=TRUE, legend.lab="default", t.axis=seq(-100,endmsec,200), scalp.array=NULL) {
+function(base, numbers, external=NULL, alpha=0.05,method = c("pearson", "kendall", "spearman"), sig=NULL, erplist=NULL, smo=NULL, layout=1, ylims="auto", yrev=TRUE, startmsec=-200, endmsec=1200, lwd=c(1,1), lty=c(1,1), col="blue", legend=TRUE, legend.lab="default", t.axis=seq(-100,endmsec,200), scalp.array=NULL) 
+{
+# preliminary checks
+	if (is.null(erplist)){
+	stop("an erplist object containing ERP data frames must be specified!", call.=F)
+	}
+	
+	if (length(numbers)!=length(external)){
+	stop("the external variable should have the same length of numbers (of Subjects)")
+	}
+	
+	#### object checks
+	object.names=c(paste(base, numbers, sep=""))
+	if (any(!object.names%in%names(erplist))){
+		missing.objects=object.names[!object.names%in%names(erplist)]
+		missing.object.collist=paste(missing.objects, "\n", sep="")
+		stop("The following objects are not contained in the erplist specified:\n", missing.object.collist, call.=F)
+	}
+
 
 if (legend.lab=="default"){
 	legend.lab=c(base)
@@ -16,7 +34,7 @@ element=function(x,row.i){
 
 alldata1.list=list(NULL)
 for (i1 in 1:length(numbers)){
-	alldata1.list[[i1]]=eval(parse(file="", text=paste(base,numbers[i1], sep="")),envir=envir)
+	alldata1.list[[i1]]=erplist[[paste(base,numbers[i1], sep="")]]
 	}
 
 
@@ -42,7 +60,7 @@ for (k in 1:dim(alldata1.list[[1]])[1]) {#prendo la dimensione di un data.frame 
 		length(temp.test.vet)=dim(alltemp[[k]][[1]])[1]
 		temp.results.vet=NULL
 		for (j in 1:dim(alltemp[[k]][[1]])[2]){#nota:uso dim perché alltemp[[k]][[1]] è una matrice
-		temp.test.vet[[j]]=cor.test(alltemp[[k]][[1]][,j], behaviour, method=method)
+		temp.test.vet[[j]]=cor.test(alltemp[[k]][[1]][,j], external, method=method)
 		if(temp.test.vet[[j]]$p.value<alpha){
 			if (temp.test.vet[[j]]$estimate<0){
 				temp.results.vet[j]=-1
@@ -79,7 +97,7 @@ if (!is.null(sig)){
 #base = le prime lettere degli oggetti 
 #numbers= il numero dei soggetti di cui calcolare l'average
 
-alldata1=grandaverage(base=base, numbers, envir=envir)
+alldata1=grandaverage(base=base, numbers, erplist=erplist)
 
 categ=list(alldata1)
 
@@ -151,7 +169,7 @@ par(mfrow=c(7,5), mai=c(0,0,0,0))
 
 	for (i in 1:(length(electrodes))){
 		if (electrodes[i]=="yaxis"){
-		plot(categ[[1]]$P4, type="n", frame.plot=FALSE,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n", ylim=c(yedge[1]+yedge[1]/3,yedge[2]+(yedge[2]/3)))
+		plot(1, type="n", frame.plot=FALSE,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n", ylim=c(yedge[1]+yedge[1]/3,yedge[2]+(yedge[2]/3)))
 axis(side=2, pos= dim(categ[[1]])[1]/2, at=c(round(ceiling(yedge[1]),0),round(ceiling(yedge[1])/2,0),0,round(floor(yedge[2])/2,0),round(floor(yedge[2]),0)), cex.axis=0.8, las=2)
 text((dim(categ[[1]])[1]/2)+(dim(categ[[1]])[1]/8),0, labels=expression(paste(mu,"V")), cex=1.4)
 }
@@ -165,15 +183,17 @@ text((dim(categ[[1]])[1]/2)+(dim(categ[[1]])[1]/8),0, labels=expression(paste(mu
 			}
 		}
 		if (electrodes[i]=="xaxis"){
-plot(categ[[1]]$P4, type="n", frame.plot=FALSE,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n", ylim=c(yedge[1]+yedge[1]/3,yedge[2]+(yedge[2]/3)))
+plot(1, type="n", frame.plot=FALSE,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n", ylim=c(yedge[1]+yedge[1]/3,yedge[2]+(yedge[2]/3)))
 		axis(1, pos=0, at=msectopoints(t.axis, dim(categ[[1]])[1], startmsec, endmsec), labels=paste(t.axis))
 		}
 		
 		if (!electrodes[i]%in%c("xaxis", "yaxis", "blank", "legend")) {
 			
 			### NOTA: plotto due volte il grafico: la prima volta con type="n" poi con type="l". Altrimenti le bande si sovrascrivono col grafico
-
-			plot(smooth.spline(categ[[1]][[electrodes[i]]][1:dim(categ[[1]])[1]], spar=smo), type="n", ylim=c(yedge[1]+yedge[1]/3,yedge[2]+(yedge[2]/3)),col=col[1], main="", ylab="", xlab="", cex.main=0.85,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n",frame.plot=FALSE, lwd=lwd[1], lty=lty[1])
+			el=categ[[1]][[electrodes[i]]][1:dim(categ[[1]])[1]]
+			# nota che non metto qui la smooth spline, tanto non serve (non plotto niente).
+				
+			plot(el, type="n", ylim=c(yedge[1]+yedge[1]/3,yedge[2]+(yedge[2]/3)),col=col[1], main="", ylab="", xlab="", cex.main=0.85,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n",frame.plot=FALSE, lwd=lwd[1], lty=lty[1])
 			
 			# plotto le bande di significatività di correlazioni negative
 		######################
@@ -184,10 +204,13 @@ plot(categ[[1]]$P4, type="n", frame.plot=FALSE,xlim=c(1,dim(categ[[1]])[1]),xaxt
 		######################
 		abline(v=grep(+1, alltemp.results[,electrodes[i]]), col="indianred1", lwd=1)
 		#######################
-
+		el=categ[[1]][[electrodes[i]]][1:dim(categ[[1]])[1]]
+		if (!is.null(smo)){
+			el=smooth.spline(el, spar=smo)
+			}
 			
 			### NOTA: plotto due volte il grafico: la prima volta con type="n" poi con type="l". Altrimenti le bande si sovrascrivono col grafico
-			lines(smooth.spline(categ[[1]][[electrodes[i]]][1:dim(categ[[1]])[1]], spar=smo), col=col[1],  cex.main=0.85, lwd=lwd[1], lty=lty[1])
+			lines(el, col=col[1],  cex.main=0.85, lwd=lwd[1], lty=lty[1])
 
 				##### di seguito ho semplicemente calcolato, tramite una proporzione, il punto che corrisponde allo 0
 				totalendmsec=endmsec+abs(startmsec)

@@ -1,5 +1,21 @@
 scalp.infl <-
-function(base, numbers, smo=0, layout=1, ylims=12, yrev=FALSE, startmsec=-200, endmsec=1200, lwd=c(1,2), lty=1, col="black", out.col="red", envir=.GlobalEnv, t.axis=seq(-100,endmsec,200), scalp.array=NULL){
+function(base, numbers, smo=NULL, layout=1, outnumber=1, ylims=12, yrev=FALSE, startmsec=-200, endmsec=1200, lwd=c(1,2), lty=1, col="black", out.col="red", erplist=NULL, t.axis=seq(-100,endmsec,200), scalp.array=NULL)
+
+{
+
+
+# preliminary checks
+	if (is.null(erplist)){
+	stop("an erplist object containing ERP data frames must be specified!", call.=F)
+	}
+
+	#### object checks
+	object.names=paste(base, numbers, sep="")
+	if (any(!object.names%in%names(erplist))){
+		missing.objects=object.names[!object.names%in%names(erplist)]
+		missing.object.collist=paste(missing.objects, "\n", sep="")
+		stop("The following objects are not contained in the erplist specified:\n", missing.object.collist, call.=F)
+	}
 
 
 # la funzione contiene all'interno una funzione che crea il panel. Questa funzione a sua volta contiene la funzione scalp.infl.endo, che è quella che effettivamente fa il grafico appoggiandosi alla funzione scalp.endo. 
@@ -7,17 +23,17 @@ function(base, numbers, smo=0, layout=1, ylims=12, yrev=FALSE, startmsec=-200, e
 
 scalp.infl.panel=function(panel)
 	{
-		scalp.infl.endo=function(base, numbers, outline, smo, col, startmsec, endmsec, yrev, ylims, lwd, lty, color.list=c("black","red"), layout, envir=.GlobalEnv){
+		scalp.infl.endo=function(base, numbers, outline, smo, col, startmsec, endmsec, yrev, ylims, lwd, lty, color.list=c("black","red"), layout, erplist=erplist){
 		text=paste(base,numbers[1],sep="")
-		average.temp=eval(parse(file="", text=paste(base,numbers[1],sep="")), envir=envir)
+		average.temp=erplist[[paste(base,numbers[1],sep="")]]
 		for (i in 2:length(numbers)){
-			average.temp=average.temp+eval(parse(file="", text=paste(base,numbers[i], sep="")),envir=envir)		
+			average.temp=average.temp+erplist[[paste(base,numbers[i], sep="")]]	
 			}
 		average=average.temp/length(numbers)
 		
-		average.excl=(average.temp-eval(parse(file="", text=paste(base,outline, sep="")),envir=envir))/(length(numbers)-1)
+		average.excl=(average.temp-erplist[[paste(base,outline, sep="")]])/(length(numbers)-1)
 
-		scalp.endo=function(categ, smo=0.5, label=c("type1"), layout=1, ylims, yrev=TRUE, startmsec=-200, 	endmsec=1200, lwd=1, lty=1, color.list=c("black","red")) {
+		scalp.endo=function(categ, smo=NULL, label=c("type1"), layout=1, ylims, yrev=TRUE, startmsec=-200, 	endmsec=1200, lwd=1, lty=1, color.list=c("black","red")) {
 
 	if (length(lwd)==1){
 		lwd=rep(lwd, length(categ))}
@@ -89,7 +105,7 @@ electrodes=c("yaxis","Fp1", "blank", "Fp2","legend", "F7", "F3", "FZ", "F4", "F8
 	
 		for (i in 1:(length(electrodes))){
 		if (electrodes[i]=="yaxis"){
-		plot(categ[[1]]$P4, type="n", frame.plot=FALSE,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n",ylim=c(yedge[1]+yedge[1]/3,yedge[2]+(yedge[2]/3)))
+		plot(1, type="n", frame.plot=FALSE,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n",ylim=c(yedge[1]+yedge[1]/3,yedge[2]+(yedge[2]/3)))
 	axis(side=2, pos= dim(categ[[1]])[1]/2, at=c(round(ceiling(yedge[1]),0),round(ceiling(yedge[1])/2,0),0,round(floor(yedge[2])/2,0),round(floor(yedge[2]),0)), cex.axis=0.8, las=2)
 	text((dim(categ[[1]])[1]/2)+(dim(categ[[1]])[1]/8),0, labels=expression(paste(mu,"V")), cex=1.4)
 	}
@@ -102,11 +118,16 @@ electrodes=c("yaxis","Fp1", "blank", "Fp2","legend", "F7", "F3", "FZ", "F4", "F8
 
 			}
 			if (electrodes[i]=="xaxis"){
-plot(categ[[1]]$P4, type="n", frame.plot=FALSE,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n", ylim=c(yedge[1]+yedge[1]/3,yedge[2]+(yedge[2]/3)))
+plot(1, type="n", frame.plot=FALSE,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n", ylim=c(yedge[1]+yedge[1]/3,yedge[2]+(yedge[2]/3)))
 		axis(1, pos=0, at=msectopoints(t.axis, dim(categ[[1]])[1], startmsec, endmsec), labels=paste(t.axis))
 		}
 			if (!electrodes[i]%in%c("xaxis", "yaxis", "legend", "blank")) {
-				plot(smooth.spline(categ[[1]][[electrodes[i]]][1:dim(categ[[1]])[1]], spar=smo), type="l", ylim=c(yedge[1]+yedge[1]/3,yedge[2]+(yedge[2]/3)),col=color.list[1], main="", ylab="", xlab="", cex.main=0.85,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n",frame.plot=FALSE, lwd=lwd[1], lty=lty[1])
+				if(!is.null(smo)){
+				el=smooth.spline(categ[[1]][[electrodes[i]]][1:dim(categ[[1]])[1]], spar=smo)
+				} else {
+					el=categ[[1]][[electrodes[i]]][1:dim(categ[[1]])[1]]
+				}
+				plot(el, type="l", ylim=c(yedge[1]+yedge[1]/3,yedge[2]+(yedge[2]/3)),col=color.list[1], main="", ylab="", xlab="", cex.main=0.85,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n",frame.plot=FALSE, lwd=lwd[1], lty=lty[1])
 				##### di seguito ho semplicemente calcolato, tramite una proporzione, il punto che corrisponde allo 0
 					totalendmsec=endmsec+abs(startmsec)
 					zeropoint=(abs(startmsec)*dim(categ[[1]])[1])/totalendmsec
@@ -115,7 +136,12 @@ plot(categ[[1]]$P4, type="n", frame.plot=FALSE,xlim=c(1,dim(categ[[1]])[1]),xaxt
 					mtext(electrodes[i],side=3, line=-2)
 		if (length(categ)>1&electrodes[i]!="blank") {
 					for (k in 2:length(categ)){
-						lines(smooth.spline(categ[[k]][electrodes[i]], spar=smo),col=color.list[k], lwd=lwd[k],lty=lty[k])
+						if(!is.null(smo)){
+							el=smooth.spline(categ[[k]][[electrodes[i]]][1:dim(categ[[k]])[1]], spar=smo)
+						} else {
+								el=categ[[k]][[electrodes[i]]][1:dim(categ[[k]])[1]]
+						}
+						lines(el,col=color.list[k], lwd=lwd[k],lty=lty[k])
 						}
 			} 
 			}
@@ -130,7 +156,7 @@ plot(categ[[1]]$P4, type="n", frame.plot=FALSE,xlim=c(1,dim(categ[[1]])[1]),xaxt
 		}
 
 		
-		scalp.infl.endo(base=base, numbers=numbers, outline=panel$outnumber, layout=layout, smo=smo, ylims=ylims, yrev=yrev, startmsec=startmsec, endmsec=endmsec, color.list=c(col, out.col), lwd=lwd, lty=lty,envir=envir)
+		scalp.infl.endo(base=base, numbers=numbers, outline=panel$outnumber, layout=layout, smo=smo, ylims=ylims, yrev=yrev, startmsec=startmsec, endmsec=endmsec, color.list=c(col, out.col), lwd=lwd, lty=lty,erplist=erplist)
 		
 		panel
 		

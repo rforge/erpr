@@ -5,12 +5,12 @@
 plot the timepoint correlations between ERPs and an external variable (scalp array)
 }
 \description{
-This function performs a series of correlations on each timepoint between ERP voltages and another (typically a behavioural) variable. The set of ERP data frames is specified by \code{base} and \code{numbers}. The behavioral variable is specified as a vector (of length equal to \code{numbers}) in the argument \code{behaviour}. A scalp plot of the results is returned.
+This function performs a series of correlations on each timepoint between ERP voltages and an external (typically a behavioural) variable. The set of ERP data frames is specified by \code{base} and \code{numbers}. The external variable is specified as a vector (of length equal to \code{numbers}) in the argument \code{external}. A scalp plot of the results is returned.
 }
 \usage{
-scalp.cor(base, numbers, behaviour = NULL, alpha = 0.05, 
+scalp.cor(base, numbers, external = NULL, alpha = 0.05, 
 method = c("pearson", "kendall", "spearman"), sig = NULL, 
-envir = .GlobalEnv, smo = 0.5, layout = 1, ylims = "auto",
+erplist = NULL, smo = NULL, layout = 1, ylims = "auto",
  yrev = TRUE, startmsec = -200, endmsec = 1200, lwd = c(1, 1), 
  lty = c(1, 1), col = "blue", legend = TRUE, legend.lab = "default",
  t.axis=seq(-100,endmsec,200), scalp.array=NULL)
@@ -23,8 +23,8 @@ a string indicating the beginning of the name of the set of ERP data frames.
   \item{numbers}{
 the numbers of the subjects of the set of ERP data frames .
 }
-  \item{behaviour}{
-a vector indicating the values of the behavioural variable. This vector must be of the same length of \code{numbers}
+  \item{external}{
+a vector indicating the values of the external variable (typically a behavioural variable). This vector must be of the same length of \code{numbers}
 }
   \item{alpha}{
 the alpha of the correlation tests.
@@ -35,11 +35,11 @@ the method of the correlations. \cr Available methods are \code{"pearson", "kend
   \item{sig}{
 if \code{NULL}, then a series of correlations is computed. If an appropriate object is specified (i.e. an object returned by \code{scalp.cor} or \code{erp.cor}) then the results are retrieved by this object and the function simply plots the results.
 }
-  \item{envir}{
-the environment in which the ERP data frames are searched for.
+  \item{erplist}{
+a list containing ERP data frames.
 }
- \item{smo}{
-%%     ~~Describe \code{smo} here~~
+  \item{smo}{
+the smoothing parameter to apply (see \code{\link{smooth.spline}}). Default is \code{NULL} and no smoothing is applied.
 }
   \item{layout}{
 A number indicating the layout of electrodes to be plotted. Currently only few default layouts are supported (a number from 1 to 5).
@@ -79,7 +79,7 @@ the legend labels. If "default", the names are retrieved from the \code{categ} a
 the position of the ticks on an additional axis indicating the time. This axis is plotted in the bottom-left corner of the plot array.
 }
 	\item{scalp.array}{
-This argument is vector of two values indicating the number of panels of the plot, as number of rows and number of columns respectively. If a default layout is specified, the number of panels is automatically computed.
+This argument is vector of two values indicating the number of panels of the plot, as number of rows and number of columns respectively. If a default layout is specified, the number of panels is automatically computed. See also \code{Details}.
 	}
 }
 
@@ -110,10 +110,10 @@ Giorgio Arcara
 \dontrun{
 data(ERPsets)
 
-#generate an hypothetic behavioral variables
+#generate an hypothetic external variables
 RT=rnorm(20, mean=500, sd=200)
 
-scalp.cor("Exp1_word_subj", 1:20, behaviour = RT, smo=0, layout=1, ylim=10, legend=T)
+scalp.cor("Exp1_word_subj", 1:20, external = RT, smo=0, layout=1, ylim=10, legend=T)
 
 }
 

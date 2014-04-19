@@ -6,6 +6,7 @@ create electrode region of interests
 }
 \description{
 An utility function to create a factor that collapses other factor levels (typically electrode names) in a new variable vector with the new ROI (region of interest) variable.
+It can be used only with data.frame in long format.
 }
 \usage{
 create.roi(datall, electrode="electrode", groups=NULL, roi.levels=NULL )
@@ -16,7 +17,7 @@ create.roi(datall, electrode="electrode", groups=NULL, roi.levels=NULL )
 a  data frame containing ERP data in long format.
 }
   \item{electrode}{
-column names of datall containing electrode names.
+name of the column in datall containing electrode names.
 }
   \item{groups}{
 a list containing (in separate vectors) electrode names to create the ROI.\cr E.g. \code{list(c("Fp1", "Fp2"), c("P3", "P4"))}.

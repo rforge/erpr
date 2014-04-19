@@ -4,11 +4,24 @@ grandaverage <-
 # in questa f(x) AGGIUNGI UN WARNING SE CI SONO NA e crea una funzione (da usare preliminarmente) che faccia un check di tutti i dati
 # magari una funz veloce che ti dica solo se sono completi e una più dettagliata che ti dica invece range e eventuali NA.
 
-function(base, numbers, electrodes="all", envir=.GlobalEnv, NA.sub=TRUE)
-	#forse da togliere la possibilità di selezionare elettrodi.
+function(base, numbers, electrodes="all", erplist=NULL, NA.sub=TRUE) 
 	{
+	# preliminary checks
+	if (is.null(erplist)){
+	stop("an erplist object containing ERP data frames must be specified!", call.=F)
+	}
+	
+	#### object checks
+	object.names=c(paste(base, numbers, sep=""))
+	if (any(!object.names%in%names(erplist))){
+		missing.objects=object.names[!object.names%in%names(erplist)]
+		missing.object.collist=paste(missing.objects, "\n", sep="")
+		stop("The following objects are not contained in the erplist specified:\n", missing.object.collist, call.=F)
+	}
+
+
 	comment_text=paste("Subjects averaged: ", paste(base,numbers[1], sep=""))
-	average.temp=eval(parse(file="", text=paste(base,numbers[1], sep="")),envir=envir)
+	average.temp=erplist[[paste(base,numbers[1], sep="")]] #nota il [[ ]] serve per accedere al data.frame
 	
 	if(electrodes[1]=="all"){
 		electrodes=names(average.temp)
@@ -25,7 +38,7 @@ function(base, numbers, electrodes="all", envir=.GlobalEnv, NA.sub=TRUE)
 	
 		for (i in 2:length(numbers))
 		{
-			average.temp.new=eval(parse(file="", text=paste(base,numbers[i],sep="")),envir=envir)[,electrodes]
+			average.temp.new=erplist[[paste(base,numbers[i], sep="")]][,electrodes]
 			
 			if(NA.sub==TRUE)
 			{

@@ -1,5 +1,12 @@
 scalp <-
-function(categ, smo=0.5, layout=1, ylims="auto", yrev=TRUE, startmsec=-200, endmsec=1200, lwd=1, lty=1, color.list=c("blue", "red", "darkgreen"), legend=F, legend.lab="default", t.axis=seq(-100,endmsec,200), scalp.array=NULL){
+function(categ, smo=NULL, layout=1, ylims="auto", yrev=TRUE, startmsec=-200, endmsec=1200, lwd=1, lty=1, color.list=c("blue", "red", "darkgreen"), legend=F, legend.lab="default", t.axis=seq(-100,endmsec,200), scalp.array=NULL){
+
+### check esistenza
+
+if (class(categ)!="list"){
+		stop("input object must be a list!")
+		}
+
 
 if (length(legend.lab)==1&legend.lab[1]=="default"){
 legend.lab=deparse(substitute(categ))
@@ -15,8 +22,7 @@ if (length(lwd)==1){
 if (length(lty)==1){
 	lty=rep(lty, length(categ))}
 
-if (class(categ)!="list"){
-		stop("input object must be a list!!")}
+
 if (layout[1]==1){
 electrodes=c("yaxis","Fp1", "blank", "Fp2","legend", "F7", "F3", "FZ", "F4", "F8", "FT7", "FC3", "FCZ", "FC4", "FT8", "T3", "C3", "CZ","C4","T4","TP7", "CP3", "CPZ", "CP4", "TP8", "T5", "P3", "PZ", "P4", "T6", "xaxis", "O1", "OZ", "O2", "blank")
 	}
@@ -74,9 +80,10 @@ if (!is.null(scalp.array)){
 }
 
 
+
 	for (i in 1:(length(electrodes))){
 		if (electrodes[i]=="yaxis"){
-plot(categ[[1]]$P4, type="n", frame.plot=FALSE,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n", ylim=c(yedge[1]+yedge[1]/3,yedge[2]+(yedge[2]/3)))
+plot(1, type="n", frame.plot=FALSE,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n", ylim=c(yedge[1]+yedge[1]/3,yedge[2]+(yedge[2]/3)))
 axis(side=2, pos=dim(categ[[1]])[1]/2, at=c(round(ceiling(yedge[1]),0),round(ceiling(yedge[1])/2,0),0,round(floor(yedge[2])/2,0),round(floor(yedge[2]),0)), cex.axis=0.8, las=2)
 text((dim(categ[[1]])[1]/2)+(dim(categ[[1]])[1]/8),0, labels=expression(paste(mu,"V")), cex=1.4)
 	}
@@ -90,11 +97,16 @@ text((dim(categ[[1]])[1]/2)+(dim(categ[[1]])[1]/8),0, labels=expression(paste(mu
 			}
 		}
 		if (electrodes[i]=="xaxis"){
-plot(categ[[1]]$P4, type="n", frame.plot=FALSE,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n", ylim=c(yedge[1]+yedge[1]/3,yedge[2]+(yedge[2]/3)))
+plot(1, type="n", frame.plot=FALSE,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n", ylim=c(yedge[1]+yedge[1]/3,yedge[2]+(yedge[2]/3)))
 		axis(1, pos=0, at=msectopoints(t.axis, dim(categ[[1]])[1], startmsec, endmsec), labels=paste(t.axis))
 		}
 		if (!electrodes[i]%in%c("xaxis", "yaxis", "legend", "blank")) {
-			plot(smooth.spline(categ[[1]][[electrodes[i]]][1:dim(categ[[1]])[1]], spar=smo), type="l", ylim=c(yedge[1]+yedge[1]/3,yedge[2]+(yedge[2]/3)),col=color.list[1], main="", ylab="", xlab="", cex.main=0.85,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n",frame.plot=FALSE, lwd=lwd[1], lty=lty[1])
+			if(!is.null(smo)){
+				el=smooth.spline(categ[[1]][[electrodes[i]]][1:dim(categ[[1]])[1]], spar=smo)
+				} else {
+					el=categ[[1]][[electrodes[i]]][1:dim(categ[[1]])[1]]
+				}
+			plot(el, type="l", ylim=c(yedge[1]+yedge[1]/3,yedge[2]+(yedge[2]/3)),col=color.list[1], main="", ylab="", xlab="", cex.main=0.85,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n",frame.plot=FALSE, lwd=lwd[1], lty=lty[1])
 				
 				##### di seguito ho semplicemente calcolato, tramite una proporzione, il punto che corrisponde allo 0
 
@@ -106,7 +118,13 @@ plot(categ[[1]]$P4, type="n", frame.plot=FALSE,xlim=c(1,dim(categ[[1]])[1]),xaxt
 				mtext(electrodes[i],side=3, line=-2)
 	if (length(categ)>1&electrodes[i]!="blank") {
 				for (k in 2:length(categ)){
-					lines(smooth.spline(categ[[k]][electrodes[i]], spar=smo),col=color.list[k], lwd=lwd[k],lty=lty[k])
+					if(!is.null(smo)){
+							el=smooth.spline(categ[[k]][[electrodes[i]]][1:dim(categ[[1]])[1]], spar=smo)
+						} else {
+								el=categ[[k]][[electrodes[i]]][1:dim(categ[[1]])[1]]
+						}
+
+					lines(el,col=color.list[k], lwd=lwd[k],lty=lty[k])
 					}
 		} 
 		}

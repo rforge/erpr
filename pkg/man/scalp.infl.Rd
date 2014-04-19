@@ -9,10 +9,10 @@ The function returns a diagnostic plot to investigate the influence of a given E
 }
 
 \usage{
-scalp.infl(base, numbers, smo = 0, layout = 1, ylims = 12, 
-yrev = FALSE, startmsec = -200, endmsec = 1200, lwd = c(1, 2), 
-lty = 1, col = "black", out.col = "red", envir = .GlobalEnv,
-t.axis=seq(-100,endmsec,200), scalp.array=NULL)
+scalp.infl(base, numbers, smo = NULL, layout = 1, outnumber=1,
+ylims = 12,  yrev = FALSE, startmsec = -200, endmsec = 1200, 
+lwd = c(1, 2), lty = 1, col = "black", out.col = "red", 
+erplist = NULL, t.axis=seq(-100,endmsec,200), scalp.array=NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -23,13 +23,17 @@ a string indicating the beginning of the name of the \code{data.frame} containin
 the numbers of the subjects to be averaged.
 }
 
- \item{smo}{
-the smoothing parameter to apply.
+  \item{smo}{
+the smoothing parameter to apply (see \code{\link{smooth.spline}}). Default is \code{NULL} and no smoothing is applied.
 }
 
   \item{layout}{
 A number indicating the layout of electrodes to be plotted. Currently only few default layouts are supported (a number from 1 to 5).
 Alternatively, a character vector specifying the layout may be supplied (see \code{Details}). 
+}
+
+\item{outnumber}{
+The number of the subject that will be initially removed from the averaged (this value could be changed also via the GUI).
 }
 
 \item{ylims}{
@@ -58,14 +62,14 @@ the color of the grand average including all subjects.
   \item{out.col}{
 the color of the grand average in which the selected subject is removed
 }
-  \item{envir}{
-the environment in which the ERP data frames are searched for.
+  \item{erplist}{
+a list containing ERP data frames.
 }
   \item{t.axis}{
 the position of the ticks on an additional axis indicating the time. This axis is plotted in the bottom-left corner of the plot array.
 }
 	\item{scalp.array}{
-if a custom \code{layout} is supplied. This argument is vector of two values indicating the number of panels of the plot, as number of rows and number of columns respectively.
+This argument is vector of two values indicating the number of panels of the plot, as number of rows and number of columns respectively. If a default layout is specified, the number of panels is automatically computed. See also \code{Details}.
 	}
 }
 
@@ -73,7 +77,7 @@ if a custom \code{layout} is supplied. This argument is vector of two values ind
 }
 
 \value{
-The function returns a plot showing the influence of a subject on the grandaverage.
+The function returns a plot of a scalp array showing the influence of a subject on the grandaverage.
 }
 
 \author{

@@ -9,8 +9,8 @@ This function performs a series of t-tests on each timepoint comparing two sets 
 }
 \usage{
 scalp.t(base1, base2, numbers1, numbers2 = NULL, paired = TRUE,
-alpha = 0.05, sig = NULL, envir = .GlobalEnv, envir2 = NULL, 
-smo = 0.5, layout = 1, ylims = "auto", yrev = TRUE,
+alpha = 0.05, sig = NULL, erplist1 = NULL, erplist2 = erplist1, 
+smo = NULL, layout = 1, ylims = "auto", yrev = TRUE,
 startmsec = -200, endmsec = 1200, lwd = c(1, 1), lty = c(1, 1), 
 color.list = c("blue", "red"), legend = F, legend.lab = "default",
 t.axis = seq(-100, endmsec, 200), scalp.array=NULL)
@@ -38,16 +38,15 @@ the alpha of the t-tests.
 if \code{NULL}, then a series of t-test is computed. If an appropriate object is specified (i.e. an object returned by \code{erp.t} or \code{scalp.t})
 then the results are retrieved by this object and the function simply plots the results.
 }
-  \item{envir}{
-the environment in which the ERP data frames of the first set are searched for.
+  \item{erplist1}{
+a list containing the ERP data frames specified in \code{base1} and \code{numbers1}.
 }
-
-  \item{envir2}{
-the environment in which the ERP data frames of the second set are searched for.
+  \item{erplist2}{
+a list containing the ERP data frames specified in \code{base2} and \code{numbers2}.
 }
 
   \item{smo}{
-the smoothing parameter to apply before plotting. Default is 0.
+the smoothing parameter to apply (see \code{\link{smooth.spline}}). Default is \code{NULL} and no smoothing is applied.
 }
 
   \item{layout}{
@@ -88,7 +87,7 @@ the legend labels. If "default", the names are retrieved from \code{categ}.
 the position of the ticks of an additional axis indicating the time. This axis is plotted in the bottom-left corner of the plot array.
 }
 	\item{scalp.array}{
-This argument is vector of two values indicating the number of panels of the plot, as number of rows and number of columns respectively. If a default layout is specified, the number of panels is automatically computed.
+This argument is vector of two values indicating the number of panels of the plot, as number of rows and number of columns respectively. If a default layout is specified, the number of panels is automatically computed. See also \code{Details}.
 	}
 }
 

@@ -5,107 +5,176 @@
 plot an ERP waveform
 }
 \description{
-A basic function to plot an ERP waveform of a single electrode.
+A function to plot an ERP waveform of a single electrode. If used with default values the function allows a fast plotting. Several parameters are available for plotting paper quality plots.
 }
 \usage{
-erp(e1, main = NULL, smo = 0.0, col = "black", startmsec = -200, endmsec = 1000, 
-interval = c(startmsec, endmsec), step = 200, verticals = NULL, horizontals = NULL,
- x.axis = "default", ylim = "default", lwd = 1, lty = 1, cex.main = 1, cex.xaxis = 0.8,
-  cex.yaxis = 1, y.axis = "default", frame.plot = TRUE, xaxis0 = FALSE, 
-  xtick.l = "default", xticks = "default", yaxis0 = FALSE, 
-  yaxis0.origin = 0, ytick.l = "default", y.axis.step = 2, 
-  yticks = "default", lwd.xticks = 1, lwd.yticks = 1)
+erp(el, startmsec=-200, endmsec = 1200, smo = NULL, interval = c(startmsec, endmsec),
+xlim = c(startmsec, endmsec), ylim = c(-6,6), col = "black", 
+lwd = 1, xlab = "", ylab = "", main = "", frame.plot = TRUE,
+draw.xaxis = TRUE, draw.yaxis = TRUE, type = "l", x0 = TRUE,
+x.tick = seq(-200, 1200, 200), x.labels=x.tick, x.pos = NA, 
+x.outer = F, x.font = NA, x.lty = "solid", x.lwd = 1, x.lwd.ticks = 1, 
+x.col = NULL,  x.col.ticks = NULL, x.hadj = NA, x.padj = NA, x.tcl = -0.5, 
+x.tick.both= FALSE, x.cex = 1, y.tick = seq(-6,6,2), y.labels = y.tick,  
+y.pos = NA, y.outer = F, y.font = NA, y.lty = "solid", y.lwd = 1, 
+y.lwd.ticks = 1, y.col = NULL, y.col.ticks = NULL, y.hadj = NA, y.padj = NA, 
+y.tcl = -0.5, y.tick.both= FALSE, y.cex = 1, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{e1}{
+  \item{el}{
 a vector with the electrode to be plotted.
 }
-  \item{main}{
-plot title.
-}
-  \item{smo}{
-the smoothing parameter to apply before plotting. Default is 0.
-}
-  \item{col}{
-the color of the electrode plotted.
-}
-  \item{startmsec}{
+\item{startmsec}{
 the start time (in ms) of the ERP vector.
 }
-  \item{endmsec}{
+\item{endmsec}{
 the end time (in ms) of the ERP vector.
 }
-  \item{interval}{
-a vector with a pair of values, indicating the interval to be plotted.
-}
-  \item{step}{
-the step of the x-axis labels. The axis will start from the first value of \code{interval}
-}
-  \item{verticals}{
-the x coordinates of optional vertical bars.
-}
-  \item{horizontals}{
-the y coordinates of optional horizontal bars.
-}
-  \item{x.axis}{
-if \code{default}, then an x.axis will be drawn on the basis of \code{interval} and \code{step} parameters. A vector of values can be supplied instead.
-}
-  \item{ylim}{
-a pair of values indicating the y-axis limit.
-}
-  \item{lwd}{
-line width.
-}
-  \item{lty}{
-line type.
-}
-  \item{cex.main}{
-magnification factor of the Title supplied in \code{Main}.
-}
-  \item{cex.xaxis}{
-magnification factor of the x-axis labels.
-}
-  \item{cex.yaxis}{
-magnification factor of the y-axis labels.
-}
-  \item{y.axis}{
-if \code{default}, then an x.axis will be drawn on the basis of \code{y.lim} and \code{y.axis.step} parameters. A vector of values can be supplied instead.
-}
-  \item{frame.plot}{
-logical. Default is \code{TRUE}. Draw a box around the plot.
-}
-  \item{xaxis0}{
-logical. Default is \code{FALSE}. If \code{TRUE}, then default x-axis R parameters are overridden. Another axis is drawn using the parameters specified below.
-}
-  \item{xtick.l}{
-the length of the ticks on the x-axis.
-}
-  \item{xticks}{
-the position of xticks (in ms). If "default", they are placed automatically.
-}
-  \item{yaxis0}{
-logical. Default is \code{FALSE}. If \code{TRUE}, the default y-axis R parameters are overridden. Another axis is drawn using the parameters specified below.
-}
-  \item{yaxis0.origin}{
-the position (in ms) where x-axis and y-axis intersect.
-}
-  \item{ytick.l}{
-the length of the ticks on the x-axis.
-}
-  \item{y.axis.step}{
-the distance between the ticks on the y-axis.
-}
-  \item{yticks}{
-a vector of positions of the y-ticks (in microVolts).
+  \item{smo}{
+the smoothing parameter to apply (see \code{\link{smooth.spline}}). Default is \code{NULL} and no smoothing is applied.
 }
 
-  \item{lwd.xticks}{
-x-ticks line width.
+  \item{interval}{
+a vector with a pair of values indicating the interval (in milliseconds) to be plotted.
 }
-  \item{lwd.yticks}{
-y-ticks line width.
+\item{xlim}{
+a vector with a pair of values indicating the limits (in milliseconds) of the x axis.
 }
+\item{ylim}{
+a vector with a pair of values indicating the limits (in milliseconds) of the x axis.
+}
+\item{col}{
+the color of the ERP waveform.
+}
+\item{lwd}{
+the line width of the ERP waveform.
+}
+\item{xlab}{
+	the label of the x axis.
+}
+\item{ylab}{
+	the label of the y axis.
+}
+\item{main}{
+	the title of the plot.
+}
+\item{frame.plot}{
+	a logical indicating whether a box should be drawn around the plot.
+}
+\item{draw.xaxis}{
+	a logical indicating whether the x axis should be drawn.
+  }
+\item{draw.yaxis}{
+	a logical indicating whether a box should be drawn around the plot.
+}
+\item{type}{
+	1-character string giving the type of plot desired. Default is \code{"l"} and a line will be plotted. If "n" the ERP waveform is not plotted (see \code{\link{plot.default}}).
+	}
+\item{x0}{
+	a logical indicating whether a short segment should be drawn to indicate the 0 point (in millisecond)
+}
+\item{x.tick}{
+the position (in milliseconds) of x ticks.
+}
+
+\item{x.labels}{
+the labels (usually a vector of numbers) to be plotted on the x axis.
+}
+
+\item{x.pos}{
+the position of x axis, in terms of y axis coordinates. Default is \code{NA} and the axis is drawn at the bottom of the plot.
+}
+
+\item{x.outer}{
+a logical value indicating whether the x axis should be drawn in the outer plot margin, rather than the standard plot margin. 
+}
+\item{x.font}{
+font for text of x labels. Defaults to par("font").	
+}
+\item{x.lty}{
+line type for both the x axis line and the x tick marks.
+}
+\item{x.lwd}{
+line width for the x axis line.	
+} 
+\item{x.lwd.ticks}{
+line width for the x tick marks.
+}
+\item{x.col}{
+colors for the x axis line and the x tick marks.	
+}
+\item{x.col.ticks}{
+color for the x tick marks (if specified, override x.col)
+}
+\item{x.hadj}{
+adjustment (see \code{\link{par}}("adj")) for all x labels parallel ("horizontal") to the reading direction. If this is not a finite value, the default is used (centring for strings parallel to the axis, justification of the end nearest the axis otherwise).
+}
+\item{x.padj}{
+adjustment for each x tick label perpendicular to the reading direction. For labels parallel to the axes, padj = 0 means right or top alignment, and padj = 1 means left or bottom alignment. This can be a vector given a value for each string, and will be recycled as necessary.
+}
+\item{x.tcl}{
+The length of tick marks as a fraction of the height of a line of text. The default value is  \code{-0.5}.	
+}
+\item{x.tick.both}{
+Logical. Should the tick marks be drawn both above and below the x axis?
+}
+\item{x.cex}{
+The magnification to be used for the x labels.
+}
+\item{y.tick}{
+the position (in milliseconds) of y ticks.
+}
+
+\item{y.labels}{
+the labels (usually a vector of numbers) to be plotted on the y axis.
+}
+
+\item{y.pos}{
+the position of y axis, in terms of x axis coordinates. Default is \code{NA} and the axis is drawn at the left of the plot.
+}
+
+
+\item{y.outer}{
+a logical value indicating whether the y axis should be drawn in the outer plot margin, rather than the standard plot margin. 
+}
+\item{y.font}{
+font for teyt of y labels. Defaults to par("font").	
+}
+\item{y.lty}{
+line type for both the y axis line and the y tick marks.
+}
+\item{y.lwd}{
+line width for the y axis line.	
+} 
+\item{y.lwd.ticks}{
+line width for the y tick marks.
+}
+\item{y.col}{
+colors for the y axis line and the y tick marks.	
+}
+\item{y.col.ticks}{
+color for the y tick marks (if specified, override y.col)
+}
+\item{y.hadj}{
+adjustment (see \code{\link{par}}("adj")) for all y labels parallel ("horizontal") to the reading direction. If this is not a finite value, the default is used (centring for strings parallel to the axis, justification of the end nearest the axis otherwise).
+}
+\item{y.padj}{
+adjustment for each y tick label perpendicular to the reading direction. For labels parallel to the ayes, padj = 0 means right or top alignment, and padj = 1 means left or bottom alignment. This can be a vector given a value for each string, and will be recycled as necessary.
+}
+\item{y.tcl}{
+The length of tick marks as a fraction of the height of a line of teyt. The default value is  \code{-0.5}.	
+}
+\item{y.tick.both}{
+Logical. Should the tick marks be drawn both above and below the y axis?
+}
+\item{y.cex}{
+The magnification to be used for the y labels.
+}
+\item{\ldots}{
+	further parameters to be passed to \code{\link{plot}}.
+}
+
 }
 
 %\details{
@@ -126,17 +195,17 @@ Giorgio Arcara
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link{erp.t}}, \code{\link{erp.infl}}
+\code{\link{erp.t}}, \code{\link{erp.infl}},  \code{\link{erp.cor}}, \code{\link{erp.xaxis}}, \code{\link{erp.yaxis}}
 }
+
 \examples{
 
 \dontrun{
-
-data(ERPsets)
-word=grandaverage("Exp1_word_subj", 1:20) 
+word=grandaverage("Exp1_word_subj", 1:20, erplist=erplist) 
 erp(word$Fp1, smo=0, col="blue", startmsec=-200, endmsec=1500, ylim=c(-10,10))
-
 }
+
+
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
