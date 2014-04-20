@@ -54,7 +54,10 @@ Giorgio Arcara
 
 \examples{
 \dontrun{
+### The following is an example for importing a series of file
+## named Exp1_word_subj1.txt, Exp1_word_subj2.txt, etc.
+
 #Exp1 <- import.erp(filenamebase="Exp1_word_subj", numbers=1:20, 
-#					outname="Exp1_word_subj", fileinfo = T)
+#	outname="Exp1_word_subj", ext=".txt" fileinfo = T, erplist=NULL)
 }
 }

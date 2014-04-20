@@ -38,13 +38,15 @@ Further information can be found on the maintainer's site \url{https://sites.goo
 %~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
 %}
 \examples{
-\dontrun{
+
 library(erpR)
 
 data(ERPsets)
 
-word=grandaverage("Exp1_word_subj", 1:20) 
+word=grandaverage("Exp1_word_subj", 1:20, erplist=ERPsets) 
+
 
 erp(word$Fp1, smo=0, col="blue", startmsec=-200, endmsec=1500, ylim=c(-10,10))
-}
+
+
 }

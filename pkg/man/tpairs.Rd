@@ -62,7 +62,7 @@ The function is not able to deal with mixed within and between t-tests. Please, 
 \code{\link{t.test}}, \code{\link{p.adjust}}
 }
 \examples{
-\dontrun{
+
 # simulate some subjects
 subjRT=rnorm(20, 500, 100)
 
@@ -78,5 +78,6 @@ RT=c(subjRT+condA, subjRT+condB, subjRT+condC ))
 
 #perform pairwise t.test
 tpairs(dat, "condition", "all", "RT", "Subject", var.equal=TRUE)	
-}
+
+
 }

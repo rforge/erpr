@@ -70,13 +70,13 @@ This function calls \code{\link{rearrange}}.
 
 }
 \examples{
-\dontrun{
+
 data(ERPsets)
 
 dat=erp.mean(base="Exp1_word_subj", numbers=1:20, 
-win.ini=130, win.end=190, startmsec=-200, endmsec=1500,
+win.ini=130, win.end=190, erplist=ERPsets, startmsec=-200, endmsec=1500,
 others=c(condition="word", interval="130-190"), name.dep="Ampl", format="long")
 
-}
+
 }
 

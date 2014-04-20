@@ -32,7 +32,7 @@ Giorgio Arcara.
 
 
 \examples{
-\dontrun{
+
 data(iris)
 
 iris2 <- iris[iris$Species!="setosa", ]
@@ -41,7 +41,7 @@ levels(iris2$Species)
 iris2[,c("Petal.Width", "Species")]<-factorall(iris2[,c("Petal.Width", "Species")])
 levels(iris2$Species)
 str(iris2)
-}
+
 
 }
 

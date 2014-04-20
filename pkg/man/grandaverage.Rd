@@ -51,11 +51,12 @@ The function keeps track of the averaged objects in a \code{comment}.
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 %}
 \examples{
-\dontrun{
+
+data(ERPsets)
 # compute the average of subjects 1 to 20 for the condition 
 # specified by the string "Exp1_word_subj".
 	
-word=grandaverage("Exp1_word_subj", 1:20)
-}
+word=grandaverage("Exp1_word_subj", 1:20, erplist=ERPsets)
+
 }
 

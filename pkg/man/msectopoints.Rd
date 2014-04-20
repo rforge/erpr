@@ -45,12 +45,11 @@ Giorgio Arcara
 }
 
 \examples{
-\dontrun{
 # convert 400 ms to points in a segment of 500 points starting from -200 ms 
 # and ending at 1500 (500 Hz).
 
 msectopoints(120, 500, startmsec=-500, endmsec=1500)
-}
+
 }					
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

@@ -32,6 +32,8 @@ mycall.erp.add=mycall.list[names(mycall.list)%in%c("lty", "smo", "col", "lwd")]
 mycall.erp.add=append(mycall.erp.add, as.name("average.excl"))
 names(mycall.erp.add)[length(mycall.erp.add)]="el"
 mycall.erp.add$col = "red"
+mycall.erp.add$lwd = 2 #substitute the lwd for the call of erp.add
+
 
 
 # la funzione contiene all'interno una funzione che crea il panel. Questa funzione a sua volta contiene la funzione scalp.infl.endo, che è quella che effettivamente fa il grafico appoggiandosi alla funzione scalp.endo. 

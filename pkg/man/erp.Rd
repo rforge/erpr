@@ -200,10 +200,12 @@ Giorgio Arcara
 
 \examples{
 
-\dontrun{
-word=grandaverage("Exp1_word_subj", 1:20, erplist=erplist) 
-erp(word$Fp1, smo=0, col="blue", startmsec=-200, endmsec=1500, ylim=c(-10,10))
-}
+data(ERPsets)
+
+word=grandaverage("Exp1_word_subj", 1:20, erplist=ERPsets) 
+
+erp(word$F3, smo=0, col="blue", startmsec=-200, endmsec=1500, ylim=c(-6,6))
+
 
 
 }

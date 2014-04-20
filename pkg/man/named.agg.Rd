@@ -49,12 +49,13 @@ named.agg is a wrapper of \code{\link{aggregate}}
 \code{\link{aggregate}}
 }
 \examples{
-\dontrun{
+
 data(ERPsets)
 
 datall=erp.mean(base = "Exp1_word_subj", numbers = 1:20, 
-win.ini = 400, win.end = 600, startmsec= -200, endmsec = 1500, format="long", name.dep="Ampl")
+win.ini = 400, win.end = 600, erplist=ERPsets, startmsec= -200, 
+endmsec = 1500, format="long", name.dep="Ampl")
 
 datagg=named.agg(Ampl~electrode+Subject, datall, FUN=mean)
-}
+
 }

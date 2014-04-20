@@ -107,15 +107,15 @@ Giorgio Arcara
 }
 \examples{
 
-\dontrun{
 data(ERPsets)
 
 #generate an hypothetic external variables
 RT=rnorm(20, mean=500, sd=200)
 
-scalp.cor("Exp1_word_subj", 1:20, external = RT, smo=0, layout=1, ylim=10, legend=T)
+scalp.cor("Exp1_word_subj", 1:20, external = RT, layout=1, 
+erplist=ERPsets, ylim=10, legend=TRUE)
 
-}
+
 
 }
 

@@ -46,13 +46,13 @@ This function is called internally by \code{erp.mean}, \code{erp.peak}, and \cod
 \code{\link{erp.mean}}, \code{\link{erp.peak}}, \code{\link{erp.latency}}%% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-\dontrun{
+
 data(ERPsets)
 
 datwide=erp.mean(base="Exp1_word_subj", numbers=1:20, win.ini=130, 
-win.end=190, startmsec=-200, endmsec=1500, format="wide")
+win.end=190, erplist=ERPsets, startmsec=-200, endmsec=1500, format="wide")
 
 dat.long=rearrange(deps=c(1:32), oth=33:34, dataset=datwide, name.newvar="electrode")
-}
+
 
 }

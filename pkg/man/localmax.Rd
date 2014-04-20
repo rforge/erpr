@@ -43,7 +43,6 @@ Giorgio Arcara
 %}
 
 \examples{
-\dontrun{
 
 x=seq(-5.5,1,0.001)
 
@@ -54,5 +53,5 @@ plot(x,y, type="l")
 #print an horizontal line intersecting the local maximum
 abline(h=localmax(y)) 
 
-}
+
 }

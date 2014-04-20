@@ -89,17 +89,17 @@ Currently this function supports a very limited number of layouts. Further versi
 \code{\link{scalp.t}}, \code{\link{scalp.infl}}, \code{\link{erp}}
 }
 \examples{
-\dontrun{
+
 data(ERPsets)
 
-word=grandaverage("Exp1_word_subj", 1:20)
+word=grandaverage("Exp1_word_subj", 1:20, erplist=ERPsets)
 
-nonword=grandaverage("Exp1_nonword_subj", 1:20)
+nonword=grandaverage("Exp1_nonword_subj", 1:20, erplist=ERPsets)
 
-scalp(list(word), smo=0, layout=1, ylim=10)
+scalp(list(word), layout=1, ylim=10)
 
-scalp(list(word, nonword), smo=0, layout=1, ylim=10, legend=T)
-}
+scalp(list(word, nonword), layout=1, ylim=10, legend=TRUE)
+
 }
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the

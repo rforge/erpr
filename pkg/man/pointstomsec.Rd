@@ -45,11 +45,11 @@ Giorgio Arcara
 }
 \examples{
 	
-\dontrun{
 # calculate the time in msec corresponding to the point 128 
-# in a segment of 500 points starting from -200 ms and ending at 1500 (500 Hz).
+# in a segment of 500 points starting from -200 ms 
+# and ending at 1500 (500 Hz).
 
 pointstomsec(128, 500, startmsec = - 500, endmsec = 1500)
-}
+
 
 }					

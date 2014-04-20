@@ -77,17 +77,16 @@ Giorgio Arcara
 \code{\link{erp}}, \code{link{scalp.infl}}
 }
 \examples{
-\dontrun{
 
 data(ERPsets)
 
 erp.infl(base="Exp1_word_subj", numbers=1:20, electrode="OZ", 
-startmsec=-200, endmsec=1500, erplist=erplist)
+startmsec=-200, endmsec=1500, erplist=ERPsets)
 
 # Notice that Subject 1 is clearly particularly influential
 # for the average on OZ.
 
-}
+
 
 }
 
