@@ -39,16 +39,16 @@ Giorgio Arcara
 
 
 \examples{
-\dontrun{
+
 data(ERPsets)
 
 datall=erp.mean(base = "Exp1_word_subj", numbers = 1:20,
- win.ini = 400, win.end = 600, startmsec= -200, endmsec=1500)
+ win.ini = 400, win.end = 600, startmsec= -200, endmsec=1500, erplist=ERPsets)
 
 datall$caudality=create.roi(datall, "electrode", 
 groups=list(c("Fp1", "Fp2"), c("P3", "P4")), 
 roi.levels=c("Frontopolar", "Parietal"))
 
 table(datall$caudality, datall$electrode)
-}	
+	
 }

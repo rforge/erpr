@@ -84,13 +84,15 @@ Giorgio Arcara
 }
 \examples{
 	
-\dontrun{
 data(ERPsets)
-word=grandaverage("Exp1_word_subj", 1:20) 
+
+
 #generate some simulated RT data 
+
 RT=rnorm(20, mean = 500, sd = 100)
-erp.cor("Exp1_word_subj", 1:20, RT, Electrode="Fp1", ylim=c(-6,6))
-}
+erp.cor("Exp1_word_subj", numbers=1:20, electrode="Fp1",  erplist=ERPsets, external=RT, startmsec=-200, endmsec=1500, ylim=c(-6,6) )
+
+
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

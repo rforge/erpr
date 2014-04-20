@@ -39,7 +39,7 @@ Giorgio Arcara
 
 \examples{
 
-##### DA FARE
-
+data(ERPsets)
+check.erplist(ERPsets)
 
 }

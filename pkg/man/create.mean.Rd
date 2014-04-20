@@ -46,8 +46,12 @@ Giorgio Arcara
 \code{\link{create.diff}}
 }
 \examples{
-\dontrun{
+
 data(ERPsets)
-create.mean("Exp1_word_subj", "Exp1_nonword_subj", 1:20,  outname="Exp1_average_subj")
-}
+
+ERPsetsmean=create.mean(c("Exp1_word_subj", "Exp1_nonword_subj"), 1:20,
+outname="Exp1_mean_subj", erplist=ERPsets)
+
+ERPsets=c(ERPsets, ERPsetsmean)
+
 }

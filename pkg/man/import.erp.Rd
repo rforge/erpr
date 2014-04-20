@@ -54,6 +54,7 @@ Giorgio Arcara
 
 \examples{
 \dontrun{
-#Exp1 <- import.erp(filenamebase="Exp1_word_subj", numbers=1:20, outname="Exp1_word_subj", fileinfo = T)
+#Exp1 <- import.erp(filenamebase="Exp1_word_subj", numbers=1:20, 
+#					outname="Exp1_word_subj", fileinfo = T)
 }
 }

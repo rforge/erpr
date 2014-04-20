@@ -32,10 +32,12 @@ This is an utility to quickly transform a \code{character} vector to \code{facto
 
 \examples{
 	
-\dontrun{
 dat=data.frame(RT=rnorm(20, mean=500, sd=100), Subject=rep(1:10, 2))
+
 conditions=c(rep("a", 10), rep("b", 10))
+
 dat$conditions=conditions	
+
 dat=char2fac(dat)
-}
+
 }

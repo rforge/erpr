@@ -3,11 +3,11 @@ function(bases, numbers, outname=NULL, erplist=NULL, fileinfo=1)
 	{
 	
 	# preliminary checks
-	if (!is.numeric(numbers)){
-	stop("\"numbers\" must be a numeric vector", call.=F)
-	}
 	if (length(bases)<2){
 	stop("the argument \"bases\" has length 1, you should specify at least two bases", call.=F)
+	}
+	if (!is.numeric(numbers)){
+	stop("\"numbers\" must be a numeric vector", call.=F)
 	}
 	if (is.null(erplist)){
 	stop("an erplist object containing ERP data frames must be specified", call.=F)

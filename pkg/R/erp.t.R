@@ -44,7 +44,7 @@ mycall.erp$type="n" # this is for the fake initial plot.
 
 
 #create the object for the future call of erp
-mycall.erp.add=mycall.list[names(mycall.list)%in%c("lty", "smo", "col", "lwd")]
+mycall.erp.add=mycall.list[names(mycall.list)%in%c("lty", "smo", "col", "lwd", "startmsec", "endmsec", "interval")]
 
 
 	#### PARTE 1: STATISTICHE PER ELETTRODO ####

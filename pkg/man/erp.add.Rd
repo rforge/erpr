@@ -62,15 +62,14 @@ Giorgio Arcara
 }
 \examples{
 
-\dontrun{
 data(ERPsets)
 
-word=grandaverage("Exp1_word_subj", 1:20) 
-nonword=grandaverage("Exp1_nonword_subj", 1:20) 
+word=grandaverage("Exp1_word_subj", 1:20, erplist=ERPsets) 
+nonword=grandaverage("Exp1_nonword_subj", 1:20, erplist=ERPsets) 
 
 erp(word$Fp1, col="blue", startmsec=-200, endmsec=1500)
-erp.add(nonword$Fp1, col="red")
-}
+erp.add(nonword$Fp1, col="red", startmsec=-200, endmsec=1500)
+
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

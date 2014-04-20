@@ -30,8 +30,10 @@ This function comes from an idea by Antoine Tremblay.
 
 
 \examples{
-\dontrun{
+
 data(iris)
+
 cn(iris)
-}
+
+
 }

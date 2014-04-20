@@ -33,6 +33,12 @@ function(base, numbers, electrode, erplist=NULL,startmsec=-200, endmsec=1200, ex
 		#notice the second part of this line of code. Basically I retrive the args of funciton erp, transform in a list. Then I take only the args in call that match
 		# with args of function erp, to avoid to call for args unexpected from the function erp.
 		mycall.erp$el=as.name("el")
+		
+		
+#create the object for the future call of erp.add
+mycall.erp.add=mycall.list[names(mycall.list)%in%c("lty", "smo", "col", "lwd", "startmsec", "endmsec", "interval")]
+mycall.erp.add$el=as.name("el")
+
 
 	#### PARTE 1: STATISTICHE PER ELETTRODO ####
 
@@ -100,7 +106,6 @@ if (!is.null(sig)){
 
 
 
-
 alldata1=grandaverage(base=base, numbers, erplist=erplist)
 
 
@@ -108,7 +113,7 @@ alldata1=grandaverage(base=base, numbers, erplist=erplist)
 el=alldata1[,electrode]
 
 		
-		do.call("erp", mycall.erp[-1])
+		do.call("erp", c(mycall.erp[-1], type="n")) #notice the type="n", tells not to plot (to avoid to plot before the significance bands)
 				
 		# plotto le bande di significatività di correlazioni negative
 		######################
@@ -117,8 +122,10 @@ el=alldata1[,electrode]
 		
 		# plotto le bande di significatività di correlazioni positive
 		######################
-		abline(v=grep(+1, alltemp.results[,electrode]), col="indianred1", lwd=3)
+		abline(v=grep(+1, alltemp.results[,electrode]), col="indianred1",  lwd=3)
 		#######################
+		
+		do.call("erp.add", mycall.erp.add)
 
 		
 
