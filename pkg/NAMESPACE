@@ -1,1 +1,37 @@
-exportPattern("^[[:alpha:]]+")
+import("rpanel", "akima")
+
+export(
+	"butterfly",
+	"char2fac",
+	"check.erplist",
+	"cn",
+	"create.diff",
+	"create.mean",
+	"create.roi",
+	"erp.add",
+	"erp.cor",
+	"erp.infl",
+	"erp.latency",
+	"erp.mean",
+	"erp.peak",
+	"erp",
+	"erp.t",
+	"erp.xaxis",
+	"erp.yaxis",
+	"factorall",
+	"grandaverage",
+	"import.erp",
+	"localmax",
+	"localmin",
+	"msectopoints",
+	"named.agg",
+	"pointstomsec",
+	"rearrange",
+	"scalp.cor",
+	"scalp.infl",
+	"scalp",
+	"scalp.t",
+	"topoplot.palette",
+	"topoplot",
+	"tpairs"
+	)
