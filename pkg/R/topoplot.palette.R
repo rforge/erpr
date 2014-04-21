@@ -98,7 +98,7 @@ topoplot.palette<-function(cols, pos = c(0.5,0.5), p.width=0.2, p.height=0.8, ho
 	# notice how I retrieve the value of a variable with .()
 	text(pos.x, y1rect+lab.y.dist, labels= bquote(paste(.(palette.lim[2]), " ",  mu, "V")),  cex = lab.cex, font = lab.font,  family = lab.family)
 	
-	print(lab.y.dist)
+	invisible(lab.y.dist)
 	
 	}
 

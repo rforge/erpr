@@ -29,12 +29,12 @@ function(base, numbers,  electrode = NULL, startmsec = - 200, endmsec = 1200, er
 	
 
 
-	numbers=numbers[-!(numbers%in%outline)]
+	#numbers=numbers[-!(numbers%in%outline)]
 		if (add==FALSE)
 			{
 			i=1
 			el=erplist[[paste(base, numbers[i], sep="")]][[electrode]]
-			erp(el, startmsec=startmsec, endmsec=endmsec, ...)
+			erp(el, startmsec=startmsec, endmsec=endmsec,  ...)
 			for (i in 2:length(numbers))
 				{
 				el=erplist[[paste(base, numbers[i], sep="")]][[electrode]]
@@ -63,7 +63,8 @@ function(base, numbers,  electrode = NULL, startmsec = - 200, endmsec = 1200, er
 			}
 			# modification to col
 			mycall.erp.add.out$col = out.col
-			
+			el=erplist[[paste(base, numbers[outline], sep="")]][[electrode]] #select the subject to be outlined
+
 			
 			for (k in 1:length(outline))
 			{
