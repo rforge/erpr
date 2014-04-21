@@ -96,8 +96,10 @@ Giorgio Arcara
 
 data(ERPsets)
 
-# Notice that Subject 1 is clearly particularly influential for the average on OZ.
-scalp.infl(base="Exp1_word_subj", numbers=1:20, layout=1, startmsec=-200, endmsec=1500, erplist=ERPsets)
+# Notice that Subject 1 is clearly particularly influential 
+# for the average on OZ.
+scalp.infl(base="Exp1_word_subj", numbers=1:20, layout=1, 
+startmsec=-200, endmsec=1500, erplist=ERPsets)
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
