@@ -5,7 +5,7 @@
 plot a topographic map of ERP
 }
 \description{
-Plot a topographic map of an ERP on a specific timepoints or averaging the ERP in a time window. The head is represented as a circle.
+Plot a topographic map of an ERP on a specific timepoint or averaging the ERP in a time window. The head is represented as a circle.
 }
 \usage{
 topoplot(erpobj, startmsec=-200, endmsec=1200, win.ini, 
@@ -107,17 +107,17 @@ time point is plotted.
 %%  ~~ If necessary, more details than the description above ~~
 %}
 \value{
-The topographic map is plotted. The function also returns a list of values that can be used for other function. The first item of the list is a pair of values indicating the 
-\code{zlim} of the plot. The second item of the list is a vector indicating the palette create by the function. This last vector with palette can be used with \code{\link{topoplot.palette}} function.
+The topographic map is plotted. The function also returns a list of values that can be used by other functions. The first item of the list is a pair of values indicating the 
+\code{zlim} of the plot. The second item of the list is a vector indicating the palette create by the function (\code{palette}). This last vector with palette colors can be used by the \code{\link{topoplot.palette}} function.
 }
 \author{
 Giorgio Arcara
 }
 \note{
-The topoplot function plots are made with the following steps. 1) The electrodes are projected from a 3d space to a 2d space. 2) Electrode values are interpolated (and extrapolated, if \code{extrap=TRUE}) on 2d space. The interpolation methods come from the \code{\link{interp}} function of \code{\link{akima}} package. The spline interpolation is NOT a spherical spline.\cr
-The function contains already a built-in list of electrode coordinates, but some names may not be the same in the supplied data frame and in the built-in list (even if in this match the case is ignored). An optional object with electrode coordinates can be supplied. This object should be a data frame with five columns: a column labeled \code{"el.name"} with electrode names, three columns labeled \code{"x", "y", "z"} with spherical coordinates of the electrode. \cr
+The topographic plots are made according the following steps. 1) The electrodes are projected from 3d space to 2d space. 2) Voltage values are interpolated (and extrapolated, if \code{extrap=TRUE}) on 2d space (the interpolation methods come from the \code{\link{interp}} function of \code{\link{akima}} package). The spline interpolation is NOT a spherical spline interpolation.\cr
+The function contains already a built-in list of electrode coordinates, but some names may not be the same in the supplied data frame and in the built-in list (even if the case is ignored in the match). An optional object with electrode coordinates can be supplied. This object should be a data frame containing these four columns: a column labeled \code{"el.name"} with electrode names, three columns labeled \code{"x", "y", "z"} with spherical coordinates of the electrode. \cr
 Type \code{topoplot(return.coord=TRUE)} to see the data frame structure. \cr
-In the \code{"orthographic"} projection only \code{"x"} and \code{"y"} of electrode coordinates are mantained. The \code{"equalarea"} projection keeps the area proprortions as in the case of 3d representation.
+In the \code{"orthographic"} projection only \code{"x"} and \code{"y"} of electrode coordinates are mantained. The \code{"equalarea"} projection keeps in the 2d projection the area proprortions as in 3d representation.
 }
 
 

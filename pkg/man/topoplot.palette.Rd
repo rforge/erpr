@@ -5,7 +5,7 @@
 Add a palette to a plot
 }
 \description{
-This function draw a topoplot palette as a rectangle with colored area indicating the palette shades.
+This function draws a topoplot palette as a rectangle with colored areas indicating the palette shades.
 }
 \usage{
 topoplot.palette(cols, pos = c(0.5,0.5), p.width=0.2, p.height=0.8, 
@@ -61,7 +61,7 @@ palette.lim = c(-5,5), labels=TRUE, lab.dist = 1, lab.cex = 1,
 %%  ~~ If necessary, more details than the description above ~~
 %}
 \value{
-the function draws a palette on an existing plot
+the function draws a palette on an existing plot.
 }
 \author{
 Giorgio Arcara
