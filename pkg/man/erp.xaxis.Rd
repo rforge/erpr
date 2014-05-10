@@ -5,7 +5,7 @@
 Draw an erp x axis
 }
 \description{
-This function plot an x axis for an erp waveform. Numbers and tick positions are determined on the base of the three parameters length of \code{length.erp}, \code{startmsec} and \code{endmsec} (the function calls \code{msectopoints}).
+This function plots an x axis for an erp waveform. Numbers and tick positions are determined according to three parameters: \code{length.erp}, \code{startmsec} and \code{endmsec} (the function calls \code{msectopoints}).
 }
 
 \usage{
@@ -18,17 +18,17 @@ x.padj = NA, x.tcl = -0.5, x.tick.both= FALSE, x.cex = 1)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
 \item{length.erp}{
-the length of the ERP vector the axis is referred to.
+the length of the ERP vector the axis refers to.
 }
 \item{startmsec}{
-the start time (in ms) of the ERP vector.
+start time (in ms) of the ERP vector.
 }
 \item{endmsec}{
-the end time (in ms) of the ERP vector.
+end time (in ms) of the ERP vector.
 }
 
 \item{x.tick}{
-the position (in milliseconds) of x ticks.
+the position (in ms) of x ticks.
 }
 
 \item{x.labels}{
@@ -43,28 +43,28 @@ the position of x axis, in terms of y axis coordinates. Default is \code{NA} and
 a logical value indicating whether the x axis should be drawn in the outer plot margin, rather than the standard plot margin. 
 }
 \item{x.font}{
-font for text of x labels. Defaults to par("font").	
+font for text of x labels. Default is par("font").	
 }
 \item{x.lty}{
-line type for both the x axis line and the x tick marks.
+line type of both the x axis line and the x tick marks.
 }
 \item{x.lwd}{
-line width for the x axis line.	
+line width of the x axis line.	
 } 
 \item{x.lwd.ticks}{
-line width for the x tick marks.
+line width of the x tick marks.
 }
 \item{x.col}{
-colors for the x axis line and the x tick marks.	
+colors of the x axis line and the x tick marks.	
 }
 \item{x.col.ticks}{
-color for the x tick marks (if specified, override x.col)
+the color of the x tick marks (if specified, overrides x.col)
 }
 \item{x.hadj}{
-adjustment (see \code{\link{par}}("adj")) for all x labels parallel ("horizontal") to the reading direction. If this is not a finite value, the default is used (centring for strings parallel to the axis, justification of the end nearest the axis otherwise).
+adjustment (see \code{\link{par}}("adj")) for all x labels parallel ("horizontal") to the reading direction. If this is not a finite value, the default is used (centering for strings parallel to the axis, alignment of the end nearest the axis otherwise).
 }
 \item{x.padj}{
-adjustment for each x tick label perpendicular to the reading direction. For labels parallel to the axes, padj = 0 means right or top alignment, and padj = 1 means left or bottom alignment. This can be a vector given a value for each string, and will be recycled as necessary.
+adjustment for each x tick label purpendicular to the reading direction. For labels parallel to the axes, padj = 0 means right or top alignment, and padj = 1 means left or bottom alignment. This can be a vector given a value for each string, and will be recycled as necessary.
 }
 \item{x.tcl}{
 The length of tick marks as a fraction of the height of a line of text. The default value is  \code{-0.5}.	

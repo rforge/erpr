@@ -18,16 +18,16 @@ palette.lim = c(-5,5), labels=TRUE, lab.dist = 1, lab.cex = 1,
   	a vector of colors to draw the palette. This vector may be the output of \code{\link{topoplot}}.
 }
 	\item{pos}{
-		the position of the palette as proportion of the plot region. Default (\code{c(0.5, 0.5)}) is centered in the screen.
+		the position of the palette as a proportion of the plot region. Default (\code{c(0.5, 0.5)}) is centered on the screen.
 	}
 	\item{p.width}{
-		the width of the palette as proportion of the plot region.
+		palette width as a proportion of the plot region.
 	}
 	\item{p.height}{
-		the height of the palette as proportion of the plot region.
+		palette height as a proportion of the plot region.
 	}
 	\item{horizontal}{
-		logical. Should the color shades be plotted horizontally (default is vertical).
+		logical. Should the color shades be plotted horizontally? (default is vertical)
 	}
 	\item{rev}{
 		logical. Should the palette shades order be reversed?
@@ -45,7 +45,7 @@ palette.lim = c(-5,5), labels=TRUE, lab.dist = 1, lab.cex = 1,
 		logical. Should labels indicating \code{zlim} be drawn?
 	}
 	\item{lab.dist}{
-		a number indicating the distance of the labels from the palette rectangle. Positive numbers move the labels from the palette rectangle, whereas negative numbers move the labels toward the rectangle. 
+		a number indicating the distance of the labels from the palette rectangle. Positive numbers move the labels from the palette rectangle, whereas negative numbers move the labels towards the rectangle. 
 	}
 	\item{lab.cex}{
 		magnification factor for the labels.

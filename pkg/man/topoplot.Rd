@@ -22,17 +22,17 @@ an ERP dataframe with electrodes in columns and timepoints in rows.
 }
 
   \item{startmsec}{
-the start time (in ms) of the ERP data frame. It can be a negative value, indicating the baseline time frame.
+start time (in ms) of the ERP data frame. It can be a negative value, indicating the baseline time frame.
 }
   \item{endmsec}{
-the end time (in ms) of the ERP data frame.
+end time (in ms) of the ERP data frame.
 }
 
  \item{win.ini}{
 the initial edge (in ms) of the window on which the topographic map has to be plotted.
 }
   \item{win.end}{
-the final edge (in ms) of the window on which the topographic map has to be plotted. If equal to win.end, then the map of a single 
+the final edge (in ms) of the window on which the topographic map has to be plotted. If equal to win.ini, then the map of a single 
 time point is plotted.
 }
 
@@ -43,17 +43,17 @@ time point is plotted.
 	an optional data frame with electrode coordinates (see Note).
 }
 \item{projection}{
-	the type of projection of electrode from 3d to 2d. The two methods available are \code{"orthographic"} and \code{"equalarea"}.
+	the type of electrode projection from 3d to 2d. Two methods available are \code{"orthographic"} and \code{"equalarea"}.
 }
 \item{palette.col}{
-	the palette for color. Two default palette are available: \code{"jet"} or \code{"heat"}. Otherwise a customized palette can be created.
+	the color palette. Two default palettes are available: \code{"jet"} or \code{"heat"}. Otherwise a customized palette can be created.
 	A palette will be built as an interpolation trough the vector of colors provided.
 }
 \item{palette.steps}{
 	the number of steps in the color palette.
 }
 \item{return.coord}{
-	if \code{TRUE} the topoplot function is not run and a data frame containing all the built-in electrode coordinates is returned.
+	if \code{TRUE}, the function doesn't create a topoplot, but returns a data frame containing all the built-in electrode coordinates.
 }
 
 \item{zlim}{
@@ -63,13 +63,13 @@ time point is plotted.
 	The interpolation between electrodes. Two methods from package \code{\link{akima}} are available: \code{"linear"} and \code{"cubicspline"}.
 }
 \item{extrap}{
-	logical. Extrapolate data also outside the convex hull. This paramter is ignored if interpolation method is \code{"linear"}.
+	logical. Extrapolate the data outside the convex hull also. This parameter is ignored if interpolation method is \code{"linear"}.
 }
 \item{interp.points}{
-	the number of points to be used for interpolation. This parameter define the smoothness of the plot.
+	the number of points to be used for interpolation. This parameter defines the smoothness of the plot.
 }
 \item{return.notfound}{
-	logical. If \code{TRUE}, the topoplot is not run and a vector with the electrode names in \code{erpobj} not contained in the supplied list of electrodes is returned.
+	logical. If \code{TRUE}, the function doesn't create a topoplot, but returns a vector with the electrode names in \code{erpobj} not contained in the supplied list of electrodes.
 }
 \item{mask}{
 	logical. Should a circular mask around topographic map be drawn?
@@ -81,22 +81,22 @@ time point is plotted.
 	logical. Should the x axis be reversed?
 }
 \item{draw.elec.pos}{
-	logical. Should black points be drawn in correspondence of electrode positions?
+	logical. Should the black points be drawn in correspondence with electrode positions?
 }
 \item{draw.nose}{
-	logical. Should a nose indicating be drawn to indicate upper side of the mask?
+	logical. Should a nose be drawn to indicate upper side of the mask?
 }
 \item{draw.elec.lab}{
-	logical. Should electrode labels of electrodes be drawn?
+	logical. Should electrode labels be drawn?
 }
 \item{elec.lab.adj}{
 	a vector with a pair of values indicating horizontal and vertical adjustment of electrode labels (see \code{\link{text}}).
 }
 \item{head.col}{
-	the line color of head and nose.
+	line color of head and nose.
 }
 \item{head.lwd}{
-	the line width of head and nose.
+	line width of head and nose.
 }
 \item{...}{
 	further parameters to be passed to \code{\link{image}}.
@@ -108,14 +108,14 @@ time point is plotted.
 %}
 \value{
 The topographic map is plotted. The function also returns a list of values that can be used by other functions. The first item of the list is a pair of values indicating the 
-\code{zlim} of the plot. The second item of the list is a vector indicating the palette create by the function (\code{palette}). This last vector with palette colors can be used by the \code{\link{topoplot.palette}} function.
+\code{zlim} of the plot. The second item of the list is a vector indicating the palette created by the function (\code{palette}). This last vector with palette colors can be used by the \code{\link{topoplot.palette}} function.
 }
 \author{
 Giorgio Arcara
 }
 \note{
-The topographic plots are made according the following steps. 1) The electrodes are projected from 3d space to 2d space. 2) Voltage values are interpolated (and extrapolated, if \code{extrap=TRUE}) on 2d space (the interpolation methods come from the \code{\link{interp}} function of \code{\link{akima}} package). The spline interpolation is NOT a spherical spline interpolation.\cr
-The function contains already a built-in list of electrode coordinates, but some names may not be the same in the supplied data frame and in the built-in list (even if the case is ignored in the match). An optional object with electrode coordinates can be supplied. This object should be a data frame containing these four columns: a column labeled \code{"el.name"} with electrode names, three columns labeled \code{"x", "y", "z"} with spherical coordinates of the electrode. \cr
+The topographic plots are created according the following steps. 1) The electrodes are projected from 3d space to 2d space. 2) Voltage values are interpolated (and extrapolated, if \code{extrap=TRUE}) on 2d space (the interpolation methods come from the \code{\link{interp}} function of \code{\link{akima}} package). The spline interpolation is NOT a spherical spline interpolation.\cr
+The function already contains a built-in list of electrode coordinates, but some names may not be the same in the supplied data frame and in the built-in list (even if the case is ignored in the match). An optional object with electrode coordinates can be supplied. This object should be a data frame containing these four columns: a column labeled \code{"el.name"} with electrode names, three columns labeled \code{"x", "y", "z"} with spherical coordinates of the electrode. \cr
 Type \code{topoplot(return.coord=TRUE)} to see the data frame structure. \cr
 In the \code{"orthographic"} projection only \code{"x"} and \code{"y"} of electrode coordinates are mantained. The \code{"equalarea"} projection keeps in the 2d projection the area proprortions as in 3d representation.
 }
