@@ -6,18 +6,18 @@
 erpR package
 }
 \description{
-The erpR package includes a series of functions for importing ERP data, carrying out exploratory analyses, computing traditional ERP measures and ERP plotting.
+The erpR package includes a series of functions for importing Event-related potentials (ERP) data, carrying out exploratory analyses, computing traditional ERP measures and ERP plotting.
 }
 \details{
 \tabular{ll}{
 Package: \tab erpR\cr
 Type: \tab Package\cr
 Version: \tab 0.1.0\cr
-Date: \tab 2014-03-19\cr
-License: \tab GNU public license \cr
+Date: \tab 2014-05-12\cr
+License: \tab CC BY-NC-SA 3.0 \cr
 }
-The package includes a series of functions for importing ERP data, carrying out exploratory analyses, computing traditional ERP measures and ERP plotting. 
-Many \code{erpR} functions require to specify two arguments: \code{base} and \code{numbers}. The names of the objects for the \code{erpR} functions are obtained from the combination of \code{base} and \code{numbers}. The argument \code{base} typically indicates the name of the experimental condition (or group, or both), while \code{numbers} indicate the numbers of the subjects on which function is applied. This system is crucial to keep order in object and files names and to tell \code{erpR} the correspondence between the objects. In particular a given \code{base} will always refer to the same condition, and a given \code{number} will always refer to the same subject. The data frames containing ERP data (named by the combination of \code{base} and \code{number}) are stored in lists called erplists.
+The package includes a series of functions for importing Event-related potentials (ERP) data, carrying out exploratory analyses, computing traditional ERP measures and ERP plotting. Many \code{erpR} functions require to specify two arguments: \code{base} and \code{numbers}. The names of the objects for the \code{erpR} functions are obtained from the combination of \code{base} and \code{numbers}. The argument \code{base} typically indicates the name of the experimental condition (or group, or both), while \code{numbers} indicate the numbers of the subjects on which function is applied. This system is crucial to keep order in object and files names and to tell \code{erpR} the correspondence between the objects. In particular a given \code{base} will always refer to the same condition, and a given \code{number} will always refer to the same subject. The data frames containing ERP data (named by the combination of \code{base} and \code{number}) are stored in lists called erplists.
+This package is released under a non FOSS license since it depends on the package \code{\link{akima}}, that cannot be freely used for commercial uses.
 
 Further information can be found on the maintainer's site \url{https://sites.google.com/site/giorgioarcara/erpr}.
 }
