@@ -247,7 +247,7 @@ draw.elec.pos=TRUE,  draw.nose=FALSE, draw.elec.lab=TRUE, elec.lab.adj=c(0.5, NA
 		extrap=FALSE #notice that extrapolation is not possible with linear interp
 	}
 	
-	interp.data=akima::interp(x,y, ampl, xo=seq(xlim[1], xlim[2], length = interp.points), yo=seq(ylim[1], ylim[2], length = interp.points), linear=interp.linear, extrap= extrap)
+	interp.data=interp(x,y, ampl, xo=seq(xlim[1], xlim[2], length = interp.points), yo=seq(ylim[1], ylim[2], length = interp.points), linear=interp.linear, extrap= extrap)
 
 
 		
