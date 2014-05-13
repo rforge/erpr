@@ -60,7 +60,7 @@ time point is plotted.
 	the limits of z axis (i.e. colors in the topographic map). If \code{NULL}, then the limits are automatically computed.
 }
 \item{interpolation}{
-	The interpolation between electrodes. Two methods from package \code{\link{akima}} are available: \code{"linear"} and \code{"cubicspline"}.
+	The interpolation between electrodes. Two methods from package \code{akima} are available: \code{"linear"} and \code{"cubicspline"}.
 }
 \item{extrap}{
 	logical. Extrapolate the data outside the convex hull also. This parameter is ignored if interpolation method is \code{"linear"}.
@@ -114,14 +114,17 @@ The topographic map is plotted. The function also returns a list of values that 
 Giorgio Arcara
 }
 \note{
-The topographic plots are created according the following steps. 1) The electrodes are projected from 3d space to 2d space. 2) Voltage values are interpolated (and extrapolated, if \code{extrap=TRUE}) on 2d space (the interpolation methods come from the \code{\link{interp}} function of \code{\link{akima}} package). The spline interpolation is NOT a spherical spline interpolation.\cr
+The topographic plots are created according the following steps. 1) The electrodes are projected from 3d space to 2d space. 2) Voltage values are interpolated (and extrapolated, if \code{extrap=TRUE}) on 2d space (the interpolation methods come from the \code{nterp} function of \code{akima} package). The spline interpolation is NOT a spherical spline interpolation.\cr
 The function already contains a built-in list of electrode coordinates, but some names may not be the same in the supplied data frame and in the built-in list (even if the case is ignored in the match). An optional object with electrode coordinates can be supplied. This object should be a data frame containing these four columns: a column labeled \code{"el.name"} with electrode names, three columns labeled \code{"x", "y", "z"} with spherical coordinates of the electrode. \cr
 Type \code{topoplot(return.coord=TRUE)} to see the data frame structure. \cr
 In the \code{"orthographic"} projection only \code{"x"} and \code{"y"} of electrode coordinates are mantained. The \code{"equalarea"} projection keeps in the 2d projection the area proprortions as in 3d representation.
+The \code{\link{topoplot}} function uses the function \code{interp} of package \code{akima}, that is released under a non-commercial use license.
 }
 
 
 \examples{
+
+library(akima)
 
 data(ERPsets)
 
@@ -135,5 +138,6 @@ notfound=topoplot(word, return.notfound=TRUE)
 #make a topoplot excluding not found electrode
 topoplot(word, startmsec=-200, endmsec=1500, win.ini=400,
 win.end=600, exclude=notfound)
+
 
 }
