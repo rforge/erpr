@@ -139,5 +139,4 @@ notfound=topoplot(word, return.notfound=TRUE)
 topoplot(word, startmsec=-200, endmsec=1500, win.ini=400,
 win.end=600, exclude=notfound)
 
-
 }
