@@ -124,7 +124,7 @@ The \code{\link{topoplot}} function uses the function \code{interp} of package \
 
 \examples{
 
-library(akima)
+if(require(akima)){
 
 data(ERPsets)
 
@@ -138,5 +138,6 @@ notfound=topoplot(word, return.notfound=TRUE)
 #make a topoplot excluding not found electrode
 topoplot(word, startmsec=-200, endmsec=1500, win.ini=400,
 win.end=600, exclude=notfound)
+}
 
 }

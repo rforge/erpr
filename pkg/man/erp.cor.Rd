@@ -83,7 +83,8 @@ Giorgio Arcara
 \code{\link{scalp.cor}}
 }
 \examples{
-	
+
+\dontrun{
 data(ERPsets)
 
 
@@ -92,7 +93,8 @@ data(ERPsets)
 RT=rnorm(20, mean = 500, sd = 100)
 erp.cor("Exp1_word_subj", numbers=1:20, electrode="Fp1",  
 erplist=ERPsets, external=RT, startmsec=-200, endmsec=1500, 
-ylim=c(-6,6) )
+ylim=c(-6,6))
+}
 
 
 }

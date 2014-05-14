@@ -92,12 +92,14 @@ There is also a function \code{\link{scalp.infl}} able to perform the t-tests on
 }
 \examples{
 
+\dontrun{
 data(ERPsets)
 
 erp.t("Exp1_word_subj", "Exp1_nonword_subj", 1:20, 1:20, 
 electrode="Fp1", ylim=c(-10,10),  startmsec=-200, 
 endmsec=1500, erplist1=ERPsets, erplist2=ERPsets, 
 col=c("blue", "red"))
+}
 
 
 

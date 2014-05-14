@@ -73,7 +73,7 @@ The two parameters \code{cols} and \code{zlim} may be supplied with values that 
 
 \examples{
 	
-library(akima)
+if(require(akima)) {
 
 data(ERPsets)
 
@@ -97,6 +97,8 @@ win.end=600, exclude=notfound)
 par(pty="m", mar=c(0,0,0,0))
 plot.new()
 topoplot.palette(cols=topo.data$palette, 
-palette.lim=topo.data$zlim, p.height=0.6)
+palette.lim=topo.data$zlim, p.height=0.6) 
+
+}
 
 }
