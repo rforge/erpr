@@ -99,5 +99,4 @@ plot.new()
 topoplot.palette(cols=topo.data$palette, 
 palette.lim=topo.data$zlim, p.height=0.6)
 
-
 }
