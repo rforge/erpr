@@ -87,7 +87,6 @@ Giorgio Arcara
 \dontrun{
 data(ERPsets)
 
-
 #generate some simulated RT data 
 
 RT=rnorm(20, mean = 500, sd = 100)

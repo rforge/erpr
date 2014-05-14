@@ -102,7 +102,6 @@ col=c("blue", "red"))
 }
 
 
-
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

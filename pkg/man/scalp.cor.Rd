@@ -118,7 +118,6 @@ erplist=ERPsets, ylim=10, legend=TRUE)
 }
 
 
-
 }
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the
