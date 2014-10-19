@@ -10,8 +10,8 @@ This function plots an x axis for an erp waveform. Numbers and tick positions ar
 
 \usage{
 erp.xaxis(length.erp = NULL, startmsec=-200, endmsec = 1200, 
-x.tick=seq(-200, 1200, 200), x.labels = x.tick,  x.pos = NA, 
-x.outer = FALSE, x.font = NA, x.lty = "solid", x.lwd = 1, 
+x.tick = seq(-200, 1200, 200), x.labels = x.tick, draw.x.ticks = TRUE,
+x.pos = NA, x.outer = FALSE, x.font = NA, x.lty = "solid", x.lwd = 1, 
 x.lwd.ticks = 1, x.col = NULL, x.col.ticks = NULL, x.hadj = NA, 
 x.padj = NA, x.tcl = -0.5, x.tick.both= FALSE, x.cex = 1)
 }
@@ -33,6 +33,10 @@ the position (in ms) of x ticks.
 
 \item{x.labels}{
 the labels (usually a vector of numbers) to be plotted on the x axis.
+}
+
+\item{draw.x.ticks}{
+	a logical value specifying whether x tickmarks and an axis line should be drawn. 
 }
 
 \item{x.pos}{

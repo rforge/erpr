@@ -28,7 +28,7 @@ function(dat, vars, contr, dep, wid, p.adjust.methods="none", paired=FALSE, ...)
 		mean.1=c(mean.1, mean(dat[dat$newfactor%in%contr[[i]][[1]],dep]))
 		mean.2=c(mean.2, mean(dat[dat$newfactor%in%contr[[i]][[2]],dep]))
 		}	
-		p.values.corr=round(p.adjust(p.values, p.adjust.methods),3)
+		p.values.corr=signif(p.adjust(p.values, p.adjust.methods),2)
 		results=data.frame(contr=contrast.names, p.value=p.values.corr, t.value=t.values, df=df, mean.1=mean.1, mean.2)
 		attr(results, "p.corr")=p.adjust.methods
 		cat("p values adjustment = ", p.adjust.methods, "\n")

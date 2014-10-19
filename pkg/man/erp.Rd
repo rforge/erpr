@@ -9,13 +9,13 @@ A function to plot an ERP waveform of a single electrode. If used with default v
 }
 \usage{
 erp(el, startmsec=-200, endmsec = 1200, smo = NULL, interval = c(startmsec, endmsec),
-xlim = c(startmsec, endmsec), ylim = c(-6,6), col = "black", 
+xlim = NULL, ylim = NULL, col = "black", 
 lwd = 1, xlab = "", ylab = "", main = "", frame.plot = TRUE,
 draw.xaxis = TRUE, draw.yaxis = TRUE, type = "l", x0 = TRUE,
-x.tick = seq(-200, 1200, 200), x.labels=x.tick, x.pos = NA, 
+x.tick = NULL, x.labels=x.tick, x.pos = NA, 
 x.outer = F, x.font = NA, x.lty = "solid", x.lwd = 1, x.lwd.ticks = 1, 
 x.col = NULL,  x.col.ticks = NULL, x.hadj = NA, x.padj = NA, x.tcl = -0.5, 
-x.tick.both= FALSE, x.cex = 1, y.tick = seq(-6,6,2), y.labels = y.tick,  
+x.tick.both= FALSE, x.cex = 1, y.tick = NULL, y.labels = y.tick,  
 y.pos = NA, y.outer = F, y.font = NA, y.lty = "solid", y.lwd = 1, 
 y.lwd.ticks = 1, y.col = NULL, y.col.ticks = NULL, y.hadj = NA, y.padj = NA, 
 y.tcl = -0.5, y.tick.both= FALSE, y.cex = 1, ...)
@@ -39,10 +39,10 @@ the smoothing parameter to apply (see \code{\link{smooth.spline}}). Default is \
 a vector with a pair of values indicating the interval (in milliseconds) to be plotted.
 }
 \item{xlim}{
-a vector with a pair of values indicating the limits (in milliseconds) of the x axis.
+a vector with a pair of values indicating the limits (in milliseconds) of the x axis. Default is \code{NULL} and the xlim is automatically computed.
 }
 \item{ylim}{
-a vector with a pair of values indicating the limits (in milliseconds) of the x axis.
+a vector with a pair of values indicating the limits (in milliseconds) of the y axis.Default is \code{NULL} and the ylim is automatically computed.
 }
 \item{col}{
 the color of the ERP waveform.
@@ -75,7 +75,8 @@ the line width of the ERP waveform.
 	a logical indicating whether a short segment should be drawn to indicate the 0 point (in millisecond)
 }
 \item{x.tick}{
-the position (in milliseconds) of x ticks.
+the position (in milliseconds) of x ticks. Default is \code{NULL} and the ticks are automatically determined.
+
 }
 
 \item{x.labels}{
@@ -123,7 +124,8 @@ Logical. Should the tick marks be drawn both above and below the x axis?
 The magnification to be used for the x labels.
 }
 \item{y.tick}{
-the position (in milliseconds) of y ticks.
+the position (in milliseconds) of y ticks. Default is \code{NULL} and the ticks are automatically determined.
+
 }
 
 \item{y.labels}{

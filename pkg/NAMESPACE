@@ -24,6 +24,7 @@ export(
 	"localmax",
 	"localmin",
 	"msectopoints",
+	"ms.locator",
 	"named.agg",
 	"pointstomsec",
 	"rearrange",

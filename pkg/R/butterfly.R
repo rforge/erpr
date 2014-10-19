@@ -35,9 +35,9 @@ function(base, numbers,  electrode = NULL, startmsec = - 200, endmsec = 1200, er
 			i=1
 			el=erplist[[paste(base, numbers[i], sep="")]][[electrode]]
 			erp(el, startmsec=startmsec, endmsec=endmsec,  ...)
-			for (i in 2:length(numbers))
+			for (i1 in 2:length(numbers))
 				{
-				el=erplist[[paste(base, numbers[i], sep="")]][[electrode]]
+				el=erplist[[paste(base, numbers[i1], sep="")]][[electrode]]
 				
 				do.call("erp.add", mycall.erp.add)
 				}

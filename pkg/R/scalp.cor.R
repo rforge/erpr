@@ -197,12 +197,12 @@ plot(1, type="n", frame.plot=FALSE,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n
 			
 			# plotto le bande di significatività di correlazioni negative
 		######################
-		abline(v=grep(-1, alltemp.results[,electrodes[i]]), col="lightblue", lwd=1)
+		abline(v=grep("-1", alltemp.results[,electrodes[i]]), col="lightblue", lwd=1)
 		#######################
 		
 		# plotto le bande di significatività di correlazioni positive
 		######################
-		abline(v=grep(+1, alltemp.results[,electrodes[i]]), col="indianred1", lwd=1)
+		abline(v=grep("^1", alltemp.results[,electrodes[i]]), col="indianred1", lwd=1)
 		#######################
 		el=categ[[1]][[electrodes[i]]][1:dim(categ[[1]])[1]]
 		if (!is.null(smo)){

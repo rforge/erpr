@@ -59,11 +59,11 @@ erp.infl.panel=function(panel)
 		
 		do.call("erp", mycall.erp[-1]) #notice the -1. It is to remove the name of the function from the call list.
 		
-		# very important! in update of rpanel the outline parameter becomes a character
-		# the line below is fundamental
-		outline=as.numeric(outline)
+		# notice that rpanel update outline that becomes a character (no more a number). This is useful for the step below.
 		
-		average.excl=(average.temp-erplist[[paste(base, numbers[outline],sep="")]][[electrode]])/(length(numbers)-1)		
+		#notice that I use "outline" and not numbers, since it is already a character and correspond to on the numbers specified in the arguments.
+		
+		average.excl=(average.temp-erplist[[paste(base, outline, sep="")]][[electrode]])/(length(numbers)-1)		
 		
 		do.call("erp.add", mycall.erp.add)
 		

@@ -1493,3 +1493,4 @@ pvals.fnc
 dir()
 a=dir()
 a
+?read.table

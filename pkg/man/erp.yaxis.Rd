@@ -10,9 +10,10 @@ This function plots an y axis of an erp waveform. The position of the axis is de
 
 \usage{
 erp.yaxis(length.erp = NULL, startmsec=-200, endmsec = 1200, y.tick=seq(-6,6,2), 
-y.labels = y.tick, y.pos = NA,  y.outer = FALSE, y.font = NA, y.lty = "solid", 
-y.lwd = 1, y.lwd.ticks = 1, y.col = NULL, y.col.ticks = NULL, y.hadj=NA,
-y.padj = NA, y.tcl = -0.5, y.tick.both= FALSE, y.cex = 1)
+y.labels = y.tick, draw.y.ticks = TRUE, y.pos = NA,  y.outer = FALSE, 
+y.font = NA, y.lty = "solid", y.lwd = 1, y.lwd.ticks = 1, y.col = NULL, 
+y.col.ticks = NULL, y.hadj=NA, y.padj = NA, y.tcl = -0.5, y.tick.both= FALSE, 
+y.cex = 1)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -27,6 +28,9 @@ the end time (in ms) of the ERP vector.
 }
 \item{y.labels}{
 the labels (usually a vector of numbers) to be plotted on the y axis.
+}
+\item{draw.y.ticks}{
+a logical value specifying whether y tickmarks and an axis line should be drawn. 
 }
 \item{y.pos}{
 the position of y axis, in terms of x axis coordinates (in ms). Default is \code{NA} and the axis is drawn at the left of the plot.

@@ -2,14 +2,14 @@
 \alias{import.erp}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-import ERP data matrices from ASCII files (file extension should be specified). Data are imported as a list containing a data frame for each files imported.
-}
+import ERP data matrices from ASCII files (file extension should be specified). }
 \description{
-Import a series of .txt files with ERP data.
+Import a series of ASCII files with ERP data. Data are imported as a list containing a data frame for each imported file. The field separator character and the character used for decimal points may be specified by the parameters \code{sep} and \code{dec}, that are passed to the function \code{read.table}, called by \code{import.erp}. 
+
 }
 \usage{
 import.erp(filenamebase, numbers, ext=".txt", 
-outname = "ERP_subj", fileinfo=FALSE, erplist = NULL, path=getwd())
+outname = "ERP_subj", fileinfo=FALSE, erplist = NULL, path=getwd(), ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -35,6 +35,9 @@ If an erplist is specified, then the imported files will be added to this erplis
 }
 \item{path}{
 A string indicating the directory where the ASCII files are contained. Otherwise the files will be searched from the current working directory.
+}
+\item{\ldots}{
+	further parameters to be passed to \code{\link{read.table}}.
 }
 }
 \details{

@@ -8,13 +8,13 @@ plot a topographic map of ERP
 Plot a topographic map of an ERP on a specific timepoint or averaging the ERP in a time window. The head is represented as a circle.
 }
 \usage{
-topoplot(erpobj, startmsec=-200, endmsec=1200, win.ini, 
-win.end,  exclude = NULL, elec.coord=NULL, projection="orthographic", 
-palette.col="jet", palette.steps=10, return.coord = FALSE, zlim=NULL, 
-interpolation = "cubicspline", extrap = TRUE, interp.points = 500, 
-return.notfound=FALSE, mask = TRUE,  contour=TRUE, x.rev=FALSE, 
-draw.elec.pos=TRUE,  draw.nose=FALSE, draw.elec.lab=TRUE, 
-elec.lab.adj=c(0.5, NA), head.col="black", head.lwd=1, ...)
+topoplot(erpobj, startmsec=-200, endmsec=1200, win.ini, win.end, exclude = NULL,
+elec.coord=NULL, projection="orthographic", palette.col="jet", palette.steps=10, 
+return.coord = FALSE, zlim=NULL, interpolation = "cubicspline", extrap = TRUE, 
+interp.points = 500, return.notfound=FALSE, mask = TRUE,  contour=TRUE, x.rev=FALSE,
+draw.elec.pos=TRUE,  elec.pos.toplot="all", elec.pos.pch=19, elec.pos.cex=1, 
+draw.nose=FALSE, draw.elec.lab=TRUE, elec.lab.adj=c(0.5, NA), elec.lab.cex=1, 
+elec.lab.toplot=elec.pos.toplot, head.col="black", head.lwd=1, ...)
 }
 \arguments{
 	\item{erpobj}{
@@ -83,6 +83,18 @@ time point is plotted.
 \item{draw.elec.pos}{
 	logical. Should the black points be drawn in correspondence with electrode positions?
 }
+\item{elec.pos.toplot}{
+	the electrode positions to plot, with a symbol specified in \code{elec.pos.pch}. 
+	Default is \code{"all"} and all electrode positions will be plotted.
+}
+\item{elec.pos.pch}{ 
+	the symbol type for electrode position. Default is \code{19} and electrode positions are plotted as black dots.
+	
+}
+\item{elec.pos.cex}{
+	The magnification to be used for the electrode position symbols
+
+}
 \item{draw.nose}{
 	logical. Should a nose be drawn to indicate upper side of the mask?
 }
@@ -91,6 +103,12 @@ time point is plotted.
 }
 \item{elec.lab.adj}{
 	a vector with a pair of values indicating horizontal and vertical adjustment of electrode labels (see \code{\link{text}}).
+}
+\item{elec.lab.cex}{
+	The magnification to be used for the electrode labels.	
+}
+\item{elec.lab.toplot}{
+	the electrode labels to plot. As default, the labels for the electrodes specified with the argument \code{elec.pos.toplot} are plotted. 
 }
 \item{head.col}{
 	line color of head and nose.

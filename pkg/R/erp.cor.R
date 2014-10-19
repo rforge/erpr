@@ -117,12 +117,12 @@ el=alldata1[,electrode]
 				
 		# plotto le bande di significatività di correlazioni negative
 		######################
-		abline(v=grep(-1, alltemp.results[,electrode]), col="lightblue", lwd=3)
+		abline(v=grep("-1", alltemp.results[,electrode]), col="lightblue", lwd=3)
 		#######################
 		
 		# plotto le bande di significatività di correlazioni positive
 		######################
-		abline(v=grep(+1, alltemp.results[,electrode]), col="indianred1",  lwd=3)
+		abline(v=grep("^1", alltemp.results[,electrode]), col="indianred1",  lwd=3)
 		#######################
 		
 		do.call("erp.add", mycall.erp.add)
