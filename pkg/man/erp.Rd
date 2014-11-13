@@ -9,16 +9,15 @@ A function to plot an ERP waveform of a single electrode. If used with default v
 }
 \usage{
 erp(el, startmsec=-200, endmsec = 1200, smo = NULL, interval = c(startmsec, endmsec),
-xlim = NULL, ylim = NULL, col = "black", 
-lwd = 1, xlab = "", ylab = "", main = "", frame.plot = TRUE,
-draw.xaxis = TRUE, draw.yaxis = TRUE, type = "l", x0 = TRUE,
-x.tick = NULL, x.labels=x.tick, x.pos = NA, 
-x.outer = F, x.font = NA, x.lty = "solid", x.lwd = 1, x.lwd.ticks = 1, 
-x.col = NULL,  x.col.ticks = NULL, x.hadj = NA, x.padj = NA, x.tcl = -0.5, 
-x.tick.both= FALSE, x.cex = 1, y.tick = NULL, y.labels = y.tick,  
-y.pos = NA, y.outer = F, y.font = NA, y.lty = "solid", y.lwd = 1, 
-y.lwd.ticks = 1, y.col = NULL, y.col.ticks = NULL, y.hadj = NA, y.padj = NA, 
-y.tcl = -0.5, y.tick.both= FALSE, y.cex = 1, ...)
+xlim = NULL, ylim = NULL, col = "black",  lwd = 1, xlab = "", ylab = "", 
+main = "", frame.plot = TRUE, draw.xaxis = TRUE, draw.yaxis = TRUE, type = "l", 
+x0 = TRUE, x.tick = NULL, x.labels=x.tick, x.las=0, x.pos = NA,  x.outer = F, 
+x.font = NA,  x.lty = "solid", x.lwd = 1, x.lwd.ticks = 1,  x.col = NULL,  
+x.col.ticks = NULL,  x.hadj = NA, x.padj = NA, x.tcl = -0.5,  x.tick.both= FALSE,
+x.cex = 1, y.tick = NULL,  y.labels = y.tick, y.las=0, y.pos = NA, y.outer = F, 
+y.font = NA, y.lty = "solid", y.lwd = 1,  y.lwd.ticks = 1, y.col = NULL, 
+y.col.ticks = NULL, y.hadj = NA, y.padj = NA,  y.tcl = -0.5, y.tick.both= FALSE,
+ y.cex = 1, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -81,6 +80,15 @@ the position (in milliseconds) of x ticks. Default is \code{NULL} and the ticks 
 
 \item{x.labels}{
 the labels (usually a vector of numbers) to be plotted on the x axis.
+}
+
+\item{y.las}{
+the style of y axis labels.
+
+}
+
+\item{x.las}{
+the style of x axis labels.
 }
 
 \item{x.pos}{

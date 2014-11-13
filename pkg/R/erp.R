@@ -4,10 +4,10 @@
 erp <- function(el, startmsec=-200, endmsec = 1200, smo = NULL, interval = c(startmsec, endmsec), # here parameters for plot
 xlim = NULL, ylim = NULL, col = "black", lwd = 1, xlab = "", ylab = "", main = "", frame.plot = TRUE,
 draw.xaxis = TRUE, draw.yaxis = TRUE, type = "l", x0 = TRUE,
-x.tick = NULL, x.labels=x.tick, x.pos = NA, #here parameters for x.axis
+x.tick = NULL, x.labels=x.tick, x.las=0, x.pos = NA, #here parameters for x.axis
 x.outer = F, x.font = NA, x.lty = "solid", x.lwd = 1, x.lwd.ticks = 1, x.col = NULL, 
 x.col.ticks = NULL, x.hadj = NA, x.padj = NA, x.tcl = -0.5, x.tick.both= FALSE, x.cex = 1,
-y.tick = NULL, y.labels = y.tick,  y.pos = NA,   # here parameters for y.axis
+y.tick = NULL, y.labels = y.tick,  y.las=0, y.pos = NA,   # here parameters for y.axis
 y.outer = F, y.font = NA, y.lty = "solid", y.lwd = 1, y.lwd.ticks = 1, y.col = NULL, 
 y.col.ticks = NULL, y.hadj = NA, y.padj = NA, y.tcl = -0.5, y.tick.both= FALSE, y.cex = 1, ...)
  
@@ -92,7 +92,7 @@ y.col.ticks = NULL, y.hadj = NA, y.padj = NA, y.tcl = -0.5, y.tick.both= FALSE, 
 	if (draw.xaxis==TRUE){
 	erp.xaxis(lengthwhole, startmsec = startmsec, endmsec = endmsec, x.labels = x.labels, x.pos=x.pos, x.tick=x.tick,
 	 x.outer=x.outer, x.font=x.font, x.lty=x.lty, x.lwd=x.lwd, x.lwd.ticks=x.lwd.ticks, x.col=x.col, x.col.ticks=x.col.ticks, x.hadj=x.hadj, x.padj=x.padj, 
-	 x.tcl=x.tcl, x.tick.both=x.tick.both, x.cex=x.cex)
+	 x.tcl=x.tcl, x.tick.both=x.tick.both, x.cex=x.cex, x.las=x.las)
 	 }
 	
 	 # PLOT y.axis calling erp.yaxis function
