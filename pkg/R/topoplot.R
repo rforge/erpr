@@ -2,7 +2,7 @@
 topoplot<-function(erpobj, startmsec=-200, endmsec=1200, win.ini, win.end, exclude = NULL,
 elec.coord=NULL, projection="orthographic", palette.col="jet", palette.steps=10, return.coord = FALSE,
 zlim=NULL, interpolation = "cubicspline", extrap = TRUE, interp.points = 500, return.notfound=FALSE, mask = TRUE,  contour=TRUE, x.rev=FALSE,
-draw.elec.pos=TRUE,  elec.pos.toplot="all", elec.pos.pch=19, elec.pos.cex=1, draw.nose=FALSE, draw.elec.lab=TRUE, elec.lab.adj=c(0.5, NA), elec.lab.cex=1, elec.lab.toplot=elec.pos.toplot, head.col="black", head.lwd=1, ...)
+draw.elec.pos=TRUE,  elec.pos.toplot="all", elec.pos.pch=19, elec.pos.cex=1, draw.nose=FALSE, draw.ears=FALSE, draw.elec.lab=TRUE, elec.lab.adj=c(0.5, NA), elec.lab.cex=1, elec.lab.toplot=elec.pos.toplot, head.col="black", head.lwd=1, ...)
 
 {
 	requireNamespace("akima")
@@ -143,10 +143,14 @@ draw.elec.pos=TRUE,  elec.pos.toplot="all", elec.pos.pch=19, elec.pos.cex=1, dra
 	
 	### EXCLUDE ELECTRODES
 	
-	erpobj=erpobj[,!names(erpobj)%in%exclude]
-	
+  if (!is.null(exclude)){
+    erpobj=erpobj[,!names(erpobj)%in%exclude]
+  }
+	  
 	# create a vector with the electrode to be included in the future steps
-	curr.el=names(erpobj[,!names(erpobj)%in%exclude])
+	#curr.el=names(erpobj[,!names(erpobj)%in%exclude])
+	  
+	curr.el=names(erpobj) 
 	
 	up.curr.el=toupper(curr.el)
 	up.elec.coord.names=toupper(elec.coord$el.name)	
@@ -157,7 +161,11 @@ draw.elec.pos=TRUE,  elec.pos.toplot="all", elec.pos.pch=19, elec.pos.cex=1, dra
 	
 	if (length(notfound)>0&return.notfound==FALSE){
 		notfound.list=paste(notfound, "\n", sep="")
-		stop("the following electrodes have not been found\n", notfound.list, call.=F)
+		warning("the following electrodes have not been found\n", notfound.list, call.=F)
+		
+		# update the curr.el object by automatically excluding not.found electrode
+		curr.el=names(erpobj[,!names(erpobj)%in%notfound])
+		erpobj=erpobj[,!names(erpobj)%in%notfound]
 		}
 	
 	if (length(notfound)>0&return.notfound==TRUE&is.null(exclude)){
@@ -173,6 +181,7 @@ draw.elec.pos=TRUE,  elec.pos.toplot="all", elec.pos.pch=19, elec.pos.cex=1, dra
 	
 	erpobj=erpobj[,order(names(erpobj))]
 	
+
 	# CHANGE X DIRECTIONS IF REQUIRED
 	if (x.rev==TRUE){
 		curr.elec.coord$x=-curr.elec.coord$x
@@ -213,7 +222,7 @@ draw.elec.pos=TRUE,  elec.pos.toplot="all", elec.pos.pch=19, elec.pos.cex=1, dra
 	
 	
 	##################
-	# RETRIEVE AMPLITUDE. If necessary compute means across timepoints. 
+	# RETRIEVE AMPLITUDE. If necessary compute average across timepoints. 
 	####################################
 
 	
@@ -381,10 +390,28 @@ if (mask == TRUE){
 	lines(Nose.right, col=head.col, lwd=head.lwd)
 	}
 
-
+	if (draw.ears==TRUE){
+	ear.left=structure(list(x = c(-0.977931701030928, -1.00236254295533, -1.01632302405498, 
+	                               -1.03028350515464, -1.04075386597938, -1.0473410652921, -1.0442439862543, 
+	                               -1.0342439862543, -1.03395386597938, -1.0372439862543, -1.0423410652921, 
+	                               -1.04273410652921, -1.0452439862543, -1.0472439862543, -1.035079338487972, 
+	                               -1.03283290378007, -0.995382302405498, -0.977931701030928, -0.967461340206185
+	  ), y = c(0.222551774378187, 0.236080757623062, 0.222551774378187, 
+	           0.202258299510875, 0.181964824643563, 0.154906858153814, 0.121084400041628, 
+	           0.0737329586845665, 0.033146008949943, -0.014205432407118, -0.054792382141742, 
+	           -0.10890831512124, -0.13596628161099, -0.169788739723176, -0.203611197835363, 
+	           -0.223904672702674, -0.244198147569986, -0.237433655947549, -0.230669164325112
+	  )), .Names = c("x", "y"))
 	
-
-
+	
+	# create ear right as symmetric of ear left on x-axis
+	ear.right=list(x=-ear.left$x, y=ear.left$y)
+	
+	lines(ear.left, col=head.col, lwd=head.lwd)
+	
+	lines(ear.right, col=head.col, lwd=head.lwd)
+	
+	}
 	
 	##############
 	### RETURN	SOME PARAMETERS
