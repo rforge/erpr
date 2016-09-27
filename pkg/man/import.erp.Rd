@@ -9,7 +9,7 @@ Import a series of ASCII files with ERP data. Data are imported as a list contai
 }
 \usage{
 import.erp(filenamebase, numbers, ext=".txt", 
-outname = "ERP_subj", fileinfo=FALSE, erplist = NULL, path=getwd(), ...)
+outname = "ERP_subj", fileinfo=FALSE, erplist = NULL, path=getwd(), electrodes="file", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -35,6 +35,9 @@ If an erplist is specified, then the imported files will be added to this erplis
 }
 \item{path}{
 A string indicating the directory where the ASCII files are contained. Otherwise the files will be searched from the current working directory.
+}
+\item{electrodes}{
+if \code{"file"} (the default), electrode names are retrieved from the imported file, as header. Otherwise a vector with electrode names can be specified.
 }
 \item{\ldots}{
 	further parameters to be passed to \code{\link{read.table}}.

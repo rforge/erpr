@@ -12,7 +12,7 @@
 \source{
 Data collected by Giorgio Arcara.
 }
-\note{some artifact were added to the original data for didactical purposes}
+\note{some artifacts were added to the original data for didactical purposes.}
 
 \examples{\dontrun{
 data(ERPsets)
