@@ -15,7 +15,7 @@ import.erp=function(filenamebase,numbers, ext=".txt", outname="ERP_subj", filein
 	for (i in 1:length(numbers)){
 		if (fileinfo==TRUE){
 		erpout=read.table(paste(path, "/", filenamebase, numbers[i], ext ,sep=""), header=myheader,skip=1, ...)
-		erp.subjectname=readLines(paste(filenamebase, numbers[i], ext,sep=""), n=1)
+		erp.subjectname=readLines(paste(path, "/", filenamebase, numbers[i], ext,sep=""), n=1)
 		erp.subjectname=gsub("\t","", erp.subjectname)
 		comment(erpout)=erp.subjectname
 		erpout.name=paste(outname, numbers[i], sep="")
@@ -25,7 +25,7 @@ import.erp=function(filenamebase,numbers, ext=".txt", outname="ERP_subj", filein
 		}
 		if (fileinfo==FALSE){
 		erpout=read.table(paste(path, "/", filenamebase, numbers[i], ext ,sep=""), header=myheader, ...)
-		erp.subjectname=paste(filenamebase, numbers[i], ext ,sep="")
+		erp.subjectname=paste(path, "/", filenamebase, numbers[i], ext ,sep="")
 		erp.subjectname=gsub("\t","", erp.subjectname)
 		comment(erpout)=erp.subjectname
 		erpout.name=paste(outname, numbers[i], sep="")
