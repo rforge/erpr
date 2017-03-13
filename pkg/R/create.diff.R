@@ -2,9 +2,9 @@ create.diff <-
 function(base1, base2, numbers, outname=NULL, erplist=NULL, fileinfo=1)
 	{
 	### preliminary checks
-	if (!is.numeric(numbers)){
-	stop("\"numbers\" must be a numeric vector", call.=F)
-	}
+	#if (!is.numeric(numbers)){
+	#stop("\"numbers\" must be a numeric vector", call.=F)
+	#}
 	if (length(base1)>1){
 	stop("the argument \"base1\" and \"base2\" must have length equal to 1", call.=F)
 	}
