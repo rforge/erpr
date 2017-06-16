@@ -28,6 +28,7 @@ export(
 	"named.agg",
 	"pointstomsec",
 	"rearrange",
+	"sampling.rate",
 	"scalp.cor",
 	"scalp.infl",
 	"scalp",

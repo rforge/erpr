@@ -84,7 +84,7 @@ time point is plotted.
 	logical. Should the black points be drawn in correspondence with electrode positions?
 }
 \item{elec.pos.toplot}{
-	the electrode positions to plot, with a symbol specified in \code{elec.pos.pch}. 
+	the names of the electrodes to plot, with a symbol specified in \code{elec.pos.pch}. 
 	Default is \code{"all"} and all electrode positions will be plotted.
 }
 \item{elec.pos.pch}{ 

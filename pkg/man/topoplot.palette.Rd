@@ -11,7 +11,7 @@ This function draws a topoplot palette as a rectangle with colored areas indicat
 topoplot.palette(cols, pos = c(0.5,0.5), p.width=0.2, p.height=0.8, 
 horizontal = FALSE, rev= FALSE, palette.lwd=1, palette.bord="black", 
 palette.lim = c(-5,5), labels=TRUE, lab.dist = 1, lab.cex = 1,
- lab.font = 1, lab.family = "")
+ lab.font = 1, lab.family = "", measure = "microvolts", detailed.labels = NULL)
 }
 \arguments{
   \item{cols}{
@@ -55,6 +55,15 @@ palette.lim = c(-5,5), labels=TRUE, lab.dist = 1, lab.cex = 1,
 	}
 	\item{lab.family}{
 		font family for the labels (see \code{\link{par}}).
+	}
+	\item{measure}{
+	the label indicating the labels to be displayed with the palette. Default is \code{"microvolt"} and an \code{expression} with microvolt label is added. Otherwise you can specify any text string (e.g., "\%").
+	}
+	
+	\item{detailed.labels}{
+	a list containing two labels, for the upper and lower limits of the palette (e.g. list(10 "\%", "-10\%"). If specified this value overrides \code{measure} argument. NOTE that if you use this argument you must manually specify the numeric value of the limits (the same of zlim).
+	}
+	
 	}
 }
 %\details{

@@ -10,7 +10,7 @@ This function calculates the peak latency on several ERP data frames. It returns
 \usage{
 erp.latency(base, numbers, win.ini, win.end, erplist = NULL, 
 startmsec=-200, endmsec=1200, others=NULL, format="long", 
-name.dep="Dep", name.newvar="electrode", peak.fun = "max", ...)
+name.dep="Dep", name.newvar="electrode", peak.fun = "max", frac=1, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -45,12 +45,16 @@ the names of other variables to be included in the returned data frame. Ignored 
 \item{name.dep}{
 	the name of the dependent variable in the returned dataframe. Ignored if the format is "wide".
 }
-\item{peak.fun}{
-	the function to calculate the peak. Available functions are \code{max}, \code{min}, \code{localmax}, \code{localmin}.
-	}
+
 \item{name.newvar}{
 	If the format is "long", the name of the new variable codifying the electrodes. Default is "electrode".
 }
+\item{peak.fun}{
+	the function to calculate the peak. Available functions are \code{max}, \code{min}, \code{localmax}, \code{localmin}.
+	}
+\item{frac}{
+To measure the "Fractional Peak Latency", this argument is number indicating the fraction of the peak maximum to be used to localize the peak. Default is 1, and the maximum (or minimum) peak is searched. If 0.5, the first peak before the maximum/mimimum, with 0.5 the size the maximum/minimum is searched.
+	}
 \item{...}{
 	arguments passed to the function specified in \code{peak.fun}.
 	}
