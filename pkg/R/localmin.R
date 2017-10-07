@@ -2,6 +2,12 @@
 # di default n.points=2
 
 localmin <- function(x, n.points=2){
+  
+  # return NA if there is any NA in the data
+  if (any(is.na(x))) {
+    return(NA)
+  }
+  
 	vet=x
 	dat=data.frame(index=1:length(vet))
 	# creo un data.frame con gli indici. Mi serve per utilizzare la funzione apply.

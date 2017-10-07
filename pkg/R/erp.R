@@ -102,7 +102,7 @@ y.col.ticks = NULL, y.hadj = NA, y.padj = NA, y.tcl = -0.5, y.tick.both= FALSE, 
 	if (draw.yaxis==TRUE){
 	erp.yaxis(lengthwhole, startmsec = startmsec, endmsec = endmsec, y.labels = y.labels, y.pos=y.pos, y.tick=y.tick,
 	 y.outer=y.outer, y.font=y.font, y.lty=y.lty, y.lwd=y.lwd, y.lwd.ticks=y.lwd.ticks, y.col=y.col, y.col.ticks=y.col.ticks, 
-	 y.hadj=y.hadj, y.padj=y.padj, y.tcl=y.tcl, y.tick.both=y.tick.both, y.cex=y.cex)
+	 y.hadj=y.hadj, y.padj=y.padj, y.tcl=y.tcl, y.tick.both=y.tick.both, y.cex=y.cex, y.las=y.las)
 	}
 	
 }

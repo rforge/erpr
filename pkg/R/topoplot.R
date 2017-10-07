@@ -1,7 +1,7 @@
 ###
 topoplot<-function(erpobj, startmsec=-200, endmsec=1200, win.ini, win.end, exclude = NULL,
-elec.coord=NULL, projection="orthographic", palette.col="jet", palette.steps=10, return.coord = FALSE,
-zlim=NULL, interpolation = "cubicspline", extrap = TRUE, interp.points = 500, return.notfound=FALSE, mask = TRUE,  contour=TRUE, x.rev=FALSE,
+elec.coord=NULL, projection="orthographic", palette.col="jet", palette.steps=50, return.coord = FALSE,
+zlim=NULL, interpolation = "cubicspline", extrap = TRUE, interp.points = 100, return.notfound=FALSE, mask = TRUE,  contour=TRUE, x.rev=FALSE,
 draw.elec.pos=TRUE,  elec.pos.toplot="all", elec.pos.pch=19, elec.pos.cex=1, draw.nose=FALSE, draw.ears=FALSE, draw.elec.lab=TRUE, elec.lab.adj=c(0.5, NA), elec.lab.cex=1, elec.lab.toplot=elec.pos.toplot, head.col="black", head.lwd=1, ...)
 
 {

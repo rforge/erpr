@@ -8,7 +8,7 @@ calculate sampling rate from an \code{erpobj}
 The function calculates calculate sampling rate from an \code{erpobj}, that is a \code{data.frame} containing ERP data used with the \code{erpR} package. 
 }
 \usage{
-sampling.rate(x, baseline = NULL, total.length = NULL)
+sampling.rate(x, startmsec = NULL, endmsec = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
