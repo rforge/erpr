@@ -1,5 +1,5 @@
 scalp.t <-
-function(base1, base2, numbers1, numbers2=NULL, paired=TRUE, alpha=0.05, sig=NULL, erplist1=NULL, erplist2=erplist1, smo=NULL, layout=1, ylims="auto", yrev=TRUE, startmsec=-200, endmsec=1200, lwd=c(1,1), lty=c(1,1), color.list=c("blue", "red"), legend=F, legend.lab="default", t.axis=seq(-100,endmsec,200), scalp.array=NULL) {
+function(base1, base2, numbers1, numbers2=NULL, paired=TRUE, alpha=0.05, sig=NULL, erplist1=NULL, erplist2=erplist1, smo=NULL, layout=1, ylims="auto", yrev=TRUE, startmsec=-200, endmsec=1200, lwd=c(1,1), lty=c(1,1), color.list=c("blue", "red"), legend=F, legend.lab="default", t.axis=seq(startmsec,endmsec,200), scalp.array=NULL, p.adjust.method="none") {
 
 
 	# preliminary checks
@@ -36,69 +36,6 @@ if (length(legend.lab)==1&legend.lab[1]=="default"){
 }
 
 
-#### PARTE 1: STATISTICHE PER ELETTRODO ####
-if (is.null(numbers2)){
-	numbers2=numbers1}
-
-
-if (is.null(sig)){
-	
-element=function(x,row.i){
-	return(x[row.i,])
-	}
-
-alldata1.list=list(NULL)
-alldata2.list=list(NULL)
-for (i1 in 1:length(numbers1)){
-	alldata1.list[[i1]]=erplist1[[paste(base1,numbers1[i1], sep="")]]
-	}
-for (i2 in 1:length(numbers2)){
-	alldata2.list[[i2]]=erplist2[[paste(base2,numbers2[i2], sep="")]]	
-	}
-
-
-alltemp=list(NULL)
-length(alltemp)=dim(alldata1.list[[1]])[1] #creo una lista con tanti elementi quanti i punti del tracciato.
-alltemp.results=list(NULL)
-length(alltemp.results)=dim(alldata1.list[[1]])[1] #creo una lista con tanti elementi quanti i punti del tracciato.
-
-
-## creo degli oggetti per stimare il tempo necessario ai calcoli
-n.points.time=floor(seq(1,dim(alldata1.list[[1]])[1],dim(alldata1.list[[1]])[1]/10))
-time.elapsed=0
-##############
-
-
-cat("t-test results computation\n")
-for (k in 1:dim(alldata1.list[[1]])[1]) {#prendo la dimensione di un data.frame qualsiasi
-		temp1=lapply(alldata1.list, function(x) { element(x,k) } )
-		temp1.1=matrix(unlist(temp1), ncol=length(alldata1.list[[1]]), byrow=TRUE)
-		temp2=lapply(alldata2.list, function(x) { element(x,k) } )
-		temp2.1=matrix(unlist(temp2), ncol=length(alldata1.list[[1]]), byrow=TRUE) #di ciascuna riga una 
-		#matrice con n righe (una per soggetto) e k colonne (una per elettrodo) 
-		alltemp[[k]][[1]]=temp1.1
-		alltemp[[k]][[2]]=temp2.1
-		temp.results.vet=NULL
-		for (j in 1:dim(alltemp[[k]][[1]])[2]){#nota:uso dim perché alltemp[[k]][[1]] è una matrice
-		temp.results.vet[j]=(t.test(alltemp[[k]][[1]][,j], alltemp[[k]][[2]][,j], corr=F, paired=paired)$p.value)<alpha
-		}
-		alltemp.results[[k]]=temp.results.vet
-		if (k%in%n.points.time){
-			cat(rep(".",10-time.elapsed), "\n")
-			time.elapsed=time.elapsed+1
-			}
-		}
-		cat("\n")
-
-alltemp.results=matrix(unlist(alltemp.results), byrow=TRUE, ncol=dim(alldata1.list[[1]])[2])
-alltemp.results=as.data.frame(alltemp.results)
-names(alltemp.results)=names(alldata1.list[[1]])
-		}
-if (!is.null(sig)){
-	alltemp.results=sig
-	}
-
-##### PARTE 2 CREO DATAFRAME PER SCALP
 
 
 ### FUNZIONE PER FARE AVERAGE PER PLOT
@@ -133,9 +70,34 @@ electrodes=c("yaxis","Fp1", "blank", "Fp2","legend", "F7", "F3", "FZ", "F4", "F8
 	if (length(layout)>1){
 		electrodes=layout
 	}		
-		
+
 
 ## ci sono incongruenze con le etichette degli elettrodi. Per non fermarmi le cambio momentaneamente nella seguente #maniera T7=T3, T4=T8, P7=T5, T6=P8
+
+
+#### PARTE 1: STATISTICHE PER ELETTRODO ####
+if (is.null(numbers2)){
+	numbers2=numbers1}
+
+
+if (is.null(sig)){
+
+electrodestoanalyze=electrodes[electrodes%in%names(alldata1)]
+
+alltemp.results=mass.t.test(base1=base1, base2=base2, numbers1=numbers1, numbers2=numbers2, startmsec=startmsec, endmsec=endmsec, paired=paired, erplist1
+=erplist1, erplist2=erplist2, electrodes=electrodestoanalyze, p.adjust.method=p.adjust.method)$sig
+	
+
+		}
+if (!is.null(sig)){
+	alltemp.results=sig
+	}
+
+
+
+##### PARTE 2 CREO DATAFRAME PER SCALP
+
+
 
 if (ylims=="auto"){
 	## mergio tutti i dataset per riscalare gli assi rispetto a massimo e minimo 
@@ -171,7 +133,7 @@ if (layout[1]==4)
    par(mfrow=c(8,5), mai=c(0,0,0,0))
    }
 if (!is.null(scalp.array)){
-	par(mfrow=scalp.array, mai=c(0,0,0,0))
+	par(mfrow=scalp.array, mai=c(0,0,0,0), oma=c(0,2,0,2))
 }
 
 

@@ -13,7 +13,7 @@ alpha = 0.05, sig = NULL, erplist1 = NULL, erplist2 = erplist1,
 smo = NULL, layout = 1, ylims = "auto", yrev = TRUE,
 startmsec = -200, endmsec = 1200, lwd = c(1, 1), lty = c(1, 1), 
 color.list = c("blue", "red"), legend = F, legend.lab = "default",
-t.axis = seq(-100, endmsec, 200), scalp.array=NULL)
+t.axis = seq(startmsec, endmsec, 200), scalp.array=NULL, p.adjust.method="none")
 }
 \arguments{	
 	\item{base1}{
@@ -89,6 +89,10 @@ the position of the ticks of an additional axis indicating the time. This axis i
 	\item{scalp.array}{
 This argument is vector of two values indicating the number of panels of the plot, as number of rows and number of columns respectively. If a default layout is specified, the number of panels is automatically computed. See also \code{Details}.
 	}
+	  \item{p.adjust.method}{
+p-value correction method as in \code{\link{p.adjust}}. Alternatively \code{"tmax"} can be used to perform permutation test as in Groppe et al., 2011. See \code{mass.t.test} for details.
+}
+
 }
 
 
@@ -96,8 +100,7 @@ This argument is vector of two values indicating the number of panels of the plo
 }
 
 \value{
-The function plots a map of two series of ERP waveforms in an array resembling the topographic locations of the electrodes on the scalp.
-One series is an average of the first set of specified data frames, and the other series is the average of the second set of specified data frames. The colors of the waveforms are specified in \code{color.list}. Timepoints in which the t-test is significant are highlighted by grey bars. The function also returns an object with the results of the t-tests. This object can be used for future plots with \code{erp.t} or \code{scalp.t}, by specifying it as the argument \code{sig}.
+The function plots a map of two series of ERP waveforms in an array resembling the topographic locations of the electrodes on the scalp. One series is an average of the first set of specified data frames, and the other series is the average of the second set of specified data frames. The colors of the waveforms are specified in \code{color.list}. Timepoints in which the t-test is significant are highlighted by grey bars. The function also returns an object with the results of the t-tests. This object can be used for future plots with \code{erp.t} or \code{scalp.t}, by specifying it as the argument \code{sig}. Significance is calculated by a call to \code{mass.t.test} function.
 }
 %\references{
 %% ~put references to the literature/web site here ~

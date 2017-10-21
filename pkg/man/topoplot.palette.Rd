@@ -9,7 +9,7 @@ This function draws a topoplot palette as a rectangle with colored areas indicat
 }
 \usage{
 topoplot.palette(cols, pos = c(0.5,0.5), p.width=0.2, p.height=0.8, 
-horizontal = FALSE, rev= FALSE, palette.lwd=1, palette.bord="black", 
+horizontal = FALSE, rev= FALSE, palette.lwd=2, palette.bord="black", 
 palette.lim = c(-5,5), draw.labels=TRUE, lab.dist = 1, lab.cex = 1,
  lab.font = 1, lab.family = "", measure = "microvolts", detailed.labels = NULL)
 }
@@ -40,6 +40,9 @@ palette.lim = c(-5,5), draw.labels=TRUE, lab.dist = 1, lab.cex = 1,
 	}
 	\item{palette.lim}{
 		limits of the palette. They will be plotted as text if \code{labels=TRUE}.
+	}
+	\item{draw.labels}{
+	logical. Should labels be drawn?
 	}
 	\item{labels}{
 		logical. Should labels indicating \code{zlim} be drawn?

@@ -8,13 +8,18 @@ plot a topographic map of ERP
 Plot a topographic map of an ERP on a specific timepoint or averaging the ERP in a time window. The head is represented as a circle.
 }
 \usage{
-topoplot(erpobj, startmsec=-200, endmsec=1200, win.ini, win.end, exclude = NULL,
-elec.coord=NULL, projection="orthographic", palette.col="jet", palette.steps=50, 
-return.coord = FALSE, zlim=NULL, interpolation = "cubicspline", extrap = TRUE, 
-interp.points = 100, return.notfound=FALSE, mask = TRUE,  contour=TRUE, x.rev=FALSE,
-draw.elec.pos=TRUE,  elec.pos.toplot="all", elec.pos.pch=19, elec.pos.cex=1, 
-draw.nose=FALSE, draw.elec.lab=TRUE, elec.lab.adj=c(0.5, NA), elec.lab.cex=1, 
-elec.lab.toplot=elec.pos.toplot, head.col="black", head.lwd=1, ...)
+topoplot(erpobj, startmsec = -200, endmsec = 1200, win.ini,
+                 win.end, exclude = NULL, elec.coord = NULL, projection
+                 = "orthographic", palette.col = "jet", palette.steps =
+                 50, return.coord = FALSE, zlim = NULL, interpolation =
+                 "cubicspline", extrap = TRUE, interp.points = 100,
+                 return.notfound = FALSE, mask = TRUE, contour = TRUE,
+                 x.rev = FALSE, draw.elec.pos = TRUE, elec.pos.toplot =
+                 "all", elec.pos.pch = 19, elec.pos.cex = 1, draw.nose
+                 = FALSE, draw.ears = FALSE, draw.elec.lab = TRUE,
+                 elec.lab.adj = c(0.5, NA), elec.lab.cex = 1,
+                 elec.lab.toplot = elec.pos.toplot, head.col = "black",
+                 head.lwd = 1, ...)
 }
 \arguments{
 	\item{erpobj}{
@@ -98,6 +103,9 @@ time point is plotted.
 \item{draw.nose}{
 	logical. Should a nose be drawn to indicate upper side of the mask?
 }
+\item{draw.ears}{
+ logical. Should ears be drawn? (just aesthetic)
+}
 \item{draw.elec.lab}{
 	logical. Should electrode labels be drawn?
 }
@@ -142,6 +150,7 @@ The \code{\link{topoplot}} function uses the function \code{interp} of package \
 
 \examples{
 
+\dontrun{
 if(require(akima)){
 
 data(ERPsets)
@@ -156,6 +165,7 @@ notfound=topoplot(word, return.notfound=TRUE)
 #make a topoplot excluding not found electrode
 topoplot(word, startmsec=-200, endmsec=1500, win.ini=400,
 win.end=600, exclude=notfound)
+}
 }
 
 }

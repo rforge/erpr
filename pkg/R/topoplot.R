@@ -5,6 +5,7 @@ zlim=NULL, interpolation = "cubicspline", extrap = TRUE, interp.points = 100, re
 draw.elec.pos=TRUE,  elec.pos.toplot="all", elec.pos.pch=19, elec.pos.cex=1, draw.nose=FALSE, draw.ears=FALSE, draw.elec.lab=TRUE, elec.lab.adj=c(0.5, NA), elec.lab.cex=1, elec.lab.toplot=elec.pos.toplot, head.col="black", head.lwd=1, ...)
 
 {
+  
 	requireNamespace("akima")
 	#  initial checks
 	#projection checks
@@ -255,7 +256,7 @@ draw.elec.pos=TRUE,  elec.pos.toplot="all", elec.pos.pch=19, elec.pos.cex=1, dra
 		extrap=FALSE #notice that extrapolation is not possible with linear interp
 	}
 	
-	interp.data=interp(x,y, ampl, xo=seq(xlim[1], xlim[2], length = interp.points), yo=seq(ylim[1], ylim[2], length = interp.points), linear=interp.linear, extrap= extrap)
+	interp.data=akima::interp(x,y, ampl, xo=seq(xlim[1], xlim[2], length = interp.points), yo=seq(ylim[1], ylim[2], length = interp.points), linear=interp.linear, extrap= extrap)
 
 
 		

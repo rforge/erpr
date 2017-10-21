@@ -9,7 +9,7 @@ An utility function to perform a series of t-tests on several combinations of le
 }
 \usage{
 tpairs(dat, vars, contr, dep, wid, p.adjust.methods = "none", 
-paired = FALSE, ...)
+paired = "CHECK", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -32,7 +32,7 @@ optional: a string specifying the variable that encodes the repeated measure ide
 p-value correction methods as in \code{\link{p.adjust}}.
 }
   \item{paired}{
-logical. If TRUE, paired t-tests are performed.
+logical. If TRUE, paired t-tests are performed. You can also specify \code{"CHECK"} and the function check if using paired t-tests or not (see the details)
 }
 
   \item{\dots}{
@@ -54,6 +54,7 @@ Giorgio Arcara
 \note{
 The means for the combinations of the variables taken into account are computed internally by \code{tpairs}, according to the specification in \code{vars}, \code{dep}, \code{wid}.
 The function is not able to deal with mixed within and between t-tests. Please, perform the two kinds of t-tests separately and take into consideration if the variables specified in \code{vars} are mixed (both within and between). 
+If \code{paired = "CHECK"} is specified, than the functions will check if all \code{wid} are duplicated. If they are, data are sorted and paired t-tests are performed. If not, between t-tests are performed. This option is useful if all contrasts include both paired and unpaired comparisons.
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
