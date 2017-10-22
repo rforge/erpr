@@ -9,7 +9,8 @@ Import a series of ASCII files with ERP data. Data are imported as a list contai
 }
 \usage{
 import.erp(filenamebase, numbers, ext=".txt", 
-outname = "ERP_subj", fileinfo=FALSE, erplist = NULL, path=getwd(), electrodes="file", ...)
+outname = "ERP_subj", fileinfo=FALSE, erplist = NULL, path=getwd(), 
+electrodes="file", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

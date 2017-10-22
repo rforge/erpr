@@ -165,7 +165,7 @@ plot(1, type="n", frame.plot=FALSE,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n
 			
 			plot(el, type="n", ylim=c(yedge[1]+yedge[1]/3,yedge[2]+(yedge[2]/3)),col=color.list[1], main="", ylab="", xlab="", cex.main=0.85,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n",frame.plot=FALSE, lwd=lwd[1], lty=lty[1])
 			
-			# plotto le bande di significatività
+			# plotto le bande di significativita
 			######################
 			abline(v=grep(TRUE,alltemp.results[,electrodes[i]]), col="lightgray")
 			#######################

@@ -1,5 +1,5 @@
 grandaverage <-
-#NOTA questa funzione può indurre in errore, perche ci sono NA
+#NOTA questa funzione puo indurre in errore, perche ci sono NA
 
 # in questa f(x) AGGIUNGI UN WARNING SE CI SONO NA e crea una funzione (da usare preliminarmente) che faccia un check di tutti i dati
 # magari una funz veloce che ti dica solo se sono completi e una piu dettagliata che ti dica invece range e eventuali NA.

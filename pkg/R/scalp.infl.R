@@ -161,7 +161,7 @@ plot(1, type="n", frame.plot=FALSE,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n
 		panel
 		
 		}
-		panel <- rp.control() #se volessi creare più pannelli allora dovrei aggiungere un'altro panel.
+		panel <- rp.control() #se volessi creare piu pannelli allora dovrei aggiungere un'altro panel.
        rp.listbox(panel, outnumber, numbers, labels=as.character(numbers), action = scalp.infl.panel, initval=numbers[1], title="Subject")
 	   rp.do(panel, scalp.infl.panel)
 	   

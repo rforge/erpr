@@ -2,10 +2,10 @@
 \alias{erplist.resample}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Calculate the mean of several ERP data frames in a given time window
+Resample ERP data frames in an erplist.
 }
 \description{
-This function resample all the data of several ERP data frames, stored in a \code{erplist}
+This function resample all the data of several ERP data frames, stored in a \code{erplist}. It relies on the \code{signal} package.
 }
 \usage{
 erplist.resample(base=NULL, numbers=NULL, erplist=NULL, 

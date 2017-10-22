@@ -79,8 +79,9 @@ Giorgio Arcara
 
 data(ERPsets)
 
-datall=erp.fun.cycle(bases=c("Exp1_word_subj", "Exp1_nonword_subj"), numbers=1:20, erp.fun=erp.mean, 
-conditions.names=c("word", "nonword"), erplist=ERPsets, intervals.var=TRUE,
-intervals=list(c(100, 200), c(300, 500)), startmsec=-200, endmsec=1500)
+datall=erp.fun.cycle(bases=c("Exp1_word_subj", "Exp1_nonword_subj"), numbers=1:20, 
+erp.fun=erp.mean, conditions.names=c("word", "nonword"), erplist=ERPsets, 
+intervals.var=TRUE, intervals=list(c(100, 200), c(300, 500)), 
+startmsec=-200, endmsec=1500)
 
 }

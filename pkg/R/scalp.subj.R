@@ -18,7 +18,7 @@ function(base, numbers, smo=NULL, layout=1, outnumber=1, ylims=12, yrev=FALSE, s
 	}
 
 
-# la funzione contiene all'interno una funzione che crea il panel. Questa funzione a sua volta contiene la funzione scalp.subj.endo, che è quella che effettivamente fa il grafico appoggiandosi alla funzione scalp.endo. 
+# la funzione contiene all'interno una funzione che crea il panel. Questa funzione a sua volta contiene la funzione scalp.subj.endo, che  quella che effettivamente fa il grafico appoggiandosi alla funzione scalp.endo. 
 
 
 scalp.subj.panel=function(panel)
@@ -80,7 +80,7 @@ electrodes=c("yaxis","Fp1", "blank", "Fp2","legend", "F7", "F3", "FZ", "F4", "F8
 		yedge=sort(yedge, decreasing=T)
 		}
 
-	oldpar <- par(no.readonly=TRUE) #questo pezzo è per risettare alla fine della funzione i vecchi parametri. L'ho preso da "An introduction to R" pag. 68. Vedi anche sotto.
+	oldpar <- par(no.readonly=TRUE) #questo pezzo  per risettare alla fine della funzione i vecchi parametri. L'ho preso da "An introduction to R" pag. 68. Vedi anche sotto.
 
 	par(mfrow=c(7,5), mai=c(0,0,0,0))
 	
@@ -140,7 +140,7 @@ plot(1, type="n", frame.plot=FALSE,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n
 			} 
 			}
 		}
-	par(oldpar)#questo pezzo è per resettare alla fine della funzione i vecchi parametri. L'ho preso da "An 
+	par(oldpar)#questo pezzo  per resettare alla fine della funzione i vecchi parametri. L'ho preso da "An 
 	#introduction to R" pag. 68. Vedi anche sotto.
 	}
 
@@ -155,7 +155,7 @@ plot(1, type="n", frame.plot=FALSE,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n
 		panel
 		
 		}
-		panel <- rp.control() #se volessi creare più pannelli allora dovrei aggiungere un'altro panel.
+		panel <- rp.control() #se volessi creare piu pannelli allora dovrei aggiungere un'altro panel.
        rp.listbox(panel, outnumber, numbers, labels=as.character(numbers), action = scalp.subj.panel, initval=numbers[1], title="Subject")
 	   rp.do(panel, scalp.subj.panel)
 	   

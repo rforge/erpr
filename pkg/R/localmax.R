@@ -1,6 +1,6 @@
 localmax <- function(x, n.points=2){
   
-  #questa funzione, dato un vettore, trova il punto che puo essere considerato come massimo locale. Rispetto alla definzione data da luck. Vale a dire un punto intorno massimo circondato da punti più bassi (n.points, nella funzione).
+  #questa funzione, dato un vettore, trova il punto che puo essere considerato come massimo locale. Rispetto alla definzione data da luck. Vale a dire un punto intorno massimo circondato da punti piu bassi (n.points, nella funzione).
   # di default n.points=2
   
   

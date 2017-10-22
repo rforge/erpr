@@ -8,8 +8,8 @@ Extract data from an erplist.
 This functions extract data from an erplist selecting a subsample of timepoints (i.e., a smaller time window than the original one)
 }
 \usage{
-erplist.extract(bases, numbers, win.ini=NULL, win.end=NULL, point.ini=NULL, point.end=NULL,
-erplist=NULL, startmsec=NULL, endmsec=NULL)
+erplist.extract(bases, numbers, win.ini=NULL, win.end=NULL, point.ini=NULL, 
+point.end=NULL, erplist=NULL, startmsec=NULL, endmsec=NULL)
 
 }
 %- maybe also 'usage' for other objects documented here.

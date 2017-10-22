@@ -79,7 +79,7 @@ e2=alldata2[,electrode]
 
 do.call("erp", mycall.erp[-1])
 
-# plotto le bande di significatività
+# plotto le bande di significativita
 ######################
 abline(v=grep(TRUE, alltemp.results[,electrode]), col="lightgray", lwd=3)
 #######################

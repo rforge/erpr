@@ -59,7 +59,7 @@ for (k in 1:dim(alldata1.list[[1]])[1]) {#prendo la dimensione di un data.frame 
 		temp.test.vet=list(NULL)
 		length(temp.test.vet)=dim(alltemp[[k]][[1]])[1]
 		temp.results.vet=NULL
-		for (j in 1:dim(alltemp[[k]][[1]])[2]){#nota:uso dim perché alltemp[[k]][[1]]e una matrice
+		for (j in 1:dim(alltemp[[k]][[1]])[2]){#nota:uso dim perche alltemp[[k]][[1]]e una matrice
 		temp.test.vet[[j]]=cor.test(alltemp[[k]][[1]][,j], external, method=method)
 		if(temp.test.vet[[j]]$p.value<alpha){
 			if (temp.test.vet[[j]]$estimate<0){
@@ -195,12 +195,12 @@ plot(1, type="n", frame.plot=FALSE,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n
 				
 			plot(el, type="n", ylim=c(yedge[1]+yedge[1]/3,yedge[2]+(yedge[2]/3)),col=col[1], main="", ylab="", xlab="", cex.main=0.85,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n",frame.plot=FALSE, lwd=lwd[1], lty=lty[1])
 			
-			# plotto le bande di significatività di correlazioni negative
+			# plotto le bande di significativita di correlazioni negative
 		######################
 		abline(v=grep("-1", alltemp.results[,electrodes[i]]), col="lightblue", lwd=1)
 		#######################
 		
-		# plotto le bande di significatività di correlazioni positive
+		# plotto le bande di significativita di correlazioni positive
 		######################
 		abline(v=grep("^1", alltemp.results[,electrodes[i]]), col="indianred1", lwd=1)
 		#######################

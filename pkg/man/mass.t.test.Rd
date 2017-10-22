@@ -8,10 +8,10 @@ perform mass univariate statistics on an erplist.
 This function performs a series of t-tests on each timepoint comparing two sets of ERP data frames. The first set is specified by \code{base1} and \code{numbers1}. The second is specified by \code{base2} and \code{numbers2}. Several options are available.
 }
 \usage{
-mass.t.test(base1=NULL, base2=NULL, numbers1=NULL, numbers2=numbers1, startmsec=NULL, endmsec=NULL, 
-paired=F, erplist1=NULL, erplist2=erplist1,  electrodes="all", to.exclude=NULL, interval=c(startmsec, endmsec),
-p.adjust.method="none", n.permutations=1000, p.crit=0.05, stable.diff=FALSE, crit.msec=NULL, crit.npoints=NULL, 
-neighbours=NULL, na.rm=TRUE)
+mass.t.test(base1=NULL, base2=NULL, numbers1=NULL, numbers2=numbers1, startmsec=NULL, 
+endmsec=NULL, paired=F, erplist1=NULL, erplist2=erplist1,  electrodes="all", to.exclude=NULL, 
+interval=c(startmsec, endmsec), p.adjust.method="none", n.permutations=1000, p.crit=0.05, 
+stable.diff=FALSE, crit.msec=NULL, crit.npoints=NULL, neighbours=NULL, na.rm=TRUE)
 }
 \arguments{	
 	\item{base1}{
