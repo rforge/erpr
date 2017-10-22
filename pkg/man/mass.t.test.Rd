@@ -117,8 +117,9 @@ Giorgio Arcara
 \dontrun{
 data(ERPsets)
 
-mass.t.test("Exp1_word_subj", "Exp1_nonword_subj", 1:20, 1:20, smo=0, 
-layout=1, ylims=10, startmsec=-200, endmsec=1500, erplist1=ERPsets, erplist2=ERPsets)
+res = mass.t.test("Exp1_word_subj", "Exp1_nonword_subj", 1:20, 1:20, startmsec=-200, endmsec=1500, 
+erplist1=ERPsets, erplist2=ERPsets, paired=T)
+
 }
 
 }

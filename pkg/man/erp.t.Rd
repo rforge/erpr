@@ -11,7 +11,7 @@ This function performs a series of t-tests on each timepoint comparing two sets 
 erp.t(base1, base2, numbers1, numbers2 = numbers1, startmsec = -200, 
 endmsec=1200, electrode, smo = NULL, paired = TRUE, alpha = 0.05, 
 erplist1 = NULL, erplist2 = erplist1, sig = NULL, main = electrode, 
-col = c("blue", "red"), p.adjust.method="none" ...)
+col = c("blue", "red"), p.adjust.method="none", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
