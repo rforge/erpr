@@ -7,8 +7,9 @@ loop over different files to calculate an ERP measure }
 This functions allow to quickly perform loops over several objects with different \code{base} or different time windows, to calculate an erp measure (i.e., \code{erp.mean}, \code{erp.peak}, or \code{erp.latency})
 }
 \usage{
-erp.fun.cycle(bases=NULL, numbers=NULL, erp.fun=NULL, intervals=NULL, conditions.names=NULL, 
-erplist=NULL, startmsec=NULL, endmsec=NULL, others=NULL, intervals.var=TRUE, ...)
+erp.fun.cycle(bases=NULL, numbers=NULL, erp.fun=NULL, intervals=NULL, 
+conditions.names=NULL, erplist=NULL, startmsec=NULL, endmsec=NULL, 
+others=NULL, intervals.var=TRUE, ...)
 
 }
 %- maybe also 'usage' for other objects documented here.
