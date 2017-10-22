@@ -1,7 +1,9 @@
 erplist.resample<-function(base=NULL, numbers=NULL, erplist=NULL, outname=paste(base, "_res", sep=""), sr.factor=c(1,2)){
   ####
   # function to resample ERP with resample function from (signal package)
-  requireNamespace("signal")
+  if (! requireNamespace("signal")){
+    stop("the signal package could not be loaded. Try to install it.")
+  }
   
    	# preliminary checks
 	if (is.null(erplist)){
