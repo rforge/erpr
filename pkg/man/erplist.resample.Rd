@@ -54,12 +54,14 @@ This function rely on the \code{resample} function from \code{signal} package. N
 %}
 \examples{
 
+\dontrun{
 data(ERPsets)
 
 erplist_res=erplist.resample(base="Exp1_word_subj", numbers=1:20, 
 erplist=ERPsets, sr.factor=c(1,2))
 
 # original data were sampled at 500 Hz, data in erplist_res are sampled at 250 Hz. 
+}
 
 
 }
