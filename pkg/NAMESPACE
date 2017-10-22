@@ -1,4 +1,4 @@
-import("rpanel", "stringr”, "signal")
+import("rpanel", "stringr", "signal")
 
 importFrom("grDevices", "colorRampPalette", "heat.colors")
 
