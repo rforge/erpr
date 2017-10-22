@@ -1,6 +1,7 @@
 erplist.resample<-function(base=NULL, numbers=NULL, erplist=NULL, outname=paste(base, "_res", sep=""), sr.factor=c(1,2)){
   ####
   # function to resample ERP with resample function from (signal package)
+  requireNamespace("signal")
   
    	# preliminary checks
 	if (is.null(erplist)){
@@ -35,7 +36,7 @@ erplist.resample<-function(base=NULL, numbers=NULL, erplist=NULL, outname=paste(
 	for (i in 1:length(numbers))
 	{
 		temp=erplist[[paste(base,numbers[i], sep="")]]
-		temp.out=apply(temp, 2, function(x){resample(x, p=sr.factor[1], q=sr.factor[2])})
+		temp.out=apply(temp, 2, function(x){signal::resample(x, p=sr.factor[1], q=sr.factor[2])})
 		temp.out=as.data.frame(temp.out)
 		# combine old comment with a new comment.
 		comment(temp.out)=paste(comment(erplist[[paste(base,numbers[i], sep="")]]), 

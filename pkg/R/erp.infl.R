@@ -36,7 +36,7 @@ mycall.erp.add$lwd = 2 #substitute the lwd for the call of erp.add
 
 
 
-# la funzione contiene all'interno una funzione che crea il panel. Questa funzione a sua volta contiene la funzione scalp.infl.endo, che è quella che effettivamente fa il grafico appoggiandosi alla funzione scalp.endo. 
+# la funzione contiene all'interno una funzione che crea il panel. Questa funzione a sua volta contiene la funzione scalp.infl.endo, che e quella che effettivamente fa il grafico appoggiandosi alla funzione scalp.endo. 
 
 
 erp.infl.panel=function(panel)
@@ -77,7 +77,7 @@ erp.infl.panel=function(panel)
 		
 		panel
 		}
-		panel <- rp.control() #se volessi creare più pannelli allora dovrei aggiungere un'altro panel.
+		panel <- rp.control() #se volessi creare piu pannelli allora dovrei aggiungere un'altro panel.
        rp.listbox(panel, outnumber, numbers, labels=as.character(numbers), action = erp.infl.panel, initval=numbers[1], title="Subject")
 	   rp.do(panel, erp.infl.panel)
 

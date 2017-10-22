@@ -339,10 +339,10 @@ if (mask == TRUE){
 	
 	circle.points=length(circ.coord$x)
 
-	#nota il grafico è costruito da dx verso sx, perchè i punti in circ.coord sono ordinati da 1 a -1 come x.
+	#nota il grafico e costruito da dx verso sx, perche i punti in circ.coord sono ordinati da 1 a -1 come x.
 	pol.x=c(xlim[2], circ.coord$x[1:120], xlim[1], xlim[1], xlim[2], xlim[2])
 	pol.y=c(0.4, -circ.coord$y[1:120], 0.4, ylim[1], ylim[1], 0.4)
-	# nota che metto -0.2, ma sarebbe 0. non metto esattamente 0, perché altrimenti le due metà della maschera si sfiorano e rimane una piccola riga colorata.
+	# nota che metto -0.2, ma sarebbe 0. non metto esattamente 0, perché altrimenti le due meta della maschera si sfiorano e rimane una piccola riga colorata.
 
 	polygon(pol.x, pol.y, col="white", lty="blank")
 	polygon(pol.x, -pol.y, col="white", lty="blank")
@@ -351,7 +351,7 @@ if (mask == TRUE){
 	
 		### ADD ELECTRODES AND TEXT
 	#add electrodes locations and labels (optional)
-	# TO BE ADJUSTED!!! devi permettere un controllo più fine di dimensioni elettrodi, caratteri, etc.
+	# TO BE ADJUSTED!!! devi permettere un controllo piu fine di dimensioni elettrodi, caratteri, etc.
 	
 	if(elec.pos.toplot[1]=="all"){} else {
 		x=x[which(curr.elec.coord$el.name%in%elec.pos.toplot)]

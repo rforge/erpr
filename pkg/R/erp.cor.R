@@ -72,7 +72,7 @@ for (k in 1:dim(alldata1.list[[1]])[1]) {#prendo la dimensione di un data.frame 
 		temp.test.vet=list(NULL)
 		length(temp.test.vet)=dim(alltemp[[k]][[1]])[1]
 		temp.results.vet=NULL
-		for (j in 1:dim(alltemp[[k]][[1]])[2]){#nota:uso dim perché alltemp[[k]][[1]] è una matrice
+		for (j in 1:dim(alltemp[[k]][[1]])[2]){#nota:uso dim perch2 alltemp[[k]][[1]] e una matrice
 		temp.test.vet[[j]]=cor.test(alltemp[[k]][[1]][,j], external, method=method)
 		if(temp.test.vet[[j]]$p.value<alpha){
 			if (temp.test.vet[[j]]$estimate<0){

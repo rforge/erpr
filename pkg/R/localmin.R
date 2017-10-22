@@ -1,7 +1,7 @@
-#questa funzione, dato un vettore, trova il punto che può essere considerato come minimo locale. Rispetto alla definzione data da luck. Vale a dire un punto intorno massimo circondato da punti più alti (n.points, nella funzione).
-# di default n.points=2
-
 localmin <- function(x, n.points=2){
+  #questa funzione, dato un vettore, trova il punto che puo essere considerato come minimo locale. Rispetto alla definzione data da luck. Vale a dire un punto intorno massimo circondato da punti più alti (n.points, nella funzione).
+  # di default n.points=2
+  
   
   # return NA if there is any NA in the data
   if (any(is.na(x))) {

@@ -4,7 +4,7 @@ stable.diff.fun<-function(res.log.mat, electrodes, crit.npoints, interval, start
     stop("The function does not work properly with NAs", call.=F)
   }
   
-  # l'input è una matrice logica SENZA NA
+  # l'input e una matrice logica SENZA NA
   
   # trasformo in numerico
   res.log.mat=apply(res.log.mat, 2, as.numeric)
@@ -19,7 +19,7 @@ stable.diff.fun<-function(res.log.mat, electrodes, crit.npoints, interval, start
   mycriterion=paste(rep(1, crit.npoints), collapse="")
   
   
-  crit.mat=matrix(FALSE, nrow=dim(res.log.mat)[1], ncol=dim(res.log.mat)[2]) #nota che è la dimensione di ogni oggetto n timepoitns x m colonne
+  crit.mat=matrix(FALSE, nrow=dim(res.log.mat)[1], ncol=dim(res.log.mat)[2]) #nota che e la dimensione di ogni oggetto n timepoitns x m colonne
   
   # crit list is the list with results in mseconds.
   crit.list=list(NULL)
@@ -27,7 +27,7 @@ stable.diff.fun<-function(res.log.mat, electrodes, crit.npoints, interval, start
   names(crit.list)=colnames(res.log.mat) # res.log.mat is a matrix, so I use colnames
   
   for (i in 1:length(res.mat.vec)){
-    crit.res=str_locate_all(res.mat.vec[i], paste(mycriterion, "+", sep=""))[[1]] #!!!!! NOTA IL + serve per il regexp e trova anche altro. Nota anche l'[[1]] è per accedere all'oggetto che viene creato in una lista.
+    crit.res=str_locate_all(res.mat.vec[i], paste(mycriterion, "+", sep=""))[[1]] #!!!!! NOTA IL + serve per il regexp e trova anche altro. Nota anche l'[[1]] e per accedere all'oggetto che viene creato in una lista.
     
     # check se dimensioni risultati sono maggiori di 0
     if (dim(crit.res)[1]>0){

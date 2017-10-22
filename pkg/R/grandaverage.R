@@ -1,8 +1,8 @@
 grandaverage <-
-#NOTA questa funzione può indurre in errore, perché ci sono NA
+#NOTA questa funzione può indurre in errore, perche ci sono NA
 
 # in questa f(x) AGGIUNGI UN WARNING SE CI SONO NA e crea una funzione (da usare preliminarmente) che faccia un check di tutti i dati
-# magari una funz veloce che ti dica solo se sono completi e una più dettagliata che ti dica invece range e eventuali NA.
+# magari una funz veloce che ti dica solo se sono completi e una piu dettagliata che ti dica invece range e eventuali NA.
 
 function(base, numbers, electrodes="all", erplist=NULL, NA.sub=TRUE) 
 	{
@@ -54,10 +54,10 @@ function(base, numbers, electrodes="all", erplist=NULL, NA.sub=TRUE)
 			noNA.num=rbind(noNA.num,noNA.num.new)			
 			
 		}
-		electrodes.n=colSums(noNA.num) # electrodes.n è il numero di soggetti per cui gli elettrodi non hanno NA
+		electrodes.n=colSums(noNA.num) # electrodes.n e il numero di soggetti per cui gli elettrodi non hanno NA
 		average=average.temp/rep(electrodes.n, each=nrow(average.temp))
 		comment(average)=comment_text
-		if (sum(electrodes.n-(length(numbers)))!=0){ #nota: length(numbers) è il numero di soggetti. In questo modo recupero il numero di sogg con NA.
+		if (sum(electrodes.n-(length(numbers)))!=0){ #nota: length(numbers) e il numero di soggetti. In questo modo recupero il numero di sogg con NA.
 			warning("The average included some NA values.", call.=FALSE)
 		}
 		return(average)

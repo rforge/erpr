@@ -59,7 +59,7 @@ for (k in 1:dim(alldata1.list[[1]])[1]) {#prendo la dimensione di un data.frame 
 		temp.test.vet=list(NULL)
 		length(temp.test.vet)=dim(alltemp[[k]][[1]])[1]
 		temp.results.vet=NULL
-		for (j in 1:dim(alltemp[[k]][[1]])[2]){#nota:uso dim perché alltemp[[k]][[1]] è una matrice
+		for (j in 1:dim(alltemp[[k]][[1]])[2]){#nota:uso dim perché alltemp[[k]][[1]]e una matrice
 		temp.test.vet[[j]]=cor.test(alltemp[[k]][[1]][,j], external, method=method)
 		if(temp.test.vet[[j]]$p.value<alpha){
 			if (temp.test.vet[[j]]$estimate<0){
@@ -148,7 +148,7 @@ if (yrev==TRUE){
 	yedge=sort(yedge, decreasing=T)
 	}
 
-oldpar <- par(no.readonly=TRUE) #questo pezzo è per risettare alla fine della funzione i vecchi parametri. L'ho preso da "An introduction to R" pag. 68. Vedi anche sotto.
+oldpar <- par(no.readonly=TRUE) #questo pezzoe per risettare alla fine della funzione i vecchi parametri. L'ho preso da "An introduction to R" pag. 68. Vedi anche sotto.
 
 par(mfrow=c(7,5), mai=c(0,0,0,0))
 
@@ -223,7 +223,7 @@ plot(1, type="n", frame.plot=FALSE,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n
 						 
 		}
 	}
-par(oldpar)#questo pezzo è per resettare alla fine della funzione i vecchi parametri. L'ho preso da "An 
+par(oldpar)#questo pezzoe per resettare alla fine della funzione i vecchi parametri. L'ho preso da "An 
 #introduction to R" pag. 68. Vedi anche sotto.
 invisible(alltemp.results)
 }
