@@ -43,7 +43,7 @@ export(
 	"ms.locator",
 	"named.agg",
 	"pointstomsec",
-	"plot.raster”,
+	"plot.raster",
 	"rearrange",
 	"sampling.rate",
 	"scalp.cor",
