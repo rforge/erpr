@@ -1,4 +1,4 @@
-plot.raster<-function(res, startmsec=NULL, endmsec=NULL, palette.col="jet",  lower.thresh=NULL, upper.thresh=NULL, zlim="default", cex.axis=1, ...){
+rasterplot<-function(res, startmsec=NULL, endmsec=NULL, palette.col="jet",  lower.thresh=NULL, upper.thresh=NULL, zlim="default", cex.axis=1, ...){
 	
 res=as.matrix(res)
 

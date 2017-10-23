@@ -1,5 +1,5 @@
-\name{plot.raster}
-\alias{plot.raster}
+\name{rasterplot}
+\alias{rasterplot}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Raster plot of results from \code{mass.t.test}.
@@ -8,7 +8,7 @@ Raster plot of results from \code{mass.t.test}.
 This function plot the results of \code{mass.t.test} in the form of raster.
 }
 \usage{
-plot.raster(res, startmsec=NULL, endmsec=NULL, palette.col="jet", lower.thresh=NULL, 
+rasterplot(res, startmsec=NULL, endmsec=NULL, palette.col="jet", lower.thresh=NULL, 
 upper.thresh=NULL, zlim="default", cex.axis=1, ...)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -54,7 +54,7 @@ This function plot the results of \code{mass.t.test results}
 }
 
 \note{
-If the function returns this error \code{ Error in plot.new() : figure margins too large }, you may want to increase the size of your graphic device (e.g. quartz(height=10, width=10)), before calling \code{plot.raster}
+If the function returns this error \code{ Error in plot.new() : figure margins too large }, you may want to increase the size of your graphic device (e.g. quartz(height=10, width=10)), before calling \code{rasterplot}
 
 
 }
@@ -84,8 +84,8 @@ erplist1=ERPsets, erplist2=ERPsets, paired=T)
 
 quartz(width=10, height=5)
 par(mfrow=c(1,2))
-plot.raster(res$t.mat, startmsec=-200, endmsec=1500, main = "all t-values", cex.axis=0.7)
-plot.raster(res$sig, startmsec=-200, endmsec=1500, main = "significance", cex.axis=0.7)
+rasterplot(res$t.mat, startmsec=-200, endmsec=1500, main = "all t-values", cex.axis=0.7)
+rasterplot(res$sig, startmsec=-200, endmsec=1500, main = "significance", cex.axis=0.7)
 
 }
 
