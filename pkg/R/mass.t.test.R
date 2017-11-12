@@ -373,7 +373,9 @@ if (stable.diff==TRUE){
   
   #print(str(stable.diff.res, 1))
   or.filt.mat[!stable.diff.res$res.log.mat]=NA
-  
+  or.res.log.mat[!stable.diff.res$res.log.mat]=NA
+  or.res.t.mat[!stable.diff.res$res.log.mat]=NA
+  or.res.p.mat[!stable.diff.res$res.log.mat]=NA
   
 } # end if (stable.diff==TRUE)
 
