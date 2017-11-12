@@ -36,6 +36,8 @@ export(
 	"erplist.offset",
 	"factorall",
 	"grandaverage",
+	"grandaverage.bands",
+	"grandaverage.se",
 	"import.erp",
 	"localmax",
 	"localmin",
