@@ -35,8 +35,7 @@ scalp.t <-
       legend.lab=c(base1, base2)
     }
     
-    
-    
+  
     
     ### FUNZIONE PER FARE AVERAGE PER PLOT
     
@@ -120,7 +119,7 @@ scalp.t <-
       yedge=sort(yedge, decreasing=T)
     }
     
-    oldpar <- par(no.readonly=TRUE) #questo pezzo è per risettare alla fine della funzione i vecchi parametri. L'ho preso da "An introduction to R" pag. 68. Vedi anche sotto.
+    oldpar <- par(no.readonly=TRUE) #This is to reset old parameter. Taken from "An introduction to R" pag. 68. Maybe deprecated.
     
     par(mfrow=c(7,5), mai=c(0,0,0,0))
     
@@ -165,7 +164,7 @@ scalp.t <-
         
         plot(el, type="n", ylim=c(yedge[1]+yedge[1]/3,yedge[2]+(yedge[2]/3)),col=color.list[1], main="", ylab="", xlab="", cex.main=0.85,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n",frame.plot=FALSE, lwd=lwd[1], lty=lty[1])
         
-        # plotto le bande di significatività
+        # plot significance bands.
         ######################
         abline(v=grep(TRUE,alltemp.results[,electrodes[i]]), col="lightgray")
         #######################
@@ -197,7 +196,6 @@ scalp.t <-
         
       }
     }
-    par(oldpar)#questo pezzo è per resettare alla fine della funzione i vecchi parametri. L'ho preso da "An 
-    #introduction to R" pag. 68. Vedi anche sotto.
+    par(oldpar)# to reset old parameters
     invisible(alltemp.results)
   }
