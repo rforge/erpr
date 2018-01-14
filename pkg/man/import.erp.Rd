@@ -9,7 +9,7 @@ Import a series of ASCII files with ERP data. Data are imported as a list contai
 }
 \usage{
 import.erp(filenamebase, numbers, ext=".txt", 
-outname = "ERP_subj", fileinfo=FALSE, erplist = NULL, path=getwd(), 
+outname = NULL, fileinfo=FALSE, timeinfo=FALSE, erplist = NULL, path=getwd(), 
 electrodes="file", ...)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -31,6 +31,11 @@ a string indicating the beginning of the name of the objects that will be create
 \item{fileinfo}{
 If \code{TRUE} the function expects that in the first row of imported file there is a string indicating some information on the subject to be stored as a comment in the data frame created.
 }
+
+\item{timeinfo}{
+If \code{TRUE} the function expects that in the first row of imported file there is a string indicating the absolute trial time in the recording. This is can be crucial to reconstruct the correct order of trials for single-trial analysis.
+}
+
 \item{erplist}{
 If an erplist is specified, then the imported files will be added to this erplist.
 }
@@ -46,6 +51,8 @@ if \code{"file"} (the default), electrode names are retrieved from the imported 
 }
 \details{
 The optional argument \code{fileinfo} can be used to store some short information on the file. This is usually an ID for the Subject or the name of the original file from which the ASCII file has been exported (for example, if the files have been exported from eeglab, the name of the .set file). All objects that will be created from a file imported with \code{import.erp} will keep this information as a \code{comment}. Type \code{comment(objectname)} to access this information. If \code{fileinfo=FALSE}, the name of the file imported will be stored as a comment.
+The \code{timeinfo} option expects that absoulte time of trial (in the recording session), is stored after the string
+\code{Time = } (note the spacing).
 }
 
 \value{

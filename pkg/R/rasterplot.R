@@ -30,20 +30,28 @@ if (!is.null(upper.thresh) & ! is.null(lower.thresh)){
 
 ### GRAFICO
 
-if (palette.col=="heat") {
+if (palette.col[1]=="heat") {
 mypalette=colorRampPalette(heat.colors(10)) # nota: my palette is a function.
-}
+mypalette.cols = mypalette(10)
+}  
 
-if (palette.col=="jet") {
+if (palette.col[1]=="jet") {
 mypalette <- colorRampPalette(c("#00007F", "blue", "#007FFF", 
                                 "cyan", "#7FFF7F", "yellow", "#FF7F00", "red", "#7F0000"))
+mypalette.cols = mypalette(10)
 }
 
-image(1:dim(res)[1], 1:dim(res)[2], as.matrix(res), axes=T, add=TRUE, col=mypalette(10), zlim=myzlim)
+if (!palette.col[1]%in%c("heat", "jet", NULL)){
+  mypalette.cols = palette.col
+}
+
+
+
+image(1:dim(res)[1], 1:dim(res)[2], as.matrix(res), axes=T, add=TRUE, col=mypalette.cols, zlim=myzlim)
 
 axis(side=2, at=1:dim(res)[2], labels=colnames(res), las=1, cex.axis=cex.axis)
 erp.xaxis(length.erp=dim(res)[1], startmsec=startmsec, endmsec=endmsec, x.tick=seq(startmsec, endmsec, 200)) 
 
-invisible(list(mypalette=mypalette, zlim=myzlim))
+invisible(list(mypalette=mypalette.cols, zlim=myzlim))
 
 }

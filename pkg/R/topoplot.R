@@ -2,7 +2,8 @@
 topoplot<-function(erpobj, startmsec=-200, endmsec=1200, win.ini, win.end, exclude = NULL,
 elec.coord=NULL, projection="orthographic", palette.col="jet", palette.steps=50, return.coord = FALSE,
 zlim=NULL, interpolation = "cubicspline", extrap = TRUE, interp.points = 100, return.notfound=FALSE, mask = TRUE,  contour=TRUE, x.rev=FALSE,
-draw.elec.pos=TRUE,  elec.pos.toplot="all", elec.pos.pch=19, elec.pos.cex=1, draw.nose=FALSE, draw.ears=FALSE, draw.elec.lab=TRUE, elec.lab.adj=c(0.5, NA), elec.lab.cex=1, elec.lab.toplot=elec.pos.toplot, head.col="black", head.lwd=1, ...)
+draw.elec.pos=TRUE,  elec.pos.toplot="all", elec.pos.pch=19, elec.pos.cex=1, draw.nose=FALSE, draw.ears=FALSE, draw.elec.lab=TRUE, elec.lab.adj=c(0.5, NA), 
+elec.lab.cex=1, elec.lab.toplot=elec.pos.toplot, head.col="black", head.lwd=1, nose.lwd=NULL, ears.lwd=NULL, ...)
 
 {
   
@@ -387,8 +388,12 @@ if (mask == TRUE){
 	1.00031714102429, 1.02885836681128, 1.06310783775568, 1.13731502480188, 
 	1.16)), .Names = c("x", "y"), row.names = 2:7, class = "data.frame")
 	
-	lines(Nose.left, col=head.col, lwd=head.lwd)
-	lines(Nose.right, col=head.col, lwd=head.lwd)
+	if(is.null(nose.lwd)){
+	  nose.lwd=head.lwd
+	}
+	
+	lines(Nose.left, col=head.col, lwd=nose.lwd)
+	lines(Nose.right, col=head.col, lwd=nose.lwd)
 	}
 
 	if (draw.ears==TRUE){
@@ -408,9 +413,14 @@ if (mask == TRUE){
 	# create ear right as symmetric of ear left on x-axis
 	ear.right=list(x=-ear.left$x, y=ear.left$y)
 	
-	lines(ear.left, col=head.col, lwd=head.lwd)
+	if(is.null(ears.lwd)){
+	  ears.lwd=head.lwd
+	}
 	
-	lines(ear.right, col=head.col, lwd=head.lwd)
+	lines(ear.left, col=head.col, lwd=ears.lwd)
+	
+	lines(ear.right, col=head.col, lwd=ears.lwd)
+	
 	
 	}
 	

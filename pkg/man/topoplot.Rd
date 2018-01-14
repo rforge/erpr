@@ -19,7 +19,7 @@ topoplot(erpobj, startmsec = -200, endmsec = 1200, win.ini,
                  = FALSE, draw.ears = FALSE, draw.elec.lab = TRUE,
                  elec.lab.adj = c(0.5, NA), elec.lab.cex = 1,
                  elec.lab.toplot = elec.pos.toplot, head.col = "black",
-                 head.lwd = 1, ...)
+                 head.lwd = 1, nose.lwd=NULL, ears.lwd=NULL, ...)
 }
 \arguments{
 	\item{erpobj}{
@@ -122,7 +122,13 @@ time point is plotted.
 	line color of head and nose.
 }
 \item{head.lwd}{
-	line width of head and nose.
+	line width of head.
+}
+\item{nose.lwd}{
+	line width of nose. (if not specified \code{head.lwd} will be used)
+}
+\item{ears.lwd}{
+	line width of ears. (if not specified \code{head.lwd} will be used)
 }
 \item{...}{
 	further parameters to be passed to \code{\link{image}}.

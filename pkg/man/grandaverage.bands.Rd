@@ -74,7 +74,8 @@ myband = grandaverage.bands(word, word.se, my_el)
 # plot electrode
 erp(word[, my_el], smo=0, col="blue", startmsec=-200, endmsec=1500, ylim=c(-6,6))
 # add band
-polygon(x=c(1:length(word[,my_el]), length(word[, my_el]):1), y = c(myband$lower, rev(myband$upper)), col=rgb(0.8, 0.8, 0.8,0.5))
+polygon(x=c(1:length(word[,my_el]), length(word[, my_el]):1), 
+  y = c(myband$lower, rev(myband$upper)), col=rgb(0.8, 0.8, 0.8,0.5))
 # NOTE! I re-plot the electrode over.
 erp.add(word[, my_el], lwd=2) 
 
@@ -86,7 +87,8 @@ require(ggplot2)
 
 
 word=grandaverage("Exp1_word_subj", 1:20, erplist=ERPsets)
-time = pointstomsec(1:dim(word)[[1]], startmsec=-500, endmsec=1500, lengthsegment = dim(word)[[1]])
+time = pointstomsec(1:dim(word)[[1]], startmsec=-500, 
+  endmsec=1500, lengthsegment = dim(word)[[1]])
 
 ### WITH GGPLOT
 
