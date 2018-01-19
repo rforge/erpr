@@ -67,9 +67,22 @@ tpairs = function (dat, vars, contr, dep, wid, p.adjust.methods = "none",
   }
   p.values.corr = signif(p.adjust(p.values, p.adjust.methods), 
                          2)
-
+  
+  # create splitted version of column names (a step back)
+  contr = contrast.names
+  contr_split = strsplit(as.character(contr), split= "_| ")
+  contr_mat = matrix(unlist(contr_split), byrow=TRUE, nrow = length(contr))
+  col_vs = length(vars)+1 # get the column with vs
+  contr_vars = data.frame(contr_mat[, -col_vs]) # exclude it (and convert to df)
+  old_vars_names = as.character ( t(sapply(vars, function(x){paste(x, 1:2, sep="_")})) )
+  names(contr_vars) = old_vars_names
+  
   results = data.frame(contr = contrast.names, p.value = p.values.corr, 
                        t.value = t.values, df = df, mean.1 = mean.1, mean.2, pair)
+  
+  # add initial columns
+  results = cbind(results, contr_vars)
+  
   attr(results, "p.corr") = p.adjust.methods
   cat("p values adjustment = ", p.adjust.methods, "\n")
   return(results)
