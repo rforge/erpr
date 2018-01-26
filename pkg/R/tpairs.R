@@ -72,7 +72,7 @@ tpairs = function (dat, vars, contr, dep, wid, p.adjust.methods = "none",
   # case 1 (more than one variable specified)
   contr = contrast.names
   
-  if (length(vars)>1){
+  if (length(contr)>1){
     contr_split = strsplit(as.character(contr), split= "_| ")
     contr_mat = matrix(unlist(contr_split), byrow=TRUE, nrow = length(contr))
     col_vs = length(vars)+1 # get the column with vs
@@ -83,7 +83,7 @@ tpairs = function (dat, vars, contr, dep, wid, p.adjust.methods = "none",
   
   # case 2 (only one var specified)
   # it is necessary cause the data.frame contr_vars is built slightly differently.
-  if (length(vars)==1){
+  if (length(contr)==1){
     contr_split = strsplit(as.character(contr), split= " ")
     contr_mat = matrix(unlist(contr_split), byrow=TRUE, nrow = length(contr))
     col_vs = length(vars)+1 # get the column with vs
