@@ -4,8 +4,9 @@ function(deps, oth=NULL, dataset, name.dep="Dep", name.newvar="New_Var") {
 	others=NULL
 	if (length(oth)>0){
 		for (i in 1:dim(dataset[,deps])[2]){
-			others=rbind(others, dataset[,oth])
+			others=rbind(others, as.data.frame(dataset[,oth]))
 		}
+	  names(others) = names(dataset)[oth]
 	}
 	nuova.var=NULL
 	for (i in 1:length(names(dataset[,deps]))) {

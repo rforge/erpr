@@ -3,7 +3,7 @@ topoplot<-function(erpobj, startmsec=-200, endmsec=1200, win.ini, win.end, exclu
 elec.coord=NULL, projection="orthographic", palette.col="jet", palette.steps=50, return.coord = FALSE,
 zlim=NULL, interpolation = "cubicspline", extrap = TRUE, interp.points = 100, return.notfound=FALSE, mask = TRUE,  contour=TRUE, x.rev=FALSE,
 draw.elec.pos=TRUE,  elec.pos.toplot="all", elec.pos.pch=19, elec.pos.cex=1, draw.nose=FALSE, draw.ears=FALSE, draw.elec.lab=TRUE, elec.lab.adj=c(0.5, NA), 
-elec.lab.cex=1, elec.lab.toplot=elec.pos.toplot, head.col="black", head.lwd=1, nose.lwd=NULL, ears.lwd=NULL, ...)
+elec.lab.cex=1, elec.lab.toplot=elec.pos.toplot, head.col="black", head.lwd=1, nose.lwd=NULL, ears.lwd=NULL, head.radius=1, ampl.radius=1, ...)
 
 {
   
@@ -257,7 +257,8 @@ elec.lab.cex=1, elec.lab.toplot=elec.pos.toplot, head.col="black", head.lwd=1, n
 		extrap=FALSE #notice that extrapolation is not possible with linear interp
 	}
 	
-	interp.data=akima::interp(x,y, ampl, xo=seq(xlim[1], xlim[2], length = interp.points), yo=seq(ylim[1], ylim[2], length = interp.points), linear=interp.linear, extrap= extrap)
+	# to solve some potential bugs I use the mean
+	interp.data=akima::interp(x,y, ampl, xo=seq(xlim[1], xlim[2], length = interp.points), yo=seq(ylim[1], ylim[2], length = interp.points), linear=interp.linear, extrap= extrap, duplicate="mean")
 
 
 		
@@ -336,13 +337,14 @@ if (mask == TRUE){
 		return(list(x = xc, y = yc))	
 	}
 
-	circ.coord=plotcircle(0,0,1, border = head.col, lwd = head.lwd)
+	ampl.coord=plotcircle(0,0, ampl.radius, border = "white", lwd=1)
+	ampl.circle.points=length(ampl.coord$x)
 	
-	circle.points=length(circ.coord$x)
-
+	head.coord=plotcircle(0,0, head.radius, border = head.col, lwd = head.lwd)
+	
 	#nota il grafico e costruito da dx verso sx, perche i punti in circ.coord sono ordinati da 1 a -1 come x.
-	pol.x=c(xlim[2], circ.coord$x[1:120], xlim[1], xlim[1], xlim[2], xlim[2])
-	pol.y=c(0.4, -circ.coord$y[1:120], 0.4, ylim[1], ylim[1], 0.4)
+	pol.x=c(xlim[2], ampl.coord$x[1:120], xlim[1], xlim[1], xlim[2], xlim[2])
+	pol.y=c(0.4, -ampl.coord$y[1:120], 0.4, ylim[1], ylim[1], 0.4)
 	# nota che metto -0.2, ma sarebbe 0. non metto esattamente 0, perche altrimenti le due meta della maschera si sfiorano e rimane una piccola riga colorata.
 
 	polygon(pol.x, pol.y, col="white", lty="blank")

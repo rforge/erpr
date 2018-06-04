@@ -19,7 +19,8 @@ topoplot(erpobj, startmsec = -200, endmsec = 1200, win.ini,
                  = FALSE, draw.ears = FALSE, draw.elec.lab = TRUE,
                  elec.lab.adj = c(0.5, NA), elec.lab.cex = 1,
                  elec.lab.toplot = elec.pos.toplot, head.col = "black",
-                 head.lwd = 1, nose.lwd=NULL, ears.lwd=NULL, ...)
+                 head.lwd = 1, nose.lwd=NULL, ears.lwd=NULL, 
+                 head.radius=1, ampl.radius=1, ...)
 }
 \arguments{
 	\item{erpobj}{
@@ -130,6 +131,15 @@ time point is plotted.
 \item{ears.lwd}{
 	line width of ears. (if not specified \code{head.lwd} will be used)
 }
+\item{head.radius}{
+	the radius of the circle depicting the head (default is 1).
+}
+\item{ampl.radius}{
+	the radius of the circle depicting the amplitude values (default is 1). Note that in some cases the electrodes could be outside the head radius and values higher than 1 may be necessary.
+}
+
+
+
 \item{...}{
 	further parameters to be passed to \code{\link{image}}.
 }
