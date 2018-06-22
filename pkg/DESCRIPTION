@@ -1,11 +1,11 @@
 Package: erpR
 Type: Package
 Title: Event-Related Potentials (ERP) Analysis, Graphics and Utility Functions
-Version: 0.3.1
+Version: 0.3.2
 Date: 2017-10-21
 Author: Giorgio Arcara, Anna Petrova
 Maintainer: Giorgio Arcara<giorgio.arcara@gmail.com>
-Depends: R (>= 3.1.0), rpanel, stringr
+Depends: R (>= 3.1.0), stringr
 Description: Functions and utilities for the analysis of event-related potentials (ERPs). Event-related potentials are the measured brain responses associated with a specific sensory, cognitive, or motor event and are obtained from electroencephalographic (EEG) signal. The erpR package contains a series of functions for importing ERP data, computing traditional ERP measures, exploratory ERP analyses and plotting.
-Suggests: akima, signal
+Suggests: akima, rpanel, signal
 License: GPL-3

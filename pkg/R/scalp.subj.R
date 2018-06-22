@@ -3,6 +3,9 @@ function(base, numbers, smo=NULL, layout=1, outnumber=1, ylims=12, yrev=FALSE, s
 ## function to plot and explore each subject
 {
 
+  
+  requireNamespace("rpanel")
+  
 
 # preliminary checks
 	if (is.null(erplist)){
@@ -155,9 +158,9 @@ plot(1, type="n", frame.plot=FALSE,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n
 		panel
 		
 		}
-		panel <- rp.control() #se volessi creare piu pannelli allora dovrei aggiungere un'altro panel.
-       rp.listbox(panel, outnumber, numbers, labels=as.character(numbers), action = scalp.subj.panel, initval=numbers[1], title="Subject")
-	   rp.do(panel, scalp.subj.panel)
+		panel <- rpanel::rp.control() #se volessi creare piu pannelli allora dovrei aggiungere un'altro panel.
+       rpanel::rp.listbox(panel, outnumber, numbers, labels=as.character(numbers), action = scalp.subj.panel, initval=numbers[1], title="Subject")
+	   rpanel::rp.do(panel, scalp.subj.panel)
 	   
 	   
 	   		

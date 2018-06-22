@@ -1,6 +1,8 @@
 erp.infl <-
 function(base, numbers, electrode, erplist=NULL,  startmsec=-200, endmsec=1200, smo=NULL, outnumber=1, lwd=1, lty=1,  ...){
 
+  requireNamespace("rpanel")
+  
 	# preliminary checks
 	if (is.null(erplist)){
 	stop("an erplist object containing ERP data frames must be specified!", call.=F)
@@ -77,9 +79,9 @@ erp.infl.panel=function(panel)
 		
 		panel
 		}
-		panel <- rp.control() #se volessi creare piu pannelli allora dovrei aggiungere un'altro panel.
-       rp.listbox(panel, outnumber, numbers, labels=as.character(numbers), action = erp.infl.panel, initval=numbers[1], title="Subject")
-	   rp.do(panel, erp.infl.panel)
+		panel <- rpanel::rp.control() #se volessi creare piu pannelli allora dovrei aggiungere un'altro panel.
+       rpanel::rp.listbox(panel, outnumber, numbers, labels=as.character(numbers), action = erp.infl.panel, initval=numbers[1], title="Subject")
+	   rpanel::rp.do(panel, erp.infl.panel)
 
 	   
 	   		

@@ -261,8 +261,6 @@ elec.lab.cex=1, elec.lab.toplot=elec.pos.toplot, head.col="black", head.lwd=1, n
 	interp.data=akima::interp(x,y, ampl, xo=seq(xlim[1], xlim[2], length = interp.points), yo=seq(ylim[1], ylim[2], length = interp.points), linear=interp.linear, extrap= extrap, duplicate="mean")
 
 
-		
-	
 	
 	################
 	# TOPOPLOT
