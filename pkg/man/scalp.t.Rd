@@ -11,9 +11,9 @@ This function performs a series of t-tests on each timepoint comparing two sets 
 scalp.t(base1, base2, numbers1, numbers2 = NULL, paired = TRUE,
 alpha = 0.05, sig = NULL, erplist1 = NULL, erplist2 = erplist1, 
 smo = NULL, layout = 1, ylims = "auto", yrev = TRUE,
-startmsec = -200, endmsec = 1200, lwd = c(1, 1), lty = c(1, 1), 
+startmsec = NULL, endmsec = NULL, lwd = c(1, 1), lty = c(1, 1), 
 color.list = c("blue", "red"), legend = F, legend.lab = "default",
-t.axis = seq(startmsec, endmsec, 200), scalp.array=NULL, p.adjust.method="none")
+t.axis = NULL, scalp.array=NULL, p.adjust.method="none")
 }
 \arguments{	
 	\item{base1}{

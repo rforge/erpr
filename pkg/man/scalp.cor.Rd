@@ -11,9 +11,9 @@ This function performs a series of correlations on each timepoint between ERP vo
 scalp.cor(base, numbers, external = NULL, alpha = 0.05, 
 method = c("pearson", "kendall", "spearman"), sig = NULL, 
 erplist = NULL, smo = NULL, layout = 1, ylims = "auto",
- yrev = TRUE, startmsec = -200, endmsec = 1200, lwd = c(1, 1), 
+ yrev = TRUE, startmsec = NULL, endmsec = NULL, lwd = c(1, 1), 
  lty = c(1, 1), col = "blue", legend = TRUE, legend.lab = "default",
- t.axis=seq(-100,endmsec,200), scalp.array=NULL)
+ t.axis=NULL, scalp.array=NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

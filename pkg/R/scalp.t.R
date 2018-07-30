@@ -1,5 +1,5 @@
 scalp.t <-
-  function(base1, base2, numbers1, numbers2=NULL, paired=TRUE, alpha=0.05, sig=NULL, erplist1=NULL, erplist2=erplist1, smo=NULL, layout=1, ylims="auto", yrev=TRUE, startmsec=-200, endmsec=1200, lwd=c(1,1), lty=c(1,1), color.list=c("blue", "red"), legend=F, legend.lab="default", t.axis=seq(startmsec,endmsec,200), scalp.array=NULL, p.adjust.method="none") {
+  function(base1, base2, numbers1, numbers2=NULL, paired=TRUE, alpha=0.05, sig=NULL, erplist1=NULL, erplist2=erplist1, smo=NULL, layout=1, ylims="auto", yrev=TRUE, startmsec=NULL, endmsec=NULL, lwd=c(1,1), lty=c(1,1), color.list=c("blue", "red"), legend=F, legend.lab="default", t.axis=NULL, scalp.array=NULL, p.adjust.method="none") {
     
     
     # preliminary checks
@@ -27,9 +27,25 @@ scalp.t <-
       stop("The following objects are not contained in the erplist2 specified:\n", missing.object.collist2, call.=F)
     }
     
+    ### get startmsec from the first object
+    erplist=erplist1
+    erpdf = erplist[[1]]
     
+    if(!is.null(attr(erpdf, "startmsec")) & !is.null(attr(erpdf, "endmsec"))){
+      startmsec=attr(erpdf, "startmsec")
+      endmsec=attr(erpdf, "endmsec")
+    }
     
+    if (is.null(startmsec)|is.null(endmsec)){
+      stop("startmsec and endmsec must be specified", call.=F)
+    }
     
+    # create t.axis if not supplied (step by 200)
+    if (is.null(t.axis)){
+      t.axis=seq(startmsec, endmsec, 200)
+    }
+    
+  
     
     if (length(legend.lab)==1&legend.lab[1]=="default"){
       legend.lab=c(base1, base2)

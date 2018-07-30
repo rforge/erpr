@@ -1,10 +1,23 @@
-erp.mean<-function(base, numbers, win.ini, win.end, erplist=NULL, startmsec=-200, endmsec=1200, others=NULL, format="long", name.dep="Dep", name.newvar="electrode")
+erp.mean<-function(base, numbers, win.ini, win.end, erplist=NULL, startmsec=NULL, endmsec=NULL, others=NULL, format="long", name.dep="Dep", name.newvar="electrode")
 	{
 		
 		# preliminary checks
 	if (is.null(erplist)){
 	stop("an erplist object containing ERP data frames must be specified!", call.=F)
 	}
+  
+  ### get startmsec from the first object
+  erpdf = erplist[[1]]
+  
+  if(!is.null(attr(erpdf, "startmsec")) & !is.null(attr(erpdf, "endmsec"))){
+    startmsec=attr(erpdf, "startmsec")
+    endmsec=attr(erpdf, "endmsec")
+  }
+  
+  if (is.null(startmsec)|is.null(endmsec)){
+    stop("startmsec and endmsec must be specified", call.=F)
+  }
+  
 	
 	#### object checks
 	object.names=paste(base, numbers, sep="")

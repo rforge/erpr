@@ -10,9 +10,9 @@ The function returns a diagnostic plot to investigate the influence of a given E
 
 \usage{
 scalp.infl(base, numbers, smo = NULL, layout = 1, outnumber=1,
-ylims = 12,  yrev = FALSE, startmsec = -200, endmsec = 1200, 
+ylims = 12,  yrev = FALSE, startmsec = NULL, endmsec = NULL, 
 lwd = c(1, 2), lty = 1, col = "black", out.col = "red", 
-erplist = NULL, t.axis=seq(-100,endmsec,200), scalp.array=NULL)
+erplist = NULL, t.axis=NULL, scalp.array=NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

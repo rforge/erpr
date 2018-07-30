@@ -8,8 +8,8 @@ plot t-test comparisons at all timepoints between two sets of ERP data frames (s
 This function performs a series of t-tests on each timepoint comparing two sets of ERP data frames. The first set is specified by \code{base1} and \code{numbers1}. The second set is specified by \code{base2} and \code{numbers2}.
 }
 \usage{
-erp.t(base1, base2, numbers1, numbers2 = numbers1, startmsec = -200, 
-endmsec=1200, electrode, smo = NULL, paired = TRUE, alpha = 0.05, 
+erp.t(base1, base2, numbers1, numbers2 = numbers1, startmsec = NULL, 
+endmsec=NULL, electrode, smo = NULL, paired = TRUE, alpha = 0.05, 
 erplist1 = NULL, erplist2 = erplist1, sig = NULL, main = electrode, 
 col = c("blue", "red"), p.adjust.method="none", ...)
 }
@@ -98,12 +98,11 @@ There is also a function \code{\link{scalp.infl}} able to perform the t-tests on
 \examples{
 
 \dontrun{
-data(ERPsets)
+data(erplistExample)
 
 erp.t("Exp1_word_subj", "Exp1_nonword_subj", 1:20, 1:20, 
-electrode="Fp1", ylim=c(-10,10),  startmsec=-200, 
-endmsec=1500, erplist1=ERPsets, erplist2=ERPsets, 
-col=c("blue", "red"))
+electrode="Fp1", ylim=c(-10,10), erplist1=ERPsets, 
+erplist2=erplistExample, col=c("blue", "red"))
 }
 
 

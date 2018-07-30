@@ -12,7 +12,7 @@ mass.t.test(base1=NULL, base2=NULL, numbers1=NULL, numbers2=numbers1, startmsec=
 endmsec=NULL, paired=F, erplist1=NULL, erplist2=erplist1,  electrodes="all", 
 to.exclude=NULL, interval=c(startmsec, endmsec), p.adjust.method="none", 
 n.permutations=1000, p.crit=0.05, stable.diff=FALSE, crit.msec=NULL, 
-crit.npoints=NULL, neighbours=NULL, na.rm=TRUE)
+crit.npoints=NULL, neighbours=NULL, min_nchans=2, na.rm=TRUE)
 }
 \arguments{	
 	\item{base1}{
@@ -82,8 +82,15 @@ if \code{stable.diff=TRUE}, only sequences of consecutive significant timpoints 
 
 }
   \item{neighbours}{
-Currently unused.
+An electrode by electrode matrix with 0 and 1 indicating neighbouring electrode (1 = neighbouring, 0 = not neighbouring).
 }
+
+\item{min_nchans}{
+Only used in cluster based permutation. The minimun number of neighbouring channels to consider a cluster.
+Default is 2 (i.e., a cluster must be composed by at least 2 channels).
+}
+
+
  \item{na.rm}{
  Logical. Should \code{NA} values be removed from the analysis?
  }
@@ -119,7 +126,7 @@ Giorgio Arcara
 data(ERPsets)
 
 res = mass.t.test("Exp1_word_subj", "Exp1_nonword_subj", 1:20, 1:20, startmsec=-200, endmsec=1500, 
-erplist1=ERPsets, erplist2=ERPsets, paired=T)
+erplist1=ERPsets, erplist2=erplistExample, paired=T)
 
 }
 

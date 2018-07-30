@@ -9,7 +9,7 @@ A function to average ERP objects, i.e. data frames with timepoints in rows, ele
 It is used to compute the grandaverage.se across several subjects, for plotting purposes.
 }
 \usage{
-grandaverage.se(base, numbers, electrodes="all", erplist = NULL, NA.sub=TRUE, type="se")
+grandaverage.se(base, numbers, electrodes="all", erplist = NULL, startmsec=NULL, endmsec=NULL,  NA.sub=TRUE, type="se")
 }
 \arguments{
   \item{base}{
@@ -22,6 +22,12 @@ the numbers of subjects to be averaged.
 \item{electrodes}{
 a character vector indicating the electrodes on which perform the grandaverage.se. Default is \code{"all"}, 
 and the \code{grandaverage.se} is performed on all electrodes of the data frames.
+}
+\item{startmsec}{
+the start time (in ms) of the \code{erpdf}.
+}
+\item{endmsec}{
+the end time (in ms) of the \code{erpdf}.
 }
   \item{erplist}{
 a list containing ERP data frames.
@@ -52,11 +58,11 @@ The function keeps track of the name of the objects used to calculated standard 
 }
 \examples{
 
-data(ERPsets)
+data(erplistExample)
 # compute the average of subjects 1 to 20 for the condition 
 # specified by the string "Exp1_word_subj".
 	
-word=grandaverage.se("Exp1_word_subj", 1:20, erplist=ERPsets)
+word=grandaverage.se("Exp1_word_subj", 1:20, erplist=erplistExample)
 
 }
 

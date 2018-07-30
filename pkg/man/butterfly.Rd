@@ -8,8 +8,8 @@ ERP butterfly plot
 A butterfly plot of several ERP data frames.
 }
 \usage{
-butterfly(base, numbers,  electrode = NULL, startmsec = - 200, 
-endmsec = 1200, erplist = NULL, outline=NULL, out.col="black", 
+butterfly(base, numbers,  electrode = NULL, startmsec = NULL, 
+endmsec = NULL, erplist = NULL, outline=NULL, out.col="black", 
 add = FALSE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -73,9 +73,9 @@ Giorgio Arcara
 }
 \examples{
 
-data(ERPsets)
+data(erplistExample)
 butterfly(base="Exp1_nonword_subj", numbers=1:20, electrode="Fp1", smo=0, 
-startmsec=-200, endmsec=1500, erplist=ERPsets, outline=1, ylim=c(-20,20), out.col="red")
+erplist=erplistExample, outline=1, ylim=c(-20,20), out.col="red")
 
 
 }

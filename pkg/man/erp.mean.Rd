@@ -9,7 +9,7 @@ This function calculates the mean amplitude of several ERP data frames. It retur
 }
 \usage{
 erp.mean(base, numbers, win.ini, win.end, erplist = NULL, 
-startmsec=-200, endmsec=1200, others=NULL, format="long", 
+startmsec=NULL, endmsec=NULL, others=NULL, format="long", 
 name.dep="Dep", name.newvar="electrode")
 }
 %- maybe also 'usage' for other objects documented here.
@@ -71,10 +71,10 @@ This function calls \code{\link{rearrange}}.
 }
 \examples{
 
-data(ERPsets)
+data(erplistExample)
 
 dat=erp.mean(base="Exp1_word_subj", numbers=1:20, 
-win.ini=130, win.end=190, erplist=ERPsets, startmsec=-200, endmsec=1500,
+win.ini=130, win.end=190, erplist=erplistExample, 
 others=c(condition="word", interval="130-190"), name.dep="Ampl", format="long")
 
 

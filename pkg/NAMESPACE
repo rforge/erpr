@@ -8,7 +8,7 @@ importFrom("graphics", "abline", "axis", "image", "legend", "lines",
 
 importFrom("stats", "aggregate", "aggregate.data.frame", "cor.test",
              "dist", "na.omit", "p.adjust", "pt", "qt", "smooth.spline",
-             "t.test", "var")
+             "t.test", "var", "median", "IQR", "sd")
 
 importFrom("utils", "combn", "read.table")
 
@@ -27,7 +27,7 @@ export(
 	"erp.mean",
 	"erp.peak",
 	"erp",
-	"erp.fun.cycle",
+	"erp.fun.loop",
 	"erp.t",
 	"erp.xaxis",
 	"erp.yaxis",
@@ -56,6 +56,7 @@ export(
 	"scalp.t",
 	"topoplot.palette",
 	"topoplot",
+	"topo.scalp",
 	"tpairs",
 	"mass.t.test",
 	"stable.diff.fun"

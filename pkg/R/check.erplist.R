@@ -9,7 +9,8 @@ check.erplist<-function(erplist = NULL){
 	dupl.error = FALSE
 	, no.number.error = FALSE
 	, incons.number.error = FALSE
-	
+	,incons.startmsec = FALSE
+	,incons.endmsec = FALSE
 	)
 	
 	## CHECK DUPLICATED
@@ -49,6 +50,21 @@ check.erplist<-function(erplist = NULL){
 			cat(numbers.dat[i,], "\n")
 		}
 		cat("\n")
+	}
+	# CHECK CONSISTENCY OF STARTMSEC AND ENDMSEC
+	all_startmsec = NULL
+	all_endmsec = NULL
+	for (i in 1:length(erplist)){
+	  all_startmsec[i]=attr(erplist[[i]], "startmsec")
+	  all_endmsec[i]=attr(erplist[[i]], "endmsec")
+	}
+	if (length(unique(all_startmsec))>1){
+	  errors$incons.startmsec=TRUE
+	  cat("WARNING!\nThe erplist contains some inconsistencies in startmsec\n")
+	}
+	if (length(unique(all_endmsec))>1){
+	  errors$incons.endmsec=TRUE
+	  cat("WARNING!\nThe erplist contains some inconsistencies in endmsec\n")
 	}
 
 	# RETURN THAT EVERYTHING IS OK

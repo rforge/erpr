@@ -70,10 +70,10 @@ Giorgio Arcara
 %}
 \examples{
 
-data(ERPsets)
+data(erplistExample)
 
-erplist_ext=erplist.extract(base="Exp1_word_subj", numbers=1:20, win.ini=-100, win.end=1200,
-erplist=ERPsets, startmsec=-200, endmsec=1500)
+erplist_ext=erplist.extract(base="Exp1_word_subj", numbers=1:20, 
+win.ini=-100, win.end=1200, erplist=erplistExample)
 
 # The new erplist now have data that starts from -100 to 1200 ms
 

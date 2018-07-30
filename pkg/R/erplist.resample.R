@@ -31,6 +31,8 @@ erplist.resample<-function(base=NULL, numbers=NULL, erplist=NULL, outname=paste(
 	{
 	stop("the argument \"outname\" must be specified", call.=F)
 	}
+  
+  
 
 	outlist=list()
 	length(outlist)=length(numbers)

@@ -9,7 +9,7 @@ This function plots an y axis of an erp waveform. The position of the axis is de
 }
 
 \usage{
-erp.yaxis(length.erp = NULL, startmsec=-200, endmsec = 1200, y.tick=seq(-6,6,2), 
+erp.yaxis(length.erp = NULL, startmsec=NULL, endmsec = NULL, y.tick=seq(-6,6,2), 
 y.labels = y.tick, y.las=0, draw.y.ticks = TRUE, y.pos = NA,  y.outer = FALSE, 
 y.font = NA, y.lty = "solid", y.lwd = 1, y.lwd.ticks = 1, y.col = NULL, 
 y.col.ticks = NULL, y.hadj=NA, y.padj = NA, y.tcl = -0.5, y.tick.both= FALSE, 

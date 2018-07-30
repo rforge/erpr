@@ -8,15 +8,15 @@ plot ERP waveforms in a scalp array
 This function plots the waveforms of several electrodes in an rectangular array reflecting their positions on the scalp
 }
 \usage{
-scalp(categ, smo = NULL, layout = 1, 
-ylims = "auto", yrev = TRUE, startmsec = -200, endmsec = 1200, 
+scalp(erpdfs, smo = NULL, layout = 1, 
+ylims = "auto", yrev = TRUE, startmsec = NULL, endmsec = NULL, 
 lwd = 1, lty = 1, color.list = c("blue", "red", "darkgreen"), 
-legend = F, legend.lab = "default", t.axis = seq(-100, endmsec, 200), 
+legend = F, legend.lab = "default", t.axis = NULL, 
 scalp.array=NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{categ}{
+  \item{erpdfs}{
 a list indicating the ERP data frame to be plotted. All electrodes specified in the parameter \code{layout} will be plotted. The other electrodes will be ignored.
 }
 
@@ -90,13 +90,13 @@ Currently this function supports a very limited number of layouts. Further versi
 }
 \examples{
 
-data(ERPsets)
+data(erplistExample)
 
-word=grandaverage("Exp1_word_subj", 1:20, erplist=ERPsets)
+word=grandaverage("Exp1_word_subj", 1:20, erplist=erplistExample)
 
-nonword=grandaverage("Exp1_nonword_subj", 1:20, erplist=ERPsets)
+nonword=grandaverage("Exp1_nonword_subj", 1:20, erplist=erplistExample)
 
-scalp(list(word), layout=1, ylim=10)
+scalp(word, layout=1, ylim=10)
 
 scalp(list(word, nonword), layout=1, ylim=10, legend=TRUE)
 

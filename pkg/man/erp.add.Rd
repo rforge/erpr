@@ -8,14 +8,18 @@ add an ERP waveform to a plot
 Add a waveform to a ERP plot created with \code{erp}, \code{erp.t}, or \code{butterfly} functions.
 }
 \usage{
-erp.add(el, startmsec=-200, endmsec=1200, interval=c(startmsec, endmsec), 
+erp.add(erpdf, electrode, startmsec=NULL, endmsec=NULL, interval=NULL, 
 smo = NULL, col = "black", lty = 1, lwd = 1, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{el}{
-the electrode to be plotted. 
+  \item{erpdf}{
+a data.frame with timepoints in row and electrodes in columns.
 }
+  \item{electrode}{
+character indicating the electrode to plot.
+}
+
 \item{startmsec}{
 the start time (in ms) of the ERP vector.
 }
@@ -28,6 +32,7 @@ the smoothing parameter to apply (see \code{\link{smooth.spline}}). Default is \
 }
   \item{interval}{
 a vector with a pair of values indicating the interval (in milliseconds) to be plotted.
+Default is from startmsec to endmsec.
 }
 
 
@@ -62,13 +67,13 @@ Giorgio Arcara
 }
 \examples{
 
-data(ERPsets)
+data(erplistExample)
 
-word=grandaverage("Exp1_word_subj", 1:20, erplist=ERPsets) 
-nonword=grandaverage("Exp1_nonword_subj", 1:20, erplist=ERPsets) 
+word=grandaverage("Exp1_word_subj", 1:20, erplist=erplistExample) 
+nonword=grandaverage("Exp1_nonword_subj", 1:20, erplist=erplistExample) 
 
-erp(word$Fp1, col="blue", startmsec=-200, endmsec=1500)
-erp.add(nonword$Fp1, col="red", startmsec=-200, endmsec=1500)
+erp(word, "Fp1", col="blue")
+erp.add(nonword, "Fp1",  col="red")
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

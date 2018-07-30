@@ -9,8 +9,8 @@ Import a series of ASCII files with ERP data. Data are imported as a list contai
 }
 \usage{
 import.erp(filenamebase, numbers, ext=".txt", 
-outname = NULL, fileinfo=FALSE, timeinfo=FALSE, erplist = NULL, path=getwd(), 
-electrodes="file", ...)
+outname = "ERP_subj", fileinfo=FALSE, abstimeinfo=FALSE, erplist = NULL, path=getwd(), 
+electrodes="file", startmsec=NULL, endmsec=NULL, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -32,9 +32,10 @@ a string indicating the beginning of the name of the objects that will be create
 If \code{TRUE} the function expects that in the first row of imported file there is a string indicating some information on the subject to be stored as a comment in the data frame created.
 }
 
-\item{timeinfo}{
+\item{abstimeinfo}{
 If \code{TRUE} the function expects that in the first row of imported file there is a string indicating the absolute trial time in the recording. This is can be crucial to reconstruct the correct order of trials for single-trial analysis.
 }
+
 
 \item{erplist}{
 If an erplist is specified, then the imported files will be added to this erplist.
@@ -45,6 +46,16 @@ A string indicating the directory where the ASCII files are contained. Otherwise
 \item{electrodes}{
 if \code{"file"} (the default), electrode names are retrieved from the imported file, as header. Otherwise a vector with electrode names can be specified.
 }
+
+\item{startmsec}{
+the start time (in ms) of the ERP data frames. It can be a negative value, indicating the baseline time frame.This info will be stored in the imported object as an attribute of the data.frame. 
+}
+
+\item{endmsec}{
+the end time (in ms) of the ERP data frames.
+This info will be stored in the imported object as an attribute of the data.frame. 
+}
+
 \item{\ldots}{
 	further parameters to be passed to \code{\link{read.table}}.
 }

@@ -54,13 +54,13 @@ Giorgio Arcara
 # LOAD AND PREPARE DATA FOR PLOTTING  ################
 #####################################################
 # load data
-data(ERPsets)
+data(erplistExample)
 
 # calculate grandaverage
-word=grandaverage("Exp1_word_subj", 1:20, erplist=ERPsets)
+word=grandaverage("Exp1_word_subj", 1:20, erplist=erplistExample)
 
 # calcualte se
-word.se = grandaverage.se ("Exp1_word_subj", 1:20, erplist=ERPsets)
+word.se = grandaverage.se ("Exp1_word_subj", 1:20, erplist=erplistExample)
 
 # calculate bands on a given electrode
 my_el = "FPZ"
@@ -72,12 +72,12 @@ myband = grandaverage.bands(word, word.se, my_el)
 #####################################################
 
 # plot electrode
-erp(word[, my_el], smo=0, col="blue", startmsec=-200, endmsec=1500, ylim=c(-6,6))
+erp(word, my_el, smo=0, col="blue", startmsec=-200, endmsec=1500, ylim=c(-6,6))
 # add band
 polygon(x=c(1:length(word[,my_el]), length(word[, my_el]):1), 
   y = c(myband$lower, rev(myband$upper)), col=rgb(0.8, 0.8, 0.8,0.5))
 # NOTE! I re-plot the electrode over.
-erp.add(word[, my_el], lwd=2) 
+erp.add(word, my_el, lwd=2) 
 
 ######################################################
 # PLOT WITH ERP BANDS (WITH GGPLOT2)

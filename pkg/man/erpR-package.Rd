@@ -12,11 +12,12 @@ The erpR package includes a series of functions for importing Event-related pote
 \tabular{ll}{
 Package: \tab erpR\cr
 Type: \tab Package\cr
-Version: \tab 0.2.1\cr
-Date: \tab 2014-10-20\cr
+Version: \tab 0.4.0\cr
+Date: \tab 2018-07-27\cr
 License: \tab GPL-3\cr
 }
-The \code{erpR} package is dedicated to the analysis of event-related potentials (ERPs). Event-related potentials are the measured brain responses associated with a specific sensory, cognitive, or motor event and are obtained from electroencephalographic (EEG) signal. The \code{erpR} package contains a series of functions for importing Event-related potentials (ERP) data, carrying out exploratory analyses, computing traditional ERP measures and ERP plotting. Many \code{erpR} functions require to specify two arguments: \code{base} and \code{numbers}. The names of the objects for the \code{erpR} functions are obtained from the combination of \code{base} and \code{numbers}. The argument \code{base} typically indicates the name of the experimental condition (or group, or both), while \code{numbers} indicate the numbers of the subjects on which function is applied. This system is crucial to keep order in objects and files names and to tell \code{erpR} the correspondence between the objects. In particular a given \code{base} will always refer to the same condition, and a given \code{number} will always refer to the same subject. The data frames containing ERP data (named by the combination of \code{base} and \code{number}) are stored in lists called erplists.
+The \code{erpR} package is dedicated to the analysis of event-related potentials (ERPs). Event-related potentials are the measured brain responses associated with a specific sensory, cognitive, or motor event and are obtained from electroencephalographic (EEG) signal. The \code{erpR} package contains a series of functions for importing Event-related potentials (ERP) data, carrying out exploratory analyses, computing traditional ERP measures and ERP plotting. Many \code{erpR} functions require to specify two arguments: \code{base} and \code{numbers}. The names of the objects for the \code{erpR} functions are obtained from the combination of \code{base} and \code{numbers}. The argument \code{base} typically indicates the name of the experimental condition (or group, or both), while \code{numbers} indicate the numbers of the subjects on which function is applied. This system is crucial to keep order in objects and files names and to tell \code{erpR} the correspondence between the objects. In particular a given \code{base} will always refer to the same condition, and a given \code{number} will always refer to the same subject. The data frames containing ERP data (named by the combination of \code{base} and \code{number}) are called \code{erpdf} and  stored in lists called \code{erplists}.
+The package include
 The \code{\link{topoplot}} function of this package uses the function \code{interp} of package \code{akima}, that is released under a non-commercial use license.
 
 Further information can be found on the maintainer's site \url{https://sites.google.com/site/giorgioarcara/erpr}.
@@ -41,12 +42,13 @@ Further information can be found on the maintainer's site \url{https://sites.goo
 
 library(erpR)
 
-data(ERPsets)
+# load some example data
+data(erplistExample)
 
-word=grandaverage("Exp1_word_subj", 1:20, erplist=ERPsets) 
+# create average of 20 subjects  
+word=grandaverage("Exp1_word_subj", 1:20, erplist=erplistExample) 
 
-
-erp(word$Fp1, smo=0, col="blue", startmsec=-200, endmsec=1500, ylim=c(-10,10))
-
+# plot an ERP
+erp(word, "Fp1", smo=0, col="blue", ylim=c(-10,10))
 
 }

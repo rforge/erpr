@@ -40,10 +40,10 @@ Giorgio Arcara
 
 \examples{
 
-data(ERPsets)
+data(erplistExample)
 
 datall=erp.mean(base = "Exp1_word_subj", numbers = 1:20,
- win.ini = 400, win.end = 600, startmsec= -200, endmsec=1500, erplist=ERPsets)
+ win.ini = 400, win.end = 600, startmsec= -200, endmsec=1500, erplist=erplistExample)
 
 datall$caudality=create.roi(datall, "electrode", 
 groups=list(c("Fp1", "Fp2"), c("P3", "P4")), 

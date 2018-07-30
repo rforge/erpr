@@ -46,9 +46,9 @@ Giorgio Arcara
 \examples{
 
 # load sample data
-data(ERPsets)
+data(erplistExample)
 
-# calculate sampling rate of the first object in the erplist, named ERPsets
-sampling.rate(ERPsets[[1]], startmsec = -200, endmsec = 1500)
+# calculate sampling rate of the first object in the erplist, named erplistExample
+sampling.rate(erplistExample[[1]], startmsec = -200, endmsec = 1500)
 
 }

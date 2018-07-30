@@ -87,9 +87,9 @@ The two parameters \code{cols} and \code{zlim} may be supplied with values that 
 	
 if(require(akima)) {
 
-data(ERPsets)
+data(erplistExample)
 
-word=grandaverage("Exp1_word_subj", 1:20, erplist=ERPsets)
+word=grandaverage("Exp1_word_subj", 1:20, erplist=erplistExample)
 
 # check if some electrodes are not present in the list
 # and create an object with these electrode names.

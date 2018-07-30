@@ -1,8 +1,8 @@
 Package: erpR
 Type: Package
 Title: Event-Related Potentials (ERP) Analysis, Graphics and Utility Functions
-Version: 0.3.2
-Date: 2017-10-21
+Version: 0.4.0
+Date: 2018-08-30
 Author: Giorgio Arcara, Anna Petrova
 Maintainer: Giorgio Arcara<giorgio.arcara@gmail.com>
 Depends: R (>= 3.1.0), stringr

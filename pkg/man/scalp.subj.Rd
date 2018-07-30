@@ -10,9 +10,9 @@ The function allows the quick inspection of the ERP waveform of of all specified
 
 \usage{
 scalp.subj(base, numbers, smo = NULL, layout = 1, outnumber=1,
-ylims = 12,  yrev = FALSE, startmsec = -200, endmsec = 1200, 
+ylims = 12,  yrev = FALSE, startmsec = NULL, endmsec = NULL, 
 lwd = c(1, 2), lty = 1, col = "black", erplist = NULL,
-t.axis=seq(startmsec,endmsec,200), scalp.array=NULL)
+t.axis=NULL, scalp.array=NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

@@ -8,7 +8,7 @@ plot an ERP waveform
 A function to plot an ERP waveform of a single electrode. If used with default values the function allows a fast plotting. Several parameters are available for plotting paper quality plots.
 }
 \usage{
-erp(el, startmsec=-200, endmsec = 1200, smo = NULL, interval = c(startmsec, endmsec),
+erp(erpdf, electrode, startmsec=NULL, endmsec = NULL, smo = NULL, interval = c(startmsec, endmsec),
 xlim = NULL, ylim = NULL, col = "black",  lwd = 1, xlab = "", ylab = "", 
 main = "", frame.plot = TRUE, draw.xaxis = TRUE, draw.yaxis = TRUE, type = "l", 
 x0 = TRUE, x.tick = NULL, x.labels=x.tick, x.las=0, x.pos = NA,  x.outer = F, 
@@ -21,14 +21,17 @@ y.col.ticks = NULL, y.hadj = NA, y.padj = NA,  y.tcl = -0.5, y.tick.both= FALSE,
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{el}{
-a vector with the electrode to be plotted.
+  \item{erpdf}{
+a data.frame with timepoints in row and electrodes in columns.
+}
+  \item{electrode}{
+character indicating the electrode to plot.
 }
 \item{startmsec}{
-the start time (in ms) of the ERP vector.
+the start time (in ms) of the \code{erpdf}.
 }
 \item{endmsec}{
-the end time (in ms) of the ERP vector.
+the end time (in ms) of the \code{erpdf}.
 }
   \item{smo}{
 the smoothing parameter to apply (see \code{\link{smooth.spline}}). Default is \code{NULL} and no smoothing is applied.
@@ -210,11 +213,11 @@ Giorgio Arcara
 
 \examples{
 
-data(ERPsets)
+data(erplistExample)
 
-word=grandaverage("Exp1_word_subj", 1:20, erplist=ERPsets) 
+word=grandaverage("Exp1_word_subj", 1:20, erplist=erplistExample) 
 
-erp(word$F3, smo=0, col="blue", startmsec=-200, endmsec=1500, ylim=c(-6,6))
+erp(word, "F3", smo=0, col="blue",  ylim=c(-6,6))
 
 
 

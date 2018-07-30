@@ -9,7 +9,7 @@ This function calculates the peak amplitude on several ERP data frame. It return
 }
 \usage{
 erp.peak(base, numbers, win.ini, win.end, erplist = NULL,
-startmsec=-200, endmsec=1200, others=NULL, format="long", 
+startmsec=NULL, endmsec=NULL, others=NULL, format="long", 
 name.dep="Dep", name.newvar="electrode", peak.fun = "max", ...)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -80,10 +80,10 @@ This function calls \code{\link{rearrange}}.
 }
 \examples{
 
-data(ERPsets)
+data(erplistExample)
 
 dat=erp.peak(base="Exp1_word_subj", numbers=1:20, 
-win.ini=130, win.end=190, erplist=ERPsets, startmsec=-200, endmsec=1500,
+win.ini=130, win.end=190, erplist=erplistExample, 
 others=c(condition="word", interval="130-190"), name.dep="Ampl", format="long", peak.fun=max)
 
 }

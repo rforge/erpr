@@ -5,6 +5,19 @@ erplist.sortbytime = function(erplist=NULL, new.name=NULL){
          call. = F)
   }
   
+  if (is.null(erplist)) {
+    stop("an erplist object containing ERP data frames must be specified!", 
+         call. = F)
+  }
+  
+  all_TrialTimes = NULL
+  for (i in 1:length(erplist)){
+    all_TrialTimes[i]=attr(erplist[[i]], "TrialTime")
+  }
+  if (any(is.null(all_TrialTimes))){
+    stop(paste("The erplists:", which(is.null(all_TrialTimes)), "does not have the Trial time\n"), .call=F)
+  }
+  
   
   #checks 
   if(max(table(names(erplist))>1)){

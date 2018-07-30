@@ -1,5 +1,4 @@
- 
-grandaverage.se = function (base, numbers, electrodes = "all", erplist = NULL, 
+ grandaverage.se = function (base, numbers, electrodes = "all", erplist = NULL, startmsec=NULL, endmsec=NULL, 
                   NA.sub = TRUE, type = "se") 
 {
   if (is.null(erplist)) {
@@ -14,6 +13,20 @@ grandaverage.se = function (base, numbers, electrodes = "all", erplist = NULL,
     stop("The following objects are not contained in the erplist specified:\n", 
          missing.object.collist, call. = F)
   }
+  
+  ### get startmsec from the first object
+  erpdf = erplist[[1]]
+  
+  if(!is.null(attr(erpdf, "startmsec")) & !is.null(attr(erpdf, "endmsec"))){
+    startmsec=attr(erpdf, "startmsec")
+    endmsec=attr(erpdf, "endmsec")
+  }
+  
+  if (is.null(startmsec)|is.null(endmsec)){
+    stop("startmsec and endmsec must be specified", call.=F)
+  }
+  
+  
   comment_text = paste("Subjects averaged: ", paste(base, numbers[1], 
                                                     sep = ""))
   average.temp = erplist[[paste(base, numbers[1], sep = "")]]
@@ -71,6 +84,12 @@ grandaverage.se = function (base, numbers, electrodes = "all", erplist = NULL,
   se = as.data.frame(se)
   
   comment(se) = comment_text
+  
+  # add startmsec and enmdsec
+  attr(se, "startmsec")=startmsec
+  attr(se, "endmsec")=endmsec
+  
+  
   if (sum(electrodes.n - (length(numbers))) != 0) {
     warning("The average included some NA values.", call. = FALSE)
   }

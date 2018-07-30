@@ -1,5 +1,5 @@
 erp.t <-
-  function(base1, base2,numbers1,numbers2=numbers1, startmsec=-200, endmsec=1200, electrode, smo = NULL, paired=TRUE, alpha=0.05, erplist1=NULL, erplist2=erplist1, sig=NULL, main=electrode, col=c("blue", "red"), p.adjust.method="none", ...) {
+  function(base1, base2,numbers1,numbers2=numbers1, startmsec=NULL, endmsec=NULL, electrode, smo = NULL, paired=TRUE, alpha=0.05, erplist1=NULL, erplist2=erplist1, sig=NULL, main=electrode, col=c("blue", "red"), p.adjust.method="none", ...) {
     
     # preliminary checks
     if (is.null(erplist1)|is.null(erplist2)){
@@ -30,6 +30,20 @@ erp.t <-
       missing.object.collist2=paste(missing.objects2, "\n", sep="")
       stop("The following objects are not contained in the erplist2 specified:\n", missing.object.collist2, call.=F)
     }
+    
+    ### get startmsec from the first object
+    erplist = erplist1
+    erpdf = erplist[[1]]
+    
+    if(!is.null(attr(erpdf, "startmsec")) & !is.null(attr(erpdf, "endmsec"))){
+      startmsec=attr(erpdf, "startmsec")
+      endmsec=attr(erpdf, "endmsec")
+    }
+    
+    if (is.null(startmsec)|is.null(endmsec)){
+      stop("startmsec and endmsec must be specified", call.=F)
+    }
+    
     
     #retrieve the call that can be used with erp and erp.add
     mycall=match.call()

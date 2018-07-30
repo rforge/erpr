@@ -1,5 +1,5 @@
 scalp.cor <-
-function(base, numbers, external=NULL, alpha=0.05,method = c("pearson", "kendall", "spearman"), sig=NULL, erplist=NULL, smo=NULL, layout=1, ylims="auto", yrev=TRUE, startmsec=-200, endmsec=1200, lwd=c(1,1), lty=c(1,1), col="blue", legend=TRUE, legend.lab="default", t.axis=seq(-100,endmsec,200), scalp.array=NULL) 
+function(base, numbers, external=NULL, alpha=0.05,method = c("pearson", "kendall", "spearman"), sig=NULL, erplist=NULL, smo=NULL, layout=1, ylims="auto", yrev=TRUE, startmsec=NULL, endmsec=NULL, lwd=c(1,1), lty=c(1,1), col="blue", legend=TRUE, legend.lab="default", t.axis=NULL, scalp.array=NULL) 
 {
 # preliminary checks
 	if (is.null(erplist)){
@@ -18,6 +18,24 @@ function(base, numbers, external=NULL, alpha=0.05,method = c("pearson", "kendall
 		stop("The following objects are not contained in the erplist specified:\n", missing.object.collist, call.=F)
 	}
 
+	### get startmsec from the first object
+	erpdf = erplist[[1]]
+	
+	if(!is.null(attr(erpdf, "startmsec")) & !is.null(attr(erpdf, "endmsec"))){
+	  startmsec=attr(erpdf, "startmsec")
+	  endmsec=attr(erpdf, "endmsec")
+	}
+	
+	if (is.null(startmsec)|is.null(endmsec)){
+	  stop("startmsec and endmsec must be specified", call.=F)
+	}
+	
+	# create t.axis if not supplied (step by 200)
+	if (is.null(t.axis)){
+	  t.axis=seq(startmsec, endmsec, 200)
+	}
+	
+	
 
 if (legend.lab=="default"){
 	legend.lab=c(base)

@@ -1,5 +1,5 @@
 scalp.subj <-
-function(base, numbers, smo=NULL, layout=1, outnumber=1, ylims=12, yrev=FALSE, startmsec=-200, endmsec=1200, lwd=c(1,2), lty=1, col="black", erplist=NULL, t.axis=seq(startmsec,endmsec,200), scalp.array=NULL)
+function(base, numbers, smo=NULL, layout=1, outnumber=1, ylims=12, yrev=FALSE, startmsec=NULL, endmsec=NULL, lwd=c(1,2), lty=1, col="black", erplist=NULL, t.axis=NULL, scalp.array=NULL)
 ## function to plot and explore each subject
 {
 
@@ -20,6 +20,22 @@ function(base, numbers, smo=NULL, layout=1, outnumber=1, ylims=12, yrev=FALSE, s
 		stop("The following objects are not contained in the erplist specified:\n", missing.object.collist, call.=F)
 	}
 
+	### get startmsec from the first object
+	erpdf = erplist[[1]]
+	
+	if(!is.null(attr(erpdf, "startmsec")) & !is.null(attr(erpdf, "endmsec"))){
+	  startmsec=attr(erpdf, "startmsec")
+	  endmsec=attr(erpdf, "endmsec")
+	}
+	
+	if (is.null(startmsec)|is.null(endmsec)){
+	  stop("startmsec and endmsec must be specified", call.=F)
+	}
+	
+	# create t.axis if not supplied (step by 200)
+	if (is.null(t.axis)){
+	  t.axis=seq(startmsec, endmsec, 200)
+	}
 
 # la funzione contiene all'interno una funzione che crea il panel. Questa funzione a sua volta contiene la funzione scalp.subj.endo, che  quella che effettivamente fa il grafico appoggiandosi alla funzione scalp.endo. 
 

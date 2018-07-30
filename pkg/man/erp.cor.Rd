@@ -8,8 +8,8 @@ plot the timepoint correlations between ERPs (single electrode) and an external 
 This function performs a series of correlations on each timepoint between ERP voltages and an external (typically a behavioral) variable. The set of ERP data frames is specified by \code{base} and \code{numbers}. The behavioral variable is specified as a vector (of length equal to \code{numbers}) as the argument \code{external}. The function returns a plot of a single electrode showing the results of the correlation tests.
 }
 \usage{
-	erp.cor(base, numbers, electrode, erplist=NULL,startmsec=-200, 
-	endmsec=1200, external=NULL, smo=NULL, alpha=0.05, 
+	erp.cor(base, numbers, electrode, erplist=NULL,startmsec=NULL, 
+	endmsec=NULL, external=NULL, smo=NULL, alpha=0.05, 
 	method = c("pearson", "kendall", "spearman"),  sig=NULL,  
 	main=electrode, ...)
 }
@@ -85,14 +85,13 @@ Giorgio Arcara
 \examples{
 
 \dontrun{
-data(ERPsets)
+data(erplistExample)
 
 #generate some simulated RT data 
 
 RT=rnorm(20, mean = 500, sd = 100)
 erp.cor("Exp1_word_subj", numbers=1:20, electrode="Fp1",  
-erplist=ERPsets, external=RT, startmsec=-200, endmsec=1500, 
-ylim=c(-6,6))
+erplist=erplistExample, external=RT, ylim=c(-6,6))
 }
 
 

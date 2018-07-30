@@ -1,6 +1,30 @@
 erp.add <-
-function(el, startmsec=-200, endmsec=1200, interval=c(startmsec, endmsec), smo=NULL,  col="black", lty=1, lwd=1, ...){
-	if (!is.null(smo)){
+function(erpdf, electrode, startmsec=NULL, endmsec=NULL, interval=NULL, smo=NULL,  col="black", lty=1, lwd=1, ...){
+	
+  # get startmsec from the first object
+  if(!is.null(attr(erpdf, "startmsec")) & !is.null(attr(erpdf, "endmsec"))){
+    startmsec=attr(erpdf, "startmsec")
+    endmsec=attr(erpdf, "endmsec")
+  }
+  
+  if (is.null(startmsec)|is.null(endmsec)){
+    stop("startmsec and endmsec must be specified", call.=F)
+  }
+  
+  if (is.null(interval)){
+    interval=c(startmsec, endmsec)
+  }
+  
+  if (!electrode%in%names(erpdf)){
+    stop("the electrode to plot is not present in the erpdf", call.=F)
+  }
+  
+  # determine what to plot
+  el = erpdf[, electrode]
+  
+  
+  
+  if (!is.null(smo)){
 		el=smooth.spline(el, spar=smo)$y #effettuo un po' di smoothing sul segnale
 	}
 	# first I calculate the msectopoints on the WHOLE length of the data

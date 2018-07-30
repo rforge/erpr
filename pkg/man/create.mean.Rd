@@ -47,11 +47,11 @@ Giorgio Arcara
 }
 \examples{
 
-data(ERPsets)
+data(erplistExample)
 
-ERPsetsmean=create.mean(c("Exp1_word_subj", "Exp1_nonword_subj"), 1:20,
-outname="Exp1_mean_subj", erplist=ERPsets)
+ERPmean=create.mean(c("Exp1_word_subj", "Exp1_nonword_subj"), 1:20,
+outname="Exp1_mean_subj", erplist=erplistExample)
 
-ERPsets=c(ERPsets, ERPsetsmean)
+erplistExample=c(erplistExample, ERPmean)
 
 }

@@ -9,8 +9,8 @@ This function plots an x axis for an erp waveform. Numbers and tick positions ar
 }
 
 \usage{
-erp.xaxis(length.erp = NULL, startmsec=-200, endmsec = 1200, 
-x.tick = seq(-200, 1200, 200), x.labels = x.tick, x.las=0,
+erp.xaxis(length.erp = NULL, startmsec=NULL, endmsec = NULL, 
+x.tick = NULL, x.labels = x.tick, x.las=0,
 draw.x.ticks = TRUE, x.pos = NA, x.outer = FALSE, x.font = NA, 
 x.lty = "solid", x.lwd = 1,  x.lwd.ticks = 1, x.col = NULL,
 x.col.ticks = NULL, x.hadj = NA,  x.padj = NA, x.tcl = -0.5,

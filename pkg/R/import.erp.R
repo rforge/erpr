@@ -1,11 +1,7 @@
-import.erp=function(filenamebase,numbers, ext=".txt", outname=NULL, fileinfo=FALSE, timeinfo=FALSE, erplist=NULL, path=getwd(), electrodes = "file", ...){
+import.erp=function(filenamebase,numbers, ext=".txt", outname="ERP_subj", fileinfo=FALSE, abstimeinfo=FALSE, erplist=NULL, path=getwd(), electrodes = "file", startmsec=NULL, endmsec=NULL, ...){
   
   outlist=list()
   length(outlist)=length(numbers)
-  
-  if (is.null(outname)) {
-    outname = filenamebase
-  }
   
   # check if the electrodes names are already in the file
   if (electrodes[1]=="file"){
@@ -21,9 +17,9 @@ import.erp=function(filenamebase,numbers, ext=".txt", outname=NULL, fileinfo=FAL
       erp.subjectname=gsub("\t","", erp.subjectname)
       comment(erpout)=erp.subjectname
       
-      # add time info if present
+      # add absolute time info if present
       # the time info is retrieved after this string "Time = " (the space is not important)
-      if (timeinfo==TRUE){
+      if (abstimeinfo==TRUE){
         temp = strsplit(erp.subjectname, "Time = ")[[1]][[2]] # retrieve what's after time
         Time = as.numeric(strsplit(temp, ";")[[1]][[1]]) # retrieve what's before the next ;
         attr(erpout, "TrialTime")=Time
@@ -44,6 +40,15 @@ import.erp=function(filenamebase,numbers, ext=".txt", outname=NULL, fileinfo=FAL
         names(erpout)=electrodes		  
       }
     }
+    
+    if(!is.null(startmsec)){
+      attr(erpout, "startmsec")=startmsec
+    }
+    
+    if(!is.null(endmsec)){
+      attr(erpout, "endmsec")=endmsec
+    }
+    
     outlist[[i]]=erpout
     names(outlist)[[i]]=erpout.name
   }

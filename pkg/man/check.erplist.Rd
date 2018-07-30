@@ -17,7 +17,7 @@ an erplist object containing ERP data frames.
 }
 }
 \details{
-The function checks the following errors: 1) check for duplicate data frames; 2) check for data frames with names without \code{number} specified; 3) check for unbalanced combinations of \code{base} and \code{number}. For an explanation of the meaning of \code{base} and \code{numbers} see \code{\link{erpR}}.
+The function checks the following errors: 1) check for duplicate data frames; 2) check for data frames with names without \code{number} specified; 3) check for unbalanced combinations of \code{base} and \code{number} 4) check inconsistencies in \code{startmsec} or \code{endmsec} across data.frame in the erplist.For an explanation of the meaning of \code{base} and \code{numbers}, \code{startmsec}, and \code{endmsec} see \code{\link{erpR}}.
 }
 \value{
 The function return the errors found on the erplist.
@@ -39,7 +39,7 @@ Giorgio Arcara
 
 \examples{
 
-data(ERPsets)
-check.erplist(ERPsets)
+data(erplistExample)
+check.erplist(erplistExample)
 
 }

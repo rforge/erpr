@@ -9,8 +9,8 @@ This function returns a diagnostic plot to investigate the influence of a given 
 }
 
 \usage{ 
-	erp.infl(base, numbers, electrode, erplist=NULL,  startmsec=-200, 
-	endmsec=1200, smo=NULL, outnumber=1, lwd=1, lty=1,  ...)
+	erp.infl(base, numbers, electrode, erplist=NULL,  startmsec=NULL, 
+	endmsec=NULL, smo=NULL, outnumber=1, lwd=1, lty=1,  ...)
 }
 
 \arguments{
@@ -79,10 +79,9 @@ Giorgio Arcara
 \examples{
 
 \dontrun{
-data(ERPsets)
+data(erplistExample)
 
-erp.infl(base="Exp1_word_subj", numbers=1:20, electrode="OZ", 
-startmsec=-200, endmsec=1500, erplist=ERPsets)
+erp.infl(base="Exp1_word_subj", numbers=1:20, electrode="OZ", erplist=erplistExample)
 
 # Notice that Subject 1 is clearly particularly influential
 # for the average on OZ.
