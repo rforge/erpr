@@ -625,7 +625,7 @@ mass.t.test<-function(base1=NULL, base2=NULL, numbers1=NULL, numbers2=numbers1, 
         
         ## ERRORE GIORGIO
         # https://github.com/dmgroppe/Mass_Univariate_ERP_Toolbox/blob/master/clust_perm2.m
-        # qui è segnato che i p-value di negative cluster e positive devono essere diversi.
+        # qui e segnato che i p-value di negative cluster e positive devono essere diversi.
         # -When doing two-tailed tests it is possible to get p-values greater than 1.
         # These can be treated equivalent to a p-value of 1. The reason for
         # this is that the p-values for positive and negative clusters are computed

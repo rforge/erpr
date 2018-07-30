@@ -70,7 +70,7 @@ find.clusters<-function(tscores, thresh, chan_hood, thresh_sign, min_nchans){
   n_chan=dim(tscores)[1] # get number of channels
   n_tpt=dim(tscores)[2] # get number of timepoints
   
-  # !! creo una variabile Globale su MATLAB (non so se può creare problemi)
+  # !! I create a clust_ids variable in the Global environment (to be fixed)
   
   clust_ids<<-matrix(0, nrow=n_chan, ncol=n_tpt)
   
