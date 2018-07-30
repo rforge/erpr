@@ -1,4 +1,4 @@
-import.erp=function(filenamebase,numbers, ext=".txt", outname="ERP_subj", fileinfo=FALSE, abstimeinfo=FALSE, erplist=NULL, path=getwd(), electrodes = "file", startmsec=NULL, endmsec=NULL, ...){
+import.erp=function(filenamebase, numbers, ext=".txt", outname="ERP_subj", fileinfo=FALSE, abstimeinfo=FALSE, erplist=NULL, path=getwd(), electrodes = "file", startmsec=NULL, endmsec=NULL, ...){
   
   outlist=list()
   length(outlist)=length(numbers)

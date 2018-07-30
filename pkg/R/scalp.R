@@ -9,8 +9,6 @@ scalp <-
       categ = erpdfs
     }
     
-    
-    
     if (class(categ)!="list"){
       stop("input object must be a list of erpdfs or an erpdf!")
     }
@@ -34,7 +32,7 @@ scalp <-
     
     
     if (length(legend.lab)==1&legend.lab[1]=="default"){
-      legend.lab=deparse(substitute(categ))
+      legend.lab=deparse(substitute(erpdfs))
       legend.lab=gsub("\\(", "",legend.lab)
       legend.lab=gsub("\\)", "", legend.lab)
       legend.lab=gsub("^list", "", legend.lab)
