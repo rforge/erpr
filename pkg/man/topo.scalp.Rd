@@ -8,9 +8,10 @@ plot ERP waveforms in a scalp array with topographic position
 This function plots the waveforms of several electrodes in a topographic array reflecting their positions on the scalp
 }
 \usage{
-topo.scalp(erpdfs, smo=NULL, ylims="auto", yrev=TRUE, startmsec=NULL, endmsec=NULL, lwd=1, lty=1, 
-color.list=c("blue", "red", "darkgreen"), legend=F, legend.lab="default", t.axis=NULL,
-elec.coord=NULL, el.toplot=NULL, x.margin=1, y.margin=1, ...)
+topo.scalp(erpdfs, smo=NULL, ylims="auto", yrev=TRUE, 
+startmsec=NULL, endmsec=NULL, lwd=1, lty=1, 
+color.list=c("blue", "red", "darkgreen"), legend=F, legend.lab="default", 
+t.axis=NULL, elec.coord=NULL, el.toplot=NULL, x.margin=1, y.margin=1, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
