@@ -7,7 +7,6 @@ localmax <- function(x, n.points=2){
   # return NA if there is any NA in the data
   if (any(is.na(x))) {
     return(NA)
-    break
   }
 
 	vet=x

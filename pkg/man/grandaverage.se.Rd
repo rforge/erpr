@@ -9,7 +9,8 @@ A function to average ERP objects, i.e. data frames with timepoints in rows, ele
 It is used to compute the grandaverage.se across several subjects, for plotting purposes.
 }
 \usage{
-grandaverage.se(base, numbers, electrodes="all", erplist = NULL, startmsec=NULL, endmsec=NULL,  NA.sub=TRUE, type="se")
+grandaverage.se(base, numbers, electrodes="all", erplist = NULL, 
+startmsec=NULL, endmsec=NULL,  NA.sub=TRUE, type="se")
 }
 \arguments{
   \item{base}{

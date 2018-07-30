@@ -9,7 +9,8 @@ A function to average ERP objects, i.e. data frames with timepoints in rows, ele
 It is used to compute the grandaverage across several subjects, for plotting purposes.
 }
 \usage{
-grandaverage(base, numbers, electrodes="all",  erplist = NULL, startmsec=NULL, endmsec=NULL, NA.sub=TRUE)
+grandaverage(base, numbers, electrodes="all",  erplist = NULL, 
+startmsec=NULL, endmsec=NULL, NA.sub=TRUE)
 }
 \arguments{
   \item{base}{

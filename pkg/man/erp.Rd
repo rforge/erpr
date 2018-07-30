@@ -8,8 +8,9 @@ plot an ERP waveform
 A function to plot an ERP waveform of a single electrode. If used with default values the function allows a fast plotting. Several parameters are available for plotting paper quality plots.
 }
 \usage{
-erp(erpdf, electrode, startmsec=NULL, endmsec = NULL, smo = NULL, interval = c(startmsec, endmsec),
-xlim = NULL, ylim = NULL, col = "black",  lwd = 1, xlab = "", ylab = "", 
+erp(erpdf, electrode, startmsec=NULL, endmsec = NULL, smo = NULL, 
+interval = c(startmsec, endmsec),xlim = NULL, ylim = NULL,
+col = "black",  lwd = 1, xlab = "", ylab = "", 
 main = "", frame.plot = TRUE, draw.xaxis = TRUE, draw.yaxis = TRUE, type = "l", 
 x0 = TRUE, x.tick = NULL, x.labels=x.tick, x.las=0, x.pos = NA,  x.outer = F, 
 x.font = NA,  x.lty = "solid", x.lwd = 1, x.lwd.ticks = 1,  x.col = NULL,  
@@ -17,7 +18,7 @@ x.col.ticks = NULL,  x.hadj = NA, x.padj = NA, x.tcl = -0.5,  x.tick.both= FALSE
 x.cex = 1, y.tick = NULL,  y.labels = y.tick, y.las=0, y.pos = NA, y.outer = F, 
 y.font = NA, y.lty = "solid", y.lwd = 1,  y.lwd.ticks = 1, y.col = NULL, 
 y.col.ticks = NULL, y.hadj = NA, y.padj = NA,  y.tcl = -0.5, y.tick.both= FALSE,
- y.cex = 1, ...)
+y.cex = 1, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
