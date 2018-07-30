@@ -57,9 +57,9 @@ Giorgio Arcara
 
 \dontrun{
 	
-data(ERPsets)
+data(erplistExample)
 
-word=grandaverage("Exp1_word_subj", 1:20, erplist=ERPsets) 
+word=grandaverage("Exp1_word_subj", 1:20, erplist=erplistExample) 
 
 erp(word$F3, smo=0, col="blue", startmsec=-200, endmsec=1500, ylim=c(-6,6))
 

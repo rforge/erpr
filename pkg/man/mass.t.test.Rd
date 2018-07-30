@@ -123,10 +123,10 @@ Giorgio Arcara
 \examples{
 
 \dontrun{
-data(ERPsets)
+data(erplistExample)
 
 res = mass.t.test("Exp1_word_subj", "Exp1_nonword_subj", 1:20, 1:20, startmsec=-200, endmsec=1500, 
-erplist1=ERPsets, erplist2=erplistExample, paired=T)
+erplist1=erplistExample, erplist2=erplistExample, paired=T)
 
 }
 

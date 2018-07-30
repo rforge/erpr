@@ -19,7 +19,7 @@ a electrode by timepoitns matrix of t-scores
 The threshold to be used to filter the t-scores.
 }
   \item{chan_hood}{
-  an electrode by electrode matrix. As the one created with \link{\code{spatial_neighbours}}
+  an electrode by electrode matrix. As the one created with \code{\link{spatial_neighbours}}
   }
   \item{thresh_sign}{
   a value (-1 or 1), to specify is positive clusters or negative clusters are searcher.

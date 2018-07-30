@@ -92,12 +92,12 @@ Giorgio Arcara
 }
 \examples{
 
-data(ERPsets)
+data(erplistExample)
 
 # Notice that Subject 1 has some problems, especially in OZ
 \dontrun{
 scalp.subj(base="Exp1_word_subj", numbers=1:20, layout=1, 
-startmsec=-200, endmsec=1500, erplist=ERPsets)
+startmsec=-200, endmsec=1500, erplist=erplistExample)
 }
 
 }

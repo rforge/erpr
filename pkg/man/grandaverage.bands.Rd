@@ -86,7 +86,7 @@ erp.add(word, my_el, lwd=2)
 require(ggplot2)
 
 
-word=grandaverage("Exp1_word_subj", 1:20, erplist=ERPsets)
+word=grandaverage("Exp1_word_subj", 1:20, erplist=erplistExample)
 time = pointstomsec(1:dim(word)[[1]], startmsec=-500, 
   endmsec=1500, lengthsegment = dim(word)[[1]])
 

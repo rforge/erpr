@@ -121,11 +121,11 @@ Giorgio Arcara
 \examples{
 
 \dontrun{
-data(ERPsets)
+data(erplistExample)
 
 scalp.t("Exp1_word_subj", "Exp1_nonword_subj", 1:20, 1:20, smo=0, 
 layout=1, ylims=10, startmsec=-200, endmsec=1500, 
-color.list=c("blue", "red"), erplist1=ERPsets, erplist2=ERPsets)
+color.list=c("blue", "red"), erplist1=erplistExample, erplist2=erplistExample)
 }
 
 }
