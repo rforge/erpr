@@ -504,9 +504,9 @@ mass.t.test<-function(base1=NULL, base2=NULL, numbers1=NULL, numbers2=numbers1, 
     
     
     # find positive clusters
-    obs.posclust=find.clusters(t(obs.perm.filt.mat), thresh = perm.thresh, chan_hood = neighbours, thresh_sign = 1)
+    obs.posclust=find.clusters(t(obs.perm.filt.mat), thresh = perm.thresh, chan_hood = neighbours, thresh_sign = 1, min_nchans=min_nchans)
     # find negative clusters
-    obs.negclust=find.clusters(t(obs.perm.filt.mat), thresh = -perm.thresh, chan_hood = neighbours, thresh_sign = -1)
+    obs.negclust=find.clusters(t(obs.perm.filt.mat), thresh = -perm.thresh, chan_hood = neighbours, thresh_sign = -1, min_nchans=min_nchans)
     
     # NOTE!! the current find.clusters function return either a 
     # electrodes*timepoints matrix OR just the NULL.
@@ -600,9 +600,9 @@ mass.t.test<-function(base1=NULL, base2=NULL, numbers1=NULL, numbers2=numbers1, 
         
         
         # find positive clusters
-        curr.posclust=find.clusters(t(curr.perm.t.mat), thresh = perm.thresh, chan_hood = neighbours, thresh_sign = 1)
+        curr.posclust=find.clusters(t(curr.perm.t.mat), thresh = perm.thresh, chan_hood = neighbours, thresh_sign = 1, min_nchans=min_nchans)
         # find negative clusters
-        curr.negclust=find.clusters(t(curr.perm.t.mat), thresh = -perm.thresh, chan_hood = neighbours, thresh_sign = -1)
+        curr.negclust=find.clusters(t(curr.perm.t.mat), thresh = -perm.thresh, chan_hood = neighbours, thresh_sign = -1, min_nchans=min_nchans)
         
         ##########################################
         ## Calculate MASS of CLUSTERS (within perm)
@@ -707,9 +707,9 @@ mass.t.test<-function(base1=NULL, base2=NULL, numbers1=NULL, numbers2=numbers1, 
         
         
         # find positive clusters
-        curr.posclust=find.clusters(t(curr.perm.t.mat), thresh = perm.thresh, chan_hood = neighbours, thresh_sign = 1)
+        curr.posclust=find.clusters(t(curr.perm.t.mat), thresh = perm.thresh, chan_hood = neighbours, thresh_sign = 1, min_nchans=min_nchans)
         # find negative clusters
-        curr.negclust=find.clusters(t(curr.perm.t.mat), thresh = -perm.thresh, chan_hood = neighbours, thresh_sign = -1)
+        curr.negclust=find.clusters(t(curr.perm.t.mat), thresh = -perm.thresh, chan_hood = neighbours, thresh_sign = -1, min_nchans=min_nchans)
         
         ##########################################
         ## Calculate MASS of CLUSTERS

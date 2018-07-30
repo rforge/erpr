@@ -2,10 +2,10 @@
 \alias{spatial_neighbours}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
- calculate spatianl neighbours. Internal function for \code{mass.t.test}, cluster based permutation
+ calculate spatial neighbours.
 }
 \description{
-No description
+ Internal function for \code{mass.t.test}, used in cluster based permutation to form clusters.
 }
 \usage{
 spatial_neighbours(chanlocs, max_dist, head_radius=NULL)}
