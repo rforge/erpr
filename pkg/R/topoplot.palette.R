@@ -77,7 +77,6 @@ topoplot.palette<-function(cols, pos = c(0.5,0.5), p.width=0.2, p.height=0.8, ho
         
       }
       
-      
       text((x0rect - lab.x.dist) ,  pos.y, labels= up_lab, pos = 2, cex = lab.cex, font = lab.font, family = lab.family) 
       # notice how I retrieve the value of a variable with .()
       text((x1rect + lab.x.dist) ,  pos.y, labels= down_lab, pos = 4, cex = lab.cex, font = lab.font, family = lab.family)

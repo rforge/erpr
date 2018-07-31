@@ -72,7 +72,7 @@ spatial_neighbours=function(chanlocs, max_dist, head_radius=NULL){
   cat("Min/Max distances between all pairs of channels (in chanlocs units): ",
       min(chan_dist)," ", max(chan_dist), "\n");
   cat("Median (semi-IQR) distance between all pairs of channels (in chanlocs units):", 
-      median(chan_dist), "-", IQR(chan_dist)/2);
+      median(chan_dist), "-", IQR(chan_dist)/2, "\n");
   cat("Mean (SD) # of neighbors per channel: ",  mean(n_neighbors), " ", sd(n_neighbors), "\n");
   cat("Median (semi-IQR) # of neighbors per channel: ", median(n_neighbors), " ", IQR(n_neighbors)/2, "\n");
   cat("Min/max # of neighbors per channel: ", min(n_neighbors), "-", max(n_neighbors), "\n");

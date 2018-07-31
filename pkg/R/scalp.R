@@ -45,6 +45,9 @@ scalp <-
     if (length(lty)==1){
       lty=rep(lty, length(categ))}
     
+    ### ADD OUTER MARGIN
+    par(oma=c(1,1,1,1))
+    
     
     if (layout[1]==1){
       electrodes=c("yaxis","Fp1", "blank", "Fp2","legend", "F7", "F3", "FZ", "F4", "F8", "FT7", "FC3", "FCZ", "FC4", "FT8", "T3", "C3", "CZ","C4","T4","TP7", "CP3", "CPZ", "CP4", "TP8", "T5", "P3", "PZ", "P4", "T6", "xaxis", "O1", "OZ", "O2", "blank")

@@ -383,6 +383,8 @@ mass.t.test<-function(base1=NULL, base2=NULL, numbers1=NULL, numbers2=numbers1, 
   
   if (p.adjust.method=="cluster.based.permutation"){
     
+    cat("\n cluster based premutation (as in Groppe et al.2011). This may require some time ...\n\n")
+    
     ##################################
     # CREATE AN ADDITIONAL FUNCTION (it will be used to calculate cluster mass)
     ##################################
@@ -414,8 +416,6 @@ mass.t.test<-function(base1=NULL, base2=NULL, numbers1=NULL, numbers2=numbers1, 
     #######################################
     
     # initilaize neighbours
-    neighbours = NULL
-    
     ## check if it possible to perform the cluster based the cluster based permutation
     
     
@@ -454,6 +454,8 @@ mass.t.test<-function(base1=NULL, base2=NULL, numbers1=NULL, numbers2=numbers1, 
     # if you don't specify
     if(is.null(neighbours)){
       
+      cat("calculating neighbours..\n\n")
+      
       ## retrieve electrode coordinates data.frame from topoplot
       elec.coord=topoplot(return.coord=TRUE)
       
@@ -468,9 +470,25 @@ mass.t.test<-function(base1=NULL, base2=NULL, numbers1=NULL, numbers2=numbers1, 
       # retrieve current electrode coordinates
       curr.elec.coord = elec.coord[up.elec.coord.names %in% up.curr.el, ]
       
+      # return if some electrodes are not found
+      not.found.names = electrodes[! up.curr.el %in% up.elec.coord.names ]
+      
+      if (length(not.found.names)>0){
+        cat("the following electrodes have not been found in the built in list:", paste(not.found.names, collapse=", "), ".\n")
+        stop(paste("please run again the code, excluding these electrodes, by adding the argument:\n, to.exclude=", deparse(not.found.names), sep=""))
+      
+      }
+        
+        # NOTE: I don't update here the list of electrodes beacuase it will cause inconsistencies.
+        # the first t.test is run above, with more electrodes and before this check. And this results (filt.mat)
+        # is used in the computation below.
+        # an alternative would be to move the check BEFORE. 
+
+        #electrodes = electrodes[!up.curr.el %in% u.elec.coord.names]
+      }
+      
       # return a matrix n_electrodes x n_electrodes with 0/1 indicating neigbourhood
       neighbours=spatial_neighbours(curr.elec.coord[, c("x", "y", "z")], 1)
-    }
     
     ## step 5) FIND CLUSTERS
     
@@ -569,7 +587,7 @@ mass.t.test<-function(base1=NULL, base2=NULL, numbers1=NULL, numbers2=numbers1, 
       
       
       #### START PERMUTATIONS HERE
-      cat("computing permutations:\n")
+      cat("computing permutations (cluster based):\n")
       
       for (i in 1:n.permutations){
         
