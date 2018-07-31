@@ -35,7 +35,8 @@ function(base, numbers, external=NULL, alpha=0.05,method = c("pearson", "kendall
 	  t.axis=seq(startmsec, endmsec, 200)
 	}
 	
-	
+	### ADD OUTER MARGIN
+	par(oma=c(1,1,1,1))
 
 if (legend.lab=="default"){
 	legend.lab=c(base)

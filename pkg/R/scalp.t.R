@@ -52,6 +52,8 @@ scalp.t <-
     }
     
   
+    ### ADD OUTER MARGIN
+    par(oma=c(1,1,1,1))
     
     ### FUNZIONE PER FARE AVERAGE PER PLOT
     

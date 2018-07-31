@@ -9,7 +9,7 @@ This function plot the results of \code{mass.t.test} in the form of raster.
 }
 \usage{
 rasterplot(res, startmsec=NULL, endmsec=NULL, palette.col="jet", lower.thresh=NULL, 
-upper.thresh=NULL, zlim="default", cex.axis=1, ...)
+upper.thresh=NULL, zlim="default", cex.yaxis=0.7, cex.xaxis=1, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -41,9 +41,14 @@ set a upper threshold to the results to be displayed. Values below this threshol
 	the limits of z axis (i.e. colors in the raster plot). If \code{"default"}, then the limits are automatically computed.
 }
 
-\item{cex.axis}{
+\item{cex.yaxis}{
 magnification factor for the y axis.
 }
+
+\item{cex.xaxis}{
+magnification factor for the x axis.
+}
+
 \item{\ldots}{
 Further arguments to be passed to the call to \code{plot}.
 }
@@ -85,8 +90,8 @@ erplist1=erplistExample, erplist2=erplistExample, paired=T)
 
 quartz(width=10, height=5)
 par(mfrow=c(1,2))
-rasterplot(res$t.mat, startmsec=-200, endmsec=1500, main = "all t-values", cex.axis=0.7)
-rasterplot(res$sig, startmsec=-200, endmsec=1500, main = "significance", cex.axis=0.7)
+rasterplot(res$t.mat, startmsec=-200, endmsec=1500, main = "all t-values", cex.yaxis=0.7)
+rasterplot(res$sig, startmsec=-200, endmsec=1500, main = "significance", cex.yaxis=0.7)
 
 }
 

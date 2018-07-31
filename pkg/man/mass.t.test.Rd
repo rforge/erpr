@@ -59,11 +59,11 @@ a vector with a pair of values indicating the interval (in milliseconds) to be p
 }
 
   \item{p.adjust.method}{
-p-value correction methods as in \code{\link{p.adjust}}. Alternatively \code{"tmax"} can be used to perform permutation test as in Groppe et al., 2011.
+p-value correction methods as in \code{\link{p.adjust}}. Alternatively \code{"tmax"} or \code{"cluster.based.permutation"} can be used to perform permutation test as in Groppe et al., 2011.
 }
 
  \item{n.permutations}{
- number of permutation if a permutation test is specified in \code{p.adjust.methods}, (currently only \code{"tmax"} is available) .
+ number of permutation if a permutation test is specified in \code{p.adjust.methods}, (currently for  \code{"tmax"} or  \code{"cluster.based.permutation"}) .
  }
 
   \item{p.crit}{
@@ -102,6 +102,8 @@ This function perform a series of t-tests, according to a Mass Univariate Statis
 }
 \value{
 The function returns results in the form of a list containing a series of objects. \code{param}, contains the parameters of the call to \code{mass.t.test}. \code{mass.t.results}, contains the t.values of the results filtered according to the \code{mass.t.results} call. \code{sig} is a logical matrix containing the significant results (0 = not significant, 1 = significant). \code{t.mat} is a matrix containing all the t-values (not filtered). \code{p.mat} is a matrix containing the p.values, unfiltered.
+If \code{cluster.based.permutation} is chosed a different list of results is returned, with seprate results for 
+positive and negative clusters and with cluster identity.
 If \code{stable.diff=TRUE} an additional object containing the list of beginning and end of signficant time windows is included in the ouput.
 }
 \references{

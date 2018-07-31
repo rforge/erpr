@@ -1,4 +1,4 @@
-rasterplot<-function(res, startmsec=NULL, endmsec=NULL, palette.col="jet",  lower.thresh=NULL, upper.thresh=NULL, zlim="default", cex.axis=1, ...){
+rasterplot<-function(res, startmsec=NULL, endmsec=NULL, palette.col="jet",  lower.thresh=NULL, upper.thresh=NULL, zlim="default", cex.yaxis=0.7, cex.xaxis=1, par = NULL, ...){
   
   if (is.null(startmsec)|is.null(endmsec)){
     stop("startmsec and endmsec must be specified", call.=F)
@@ -17,7 +17,8 @@ rasterplot<-function(res, startmsec=NULL, endmsec=NULL, palette.col="jet",  lowe
   
   res=as.matrix(res)
   
-  par(mar=c(5.1, 8.0, 4.1, 2.1))
+  #par(mar=c(5.1, 8.0, 4.1, 2.1))
+  # par(mar=c(2, 4.0, 2.1, 2.1))
   plot(0,0, xlim=c(1, dim(res)[1]), ylim=c(1, dim(res)[2]), type="n", xlab="", ylab="", axes=F, frame.plot=F, ...)
   abline(v=1:dim(res)[1]-0.5, col="lightgray", lwd=0.3) # note the shift -0.5 to center the little rectangles.
   abline(h=1:dim(res)[2]-0.5, col="lightgray", lwd=0.3)
@@ -64,8 +65,8 @@ rasterplot<-function(res, startmsec=NULL, endmsec=NULL, palette.col="jet",  lowe
   
   image(1:dim(res)[1], 1:dim(res)[2], as.matrix(res), axes=T, add=TRUE, col=mypalette.cols, zlim=myzlim)
   
-  axis(side=2, at=1:dim(res)[2], labels=colnames(res), las=1, cex.axis=cex.axis)
-  erp.xaxis(length.erp=dim(res)[1], startmsec=startmsec, endmsec=endmsec, x.tick=seq(startmsec, endmsec, 200)) 
+  axis(side=2, at=1:dim(res)[2], labels=colnames(res), las=1, cex.axis=cex.yaxis)
+  erp.xaxis(length.erp=dim(res)[1], startmsec=startmsec, endmsec=endmsec, x.tick=seq(startmsec, endmsec, 200), x.cex=cex.axis) 
   
   invisible(list(mypalette=mypalette.cols, zlim=myzlim))
   
