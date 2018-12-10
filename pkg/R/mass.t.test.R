@@ -855,7 +855,7 @@ mass.t.test<-function(base1=NULL, base2=NULL, numbers1=NULL, numbers2=numbers1, 
     perm.filt.mat[!cluster.belong.log.mat]=NA
     
     # apply the new data to the NA matrix with original dimensions
-    perm.or.filt.mat[startpoint:endpoint, electrodes]  = perm.filt.mat
+    # perm.or.filt.mat[startpoint:endpoint, electrodes]  = perm.filt.mat
     
     # Sub-STEP 2now I can filter the data for SIGNIFICANT clusters
     ## create a unique logical matrix to mask significant results (as in other functions)

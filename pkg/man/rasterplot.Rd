@@ -90,8 +90,21 @@ erplist1=erplistExample, erplist2=erplistExample, paired=T)
 
 quartz(width=10, height=5)
 par(mfrow=c(1,2))
-rasterplot(res$t.mat, startmsec=-200, endmsec=1500, main = "all t-values", cex.yaxis=0.7)
+rasterplot(res$t.mat, startmsec=-200, endmsec=1500, main = "all t-scores", cex.yaxis=0.7)
 rasterplot(res$sig, startmsec=-200, endmsec=1500, main = "significance", cex.yaxis=0.7)
+
+#rasterplot
+
+layout(mat, widths=c(0.8, 0.2))
+
+#make a rasterplot with palette using topoplot.palette.
+par(pty="s")
+rast = rasterplot(res$t.mat, startmsec=-200, endmsec=1500, main = "all t-scores", cex.yaxis=0.7)
+#draw the palette on a new empty plot.
+par(pty="m", mar=c(0,0,0,0))
+plot.new()
+topoplot.palette(cols=rast$palette, palette.lim=c(-4,4), p.height=0.6) 
+
 
 }
 

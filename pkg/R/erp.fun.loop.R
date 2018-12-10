@@ -1,4 +1,4 @@
-erp.fun.loop<-function(bases=NULL, numbers=NULL, erp.fun=NULL, intervals=NULL, conditions.names=NULL, erplist=NULL, startmsec=NULL, endmsec=NULL, others=NULL, intervals.var=TRUE, ...){
+erp.fun.loop<-function(bases=NULL, numbers=NULL, erp.fun=NULL, intervals=NULL, conditions.names=NULL, erplist=NULL, startmsec=NULL, endmsec=NULL, others=NULL, intervals.var=TRUE,  ...){
   
   #datall=erp.fun.loop(bases=c("Exp1_word_subj", "Exp1_nonword_subj"), numbers=1:20, erp.fun=erp.mean, conditions.names=c("word", "nonword"), erplist=ERPsets, intervals.var=TRUE, intervals=list(c(100, 200), c(300, 500)))
   

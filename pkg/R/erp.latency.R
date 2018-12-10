@@ -1,6 +1,6 @@
 
 erp.latency <-
-  function(base, numbers, win.ini, win.end, erplist=NULL, startmsec=NULL, endmsec=NULL, others=NULL, format="long", name.dep="Dep", name.newvar="electrode", peak.fun=max, frac = 1, ...)
+  function(base, numbers, win.ini, win.end, erplist=NULL, startmsec=NULL, endmsec=NULL, others=NULL, format="long", name.dep="Dep", name.newvar="electrode", peak.fun=max, frac = 1, numbers.name="Subject", ...)
   {
     
     # preliminary checks
@@ -90,7 +90,7 @@ erp.latency <-
     
     if(format=="long"){
       
-      temp=rearrange(deps=1:(length(datall)-2),oth=c("Subject", "Subject_name"),dataset=datall, name.dep=name.dep, name.newvar=name.newvar)
+      temp=rearrange(deps=1:(length(datall)-2),oth=c(numbers.name, "Subject_name"),dataset=datall, name.dep=name.dep, name.newvar=name.newvar)
       # notice: length(datall)-2 because the last two columns are Subject and Subject_name
     }
     

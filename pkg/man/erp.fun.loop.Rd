@@ -2,7 +2,7 @@
 \alias{erp.fun.loop}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-loop over different files to calculate an ERP measure }
+Calculate several ERP measures}
 \description{
 This functions allow to quickly perform loops over several objects with different \code{base} or different time windows, to calculate an erp measure (i.e., \code{erp.mean}, \code{erp.peak}, or \code{erp.latency})
 }

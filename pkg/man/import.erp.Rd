@@ -10,7 +10,7 @@ Import a series of ASCII files with ERP data. Data are imported as a list contai
 \usage{
 import.erp(filenamebase, numbers, ext=".txt", 
 outname = "ERP_subj", fileinfo=FALSE, abstimeinfo=FALSE, erplist = NULL, path=getwd(), 
-electrodes="file", startmsec=NULL, endmsec=NULL, ...)
+electrodes="file", startmsec=NULL, endmsec=NULL, values.multi=1, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -54,6 +54,10 @@ the start time (in ms) of the ERP data frames. It can be a negative value, indic
 \item{endmsec}{
 the end time (in ms) of the ERP data frames.
 This info will be stored in the imported object as an attribute of the data.frame. 
+}
+
+\item{values.multi}{
+A multiplication factor to be applied to all numeric values while importing. Default is 1 (i.e., no correction).
 }
 
 \item{\ldots}{

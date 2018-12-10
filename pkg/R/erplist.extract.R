@@ -44,15 +44,26 @@ erplist.extract<-function(bases, numbers, win.ini=NULL, win.end=NULL, point.ini=
     {
       x.temp=erplist[[paste(base,numbers[i], sep="")]]
       Subject_name=comment(erplist[[paste(base,numbers[i], sep="")]])
+      
       if (!is.null(win.ini) & !is.null(win.end)){
         x.temp=x.temp[round(msectopoints(win.ini,dim(x.temp)[1],startmsec, endmsec)):
                         round(msectopoints(win.end,dim(x.temp)[1],startmsec, endmsec)),]
+        
+        
       } else {
         x.temp=x.temp[ point.ini:point.end,] # in case the exact points are specified.
+        
+        # create the new startmmsec and endmsec
+        win.ini = pointstomsec(point.ini, dim(x.temp)[1], startmsec, endmsec)
+        win.end = pointstomsec(point.end, dim(x.temp)[1], startmsec, endmsec)
       }
+      
+      attr(x.temp, "startmsec") = win.ini
+      attr(x.temp, "endmsec") = win.end
       
       x.temp=list(x.temp)
       names(x.temp)=paste(base,numbers[i], sep="")
+      
       #
       outlist=c(outlist, x.temp)
     }

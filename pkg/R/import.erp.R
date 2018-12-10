@@ -1,4 +1,4 @@
-import.erp=function(filenamebase, numbers, ext=".txt", outname="ERP_subj", fileinfo=FALSE, abstimeinfo=FALSE, erplist=NULL, path=getwd(), electrodes = "file", startmsec=NULL, endmsec=NULL, ...){
+import.erp=function(filenamebase, numbers, ext=".txt", outname="ERP_subj", fileinfo=FALSE, abstimeinfo=FALSE, erplist=NULL, path=getwd(), electrodes = "file", startmsec=NULL, endmsec=NULL, values.multi=1, ...){
   
   outlist=list()
   length(outlist)=length(numbers)
@@ -13,6 +13,7 @@ import.erp=function(filenamebase, numbers, ext=".txt", outname="ERP_subj", filei
   for (i in 1:length(numbers)){
     if (fileinfo==TRUE){
       erpout=read.table(paste(path, "/", filenamebase, numbers[i], ext ,sep=""), header=myheader,skip=1, ...)
+      erpout = erpout*values.multi
       erp.subjectname=readLines(paste(path, "/", filenamebase, numbers[i], ext,sep=""), n=1)
       erp.subjectname=gsub("\t","", erp.subjectname)
       comment(erpout)=erp.subjectname
@@ -32,6 +33,7 @@ import.erp=function(filenamebase, numbers, ext=".txt", outname="ERP_subj", filei
     }
     if (fileinfo==FALSE){
       erpout=read.table(paste(path, "/", filenamebase, numbers[i], ext ,sep=""), header=myheader, ...)
+      erpout = erpout*values.multi
       erp.subjectname=paste(path, "/", filenamebase, numbers[i], ext ,sep="")
       erp.subjectname=gsub("\t","", erp.subjectname)
       comment(erpout)=erp.subjectname

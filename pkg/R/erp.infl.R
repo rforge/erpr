@@ -41,12 +41,12 @@ erp.infl <-
     mycall.erp=mycall.list[names(mycall.list)%in%as.list(names(as.list(args(erp))))]
     #notice the second part of this line of code. Basically I retrive the args of funciton erp, transform in a list. Then I take only the args in call that match
     # with args of function erp, to avoid to call for args unexpected from the function erp.
-    mycall.erp$el=as.name("average")
+    mycall.erp$erpdf=as.name("average")
     
     #create the object for the future call of erp
-    mycall.erp.add=mycall.list[names(mycall.list)%in%c("lty", "smo", "col", "lwd")]
+    mycall.erp.add=mycall.list[names(mycall.list)%in%c("lty", "smo", "col", "lwd", "electrode", "startmsec", "endmsec")]
     mycall.erp.add=append(mycall.erp.add, as.name("average.excl"))
-    names(mycall.erp.add)[length(mycall.erp.add)]="el"
+    names(mycall.erp.add)[length(mycall.erp.add)]="erpdf"
     mycall.erp.add$col = "red"
     mycall.erp.add$lwd = 2 #substitute the lwd for the call of erp.add
     
@@ -66,7 +66,9 @@ erp.infl <-
           average.temp=average.temp+erplist[[paste(base,numbers[i],sep="")]][[electrode]]	
         }
         average=average.temp/length(numbers)
-        
+        average = data.frame(average)
+        names(average) = electrode
+
         if (!is.null(smo)){
           average=smooth.spline(erp, spar=smo)$y
         }
@@ -80,6 +82,8 @@ erp.infl <-
         #notice that I use "outline" and not numbers, since it is already a character and correspond to on the numbers specified in the arguments.
         
         average.excl=(average.temp-erplist[[paste(base, outline, sep="")]][[electrode]])/(length(numbers)-1)		
+        average.excl = data.frame(average.excl)
+        names(average.excl)=electrode
         
         do.call("erp.add", mycall.erp.add)
         

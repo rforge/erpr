@@ -1,4 +1,4 @@
-erp.mean<-function(base, numbers, win.ini, win.end, erplist=NULL, startmsec=NULL, endmsec=NULL, others=NULL, format="long", name.dep="Dep", name.newvar="electrode")
+erp.mean<-function(base, numbers, win.ini, win.end, erplist=NULL, startmsec=NULL, endmsec=NULL, others=NULL, format="long", name.dep="Dep", name.newvar="electrode", numbers.name="Subject")
 	{
 		
 		# preliminary checks
@@ -35,7 +35,7 @@ erp.mean<-function(base, numbers, win.ini, win.end, erplist=NULL, startmsec=NULL
 			Subject_name=comment(erplist[[paste(base,numbers[i], sep="")]])
 			x.temp=apply(x.temp[round(msectopoints(win.ini,dim(x.temp)[1],startmsec, endmsec)):round(msectopoints(win.end,dim(x.temp)[1],startmsec, endmsec)),],2, mean)
 			x.temp=data.frame(t(x.temp))
-			x.temp$Subject=numbers[i]
+			x.temp[, numbers.name]=numbers[i]
 			x.temp$Subject_name=Subject_name
 			datall=rbind(datall, x.temp)
 			}
@@ -48,7 +48,7 @@ erp.mean<-function(base, numbers, win.ini, win.end, erplist=NULL, startmsec=NULL
 	
 	if(format=="long"){
 		
-		temp=rearrange(deps=1:(length(datall)-2),oth=c("Subject", "Subject_name"),dataset=datall, name.dep=name.dep, name.newvar=name.newvar)
+		temp=rearrange(deps=1:(length(datall)-2), oth=c(numbers.name, "Subject_name"), dataset=datall, name.dep=name.dep, name.newvar=name.newvar)
 		# notice: length(datall)-2 because the last two columns are Subject and Subject_name
 	}
 	

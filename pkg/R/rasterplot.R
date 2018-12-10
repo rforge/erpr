@@ -1,4 +1,4 @@
-rasterplot<-function(res, startmsec=NULL, endmsec=NULL, palette.col="jet",  lower.thresh=NULL, upper.thresh=NULL, zlim="default", cex.yaxis=0.7, cex.xaxis=1, par = NULL, ...){
+rasterplot<-function(res, startmsec=NULL, endmsec=NULL, palette.col="jet", lower.thresh=NULL, upper.thresh=NULL, zlim="default", cex.yaxis=0.7, cex.xaxis=1, par = NULL, ...){
   
   if (is.null(startmsec)|is.null(endmsec)){
     stop("startmsec and endmsec must be specified", call.=F)
@@ -66,8 +66,9 @@ rasterplot<-function(res, startmsec=NULL, endmsec=NULL, palette.col="jet",  lowe
   image(1:dim(res)[1], 1:dim(res)[2], as.matrix(res), axes=T, add=TRUE, col=mypalette.cols, zlim=myzlim)
   
   axis(side=2, at=1:dim(res)[2], labels=colnames(res), las=1, cex.axis=cex.yaxis)
-  erp.xaxis(length.erp=dim(res)[1], startmsec=startmsec, endmsec=endmsec, x.tick=seq(startmsec, endmsec, 200), x.cex=cex.axis) 
+  erp.xaxis(length.erp=dim(res)[1], startmsec=startmsec, endmsec=endmsec, x.tick=seq(startmsec, endmsec, 200), x.cex=cex.xaxis) 
   
-  invisible(list(mypalette=mypalette.cols, zlim=myzlim))
+  
+  invisible(list(palette=mypalette.cols, zlim=myzlim))
   
 }

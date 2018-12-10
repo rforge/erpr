@@ -33,6 +33,9 @@ function(base1, base2, numbers, outname=NULL, erplist=NULL, fileinfo=1)
 	{
 		temp.out=erplist[[paste(base1, numbers[i], sep="")]]-erplist[[paste(base2, numbers[i], sep="")]]
 		comment(temp.out)=comment(erplist[[paste(bases[fileinfo], numbers[i], sep="")]])
+		attr(temp.out, "startmsec") = attr(erplist[[paste(base1,numbers[i], sep="")]], "starmsec") 
+		attr(temp.out, "endmsec") = attr(erplist[[paste(base1,numbers[i], sep="")]], "endmsec") 
+		
 	outlist[[i]]=temp.out
 	names(outlist)[[i]]=paste(outname,numbers[i], sep="")
 	}

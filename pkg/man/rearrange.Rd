@@ -52,7 +52,7 @@ data(erplistExample)
 datwide=erp.mean(base="Exp1_word_subj", numbers=1:20, win.ini=130, 
 win.end=190, erplist=erplistExample, startmsec=-200, endmsec=1500, format="wide")
 
-dat.long=rearrange(deps=c(1:32), oth=33:34, dataset=datwide, name.newvar="electrode")
+dat.long=rearrange(deps=c(1:32), oth=35:36, dataset=datwide, name.newvar="electrode")
 
 
 }
