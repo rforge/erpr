@@ -192,11 +192,27 @@ mass.t.test<-function(base1=NULL, base2=NULL, numbers1=NULL, numbers2=numbers1, 
     
     # permutations are made from datall1 and datall2
     
-    if (paired == FALSE){ # tmax for unpaired case
+    if (paired == FALSE){
       
-      # all res t was already calculated  
-      allres.t.obs=allres.t
+      # creo data.frame con tutti i soggetti. serve solo se paired=F
+      datall12=cbind(datall1, datall2)
+      # creo vettore con numero totale di soggetti
+      all.numbers=1:dim(datall12)[2] 
       
+      
+      
+      allres.t.obs=rep(NA, dim(datall1)[1]) # creo matrice per valori di t
+      
+      t.max.res=rep(NA, n.permutations)
+      
+      for (i in 1:dim(datall1)[1]){
+        
+        res.t.obs=(mean(datall1[i, ])-mean(datall2[i, ]))/sqrt(var(datall1[i,])/length(datall1[i,])+var(datall2[i, ])/length(datall2[i,])) # independent samples.
+        
+        
+        allres.t.obs[i]=res.t.obs
+        
+      }
       # set timer for permutations:
       n.points.time=floor(seq(1, n.permutations, n.permutations/10))
       time.elapsed=0
@@ -245,12 +261,23 @@ mass.t.test<-function(base1=NULL, base2=NULL, numbers1=NULL, numbers2=numbers1, 
     } # end if method = tmax paired =F	
     
     
-    if (paired == TRUE) {# t max paired case
+    
+    if (paired == TRUE) {
       
-      all.res.t.obs = 
+      # datall12 is the dataframe with the difference of datall1 and datall2.
+      datall12=datall1-datall2
+      allres.t.obs=rep(NA, dim(datall12)[1])
+      
+      for (i in 1:dim(datall12)[1]){
         
-        # create object with all t.max
-        t.max.res=rep(NA, n.permutations)
+        res.t.obs=mean(datall12[i, ])/sqrt((var(datall12[i,])/length(datall12[i, ])))
+        
+        allres.t.obs[i]=res.t.obs
+        
+      }
+      
+      # create object with all t.max
+      t.max.res=rep(NA, n.permutations)
       
       # create object with length to speed-up computation
       datall.perm.len=rep(dim(datall1)[2], dim(datall1)[1])
@@ -288,7 +315,6 @@ mass.t.test<-function(base1=NULL, base2=NULL, numbers1=NULL, numbers2=numbers1, 
     } # end if method = tmax, paired = T
     
   } # end if method = tmax
-  
   
   ##############################
   # reconstruct the matrix to return the reuslts
@@ -361,6 +387,11 @@ mass.t.test<-function(base1=NULL, base2=NULL, numbers1=NULL, numbers2=numbers1, 
     if (!is.null(crit.msec)){
       crit.npoints=round(crit.msec/(1000/mysamp.rate))
     }
+    
+    if (is.null(crit.msec)){
+      crit.msec=crit.npoints*(1000/mysamp.rate)
+    }
+    
     
     # calculate the exact ms, to be returned in param
     exact.crit.msec=crit.npoints*(1000/mysamp.rate)
@@ -476,19 +507,19 @@ mass.t.test<-function(base1=NULL, base2=NULL, numbers1=NULL, numbers2=numbers1, 
       if (length(not.found.names)>0){
         cat("the following electrodes have not been found in the built in list:", paste(not.found.names, collapse=", "), ".\n")
         stop(paste("please run again the code, excluding these electrodes, by adding the argument:\n, to.exclude=", deparse(not.found.names), sep=""))
-      
-      }
         
-        # NOTE: I don't update here the list of electrodes beacuase it will cause inconsistencies.
-        # the first t.test is run above, with more electrodes and before this check. And this results (filt.mat)
-        # is used in the computation below.
-        # an alternative would be to move the check BEFORE. 
-
-        #electrodes = electrodes[!up.curr.el %in% u.elec.coord.names]
       }
       
-      # return a matrix n_electrodes x n_electrodes with 0/1 indicating neigbourhood
-      neighbours=spatial_neighbours(curr.elec.coord[, c("x", "y", "z")], 1)
+      # NOTE: I don't update here the list of electrodes beacuase it will cause inconsistencies.
+      # the first t.test is run above, with more electrodes and before this check. And this results (filt.mat)
+      # is used in the computation below.
+      # an alternative would be to move the check BEFORE. 
+      
+      #electrodes = electrodes[!up.curr.el %in% u.elec.coord.names]
+    }
+    
+    # return a matrix n_electrodes x n_electrodes with 0/1 indicating neigbourhood
+    neighbours=spatial_neighbours(curr.elec.coord[, c("x", "y", "z")], 1)
     
     ## step 5) FIND CLUSTERS
     

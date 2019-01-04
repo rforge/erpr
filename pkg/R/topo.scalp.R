@@ -128,7 +128,7 @@ topo.scalp = function(erpdfs, smo=NULL, ylims="auto", yrev=TRUE, startmsec=NULL,
       
       #plot(0.5, 0.5, frame.plot=F, xlim=c(0,1), ylim=c(0,1))
       #plot(word[, as.character(curr.elec.coord$el.name[i]) ], type="l", frame.plot=F, axes=F)
-      erp(categ[[k]], as.character(curr.elec.coord$el.name[i]), draw.xaxis=F, draw.yaxis=F, startmsec=startmsec, endmsec=endmsec, col=color.list[k],...)
+      erp(categ[[k]], as.character(curr.elec.coord$el.name[i]), draw.xaxis=F, draw.yaxis=F, startmsec=startmsec, endmsec=endmsec, col=color.list[k], frame.plot=F,...)
       
     }
   }
