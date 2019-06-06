@@ -186,7 +186,7 @@ mass.t.test<-function(base1=NULL, base2=NULL, numbers1=NULL, numbers2=numbers1, 
   
   
   ########################################
-  #### tMAX permutations ########
+  #### TMAX permutations ########
   #######################################
   if (p.adjust.method=="tmax"){
     
@@ -376,7 +376,7 @@ mass.t.test<-function(base1=NULL, base2=NULL, numbers1=NULL, numbers2=numbers1, 
   exact.interval.end=pointstomsec(endpoint, dim(erplist1[[paste(base1, numbers1[1], sep = "")]])[1], startmsec=startmsec, endmsec=endmsec)
   
   ############################################
-  # STABLE DIFF (applied to regular t-tests and t-max)
+  # STABLE DIFF (applied to regular t-tests and t-max-AFTER)
   ############################################
   if (stable.diff==TRUE){ 
     
@@ -473,7 +473,7 @@ mass.t.test<-function(base1=NULL, base2=NULL, numbers1=NULL, numbers2=numbers1, 
     # step 1) calculate t.scores.  
     # step 2) exclude p not exceding a threshold (e.g. p>= 0.05)
     # step 3a) determine neighbours (added by G)
-    # step 3) optional (use only t scores with at least some significant neighbours)
+    # step 3) optional (use only t scores with at least some significant neighbours in time)
     # step 4) on remaining t.scores, form cluster (the permutation start here!)
     # step 5) sum values of each cluster and find cluster.level.t. this is the cluster level t.score
     # step 6) On each permutation get the more extreme values to define the null hypothesis ditsribution(as in tmax) (the permutation end here!)
@@ -545,7 +545,15 @@ mass.t.test<-function(base1=NULL, base2=NULL, numbers1=NULL, numbers2=numbers1, 
     # store a new object called "obs.perm.mat", to keep the original "filt.mat" object
     obs.perm.filt.mat=filt.mat
     
+    if (stable.diff==TRUE){
+      stable.diff.res=stable.diff.fun(!is.na(obs.perm.filt.mat), electrodes, crit.npoints, interval, startmsec, endmsec)
+      obs.perm.filt.mat[!stable.diff.res$res.log.mat]=NA
+    }
+    
     obs.perm.filt.mat[is.na(obs.perm.filt.mat)]=0
+    
+    
+
     
     #######################################
     # 1) CALCULATE ACTUAL CLUSTERS
@@ -640,6 +648,12 @@ mass.t.test<-function(base1=NULL, base2=NULL, numbers1=NULL, numbers2=numbers1, 
         ## reconstruct the data, to use the various cluster perm functions (which require matrices)
         curr.perm.t.mat=matrix(curr.perm.t, nrow=dim(obs.perm.filt.mat)[1], ncol=dim(  obs.perm.filt.mat)[2], byrow=F)
         colnames(curr.perm.t.mat)=colnames(obs.perm.filt.mat)
+        
+        if (stable.diff==TRUE){
+          curr_stable.diff.res=stable.diff.fun(!is.na(curr.perm.filt.mat), electrodes, crit.npoints, interval, startmsec, endmsec)
+          curr.perm.filt.mat[!curr_stable.diff.res$res.log.mat]=NA
+        }
+        
         
         #######################################
         # 1) CALCULATE CURRENT PERMUTATION CLUSTERS
@@ -747,6 +761,10 @@ mass.t.test<-function(base1=NULL, base2=NULL, numbers1=NULL, numbers2=numbers1, 
         curr.perm.t.mat=matrix(curr.perm.t, nrow=dim(obs.perm.filt.mat)[1], ncol=dim(obs.perm.filt.mat)[2], byrow=F)
         colnames(curr.perm.t.mat)=colnames(obs.perm.filt.mat)
         
+        if (stable.diff==TRUE){
+          curr_stable.diff.res=stable.diff.fun(!is.na(curr.perm.filt.mat), electrodes, crit.npoints, interval, startmsec, endmsec)
+          curr.perm.filt.mat[!curr_stable.diff.res$res.log.mat]=NA
+        }
         
         #######################################
         # 1) CALCULATE CURRENT PERMUTATION CLUSTERS
@@ -830,6 +848,9 @@ mass.t.test<-function(base1=NULL, base2=NULL, numbers1=NULL, numbers2=numbers1, 
       
       # re-transform in matrix
       neg_p.values.mat=matrix(neg_p.values, nrow=dim(obs.perm.filt.mat)[1], ncol=dim(or.res.t.mat)[2])
+      # filter to NA results outside clusters (currently they are 0)
+      neg_p.values.mat[t(obs.negclust)==0]=NA
+      
     } else {
       # this NA objects are created if there were NO significant values already in the observed data
       # matrix timepoinsts * electrode with NA
@@ -859,6 +880,10 @@ mass.t.test<-function(base1=NULL, base2=NULL, numbers1=NULL, numbers2=numbers1, 
       
       # re-transform in matrix
       pos_p.values.mat=matrix(pos_p.values, nrow=dim(obs.perm.filt.mat)[1], ncol=dim(or.res.t.mat)[2])
+      # filter to NA results outside cluster (currently they are 0)
+      pos_p.values.mat[t(obs.posclust)==0]=NA
+      
+      
     } else {
       # see above, this is 
       pos_p.values.mat = matrix(NA, nrow=dim(obs.perm.filt.mat)[1], ncol=dim(res.t.mat)[2])
@@ -926,10 +951,20 @@ mass.t.test<-function(base1=NULL, base2=NULL, numbers1=NULL, numbers2=numbers1, 
     or.pos.p.mat[startpoint:endpoint, electrodes]=pos_p.values.mat
     or.pos.p.mat = as.data.frame(or.pos.p.mat)
     
+    if(stable.diff==TRUE){
+      or.pos.p.mat[!stable.diff.res$res.log.mat]=NA
+    }
+    
     # negative cluster p-values
     or.neg.p.mat=generic.or.NA.mat
     or.neg.p.mat[startpoint:endpoint, electrodes]=neg_p.values.mat
     or.neg.p.mat = as.data.frame(or.neg.p.mat)
+    
+    if(stable.diff==TRUE){
+      or.pos.p.mat[!stable.diff.res$res.log.mat]=NA
+    }
+    
+    
     
     # fix exception for cluster
     # if no observed cluster is found the results is null (this is the output of find.clusters function if no cluster is found)
@@ -942,9 +977,6 @@ mass.t.test<-function(base1=NULL, base2=NULL, numbers1=NULL, numbers2=numbers1, 
     if (is.null(obs.negclust)){
       obs.negclust=matrix(NA, nrow=dim(res.t.mat)[1], ncol=dim(res.t.mat)[2])  # 
     }
-    
-    
-    
     
     
     # positive cluster labeling
@@ -985,7 +1017,7 @@ mass.t.test<-function(base1=NULL, base2=NULL, numbers1=NULL, numbers2=numbers1, 
     allresults=list(param=param, mass.t.results=perm.or.filt.mat, 
                     sig.pos= as.data.frame(or.pos.p.mat<p.crit), # calculate here on the fly
                     sig.neg = as.data.frame(or.neg.p.mat<p.crit), 
-                    t.mat=or.res.t.mat, pos.p.mat = or.pos.p.mat, neg.p.mat=or.neg.p.mat, pos.clusters=or.pos.clusters, neg.clusters=or.neg.clusters)
+                    t.mat=or.res.t.mat, pos.p.mat = or.pos.p.mat, neg.p.mat=or.neg.p.mat, pos.clusters=or.pos.clusters, neg.clusters=or.neg.clusters, pr = stable.diff.res$res.log.mat)
     
   }
   

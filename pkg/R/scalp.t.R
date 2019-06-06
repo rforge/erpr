@@ -28,6 +28,8 @@ scalp.t <-
     }
     
     ### get startmsec from the first object
+    if((is.null(startmsec)|is.null(endmsec))){
+    
     erplist=erplist1
     erpdf = erplist[[1]]
     
@@ -36,8 +38,10 @@ scalp.t <-
       endmsec=attr(erpdf, "endmsec")
     }
     
-    if (is.null(startmsec)|is.null(endmsec)){
-      stop("startmsec and endmsec must be specified", call.=F)
+#    if (is.null(startmsec)|is.null(endmsec)){
+#      stop("startmsec and endmsec must be specified", call.=F)
+#    }
+    
     }
     
     # create t.axis if not supplied (step by 200)
@@ -60,8 +64,8 @@ scalp.t <-
     #base1 = le prime lettere degli oggetti 
     #numbers1= il numero dei soggetti di cui calcolare l'average
     
-    alldata1=grandaverage(base=base1, numbers1, erplist=erplist1)
-    alldata2=grandaverage(base=base2,numbers2, erplist=erplist2)
+    alldata1=grandaverage(base=base1, numbers1, erplist=erplist1, startmsec=startmsec, endmsec=endmsec)
+    alldata2=grandaverage(base=base2,numbers2, erplist=erplist2, startmsec=startmsec, endmsec=endmsec)
     
     categ=list(alldata1,alldata2)
     
@@ -172,7 +176,7 @@ scalp.t <-
       if (electrodes[i]=="xaxis"){
         plot(1, type="n", frame.plot=FALSE,xlim=c(1,dim(categ[[1]])[1]),xaxt="n",yaxt="n", ylim=c(yedge[1]+yedge[1]/3,yedge[2]+(yedge[2]/3)))
         
-        axis(1, pos=0, at=msectopoints(t.axis, dim(categ[[1]])[1], startmsec, endmsec), labels=paste(t.axis))
+        axis(1, pos=0, at=msectopoints(t.axis, dim(categ[[1]])[1], startmsec=startmsec, endmsec=endmsec), labels=paste(t.axis))
       }
       if (!electrodes[i]%in%c("xaxis", "yaxis", "legend", "blank")) {
         
@@ -197,7 +201,7 @@ scalp.t <-
         lines(el, col=color.list[1],  cex.main=0.85, lwd=lwd[1], lty=lty[1])
         
         ##### di seguito ho semplicemente calcolato, tramite una proporzione, il punto che corrisponde allo 0
-        zeropoint=msectopoints(0, length(el), startmsec, endmsec)
+        zeropoint=msectopoints(0, length(el), startmsec=startmsec, endmsec=endmsec)
         segments(x0=zeropoint, y0=-0.8, x1=zeropoint, y1=0.5, lwd=1.5)
         
         
