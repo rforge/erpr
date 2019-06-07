@@ -10,7 +10,7 @@ This function calculates the peak amplitude on several ERP data frame. It return
 \usage{
 erp.peak(base, numbers, win.ini, win.end, erplist = NULL,
 startmsec=NULL, endmsec=NULL, others=NULL, format="long", 
-name.dep="Dep", name.newvar="electrode", peak.fun = "max", ...)
+name.dep="Dep", name.newvar="electrode", peak.fun = "max", numbers.name="Subject", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -54,6 +54,10 @@ the names of other variables to be included in the returned data frame. Ignored 
 \item{...}{
 	arguments passed to the function specified in \code{peak.fun}.
 	}
+	\item{numbers.name}{
+The  name of the new column  (in the output \code{data.frame}) that will be associated with \code{number}. By default it is \code{Subject}, as it is assumed that each \code{number} is a Subject.
+}
+	
 }
 
 \details{

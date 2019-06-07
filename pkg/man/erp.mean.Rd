@@ -10,7 +10,7 @@ This function calculates the mean amplitude of several ERP data frames. It retur
 \usage{
 erp.mean(base, numbers, win.ini, win.end, erplist = NULL, 
 startmsec=NULL, endmsec=NULL, others=NULL, format="long", 
-name.dep="Dep", name.newvar="electrode")
+name.dep="Dep", name.newvar="electrode", numbers.name="Subject")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -48,6 +48,10 @@ the names of other variables to be included in the returned data frame. Ignored 
 \item{name.newvar}{
 	If the format is "long", the name of the new variable codifying the electrodes. Default is "electrode".
 }
+\item{numbers.name}{
+The  name of the new column  (in the output \code{data.frame}) that will be associated with \code{number}. By default it is \code{Subject}, as it is assumed that each \code{number} is a Subject.
+}
+
 }
 
 \details{

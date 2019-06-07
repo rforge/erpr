@@ -1,4 +1,7 @@
-rasterplot<-function(res, startmsec=NULL, endmsec=NULL, palette.col="jet", lower.thresh=NULL, upper.thresh=NULL, zlim="default", cex.yaxis=0.7, cex.xaxis=1, par = NULL, ...){
+rasterplot<-function(res, startmsec=NULL, endmsec=NULL, palette.col="jet", lower.thresh=NULL, upper.thresh=NULL, zlim="default", cex.yaxis=0.7, cex.xaxis=1, ...){
+  
+  # par = NULL, ...
+  # not clear if it is necessary to add a par= NULL parameter
   
   if (is.null(startmsec)|is.null(endmsec)){
     stop("startmsec and endmsec must be specified", call.=F)
