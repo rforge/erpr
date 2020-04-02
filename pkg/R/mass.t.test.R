@@ -412,7 +412,8 @@ mass.t.test<-function(base1=NULL, base2=NULL, numbers1=NULL, numbers2=numbers1, 
   #### CLUSTER BASED PERMUTATION
   #######################################
   
-  if (p.adjust.method=="cluster.based.permutation"){
+  if (FALSE){ # currently I deactivate cluster based permutation. Delete line (and uncoment the following, to restore)
+#  if (p.adjust.method=="cluster.based.permutation"){
     
     cat("\n cluster based premutation (as in Groppe et al.2011). This may require some time ...\n\n")
     
