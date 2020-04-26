@@ -22,7 +22,7 @@ import.erp=function(filenamebase, numbers, ext=".txt", outname="ERP_subj", filei
       # the time info is retrieved after this string "Time = " (the space is not important)
       if (abstimeinfo==TRUE){
         temp = strsplit(erp.subjectname, "Time = ")[[1]][[2]] # retrieve what's after time
-        Time = as.numeric(strsplit(temp, ";")[[1]][[1]]) # retrieve what's before the next ;
+        Time = as.numeric(temp)#as.numeric(strsplit(temp, ";")[[1]][[1]]) # retrieve what's before the next ;
         attr(erpout, "TrialTime")=Time
       }
       

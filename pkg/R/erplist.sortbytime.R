@@ -38,7 +38,7 @@ erplist.sortbytime = function(erplist=NULL, new.name=NULL){
   ################
   if (is.null(new.name)) {
     # retrieve original base
-    or.bases = gsub("[0-9]+$", names(sorted_erplist))
+    or.bases = gsub("_[0-9]+$", "", names(sorted_erplist))
     names(sorted_erplist)=paste(or.bases, 1:length(sorted_erplist), sep="_")
   } else {
     names(sorted_erplist)=paste(new.name, 1:length(sorted_erplist), sep="_")
